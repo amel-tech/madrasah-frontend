@@ -1,0 +1,34 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+    "paths": {
+      "@/shared/*": ["./*"]
+    }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.jsx",
+    "components/**/*.ts",
+    "components/**/*.tsx",
+    "components/**/*.js",
+    "components/**/*.jsx",
+    "lib/**/*.ts",
+    "lib/**/*.tsx"
+  ],
+  "exclude": ["node_modules"]
+}

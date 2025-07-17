@@ -1,0 +1,35 @@
+{
+  "name": "madrasah-frontend",
+  "version": "1.0.0",
+  "description": "Online Medrese Projesinin frontend reposudur.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amel-tech/madrasah-frontend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/amel-tech/madrasah-frontend/issues"
+  },
+  "homepage": "https://github.com/amel-tech/madrasah-frontend#readme",
+  "packageManager": "pnpm@10.13.1",
+  "workspaces": [
+    "apps/*",
+    "shared/*"
+  ],
+  "dependencies": {
+    "@madrasah/ui": "workspace:*"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.5"
+  }
+}

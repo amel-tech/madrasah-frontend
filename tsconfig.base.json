@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "target": "es2022",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/shared/*": ["./shared/*"],
+      "@madrasah/hooks": ["./shared/hooks"],
+      "@madrasah/utils": ["./shared/utils"],
+      "@madrasah/types": ["./shared/types"],
+      "@madrasah/ui": ["./shared/ui"]
+    }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "**/.next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
