@@ -3,6 +3,7 @@
 Online Medrese Projesi için frontend deposu. Bu proje Turborepo kullanılarak monorepo yapısında geliştirilmiştir.
 
 ## Teknoloji Yığını
+
 - **Next.js 14** - App Router ile React framework
 - **TailwindCSS** - Utility-first CSS framework
 - **Shadcn/ui** - Radix UI ve Tailwind CSS ile oluşturulmuş yeniden kullanılabilir bileşenler
@@ -12,22 +13,26 @@ Online Medrese Projesi için frontend deposu. Bu proje Turborepo kullanılarak m
 ## Başlangıç
 
 ### Gereksinimler
+
 - Node.js 18+
 - npm 8+
 
 ### Kurulum
 
 1. Bağımlılıkları yükleyin:
+
 ```bash
 npm install
 ```
 
 2. Geliştirme sunucusunu başlatın:
+
 ```bash
 npm run dev
 ```
 
 3. Tüm paketleri build edin:
+
 ```bash
 npm run build
 ```
@@ -53,8 +58,9 @@ Paylaşılan UI paketine yeni Shadcn/ui bileşenleri eklemek için:
 3. Uygulamalarda `@madrasah/ui` paketinden import edin
 
 Örnek:
+
 ```tsx
-import { Button, Card } from '@madrasah/ui'
+import { Button, Card } from '@madrasah/ui';
 ```
 
 ## Dizin Yapısı

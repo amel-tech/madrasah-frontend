@@ -1,0 +1,6 @@
+@import "tailwindcss";
+@reference "@madrasah/tokens/css";
+
+#kc-page-title span{
+    @apply text-red-500 font-extrabold;
+}

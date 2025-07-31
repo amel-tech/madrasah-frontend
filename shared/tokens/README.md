@@ -13,7 +13,7 @@ npm install @madrasah/tokens
 This package provides a clean, semantic token system with domain-specific namespacing:
 
 - **Background Colors**: `--background-color-{category}-{variant}`
-- **Text Colors**: `--text-color-{category}-{variant}`  
+- **Text Colors**: `--text-color-{category}-{variant}`
 - **Border Colors**: `--border-color-{category}-{variant}`
 
 ### Token Categories
@@ -37,6 +37,7 @@ This package provides a clean, semantic token system with domain-specific namesp
 #### Figma Integration
 
 The [Tailwind Theme Gen](https://www.figma.com/community/plugin/1384511746402383895/tailwind-theme-gen) Figma plugin allows you to:
+
 - Export design tokens directly from your Figma design system
 - Generate CSS variables in the correct format
 - Maintain consistency between design and code
@@ -44,6 +45,7 @@ The [Tailwind Theme Gen](https://www.figma.com/community/plugin/1384511746402383
 Simply export your tokens from Figma and paste them into `input/main.css`, then run the processing workflow.
 
 Example transformation:
+
 ```css
 /* Input (from Figma export in input/main.css) */
 --color-semantic-text-primary: rgba(17, 24, 39, 1);
@@ -71,15 +73,14 @@ Tailwind CSS v4 reads CSS variables directly, so you just need to import the the
 <div className="bg-background-neutral-primary text-text-neutral-primary border border-border-neutral-primary">
   <h1 className="text-text-brand-primary">Hello World</h1>
   <p className="text-text-neutral-secondary">This uses semantic design tokens</p>
-  <button className="bg-background-success-bold text-text-success-inverse">
-    Success Button
-  </button>
+  <button className="bg-background-success-bold text-text-success-inverse">Success Button</button>
 </div>
 ```
 
 ## Available Token Categories
 
 ### Background Colors
+
 - `background-color-neutral-{primary|secondary|tertiary|disabled}`
 - `background-color-neutralinverse-{primary|secondary|tertiary}`
 - `background-color-brand-{primary|secondary|tertiary}`
@@ -90,6 +91,7 @@ Tailwind CSS v4 reads CSS variables directly, so you just need to import the the
 - `background-color-{white|black}`
 
 ### Text Colors
+
 - `text-color-neutral-{primary|secondary|tertiary|disabled}`
 - `text-color-neutralinverse-{primary|secondary|tertiary}`
 - `text-color-brand-{primary|secondary|inverse}`
@@ -100,6 +102,7 @@ Tailwind CSS v4 reads CSS variables directly, so you just need to import the the
 - `text-color-{white|black}`
 
 ### Border Colors
+
 - `border-color-neutral-{primary|secondary}`
 - `border-color-neutralinverse-{primary|secondary}`
 - `border-color-brand-{primary|inverse}`
@@ -138,9 +141,15 @@ With Tailwind v4, semantic tokens work seamlessly with utilities:
 
 ```css
 /* These are automatically available in Tailwind */
-.bg-background-neutral-primary { background-color: var(--background-color-neutral-primary); }
-.text-text-brand-primary { color: var(--text-color-brand-primary); }
-.border-border-success-primary { border-color: var(--border-color-success-primary); }
+.bg-background-neutral-primary {
+  background-color: var(--background-color-neutral-primary);
+}
+.text-text-brand-primary {
+  color: var(--text-color-brand-primary);
+}
+.border-border-success-primary {
+  border-color: var(--border-color-success-primary);
+}
 ```
 
 ## Development
