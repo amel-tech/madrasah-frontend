@@ -1,12 +1,13 @@
 import { AuthOptions } from 'next-auth';
 import KeycloakProvider from 'next-auth/providers/keycloak';
+import { env } from '~/env';
 
 const authOptions: AuthOptions = {
   providers: [
     KeycloakProvider({
-      clientId: process.env.KEYCLOAK_CLIENT_ID ?? '',
-      clientSecret: process.env.KEYCLOAK_CLIENT_SECRET ?? '',
-      issuer: process.env.KEYCLOAK_ISSUER ?? '',
+      clientId: env.KEYCLOAK_CLIENT_ID ?? '',
+      clientSecret: env.KEYCLOAK_CLIENT_SECRET ?? '',
+      issuer: env.KEYCLOAK_ISSUER ?? '',
       idToken: true,
     }),
   ],

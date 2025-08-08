@@ -2,13 +2,12 @@
 
 ## [1.3.0](https://github.com/amel-tech/madrasah-frontend/compare/v1.2.0...v1.3.0) (2025-08-05)
 
-
 ### Features
 
-* add instructions for adding new components to the library ([9627d4b](https://github.com/amel-tech/madrasah-frontend/commit/9627d4b50b37e0bcb603e8492f6d3864ceeae37b))
-* add keycloak realm export and update theme config ([95e273c](https://github.com/amel-tech/madrasah-frontend/commit/95e273cf6d06d8a21f9e906e20e68265f0c331f7))
-* enhance type definitions and improve i18n imports across components ([a556116](https://github.com/amel-tech/madrasah-frontend/commit/a556116b54e8e76165e06ff18d113c722cebdf7d))
-* update styles in Template, Login, and Register pages ([1c0434c](https://github.com/amel-tech/madrasah-frontend/commit/1c0434cc10faeddf49522167d998b4a339aa2e97))
+- add instructions for adding new components to the library ([9627d4b](https://github.com/amel-tech/madrasah-frontend/commit/9627d4b50b37e0bcb603e8492f6d3864ceeae37b))
+- add keycloak realm export and update theme config ([95e273c](https://github.com/amel-tech/madrasah-frontend/commit/95e273cf6d06d8a21f9e906e20e68265f0c331f7))
+- enhance type definitions and improve i18n imports across components ([a556116](https://github.com/amel-tech/madrasah-frontend/commit/a556116b54e8e76165e06ff18d113c722cebdf7d))
+- update styles in Template, Login, and Register pages ([1c0434c](https://github.com/amel-tech/madrasah-frontend/commit/1c0434cc10faeddf49522167d998b4a339aa2e97))
 
 ## [1.2.0](https://github.com/amel-tech/madrasah-frontend/compare/v1.1.0...v1.2.0) (2025-08-04)
 

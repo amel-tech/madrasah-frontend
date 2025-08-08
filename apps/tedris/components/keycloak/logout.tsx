@@ -1,6 +1,7 @@
 'use client';
 import { SessionProvider, signOut, useSession } from 'next-auth/react';
 import { Button } from '@madrasah/ui/components/button';
+import { env } from '~/env';
 
 const KeycloakLogoutButton = () => {
   const session = useSession();
@@ -8,11 +9,11 @@ const KeycloakLogoutButton = () => {
     const idtoken = session.data?.idToken;
     //TODO: Exception yönetimi eklenmeli NEXT_PUBLIC_KEYCLOAK_CLIENT_ID, NEXT_PUBLIC_NEXTAUTH_URL ve idtoken için
     const params = new URLSearchParams({
-      client_id: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_ID ?? '',
-      post_logout_redirect_uri: process.env.NEXT_PUBLIC_NEXTAUTH_URL ?? '',
+      client_id: env.NEXT_PUBLIC_KEYCLOAK_CLIENT_ID ?? '',
+      post_logout_redirect_uri: env.NEXT_PUBLIC_NEXTAUTH_URL ?? '',
       id_token_hint: idtoken ?? '',
     });
-    const keycloakLogoutUrl = `${process.env.NEXT_PUBLIC_KEYCLOAK_ISSUER}/protocol/openid-connect/logout?${params.toString()}`;
+    const keycloakLogoutUrl = `${env.NEXT_PUBLIC_KEYCLOAK_ISSUER}/protocol/openid-connect/logout?${params.toString()}`;
     await signOut({ redirect: false, callbackUrl: keycloakLogoutUrl });
     window.location.href = keycloakLogoutUrl;
   };
