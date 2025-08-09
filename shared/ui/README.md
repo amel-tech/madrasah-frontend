@@ -25,17 +25,17 @@ Import components, styles, and utilities from the package:
 
 ```tsx
 // Components
-import { Button } from '@madrasah/ui/components/button';
-import { Select } from '@madrasah/ui/components/select';
+import { Button } from "@madrasah/ui/components/button";
+import { Select } from "@madrasah/ui/components/select";
 
 // Styles
-import '@madrasah/ui/globals.css';
+import "@madrasah/ui/globals.css";
 
 // Utilities
-import { cn } from '@madrasah/ui/lib/utils';
+import { cn } from "@madrasah/ui/lib/utils";
 
 // Hooks
-import { useTheme } from '@madrasah/ui/hooks/use-theme';
+import { useTheme } from "@madrasah/ui/hooks/use-theme";
 ```
 
 ## Available Exports

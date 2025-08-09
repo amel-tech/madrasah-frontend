@@ -1,5 +1,6 @@
 {
   "name": "madrasah-frontend",
+  "type": "module",
   "private": true,
   "workspaces": [
     "apps/*",
