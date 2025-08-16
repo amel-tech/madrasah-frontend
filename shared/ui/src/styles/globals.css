@@ -121,12 +121,3 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 }
-
-@layer base {
-  body {
-    @apply font-body
-  }
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-headings
-  }
-}

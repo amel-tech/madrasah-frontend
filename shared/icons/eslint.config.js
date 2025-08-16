@@ -5,6 +5,7 @@ const iconsConfig = [
   {
     rules: {
       'no-restricted-imports': 'off',
+      '@typescript-eslint/ban-ts-comment': 'off',
     },
   },
 ]

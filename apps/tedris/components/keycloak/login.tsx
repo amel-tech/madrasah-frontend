@@ -1,9 +1,13 @@
 'use client'
+
+import { Button } from '@madrasah/ui/components/button'
 import { signIn } from 'next-auth/react'
 
 const KeycloakLogin = () => {
-  signIn('keycloak')
-  return <>Giriş Yapılıyor...</>
+  const onClick = () => {
+    signIn('keycloak')
+  }
+  return <Button onClick={onClick}>Giriş Yap</Button>
 }
 
 export default KeycloakLogin

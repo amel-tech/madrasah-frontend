@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "@madrasah/hooks": "*",
+    "@madrasah/icons": "*",
+    "@madrasah/tokens": "*",
     "@madrasah/types": "*",
     "@madrasah/ui": "*",
     "@madrasah/utils": "*",

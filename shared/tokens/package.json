@@ -12,14 +12,13 @@
       "import": "./index.js",
       "types": "./index.d.ts"
     },
-    "./css": "./theme/main.css",
-    "./theme.css": "./theme/main.css"
+    "./css": "./theme/main.css"
   },
   "files": [
     "index.js",
     "index.d.ts",
-    "theme/",
-    "build/"
+    "theme/main.css",
+    "build/*"
   ],
   "scripts": {
     "build": "npm run process && node scripts/build.js",
