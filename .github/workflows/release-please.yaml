@@ -15,7 +15,9 @@ jobs:
     steps:
       - name: release-please
         id: release
-        uses: google-github-actions/release-please-action@v4
+        uses: google-github-actions/release-please-action@v3
         with:
-          config-file: release-please-config.json
+          release-type: simple
+          package-name: release
+          target-branch: release
           token: ${{ secrets.MADRASAH_FRONTEND_PAT }}

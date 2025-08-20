@@ -19,7 +19,6 @@ env:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_call' || startsWith(github.event.release.tag_name, 'tedris-spa-') }}
     permissions:
       contents: read
       packages: write
