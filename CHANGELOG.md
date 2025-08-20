@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.4.0](https://github.com/amel-tech/madrasah-frontend/compare/v1.3.0...v1.4.0) (2025-08-20)
+
+
+### Features
+
+* add deployment step to Coolify in GitHub Actions workflow ([408f2e0](https://github.com/amel-tech/madrasah-frontend/commit/408f2e0d2e59393114efecb2dafd939088d396d2))
+* add environment configuration and Keycloak integration for authentication ([ced3fbb](https://github.com/amel-tech/madrasah-frontend/commit/ced3fbb067268b441de47572fa022ed3b1b23955))
+* add ESLint flat config for tedris app ([ef5beae](https://github.com/amel-tech/madrasah-frontend/commit/ef5beae8259238f0e062d434f0bfe53fc4a48557))
+* add type checking scripts and update pre-commit hook ([9fd4fe2](https://github.com/amel-tech/madrasah-frontend/commit/9fd4fe248b50864f2cefb9238c3f34c257936399))
+* created tedris main app layout ([6cc6504](https://github.com/amel-tech/madrasah-frontend/commit/6cc65045d3b0143e2bdc374eb2e0e85bf733bb09))
+* enhance ESLint configuration with modern rules and configs ([f9c39eb](https://github.com/amel-tech/madrasah-frontend/commit/f9c39ebe1808a1e55a0989ef3d7eddbd5da9fb37))
+* **header:** enhance user header menu with user avatar and dropdown options ([807cf42](https://github.com/amel-tech/madrasah-frontend/commit/807cf428022b8e1b25ede945c67fd4318100b0fa))
+* **tedris:** add OpenTelemetry environment variables and instrumentation ([c27dae8](https://github.com/amel-tech/madrasah-frontend/commit/c27dae8eaad2483f6e684fef5c2b21a0e34a1bdf))
+* **tedris:** update TypeScript configuration and add Jiti for environment imports ([185c353](https://github.com/amel-tech/madrasah-frontend/commit/185c3535980a937ae6437a58b63e296b5437cdd8))
+
+
+### Bug Fixes
+
+* add missing environment variables to turbo.json ([3a7ceb4](https://github.com/amel-tech/madrasah-frontend/commit/3a7ceb4d865850976cdb6d2a7a03bbcd5b0c2866))
+* improve TypeScript type safety in custom icon component ([b12aaba](https://github.com/amel-tech/madrasah-frontend/commit/b12aabaf3885dd56e77ffe70cc57f715cdbafbad))
+
 ## [1.3.0](https://github.com/amel-tech/madrasah-frontend/compare/v1.2.0...v1.3.0) (2025-08-05)
 
 ### Features
