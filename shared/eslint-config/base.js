@@ -29,5 +29,5 @@ export const baseConfig = [
       onlyWarn,
     },
   },
-  { ignores: ['archived/*', '**/build/', '**/dist/', 'node_modules/', 'public/build/', '.env'] },
+  { ignores: ['archived/*', '**/build/', '**/dist/', 'node_modules/', 'public/build/', '.env', '.next/**'] },
 ]
