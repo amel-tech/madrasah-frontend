@@ -5,9 +5,9 @@ import './globals.css'
 import '@madrasah/ui/globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
-import { Header } from '~/components/header/header'
-import { ClientProviders } from '~/components/providers/client-providers'
-import { TabView } from '~/components/tab-view/TabView'
+import { Header } from '~/features/header/header'
+import { ClientProviders } from '~/features/providers/client-providers'
+import { TabView } from '~/features/tab-view/TabView'
 
 export const metadata: Metadata = {
   title: 'Madrasah - Online Medrese',

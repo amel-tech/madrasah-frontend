@@ -1,9 +1,9 @@
-import { BellIcon } from '@madrasah/icons'
+import { BellIcon } from "@madrasah/icons";
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from '@madrasah/ui/components/hover-card'
+} from "@madrasah/ui/components/hover-card";
 
 export const UserNotifications = () => {
   return (
@@ -15,5 +15,5 @@ export const UserNotifications = () => {
         <p>No new notifications</p>
       </HoverCardContent>
     </HoverCard>
-  )
-}
+  );
+};

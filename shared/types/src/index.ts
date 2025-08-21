@@ -33,3 +33,34 @@ export interface ApiResponse<T> {
   message?: string
   error?: string
 }
+
+export enum FlashCardType {
+  Hadith = 'hadith',
+  Vocab = 'vocab',
+  Any = 'any',
+}
+
+export interface BaseFlashCard {
+  id: string | number
+  type: FlashCardType
+}
+
+export interface HadithCard extends BaseFlashCard {
+  type: FlashCardType.Hadith
+  partialText: string
+  fullText: string
+}
+
+export interface VocabCard extends BaseFlashCard {
+  type: FlashCardType.Vocab
+  arabic: string
+  translation: string
+}
+
+export interface FlashCardUIModel extends BaseFlashCard {
+  question: string
+  value: string
+  title: string
+}
+
+export type FlashCard = HadithCard | VocabCard
