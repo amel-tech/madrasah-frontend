@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "@madrasah/eslint-config": "*",
+    "@madrasah/services": "^0.1.0",
     "@tailwindcss/postcss": "^4.1.12",
     "@types/node": "^24",
     "@types/react": "^19",

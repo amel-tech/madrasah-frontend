@@ -1,0 +1,58 @@
+{
+  "name": "@madrasah/services",
+  "type": "module",
+  "version": "0.1.0",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/cjs/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./api": {
+      "import": {
+        "types": "./dist/api/index.d.ts",
+        "default": "./dist/esm/api/index.mjs"
+      },
+      "require": {
+        "types": "./dist/api/index.d.ts",
+        "default": "./dist/cjs/api/index.js"
+      }
+    },
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/esm/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
+    },
+    "./*": {
+      "import": {
+        "types": "./dist/*.d.ts",
+        "default": "./dist/esm/*.mjs"
+      },
+      "require": {
+        "types": "./dist/*.d.ts",
+        "default": "./dist/cjs/*.js"
+      }
+    }
+  },
+  "scripts": {
+    "build": "npm run clean && node ./build.js",
+    "dev": "node ./build.js --watch",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@madrasah/eslint-config": "*",
+    "@madrasah/typescript-config": "*",
+    "@types/node": "^24",
+    "esbuild": "^0.21.5",
+    "eslint": "^9.34.0",
+    "typescript": "^5.4.5"
+  }
+}
