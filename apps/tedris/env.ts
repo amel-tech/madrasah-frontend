@@ -12,11 +12,13 @@ export const env = createEnv({
     NEXTAUTH_SECRET: z.string().min(1),
     OTEL_EXPORTER_OTLP_ENDPOINT: z.string().min(1).url().optional(),
     OTEL_SERVICE_NAME: z.string().min(1).optional(),
+    TEDRISAT_API_BASE_URL: z.string().min(1).url().optional(),
   },
   client: {
     NEXT_PUBLIC_KEYCLOAK_ISSUER: z.string().min(1).url(),
     NEXT_PUBLIC_KEYCLOAK_CLIENT_ID: z.string().min(1),
     NEXT_PUBLIC_NEXTAUTH_URL: z.string().min(1).url(),
+    NEXT_PUBLIC_TEDRISAT_API_BASE_URL: z.string().min(1).url(),
   },
   runtimeEnv: {
     KEYCLOAK_CLIENT_ID: process.env.KEYCLOAK_CLIENT_ID,
@@ -29,5 +31,8 @@ export const env = createEnv({
     NEXT_PUBLIC_KEYCLOAK_ISSUER: process.env.NEXT_PUBLIC_KEYCLOAK_ISSUER,
     NEXT_PUBLIC_KEYCLOAK_CLIENT_ID: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_ID,
     NEXT_PUBLIC_NEXTAUTH_URL: process.env.NEXT_PUBLIC_NEXTAUTH_URL,
+
+    TEDRISAT_API_BASE_URL: process.env.TEDRISAT_API_BASE_URL,
+    NEXT_PUBLIC_TEDRISAT_API_BASE_URL: process.env.NEXT_PUBLIC_TEDRISAT_API_BASE_URL,
   },
 })

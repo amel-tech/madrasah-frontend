@@ -1,0 +1,10 @@
+{
+  "extends": "@madrasah/typescript-config/base.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "module": "esnext",
+    "moduleResolution": "node"
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}
