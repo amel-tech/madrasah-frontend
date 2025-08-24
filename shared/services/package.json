@@ -1,0 +1,29 @@
+{
+  "name": "@madrasah/services",
+  "type": "module",
+  "version": "0.1.0",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    "./tedrisat": {
+      "types": "./src/tedrisat/index.ts",
+      "import": "./src/tedrisat/index.ts",
+      "require": "./src/tedrisat/index.ts"
+    }
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@madrasah/eslint-config": "*",
+    "@madrasah/typescript-config": "*",
+    "@types/node": "^24",
+    "esbuild": "^0.21.5",
+    "eslint": "^9.34.0",
+    "typescript": "^5.4.5"
+  }
+}

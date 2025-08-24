@@ -3,23 +3,10 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**", "dist/**", "theme/main.css"],
-      "env": [
-        "KEYCLOAK_CLIENT_ID",
-        "KEYCLOAK_CLIENT_SECRET",
-        "KEYCLOAK_ISSUER",
-        "NEXTAUTH_URL",
-        "NEXTAUTH_SECRET",
-        "NEXT_PUBLIC_KEYCLOAK_ISSUER",
-        "NEXT_PUBLIC_KEYCLOAK_CLIENT_ID",
-        "NEXT_PUBLIC_NEXTAUTH_URL",
-        "OTEL_EXPORTER_OTLP_ENDPOINT",
-        "OTEL_SERVICE_NAME"
-      ]
+      "outputs": [".next/**", "!.next/cache/**", "dist/**", "theme/main.css"]
     },
     "lint": {
-      "dependsOn": ["^lint"],
-      "env": ["KEYCLOAK_CLIENT_ID", "KEYCLOAK_CLIENT_SECRET", "KEYCLOAK_ISSUER", "OTEL_EXPORTER_OTLP_ENDPOINT", "OTEL_SERVICE_NAME"]
+      "dependsOn": ["^lint"]
     },
     "check-types": {
       "dependsOn": ["^check-types"]
@@ -27,19 +14,7 @@
     "dev": {
       "dependsOn": ["lint"],
       "cache": false,
-      "persistent": true,
-      "env": [
-        "KEYCLOAK_CLIENT_ID",
-        "KEYCLOAK_CLIENT_SECRET",
-        "KEYCLOAK_ISSUER",
-        "NEXTAUTH_URL",
-        "NEXTAUTH_SECRET",
-        "NEXT_PUBLIC_KEYCLOAK_ISSUER",
-        "NEXT_PUBLIC_KEYCLOAK_CLIENT_ID",
-        "NEXT_PUBLIC_NEXTAUTH_URL",
-        "OTEL_EXPORTER_OTLP_ENDPOINT",
-        "OTEL_SERVICE_NAME"
-      ]
+      "persistent": true
     },
     "clean": {
       "cache": false

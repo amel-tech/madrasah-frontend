@@ -6,7 +6,7 @@ jiti.import('./env.ts')
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ['@madrasah/ui', '@madrasah/utils', '@madrasah/types', '@madrasah/hooks'],
+  transpilePackages: ['@madrasah/ui', '@madrasah/utils', '@madrasah/types', '@madrasah/hooks', '@madrasah/services', '@madrasah/msw'],
   redirects: async () => {
     return [
       {
