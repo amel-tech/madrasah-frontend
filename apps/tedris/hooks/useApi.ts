@@ -1,36 +1,42 @@
+/**
+ * @file İstemci tarafı (Client Components) için API servisine erişim sağlayan custom hook.
+ */
+import 'client-only'; // Bu kodun sunucuda kullanılmasını engeller.
+
 import { useSession } from 'next-auth/react';
 import { useMemo } from 'react';
-import { TedrisatService, createTedrisatClient } from '@madrasah/services/tedrisat';
+import { APIService } from '@madrasah/services/tedrisat';
 import { env } from '~/env';
 
 /**
- * React hook that provides an authenticated API service instance based on the current user's session.
+ * İstemci tarafında, NextAuth session'ından alınan JWT'yi kullanarak
+ * yetkilendirilmiş ve memoize edilmiş bir APIService örneği döndüren custom hook.
  *
- * This hook uses the NextAuth `useSession` hook to determine the authentication status and access token.
- * If the user is authenticated, it creates and memoizes an `APIService` instance with the user's access token.
- * If the user is not authenticated or the session is loading, it returns `null` for the API service.
- *
- * @returns An object containing:
- *   - `api`: An instance of `APIService` if authenticated, otherwise `null`.
- *   - `status`: The current authentication status, which can be `'loading'`, `'authenticated'`, or `'unauthenticated'`.
+ * @returns APIService örneğini veya session yükleniyorsa/yoksa null döndürür.
  */
-export const useApi = (): { api: TedrisatService | null; status: 'loading' | 'authenticated' | 'unauthenticated' } => {
-  const { data: session, status } = useSession();
+export const useApi = (): APIService | null => {
+  // 1. NextAuth'un client-side hook'u ile session'ı al.
+  const { data: session } = useSession();
 
+  // Kendi session yapınıza göre token'ı buradan alın (next-auth.d.ts içinde tanımlanmalı).
   const accessToken = session?.accessToken as string | undefined;
 
+  // 2. Servis örneğini oluştur ve token değişmediği sürece yeniden oluşturma (useMemo).
   const apiServiceInstance = useMemo(() => {
-    if (status !== 'authenticated' || !accessToken) {
+    // Session henüz yüklenmediyse veya token yoksa, bir örnek oluşturma.
+    if (!accessToken) {
       return null;
     }
 
-    const client = createTedrisatClient({
-      baseUrl: env.NEXT_PUBLIC_TEDRISAT_API_BASE_URL!,
-      token: accessToken
-    });
+    // İstemci tarafı için bir config oluştur.
+    const config = {
+      baseUrl: env.NEXT_PUBLIC_TEDRISAT_API_BASE_URL, // İstemcide NEXT_PUBLIC_ öneki olmalı!
+      token: accessToken,
+    };
 
-    return new TedrisatService(client);
-  }, [accessToken, status]);
+    // APIService sınıfını kullanarak istemciye özel bir örnek oluştur.
+    return new APIService(config);
+  }, [accessToken]); // Sadece accessToken değiştiğinde yeniden çalışır.
 
-  return { api: apiServiceInstance, status };
+  return apiServiceInstance;
 };
