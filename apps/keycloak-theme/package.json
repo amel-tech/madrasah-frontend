@@ -11,8 +11,7 @@
         "build-keycloak-theme": "vite build && keycloakify build",
         "build:keycloak": "keycloakify build",
         "run-keycloak": "docker run -p 127.0.0.1:8080:8080 -e KC_BOOTSTRAP_ADMIN_USERNAME=admin -e KC_BOOTSTRAP_ADMIN_PASSWORD=admin -v \"$(pwd)/dist_keycloak/keycloak-theme-for-kc-all-other-versions.jar:/opt/keycloak/providers/keycloak-theme.jar\" quay.io/keycloak/keycloak:26.3.2 start-dev",
-        "check-types": "tsc --noEmit",
-        "test": "echo 'Tests not implemented'"
+        "check-types": "tsc --noEmit"
     },
     "license": "MIT",
     "keywords": [],
