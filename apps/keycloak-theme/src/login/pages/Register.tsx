@@ -72,14 +72,12 @@ export default function Register(props: RegisterProps) {
       displayMessage={messagesPerField.exists('global')}
       displayRequiredFields={false}
     >
-      <div className="mx-auto flex flex-row gap-2 w-fit bg-[#f5f5f5] border border-[#e5e5e5] rounded-[35px] overflow-hidden font-light text-sm mb-8">
-        <div
-          className="py-2 rounded-[35px] px-6 bg-brand-primary text-white "
-        >
+      <div className="mx-auto flex flex-row gap-1 w-fit bg-[#f5f5f5] border border-gray-200 rounded-lg overflow-hidden font-medium text-sm mb-8 p-1">
+        <div className="py-2 px-4 rounded-md bg-brand-primary text-white shadow-sm">
           Register
         </div>
         <a href={url.loginUrl}>
-          <div className="py-2 rounded-[35px] px-5">Login</div>
+          <div className="py-2 px-4 rounded-md text-gray-600 hover:text-gray-800 hover:bg-gray-50 transition-all duration-200">Login</div>
         </a>
       </div>
 
@@ -127,7 +125,7 @@ export default function Register(props: RegisterProps) {
                   <Button
                     size="lg"
                     className={cn(
-                      'w-full bg-brand-primary text-white hover:bg-brand-primary/90',
+                      'w-full bg-brand-primary text-white h-[48px] hover:bg-brand-primary/90 font-medium rounded-lg transition-all duration-200 shadow-sm hover:shadow-md', // Modern native button style - animasyonlar ve gölgeler eklendi
                       'g-recaptcha',
                     )}
                     data-sitekey={recaptchaSiteKey}
@@ -153,7 +151,7 @@ export default function Register(props: RegisterProps) {
                       !isFormSubmittable
                       || (termsAcceptanceRequired && !areTermsAccepted)
                     }
-                    className="w-full bg-brand-primary text-white hover:bg-brand-primary/90 disabled:opacity-50"
+                    className="w-full bg-brand-primary text-white h-[48px] hover:bg-brand-primary/90 disabled:opacity-50 font-medium rounded-lg transition-all duration-200 shadow-sm hover:shadow-md"
                     type="submit"
                   >
                     {msgStr('doRegister')}

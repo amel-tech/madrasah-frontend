@@ -23,6 +23,7 @@
     "esbuild": "^0.25.9",
     "husky": "^9.1.7",
     "jiti": "^2.5.1",
+    "lint-staged": "^16.1.5",
     "prettier": "^3.6.2",
     "turbo": "^2.5.6"
   },
@@ -31,5 +32,8 @@
     "workerDirectory": [
       "apps/tedris/public"
     ]
+  },
+  "lint-staged": {
+    "*.{js,css,md}": "prettier --write"
   }
 }
