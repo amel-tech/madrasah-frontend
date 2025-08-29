@@ -17,6 +17,8 @@ export default async function Card({
     return <div>Error: {error}</div>;
   }
 
+  console.log(card)
+
   return (
     <div>
       <ul>

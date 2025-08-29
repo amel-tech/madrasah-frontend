@@ -29,4 +29,11 @@ export class TedrisatService {
   async getListCards(id: number) {
     return this.client<Card[]>(`/lists/${id}/cards`)
   }
+
+  async createCard(card: Card) {
+    return this.client<Card>('/cards', {
+      method: 'POST',
+      body: JSON.stringify(card),
+    })
+  }
 }

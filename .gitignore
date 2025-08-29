@@ -193,3 +193,6 @@ firestore-debug.log
 
 # Local Netlify folder
 .netlify
+
+# Mock database
+shared/mocks/mock-db.json

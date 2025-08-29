@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "type": "module",
   "main": "index.js",
- "exports": {
+  "scripts": {
+    "start-server": "node --loader ts-node/esm mock-ws-server.ts"
+  },
+  "exports": {
     "./tedrisat": {
       "types": "./src/tedrisat/index.ts",
       "import": "./src/tedrisat/index.ts",
@@ -12,7 +15,10 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^9.9.0",
-    "msw": "^2.10.5"
+    "@mswjs/data": "^0.16.2",
+    "@types/ws": "^8.18.1",
+    "msw": "^2.10.5",
+    "ws": "^8.18.3"
   },
   "dependencies": {
     "@madrasah/services": "^0.1.0"
