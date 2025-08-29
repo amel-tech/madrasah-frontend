@@ -25,6 +25,7 @@ jobs:
       - name: Lint code
         run: |
           cp apps/tedris/.env.example apps/tedris/.env
+          cp apps/nizam/.env.example apps/nizam/.env
           npm run lint
 
       - name: Run tests

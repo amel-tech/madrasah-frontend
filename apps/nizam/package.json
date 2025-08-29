@@ -11,10 +11,14 @@
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
-    "@madrasah/ui": "^0.0.0",
+    "@madrasah/icons": "^1.0.0",
+    "@madrasah/ui": "*",
+    "@t3-oss/env-nextjs": "^0.13.8",
     "next": "15.4.6",
+    "next-auth": "^4.24.11",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
