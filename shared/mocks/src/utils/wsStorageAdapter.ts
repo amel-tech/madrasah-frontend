@@ -52,7 +52,12 @@ export const createWebSocketStorage = (): StorageAdapter => {
         if (type === 'GET_ITEM_SUCCESS') {
           const resolveFunc = pendingRequests.get(key)
           if (resolveFunc) {
-            resolveFunc(value ? JSON.stringify(value) : null)
+            if (typeof resolveFunc === 'function') {
+              resolveFunc(value ? JSON.stringify(value) : null)
+            }
+            else {
+              console.warn(`Expected pendingRequests entry for key "${key}" to be a function, got:`, resolveFunc)
+            }
             pendingRequests.delete(key)
           }
         }
