@@ -1,16 +1,18 @@
 export type Card = {
-  id: number
-  type: 'hadeeth' | 'vocabulary'
-  author_id: number
-  is_public: boolean
-  image_source: string
-  content: any
+    id: number;
+    author_id: number;
+    is_public: boolean;
+    content: {
+        front: string;
+        back: string;
+    };
+    type: string;
+    image_source: string;
 }
-
 export type List = {
-  id: number
-  author_id: number
-  title: string
-  description: string
-  is_public: boolean
+    id: number;
+    author_id: number;
+    is_public: boolean;
+    title: string;
+    description: string;
 }

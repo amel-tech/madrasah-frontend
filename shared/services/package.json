@@ -16,7 +16,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "clean": "rm -rf dist",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "generate-services": "orval --config ./orval.config.ts"
   },
   "devDependencies": {
     "@madrasah/eslint-config": "*",
@@ -24,6 +25,7 @@
     "@types/node": "^24",
     "esbuild": "^0.21.5",
     "eslint": "^9.34.0",
+    "orval": "^7.11.2",
     "typescript": "^5.4.5"
   }
 }
