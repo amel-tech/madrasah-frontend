@@ -1,0 +1,15 @@
+# Git sends three arguments to this hook:
+# $1: Ref of previous HEAD
+# $2: Ref of new HEAD
+# $3: 1 if this is a branch checkout, 0 if it's a file checkout
+
+# Only run if it's a branch change (flag=1)
+if [ "$3" = "1" ]; then
+    # Check for files changed between previous and new HEAD.
+    # If package-lock.json file has changed, run install command.
+    if git diff --name-only "$1" "$2" | grep -q "package-lock.json"; then
+        echo "BRANCH CHANGE: Detected change in package-lock.json file."
+        echo "Reinstalling dependencies..."
+        npm install
+    fi
+fi

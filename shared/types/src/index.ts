@@ -33,3 +33,11 @@ export interface ApiResponse<T> {
   message?: string
   error?: string
 }
+
+export interface MemoryCard {
+  id: string
+  front: string
+  back: string
+  note: string
+  type: 'hadith' | 'verse'
+}
