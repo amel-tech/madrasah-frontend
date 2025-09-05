@@ -1,10 +1,10 @@
-import React from "react";
-import { env } from "~/env";
-import { WarningIcon } from "@madrasah/icons";
+import React from 'react'
+import { env } from '~/env'
+import { WarningIcon } from '@madrasah/icons'
 
 export const MockIndicator = () => {
-  if (env.NEXT_PUBLIC_API_MOCKING !== "enabled") {
-    return null;
+  if (env.NEXT_PUBLIC_API_MOCKING !== 'enabled') {
+    return null
   }
 
   return (
@@ -12,5 +12,5 @@ export const MockIndicator = () => {
       <WarningIcon size={24} weight="fill" />
       Mock API Active
     </div>
-  );
-};
+  )
+}

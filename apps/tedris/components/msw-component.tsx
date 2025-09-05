@@ -1,7 +1,7 @@
-'use client';
+'use client'
 
-import { useEffect } from 'react';
-import { env } from '~/env';
+import { useEffect } from 'react'
+import { env } from '~/env'
 
 export function MSWComponent() {
   useEffect(() => {
@@ -9,12 +9,12 @@ export function MSWComponent() {
       if (typeof window !== 'undefined') {
         import('../mocks/browser').then(({ worker }) => {
           worker.start({
-            onUnhandledRequest: 'bypass'
-          });
-        });
+            onUnhandledRequest: 'bypass',
+          })
+        })
       }
     }
-  }, []);
+  }, [])
 
-  return null;
+  return null
 }

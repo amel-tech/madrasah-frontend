@@ -23,6 +23,7 @@
   "scripts": {
     "build": "npm run process && node scripts/build.js",
     "process": "node scripts/process-tokens.js",
+    "clean": "rm -rf .turbo node_modules dist",
     "prepublishOnly": "npm run build",
     "check-types": "tsc --noEmit"
   },

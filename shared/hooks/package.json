@@ -14,7 +14,7 @@
     "build": "tsc --emitDeclarationOnly && esbuild src/index.ts --bundle --format=esm --outdir=dist --sourcemap",
     "dev": "esbuild src/index.ts --bundle --format=esm --outdir=dist --sourcemap --watch",
     "lint": "eslint \"src/**/*.ts*\"",
-    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
+    "clean": "rm -rf .turbo node_modules dist",
     "check-types": "tsc --noEmit"
   },
   "devDependencies": {

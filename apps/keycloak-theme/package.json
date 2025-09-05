@@ -6,6 +6,7 @@
     "scripts": {
         "dev": "vite",
         "storybook": "storybook dev -p 6006",
+        "clean": "rm -rf .turbo .next node_modules dist dist_keycloak",
         "lint": "eslint . --max-warnings 0",
         "lint:fix": "eslint . --max-warnings 0 --fix",
         "build-keycloak-theme": "vite build && keycloakify build",
@@ -38,5 +39,9 @@
         "storybook": "^8.1.10",
         "typescript": "^5.2.2",
         "vite": "^5.0.8"
+    },
+    "optionalDependencies": {
+        "@rollup/rollup-linux-x64-gnu": "*",
+        "@rollup/rollup-darwin-arm64": "*"
     }
 }

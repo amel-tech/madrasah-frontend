@@ -12,7 +12,7 @@
     "lint": "turbo lint",
     "check-types": "turbo run check-types",
     "lint:fix": "turbo lint -- --fix",
-    "clean": "turbo clean",
+    "clean": "turbo clean && rm -rf node_modules .turbo dist",
     "prepare": "husky",
     "test": "turbo test"
   },
@@ -20,7 +20,7 @@
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
     "@turbo/gen": "^2.5.6",
-    "esbuild": "^0.25.9",
+    "esbuild": "^0.21.5",
     "husky": "^9.1.7",
     "jiti": "^2.5.1",
     "prettier": "^3.6.2",
