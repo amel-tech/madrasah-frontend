@@ -1,9 +1,7 @@
-import type { JSX } from 'keycloakify/tools/JSX'
 import { useState } from 'react'
 import { kcSanitize } from 'keycloakify/lib/kcSanitize'
-import { useIsPasswordRevealed } from 'keycloakify/tools/useIsPasswordRevealed'
 import { clsx } from 'keycloakify/tools/clsx'
-import { getKcClsx, type KcClsx } from 'keycloakify/login/lib/kcClsx'
+import { getKcClsx } from 'keycloakify/login/lib/kcClsx'
 import type { KcContext } from '../KcContext'
 import type { I18n } from '../i18n'
 import type { ExtendedPageProps } from '../types/PageProps'
@@ -14,7 +12,8 @@ import { Label } from '@madrasah/ui/components/label'
 import { Checkbox } from '@madrasah/ui/components/checkbox'
 import { cn } from '@madrasah/ui/lib/utils'
 import { Button } from '@madrasah/ui/components/button'
-import { EyeIcon, EyeSlashIcon } from '@madrasah/icons'
+import { PasswordWrapper } from '../components/PasswordWrapper'
+import { FieldContainer } from '../components/FieldContainer'
 
 export default function Login(
   props: ExtendedPageProps<Extract<KcContext, { pageId: 'login.ftl' }>, I18n>,
@@ -132,13 +131,14 @@ export default function Login(
       )}
     >
       {displayRegisterationNodes && (
-        <div className="mx-auto flex flex-row gap-2 w-fit bg-[#f5f5f5] border border-[#e5e5e5] rounded-[35px] overflow-hidden font-light text-sm mb-8">
+        <div className="mx-auto flex flex-row gap-1 w-fit bg-gray-100 border border-gray-200 rounded-lg overflow-hidden font-medium text-sm mb-8 p-1">
+          {' '}
           <a href={url.registrationUrl}>
-            <div className="py-2 rounded-[35px] px-5 ">Register</div>
+            <div className="py-2 px-4 rounded-md text-gray-600 hover:text-gray-800 hover:bg-gray-50 transition-all duration-200">Register</div>
+            {' '}
           </a>
-          <div
-            className="py-2 rounded-[35px] px-6 bg-brand-primary text-white "
-          >
+          <div className="py-2 px-4 rounded-md bg-brand-primary text-white shadow-sm">
+            {' '}
             Login
           </div>
         </div>
@@ -158,7 +158,9 @@ export default function Login(
               className="flex flex-col gap-5"
             >
               {!usernameHidden && (
-                <div className="grid w-full max-w-sm items-center gap-2">
+                <FieldContainer>
+                  {' '}
+                  {/* Modüler field container */}
                   <Label htmlFor="username" className="text-gray-600">
                     {!realm.loginWithEmailAllowed
                       ? msg('username')
@@ -200,10 +202,12 @@ export default function Login(
                       }}
                     />
                   )}
-                </div>
+                </FieldContainer>
               )}
 
-              <div className="flex flex-col gap-2">
+              <FieldContainer>
+                {' '}
+                {/* Modüler field container */}
                 <Label
                   htmlFor="password"
                   className={cn(kcClsx('kcLabelClass'), 'text-gray-600')}
@@ -227,6 +231,7 @@ export default function Login(
                     )}
                     placeholder="Password"
                     className={cn(
+                      'w-full pr-10',
                       messagesPerField.existsError('username', 'password')
                       && 'border border-error-secondary !text-error-primary placeholder:text-error-primary',
                     )}
@@ -248,7 +253,7 @@ export default function Login(
                     }}
                   />
                 )}
-              </div>
+              </FieldContainer>
 
               <div className="flex flex-row justify-between items-center gap-2">
                 <div id="kc-form-options" className="flex flex-row gap-2">
@@ -288,7 +293,7 @@ export default function Login(
                 <Button
                   tabIndex={0}
                   disabled={isLoginButtonDisabled}
-                  className="bg-brand-primary text-white h-[45px] hover:bg-brand-primary/90"
+                  className="w-full bg-brand-primary text-white h-[48px] hover:bg-brand-primary/90 disabled:opacity-50 font-medium rounded-lg transition-all duration-200 shadow-sm hover:shadow-md"
                   type="submit"
                 >
                   {msgStr('doLogIn')}
@@ -299,37 +304,5 @@ export default function Login(
         </div>
       </div>
     </Template>
-  )
-}
-
-function PasswordWrapper(props: {
-  kcClsx: KcClsx
-  i18n: I18n
-  passwordInputId: string
-  children: JSX.Element
-}) {
-  const { i18n, passwordInputId, children } = props
-
-  const { msgStr } = i18n
-
-  const { isPasswordRevealed, toggleIsPasswordRevealed }
-    = useIsPasswordRevealed({ passwordInputId })
-
-  return (
-    <div className="flex flex-row gap-1">
-      {children}
-      <Button
-        variant="outline"
-        type="button"
-        aria-label={msgStr(
-          isPasswordRevealed ? 'hidePassword' : 'showPassword',
-        )}
-        aria-controls={passwordInputId}
-        onClick={toggleIsPasswordRevealed}
-        className="border-[var(--input)]"
-      >
-        {isPasswordRevealed ? <EyeSlashIcon /> : <EyeIcon />}
-      </Button>
-    </div>
   )
 }

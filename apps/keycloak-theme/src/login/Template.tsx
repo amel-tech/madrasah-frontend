@@ -70,15 +70,24 @@ export default function Template(
 
   return (
     <div className={cn(kcClsx('kcLoginClass'), 'min-h-screen flex')}>
-      <div className="flex-1 flex items-center justify-center p-8">
+      <div className="flex-1 flex items-center justify-center p-4 md:p-8">
         <div className="w-full max-w-md">
           <div
             className={cn(
               kcClsx('kcFormCardClass'),
-              'bg-white rounded-xl border-0 p-8',
+              'bg-white rounded-xl border-0 p-6 md:p-8',
             )}
           >
-            <header className={cn(kcClsx('kcFormHeaderClass'), 'mb-8')}>
+            <div className="block md:hidden mb-4">
+              <div className="flex justify-center">
+                <img
+                  src={BackgroundImage}
+                  alt="Madrasah Background"
+                  className="h-16 w-auto object-contain"
+                />
+              </div>
+            </div>
+            <header className={cn(kcClsx('kcFormHeaderClass'), 'mb-6 md:mb-8')}>
               {enabledLanguages.length > 1 && (
                 <div className={kcClsx('kcLocaleMainClass')} id="kc-locale">
                   <div
@@ -122,13 +131,13 @@ export default function Template(
                       <div className="text-center mb-4">
                         <h1
                           id="kc-page-title"
-                          className="font-bold text-gray-900 mb-2 text-[30px]"
+                          className="font-bold text-gray-900 mb-2 text-[24px] md:text-[30px]"
                         >
                           {headerNode}
                         </h1>
                         {headerSubNode && (
                           <p
-                            className="text-sm text-black font-light text-[16px]"
+                            className="text-sm text-black font-light text-[14px] md:text-[16px]"
                             id="kc-page-subtitle"
                           >
                             {headerSubNode}
@@ -311,9 +320,8 @@ export default function Template(
           </div>
         </div>
       </div>
-
       {/* Right side - Image/Branding */}
-      <div id="kc-header" className={cn('flex flex-1 items-center relative')}>
+      <div id="kc-header" className={cn('hidden md:flex flex-1 items-center relative')}>
         <img
           src={BackgroundImage}
           alt="Madrasah Background"

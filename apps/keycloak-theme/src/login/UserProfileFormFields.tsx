@@ -1,7 +1,5 @@
-import type { JSX } from 'keycloakify/tools/JSX'
 import { useEffect, Fragment } from 'react'
 import { assert } from 'keycloakify/tools/assert'
-import { useIsPasswordRevealed } from 'keycloakify/tools/useIsPasswordRevealed'
 import type { KcClsx } from 'keycloakify/login/lib/kcClsx'
 import {
   useUserProfileForm,
@@ -26,7 +24,8 @@ import {
   SelectValue,
 } from '@madrasah/ui/components/select'
 import { cn } from '@madrasah/ui/lib/utils'
-import { EyeIcon, EyeSlashIcon } from '@madrasah/icons'
+import { PasswordWrapper } from './components/PasswordWrapper'
+import { FieldContainer } from './components/FieldContainer'
 
 export default function UserProfileFormFields(
   props: UserProfileFormFieldsProps<KcContext, I18n>,
@@ -80,16 +79,14 @@ export default function UserProfileFormFields(
                   i18n={i18n}
                 />
               )}
-              <div
-                className="grid w-full max-w-sm items-center gap-2"
-                style={{
-                  display:
-                    attribute.annotations.inputType === 'hidden'
-                    || (attribute.name === 'password-confirm'
-                      && !doMakeUserConfirmPassword)
-                      ? 'none'
-                      : undefined,
-                }}
+              <FieldContainer
+                className={
+                  attribute.annotations.inputType === 'hidden'
+                  || (attribute.name === 'password-confirm'
+                    && !doMakeUserConfirmPassword)
+                    ? 'hidden'
+                    : undefined
+                }
               >
                 <div className="flex flex-col gap-1">
                   <Label htmlFor={attribute.name} className="text-gray-600">
@@ -145,7 +142,7 @@ export default function UserProfileFormFields(
                   )}
                   {/* NOTE: Downloading of html5DataAnnotations scripts is done in the useUserProfileForm hook */}
                 </div>
-              </div>
+              </FieldContainer>
             </Fragment>
           )
         },
@@ -322,44 +319,6 @@ function InputFieldByType(props: InputFieldByTypeProps) {
   }
 }
 
-function PasswordWrapper(props: {
-  kcClsx: KcClsx
-  i18n: I18n
-  passwordInputId: string
-  children: JSX.Element
-}) {
-  const { i18n, passwordInputId, children } = props
-
-  const { msgStr } = i18n
-
-  const { isPasswordRevealed, toggleIsPasswordRevealed }
-    = useIsPasswordRevealed({ passwordInputId })
-
-  return (
-    <div className="flex flex-row gap-1">
-      {children}
-      <Button
-        variant="outline"
-        type="button"
-        aria-label={msgStr(
-          isPasswordRevealed ? 'hidePassword' : 'showPassword',
-        )}
-        aria-controls={passwordInputId}
-        onClick={toggleIsPasswordRevealed}
-        className="shrink-0 border-[var(--input)]"
-      >
-        {isPasswordRevealed
-          ? (
-              <EyeSlashIcon size={16} />
-            )
-          : (
-              <EyeIcon size={16} />
-            )}
-      </Button>
-    </div>
-  )
-}
-
 function InputTag(
   props: InputFieldByTypeProps & { fieldIndex: number | undefined },
 ) {
@@ -399,6 +358,7 @@ function InputTag(
           return valueOrValues
         })()}
         className={cn(
+          (attribute.name === 'password' || attribute.name === 'password-confirm') && 'pr-10',
           displayableErrors.find(error => error.fieldIndex === fieldIndex)
           !== undefined
           && 'border-error-secondary !text-error-primary placeholder:text-error-primary',
@@ -745,7 +705,6 @@ function SelectTag(props: InputFieldByTypeProps) {
   })()
 
   if (isMultiple) {
-    // For multiselect, fall back to native select as shadcn Select doesn't support multiple
     return (
       <select
         id={attribute.name}
@@ -788,7 +747,6 @@ function SelectTag(props: InputFieldByTypeProps) {
     )
   }
 
-  // For single select, use shadcn Select component
   return (
     <Select
       value={typeof valueOrValues === 'string' ? valueOrValues : ''}
