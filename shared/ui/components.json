@@ -9,6 +9,7 @@
     "baseColor": "neutral",
     "cssVariables": true
   },
+  "iconLibrary": "phosphoricons",
   "aliases": {
     "components": "@madrasah/ui/components",
     "utils": "@madrasah/ui/lib/utils",
