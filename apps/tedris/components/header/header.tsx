@@ -5,7 +5,7 @@ import { MadrasahLogoIcon } from '@madrasah/icons/ssr'
 import { Input } from '@madrasah/ui/components/input'
 import { UserHeaderMenu } from './user-header-menu'
 import { UserNotifications } from './user-notification-menu'
-
+import Version from './version'
 export const Header = async () => {
   const session = await getServerSession(authOptions)
 
@@ -28,6 +28,7 @@ export const Header = async () => {
           : (
               <KeycloakLogin />
             )}
+        <Version />
       </div>
     </header>
   )

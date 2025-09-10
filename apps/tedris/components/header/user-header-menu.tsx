@@ -11,6 +11,7 @@ import {
   DropdownMenuTrigger,
 } from '@madrasah/ui/components/dropdown-menu'
 import { UserAvatar } from '../user-avatar'
+import Version from './version'
 
 export const UserHeaderMenu = () => {
   const { data: session, status } = useSession()
@@ -69,6 +70,11 @@ export const UserHeaderMenu = () => {
           <SignOutIcon className="text-neutral-primary" />
           <p className="text-neutral-primary text-sm">Sign out</p>
         </DropdownMenuItem>
+        <DropdownMenuSeparator>
+          <DropdownMenuItem>
+            <Version />
+          </DropdownMenuItem>
+        </DropdownMenuSeparator>
       </DropdownMenuContent>
     </DropdownMenu>
   )
