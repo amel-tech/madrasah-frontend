@@ -7,7 +7,7 @@ import '@madrasah/ui/globals.css'
 const inter = Inter({ subsets: ['latin'] })
 import { Header } from '~/components/header/header'
 import { ClientProviders } from '~/components/providers/client-providers'
-import { TabView } from '~/components/tab-view/TabView'
+import { TabView } from '~/components/tab-view'
 import { MSWComponent } from '~/components/msw-component'
 import { MockIndicator } from '~/components/mock-indicator'
 import { env } from '~/env'

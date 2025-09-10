@@ -20,9 +20,8 @@
     "jsx": "preserve",
     "target": "ES2017",
     "paths": {
-      "~/env": [
-        "./env.ts"
-      ],
+      "~/env": ["./env.ts"],
+      "~/features/*": ["./features/*"],
       "~/components/*": ["./components/*"],
       "~/lib/*": ["./lib/*"],
       "~/hooks": ["./hooks"]

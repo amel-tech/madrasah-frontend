@@ -11,7 +11,7 @@ export default async function Card({
 
   const cookieStore = await cookies()
   const api = getAuthenticatedApiService(cookieStore)
-  const { data: card, error } = await api.getCard(Number(id))
+  const { data: card, error } = await api.getDeckCards(id)
 
   if (error) {
     return (
@@ -25,18 +25,18 @@ export default async function Card({
   return (
     <div>
       <ul>
-        <Link href={`/cards/${card.id}`} key={card.id}>
+        <Link href={`/cards/${card[0].id}`} key={card[0].id}>
           <li>
-            {card.content.front}
+            {card[0].content.front}
             {' '}
             (
-            {card.type}
+            {card[0].type}
             )
-            {card.content.back && (
+            {card[0].content.back && (
               <>
                 {' '}
                 -
-                {card.content.back}
+                {card[0].content.back}
               </>
             )}
           </li>

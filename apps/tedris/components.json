@@ -13,6 +13,7 @@
     "components": "@/components",
     "hooks": "@/hooks",
     "lib": "@/lib",
+    "types": "@madrasah/types",
     "utils": "@madrasah/ui/lib/utils",
     "ui": "@madrasah/ui/components"
   }

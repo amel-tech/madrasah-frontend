@@ -1,16 +1,29 @@
 export type Card = {
   id: number
   type: 'hadeeth' | 'vocabulary'
-  author_id: number
   is_public: boolean
+  author: string
+  content: {
+    front: string
+    back: string
+  }
   image_source: string
-  content: any
 }
 
-export type List = {
+export type Deck = {
   id: number
-  author_id: number
+  author: string
   title: string
   description: string
+  stats: {
+    cards_count: number
+    downloads_count: number
+    rating: number
+  }
   is_public: boolean
+}
+
+export type Tag = {
+  id: number
+  title: string
 }

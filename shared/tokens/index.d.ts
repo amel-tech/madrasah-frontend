@@ -3,31 +3,31 @@
  */
 
 export interface TokenValue {
-  [key: string]: string | TokenValue;
+  [key: string]: string | TokenValue
 }
 
 export interface Tokens {
-  color?: TokenValue;
-  font?: TokenValue;
-  [key: string]: TokenValue | undefined;
+  color?: TokenValue
+  font?: TokenValue
+  [key: string]: TokenValue | undefined
 }
 
-export interface Colors extends TokenValue {}
-export interface Fonts extends TokenValue {}
+export interface Colors extends TokenValue { }
+export interface Fonts extends TokenValue { }
 
-export const tokens: Tokens;
-export const colors: Colors;
-export const fonts: Fonts;
+export const tokens: Tokens
+export const colors: Colors
+export const fonts: Fonts
 
-export function getToken(path: string): string | TokenValue | undefined;
-export function getCSSVariable(tokenName: string): string;
+export function getToken(path: string): string | TokenValue | undefined
+export function getCSSVariable(tokenName: string): string
 
 declare const defaultExport: {
-  tokens: Tokens;
-  colors: Colors;
-  fonts: Fonts;
-  getToken: typeof getToken;
-  getCSSVariable: typeof getCSSVariable;
-};
+  tokens: Tokens
+  colors: Colors
+  fonts: Fonts
+  getToken: typeof getToken
+  getCSSVariable: typeof getCSSVariable
+}
 
-export default defaultExport;
+export default defaultExport
