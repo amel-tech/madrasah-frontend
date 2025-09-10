@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.1.0](https://github.com/amel-tech/madrasah-frontend/compare/tedris-web-v1.0.0...tedris-web-v1.1.0) (2025-09-10)
+
+
+### Features
+
+* created msw package ([1ccb44a](https://github.com/amel-tech/madrasah-frontend/commit/1ccb44afdaebf32bd9c8025fe15a9a81b380bfbc))
+* created services package ([c135b5b](https://github.com/amel-tech/madrasah-frontend/commit/c135b5bb24a6a3cd5eb06e84a61c148920480156))
+* implement mobile responsive UI for login and register pages ([9946169](https://github.com/amel-tech/madrasah-frontend/commit/9946169afa0acf368a23f69a24dd58d666c208f9))
+* **tedris:** created TedrisatService and mock layer ([40c3ef6](https://github.com/amel-tech/madrasah-frontend/commit/40c3ef6ebe664d600bf5c66b31946106f5d87fd2))
+
+
+### Bug Fixes
+
+* add NEXT_PUBLIC_TEDRISAT_API_BASE_URL to env example ([c60f7f9](https://github.com/amel-tech/madrasah-frontend/commit/c60f7f9133ed528683135d64909e50eaa1bf2642))
+* checked the API_MOCKING env variable to initiate mock service ([994e2f1](https://github.com/amel-tech/madrasah-frontend/commit/994e2f1df71790180d8f487b280e6bcbe0411ccc))
+
 ## [1.0.0](https://github.com/amel-tech/madrasah-frontend/compare/tedris-web-v1.0.0...tedris-web-v1.0.0) (2025-08-21)
 
 
