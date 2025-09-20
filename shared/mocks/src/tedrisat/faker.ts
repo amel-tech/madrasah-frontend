@@ -21,7 +21,6 @@ export const tedrisat = {
       image_source: faker.image.urlLoremFlickr({ category: 'nature', width: 640, height: 480 }),
     }
   },
-
   tag(id?: number): Tag {
     if (id) faker.seed(id)
 

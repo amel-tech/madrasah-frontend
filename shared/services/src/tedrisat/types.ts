@@ -4,10 +4,12 @@ export type Card = {
   is_public: boolean
   author: string
   content: {
-    front: string
-    back: string
+    front?: string
+    back?: string
+    note?: string
   }
   image_source: string
+  deck_id?: number
 }
 
 export type Deck = {
@@ -16,9 +18,9 @@ export type Deck = {
   title: string
   description: string
   stats: {
-    cards_count: number
-    downloads_count: number
-    rating: number
+    cards_count?: number
+    downloads_count?: number
+    rating?: number
   }
   is_public: boolean
 }

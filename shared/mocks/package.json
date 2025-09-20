@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "main": "index.js",
- "exports": {
+  "exports": {
     "./tedrisat": {
       "types": "./src/tedrisat/index.ts",
       "import": "./src/tedrisat/index.ts",
@@ -12,6 +12,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^9.9.0",
+    "@mswjs/data": "^0.16.2",
     "msw": "^2.10.5"
   },
   "dependencies": {

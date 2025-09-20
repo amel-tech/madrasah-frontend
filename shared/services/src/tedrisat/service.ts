@@ -14,6 +14,18 @@ export class TedrisatService {
     return this.client<{ decks: Deck[], tags: Tag[], explore: Deck[] }>('/decks/dashboard')
   }
 
+  async createCard(body: Card[]) {
+    return this.client<Card[]>(`/card`, { method: 'POST', body: JSON.stringify(body) })
+  }
+
+  async getCard(id: number) {
+    return this.client<Card>(`/cards/${id}`)
+  }
+
+  async updateCard(id: number, body: Partial<Card>) {
+    return this.client<Card>(`/cards/${id}`, { method: 'PUT', body: JSON.stringify(body) })
+  }
+
   async getDecksSelf() {
     return this.client<Deck[]>('/decks/self')
   }

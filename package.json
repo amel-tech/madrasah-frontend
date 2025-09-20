@@ -29,7 +29,8 @@
   "packageManager": "npm@11.5.2",
   "msw": {
     "workerDirectory": [
-      "apps/tedris/public"
+      "apps/tedris/public",
+      "apps/nizam/public"
     ]
   }
 }
