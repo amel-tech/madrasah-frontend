@@ -7,6 +7,7 @@ interface IATFormGroupProps {
   label?: string
   wrapperClass?: string
   placeholder?: string
+  required?: boolean
   type?: string
   value: string | number
   onChange: React.ChangeEventHandler<HTMLInputElement>
@@ -15,9 +16,10 @@ interface IATFormGroupProps {
 function ATFormGroup({
   id,
   label,
-  wrapperClass = "mb-6",
+  wrapperClass = "mb-4",
   placeholder,
   type = "text",
+  required,
   value,
   onChange,
 }: IATFormGroupProps) {
@@ -26,6 +28,7 @@ function ATFormGroup({
       {label && (
         <Label htmlFor={id} className="mb-3">
           {label}
+          {required && <span className="text-red-500">*</span>}
         </Label>
       )}
       <Input

@@ -8,6 +8,7 @@ interface IATFormGroupTextAreaProps {
   label?: string
   wrapperClass?: string
   placeholder?: string
+  required?: boolean
   rows?: number
   inputClassName?: string
   value: string | number
@@ -17,8 +18,9 @@ interface IATFormGroupTextAreaProps {
 function ATFormGroupTextArea({
   id,
   label,
-  wrapperClass = "mb-6",
+  wrapperClass = "mb-4",
   placeholder,
+  required,
   rows = 4,
   inputClassName = "",
   value,
@@ -29,6 +31,7 @@ function ATFormGroupTextArea({
       {label && (
         <Label htmlFor={id} className="mb-3">
           {label}
+          {required && <span className="text-red-500">*</span>}
         </Label>
       )}
 
