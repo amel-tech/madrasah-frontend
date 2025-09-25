@@ -10,6 +10,8 @@ import { ClientProviders } from '~/components/providers/client-providers'
 import { TabView } from '~/components/tab-view'
 import { MSWComponent } from '~/components/msw-component'
 import { MockIndicator } from '~/components/mock-indicator'
+import { Toaster } from '@madrasah/ui/components/sonner'
+
 import { env } from '~/env'
 
 export const metadata: Metadata = {
@@ -36,6 +38,7 @@ export default async function RootLayout({
           <Header />
           <TabView>{children}</TabView>
         </ClientProviders>
+        <Toaster />
       </body>
     </html>
   )
