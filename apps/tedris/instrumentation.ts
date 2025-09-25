@@ -12,12 +12,4 @@ export async function register() {
       url: env.OTEL_EXPORTER_OTLP_ENDPOINT,
     }),
   })
-
-  if (process.env.NEXT_RUNTIME === 'nodejs' && process.env.NODE_ENV === 'development' && env.API_MOCKING === 'enabled') {
-    const { server } = await import('./mocks/server');
-    server.listen({
-      onUnhandledRequest: 'bypass'
-    });
-    console.log('✅ MSW mocking is enabled for Server Components.');
-  }
 }

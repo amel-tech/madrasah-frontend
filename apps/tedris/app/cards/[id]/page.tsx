@@ -1,26 +1,17 @@
-import { cookies } from 'next/headers'
 import Link from 'next/link'
-import { getAuthenticatedApiService } from '~/lib/services'
+import { getTedrisatMock } from '~/lib/mock-data'
 
 export default async function Card({
   params,
 }: {
-  params: Promise<{ id: string }>
+  params: Promise<{
+    id: string
+  }>
 }) {
   const { id } = await params
 
-  const cookieStore = await cookies()
-  const api = getAuthenticatedApiService(cookieStore)
-  const { data: card, error } = await api.getDeckCards(id)
-
-  if (error) {
-    return (
-      <div>
-        Error:
-        {error}
-      </div>
-    )
-  }
+  const { cards } = await getTedrisatMock()
+  const card = cards.find(card => card.id === Number(id))
 
   return (
     <div>

@@ -1,27 +1,14 @@
 import Link from 'next/link'
-import { cookies } from 'next/headers'
 
 import { PlusIcon } from '@madrasah/icons/ssr'
 import { Button } from '@madrasah/ui/components/button'
 
 import DeckCard from '~/features/flashcards/components/deck/deck-card'
-import { getAuthenticatedApiService } from '~/lib/services'
+import { getTedrisatMock } from '~/lib/mock-data'
 
 export default async function Page() {
-  const cookieStore = await cookies()
-  const api = getAuthenticatedApiService(cookieStore)
-  const { data: { decks, tags, explore } = { decks: [], tags: [], explore: [] }, error } = await api.getDashboard()
-
-  if (error) {
-    return (
-      <div>
-        Error:
-        <div>
-          {error}
-        </div>
-      </div>
-    )
-  }
+  const tedrisatMock = await getTedrisatMock()
+  const { decks = [], tags = [] } = tedrisatMock
 
   return (
     <div>
@@ -75,16 +62,18 @@ export default async function Page() {
         ))}
       </div>
       <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
-        {explore?.map(deck => (
-          <DeckCard
-            key={deck.id}
-            title={deck.title}
-            author={deck.author}
-            cardCount={deck.stats.cards_count}
-            rating={deck.stats.rating}
-            downloadCount={deck.stats.downloads_count}
-            description={deck.description}
-          />
+        {decks?.map(deck => (
+          <Link href={`/cards/decks/${deck.id}`} key={deck.id}>
+            <DeckCard
+              key={deck.id}
+              title={deck.title}
+              author={deck.author}
+              cardCount={deck.stats.cards_count}
+              rating={deck.stats.rating}
+              downloadCount={deck.stats.downloads_count}
+              description={deck.description}
+            />
+          </Link>
         ))}
       </div>
     </div>
