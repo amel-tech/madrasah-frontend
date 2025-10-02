@@ -3,20 +3,24 @@ import React, { useState } from 'react'
 import { Button } from '@madrasah/ui/components/button'
 import ATFormGroup from '@madrasah/ui/custom/form-group'
 import ATFormGroupTextArea from '@madrasah/ui/custom/form-group-text-area'
-import FlashCard from './flashcard'
+import FlashCard from '../flashcard'
 import { useRouter } from 'next/navigation'
 import { CaretLeftIcon } from '@madrasah/icons'
+import { Card } from '@madrasah/services/tedrisat'
+import DeckMetaForm from './deck-meta-form'
 
 interface IDeckFormProps {
-  id?: string
+  id?: number
 }
 
 function DeckForm({ id }: IDeckFormProps) {
   const router = useRouter()
-  const [deckName, setDeckName] = useState('')
-  const [description, setDescription] = useState('')
-  const [frontLanguage, setFrontLanguage] = useState('')
-  const [backLanguage, setBackLanguage] = useState('')
+  const [deckMeta, setDeckMeta] = useState({
+    name: '',
+    description: '',
+    tags: [] as string[],
+    is_public: false,
+  })
 
   const [cards, setCards] = useState([
     {
@@ -31,7 +35,7 @@ function DeckForm({ id }: IDeckFormProps) {
     },
   ])
 
-  const onChangeNestedField = (index: number, field: string, value: string) => {
+  const onChangeCardField = (index: number, field: string, value: string) => {
     setCards(prevCards =>
       prevCards.map((card, i) =>
         i === index ? { ...card, [field]: value } : card,
@@ -57,10 +61,7 @@ function DeckForm({ id }: IDeckFormProps) {
 
   const onSubmit = () => {
     const normalizedForm = {
-      deckName,
-      description,
-      frontLanguage,
-      backLanguage,
+      ...deckMeta,
       cards,
     }
 
@@ -73,7 +74,7 @@ function DeckForm({ id }: IDeckFormProps) {
       )
     }
     else {
-      const updatedCards = oldCards.map((card: any) =>
+      const updatedCards = oldCards.map((card: Card) =>
         card.id === id ? normalizedForm : card,
       )
       localStorage.setItem('flashCards', JSON.stringify(updatedCards))
@@ -95,34 +96,7 @@ function DeckForm({ id }: IDeckFormProps) {
 
       <div className="mb-8">
         <h4 className="mb-6">DECK</h4>
-        <ATFormGroup
-          id="deckName"
-          label="Deck Name"
-          placeholder="Deck Name"
-          value={deckName}
-          onChange={e => setDeckName(e.target.value)}
-        />
-        <ATFormGroupTextArea
-          id="description"
-          label="Description"
-          placeholder="Description"
-          value={description}
-          onChange={e => setDescription(e.target.value)}
-        />
-        <ATFormGroup
-          id="frontLanguage"
-          label="Front Card's Language"
-          placeholder="Turkce"
-          value={frontLanguage}
-          onChange={e => setFrontLanguage(e.target.value)}
-        />
-        <ATFormGroup
-          id="backLanguage"
-          label="Back Card's Language"
-          placeholder="Arapca"
-          value={backLanguage}
-          onChange={e => setBackLanguage(e.target.value)}
-        />
+        <DeckMetaForm deckMeta={deckMeta} setDeckMeta={setDeckMeta} />
       </div>
 
       <div>
@@ -135,14 +109,14 @@ function DeckForm({ id }: IDeckFormProps) {
                 placeholder="Front Text"
                 value={card.front}
                 onChange={e =>
-                  onChangeNestedField(index, 'front', e.target.value)}
+                  onChangeCardField(index, 'front', e.target.value)}
               />
               <ATFormGroupTextArea
                 id={`${index}-frontNote`}
                 placeholder="Front Note"
                 value={card.frontNote}
                 onChange={e =>
-                  onChangeNestedField(index, 'frontNote', e.target.value)}
+                  onChangeCardField(index, 'frontNote', e.target.value)}
               />
             </FlashCard>
             <FlashCard>
@@ -151,14 +125,14 @@ function DeckForm({ id }: IDeckFormProps) {
                 placeholder="Back Text"
                 value={card.back}
                 onChange={e =>
-                  onChangeNestedField(index, 'back', e.target.value)}
+                  onChangeCardField(index, 'back', e.target.value)}
               />
               <ATFormGroupTextArea
                 id={`${index}-backNote`}
                 placeholder="Back Note"
                 value={card.backNote}
                 onChange={e =>
-                  onChangeNestedField(index, 'backNote', e.target.value)}
+                  onChangeCardField(index, 'backNote', e.target.value)}
               />
             </FlashCard>
             <div className="card-actions">
@@ -168,7 +142,7 @@ function DeckForm({ id }: IDeckFormProps) {
                 placeholder="hadith abdest abdestin sunnetleri"
                 value={card.categories}
                 onChange={e =>
-                  onChangeNestedField(index, 'categories', e.target.value)}
+                  onChangeCardField(index, 'categories', e.target.value)}
               />
               <ATFormGroup
                 id={`${index}-difficulty`}
@@ -176,7 +150,7 @@ function DeckForm({ id }: IDeckFormProps) {
                 placeholder="Zorluk"
                 value={card.difficulty}
                 onChange={e =>
-                  onChangeNestedField(index, 'difficulty', e.target.value)}
+                  onChangeCardField(index, 'difficulty', e.target.value)}
               />
             </div>
           </div>
