@@ -1,57 +1,46 @@
 import ATFormGroup from '@madrasah/ui/custom/form-group'
 import ATFormGroupTextArea from '@madrasah/ui/custom/form-group-text-area'
+import { UseFormReturn } from 'react-hook-form'
 
-interface IDeckMetaFormProps {
-  deckMeta: {
-    name: string
-    description: string
-    tags: string[]
-    is_public: boolean
-  }
-  setDeckMeta: React.Dispatch<React.SetStateAction<{
-    name: string
-    description: string
-    tags: string[]
-    is_public: boolean
-  }>>
+export interface IDeckMeta {
+  name: string
+  description: string
+  tags: string[]
+  is_public: boolean
 }
 
-export default function DeckMetaForm({ deckMeta, setDeckMeta }: IDeckMetaFormProps) {
-  const setFormField = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setDeckMeta({ ...deckMeta, [e.target.id]: e.target.value })
-  }
+interface IDeckMetaFormProps {
+  form: UseFormReturn<IDeckMeta>
+}
 
+export default function DeckMetaForm({ form }: IDeckMetaFormProps) {
   return (
     <>
       <ATFormGroup
-        id="deckName"
+        name="name"
         label="Deck Name"
         placeholder="Deck Name"
         required
-        value={deckMeta.name}
-        onChange={setFormField}
+        form={form}
       />
       <ATFormGroupTextArea
-        id="description"
+        name="description"
         label="Description"
         placeholder="Description"
-        value={deckMeta.description}
+        form={form}
         required
-        onChange={setFormField}
       />
       <ATFormGroup
-        id="tags"
+        name="tags"
         label="Tags"
         required
-        value={deckMeta.tags.join(', ')}
-        onChange={setFormField}
+        form={form}
       />
       <ATFormGroup
-        id="is_public"
+        name="is_public"
         label="Who can see this deck?"
         required
-        value={String(deckMeta.is_public)}
-        onChange={setFormField}
+        form={form}
       />
     </>
   )

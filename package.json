@@ -31,5 +31,8 @@
     "workerDirectory": [
       "apps/tedris/public"
     ]
+  },
+  "dependencies": {
+    "react-hook-form": "^7.64.0"
   }
 }
