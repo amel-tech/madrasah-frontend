@@ -1,7 +1,7 @@
 import React from "react"
 import { Label } from "../components/label"
 import { Input } from "../components/input"
-import { FieldValues, UseFormReturn, Path } from "react-hook-form"
+import { FieldValues, Path, Control } from "react-hook-form"
 import { FormField, FormItem } from "./form"
 
 interface IATFormGroupProps<T extends FieldValues = FieldValues> {
@@ -10,7 +10,7 @@ interface IATFormGroupProps<T extends FieldValues = FieldValues> {
   wrapperClass?: string
   placeholder?: string
   required?: boolean
-  form: UseFormReturn<T>
+  control: Control<T>
   type?: string
   onChange?: React.ChangeEventHandler<HTMLInputElement>
 }
@@ -21,15 +21,15 @@ function ATFormGroup<T extends FieldValues = FieldValues>({
   wrapperClass = "mb-4",
   placeholder,
   type = "text",
-  form,
+  control,
   required,
   onChange,
 }: IATFormGroupProps<T>) {
   return (
     <FormField
-      control={form.control}
+      control={control}
       name={name}
-      render={({ field }) => (
+      render={({ field, fieldState: { error } }) => (
         <FormItem className={wrapperClass}>
           {label && (
             <Label htmlFor={name as string} className="mb-3">
@@ -42,8 +42,10 @@ function ATFormGroup<T extends FieldValues = FieldValues>({
             type={type}
             placeholder={placeholder}
             {...field}
+            className={error ? "border-red-500 focus-visible:border-red-500" : ""}
             {...(onChange && { onChange: onChange })}
           />
+          {error && (<small className="text-red-500 text-xs">{error.message}</small>)}
         </FormItem>
       )}
     />

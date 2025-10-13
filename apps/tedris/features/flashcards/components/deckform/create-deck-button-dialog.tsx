@@ -15,11 +15,15 @@ import DeckMetaForm, { IDeckMeta } from './deck-meta-form'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { Form } from '@madrasah/ui/custom/form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import z from 'zod'
+import { deckMetaFormSchema } from '../../validations/deck-meta-form-schema'
 
 export default function CreateDeckButtonDialog() {
   const router = useRouter()
 
-  const form = useForm<IDeckMeta>({
+  const form = useForm<z.infer<typeof deckMetaFormSchema>>({
+    resolver: zodResolver(deckMetaFormSchema),
     defaultValues: {
       name: '',
       description: '',
@@ -49,7 +53,7 @@ export default function CreateDeckButtonDialog() {
             <DialogHeader className="mb-6">
               <DialogTitle>New Deck</DialogTitle>
             </DialogHeader>
-            <DeckMetaForm form={form} />
+            <DeckMetaForm control={form.control} />
             <DialogFooter>
               <DialogClose asChild>
                 <Button variant="outline">Cancel</Button>

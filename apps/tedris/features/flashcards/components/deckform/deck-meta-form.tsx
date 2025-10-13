@@ -1,6 +1,9 @@
+import z from 'zod'
+import { Control } from 'react-hook-form'
+
 import ATFormGroup from '@madrasah/ui/custom/form-group'
 import ATFormGroupTextArea from '@madrasah/ui/custom/form-group-text-area'
-import { UseFormReturn } from 'react-hook-form'
+import { deckMetaFormSchema } from '~/features/flashcards/validations/deck-meta-form-schema'
 
 export interface IDeckMeta {
   name: string
@@ -10,10 +13,10 @@ export interface IDeckMeta {
 }
 
 interface IDeckMetaFormProps {
-  form: UseFormReturn<IDeckMeta>
+  control: Control<z.infer<typeof deckMetaFormSchema>>
 }
 
-export default function DeckMetaForm({ form }: IDeckMetaFormProps) {
+export default function DeckMetaForm({ control }: IDeckMetaFormProps) {
   return (
     <>
       <ATFormGroup
@@ -21,26 +24,26 @@ export default function DeckMetaForm({ form }: IDeckMetaFormProps) {
         label="Deck Name"
         placeholder="Deck Name"
         required
-        form={form}
+        control={control}
       />
       <ATFormGroupTextArea
         name="description"
         label="Description"
         placeholder="Description"
-        form={form}
+        control={control}
         required
       />
       <ATFormGroup
         name="tags"
         label="Tags"
         required
-        form={form}
+        control={control}
       />
       <ATFormGroup
         name="is_public"
         label="Who can see this deck?"
         required
-        form={form}
+        control={control}
       />
     </>
   )

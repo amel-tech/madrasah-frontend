@@ -7,6 +7,10 @@ import { useRouter } from 'next/navigation'
 import { CaretLeftIcon } from '@madrasah/icons'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { Form } from '@madrasah/ui/custom/form'
+import z from 'zod'
+
+import { deckCardsFormSchema } from '~/features/flashcards/validations/deck-cards-form-schema'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 interface IDeckFormProps {
   id?: number
@@ -22,7 +26,8 @@ interface ICard {
 function DeckForm({ id }: IDeckFormProps) {
   const router = useRouter()
 
-  const form = useForm<{ cards: ICard[] }>({
+  const form = useForm<z.infer<typeof deckCardsFormSchema>>({
+    resolver: zodResolver(deckCardsFormSchema),
     defaultValues: {
       cards: [
         {
@@ -81,14 +86,14 @@ function DeckForm({ id }: IDeckFormProps) {
                   <ATFormGroupTextArea
                     name={`cards.${index}.content.front`}
                     placeholder="Front Text"
-                    form={form}
+                    control={form.control}
                   />
                 </FlashCard>
                 <FlashCard>
                   <ATFormGroupTextArea
                     name={`cards.${index}.content.back`}
                     placeholder="Back Text"
-                    form={form}
+                    control={form.control}
                   />
                 </FlashCard>
               </div>

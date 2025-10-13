@@ -1,9 +1,9 @@
 import React from "react"
-import { Label } from "../components/label"
-import { Textarea } from "../components/textarea"
-import { cn } from "../lib/utils"
+import { Label } from "@madrasah/ui/components/label"
+import { Textarea } from "@madrasah/ui/components/textarea"
+import { cn } from "@madrasah/ui/lib/utils"
 import { FormField, FormItem } from "./form"
-import { FieldValues, Path, UseFormReturn } from "react-hook-form"
+import { Control, FieldValues, Path } from "react-hook-form"
 
 interface IATFormGroupTextAreaProps<T extends FieldValues = FieldValues> {
   name: Path<T>
@@ -12,7 +12,7 @@ interface IATFormGroupTextAreaProps<T extends FieldValues = FieldValues> {
   placeholder?: string
   required?: boolean
   rows?: number
-  form: UseFormReturn<T>
+  control: Control<T>
   inputClassName?: string
   onChange?: React.ChangeEventHandler<HTMLTextAreaElement>
 }
@@ -24,15 +24,15 @@ function ATFormGroupTextArea<T extends FieldValues = FieldValues>({
   placeholder,
   required,
   rows = 4,
-  form,
+  control,
   inputClassName = "",
   onChange,
 }: IATFormGroupTextAreaProps<T>) {
   return (
     <FormField
-      control={form.control}
+      control={control}
       name={name}
-      render={({ field }) => (
+      render={({ field, fieldState: { error } }) => (
         <FormItem className={cn(wrapperClass)}>
           {label && (
             <Label htmlFor={name} className="mb-3">
@@ -45,10 +45,11 @@ function ATFormGroupTextArea<T extends FieldValues = FieldValues>({
             key={name}
             placeholder={placeholder}
             rows={rows}
-            className={inputClassName}
+            className={`${inputClassName} ${error ? "border-red-500 focus-visible:border-red-500" : ""}`}
             {...field}
             {...(onChange && { onChange: onChange })}
           />
+          {error && (<small className="text-red-500 text-xs">{error.message}</small>)}
         </FormItem>
       )}
     />
