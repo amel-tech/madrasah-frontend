@@ -34,7 +34,6 @@ export default function CreateDeckButtonDialog() {
 
   const onSubmit = (data: IDeckMeta) => {
     // handle form submission logic here
-    console.log('hello world')
     console.log('Deck Meta:', data)
     router.push('/cards/decks/create')
   }

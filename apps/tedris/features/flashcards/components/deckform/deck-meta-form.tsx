@@ -3,6 +3,7 @@ import { Control } from 'react-hook-form'
 
 import ATFormGroup from '@madrasah/ui/custom/form-group'
 import ATFormGroupTextArea from '@madrasah/ui/custom/form-group-text-area'
+import ATFormGroupTabs from '@madrasah/ui/custom/form-group-tabs'
 import { deckMetaFormSchema } from '~/features/flashcards/validations/deck-meta-form-schema'
 
 export interface IDeckMeta {
@@ -39,10 +40,13 @@ export default function DeckMetaForm({ control }: IDeckMetaFormProps) {
         required
         control={control}
       />
-      <ATFormGroup
+      <ATFormGroupTabs
         name="is_public"
         label="Who can see this deck?"
-        required
+        tabs={[
+          { value: true, label: 'Public' },
+          { value: false, label: 'Private' },
+        ]}
         control={control}
       />
     </>
