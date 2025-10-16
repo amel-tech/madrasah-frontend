@@ -32,7 +32,7 @@ The application uses type-safe environment variables through `@t3-oss/env-nextjs
 KEYCLOAK_CLIENT_ID=madrasah-client
 KEYCLOAK_CLIENT_SECRET=your-client-secret
 KEYCLOAK_ISSUER=http://localhost:8080/realms/madrasah-dev
-NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_URL=http://localhost:4000
 NEXTAUTH_SECRET=your-nextauth-secret
 ```
 
@@ -41,7 +41,7 @@ NEXTAUTH_SECRET=your-nextauth-secret
 ```env
 NEXT_PUBLIC_KEYCLOAK_ISSUER=http://localhost:8080/realms/madrasah-dev
 NEXT_PUBLIC_KEYCLOAK_CLIENT_ID=madrasah-client
-NEXT_PUBLIC_NEXTAUTH_URL=http://localhost:3000
+NEXT_PUBLIC_NEXTAUTH_URL=http://localhost:4000
 ```
 
 ## 🔐 Keycloak OpenID Client Setup
@@ -70,16 +70,16 @@ Configure the following settings in the client:
 
 #### Access Settings
 
-- **Root URL**: `http://localhost:3000` (for development)
-- **Home URL**: `http://localhost:3000`
+- **Root URL**: `http://localhost:4000` (for development)
+- **Home URL**: `http://localhost:4000`
 - **Valid redirect URIs**:
-  - `http://localhost:3000/api/auth/callback/keycloak`
+  - `http://localhost:4000/api/auth/callback/keycloak`
   - `https://your-production-domain.com/api/auth/callback/keycloak`
 - **Valid post logout redirect URIs**:
-  - `http://localhost:3000`
+  - `http://localhost:4000`
   - `https://your-production-domain.com`
 - **Web origins**:
-  - `http://localhost:3000`
+  - `http://localhost:4000`
   - `https://your-production-domain.com`
 
 #### Capability Config
@@ -132,7 +132,7 @@ npm run lint
 npm run clean
 ```
 
-The application will be available at `http://localhost:3000`.
+The application will be available at `http://localhost:4000`.
 
 ## 🏗️ Project Structure
 
