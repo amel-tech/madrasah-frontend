@@ -1,46 +1,58 @@
 import React from "react"
-import { Label } from "../components/label"
-import { Textarea } from "../components/textarea"
-import { cn } from "../lib/utils"
+import { Label } from "@madrasah/ui/components/label"
+import { Textarea } from "@madrasah/ui/components/textarea"
+import { cn } from "@madrasah/ui/lib/utils"
+import { FormField, FormItem } from "./form"
+import { Control, FieldValues, Path } from "react-hook-form"
 
-interface IATFormGroupTextAreaProps {
-  id: string
+interface IATFormGroupTextAreaProps<T extends FieldValues = FieldValues> {
+  name: Path<T>
   label?: string
   wrapperClass?: string
   placeholder?: string
+  required?: boolean
   rows?: number
+  control: Control<T>
   inputClassName?: string
-  value: string | number
-  onChange: React.ChangeEventHandler<HTMLTextAreaElement>
+  onChange?: React.ChangeEventHandler<HTMLTextAreaElement>
 }
 
-function ATFormGroupTextArea({
-  id,
+function ATFormGroupTextArea<T extends FieldValues = FieldValues>({
+  name,
   label,
-  wrapperClass = "mb-6",
+  wrapperClass = "mb-4",
   placeholder,
+  required,
   rows = 4,
+  control,
   inputClassName = "",
-  value,
   onChange,
-}: IATFormGroupTextAreaProps) {
+}: IATFormGroupTextAreaProps<T>) {
   return (
-    <div className={cn(wrapperClass)}>
-      {label && (
-        <Label htmlFor={id} className="mb-3">
-          {label}
-        </Label>
-      )}
+    <FormField
+      control={control}
+      name={name}
+      render={({ field, fieldState: { error } }) => (
+        <FormItem className={cn(wrapperClass)}>
+          {label && (
+            <Label htmlFor={name} className="mb-3">
+              {label}
+              {required && <span className="text-red-500">*</span>}
+            </Label>
+          )}
 
-      <Textarea
-        key={id}
-        placeholder={placeholder}
-        rows={rows}
-        className={inputClassName}
-        value={value}
-        onChange={onChange}
-      />
-    </div>
+          <Textarea
+            key={name}
+            placeholder={placeholder}
+            rows={rows}
+            className={`${inputClassName} ${error ? "border-red-500 focus-visible:border-red-500" : ""}`}
+            {...field}
+            {...(onChange && { onChange: onChange })}
+          />
+          {error && (<small className="text-red-500 text-xs">{error.message}</small>)}
+        </FormItem>
+      )}
+    />
   )
 }
 
