@@ -13,17 +13,26 @@
     }
   },
   "scripts": {
+    "dev": "npm run dev:tedrisat",
+    "dev:tedrisat": "onchange 'swagger-docs/tedrisat.json' --initial -- npm run generate:tedrisat && npm run build:tedrisat",
+    "generate": "npm run generate:tedrisat && npm run lint:fix",
+    "generate:tedrisat": "openapi-generator-cli generate -i swagger-docs/tedrisat.json -g typescript-fetch -o src/tedrisat/generated --additional-properties=typescriptThreePlus=true,supportsES6=true,npmName=@madrasah/tedrisatapi",
+    "prebuild": "npm run generate",
+    "build": "npm run generate && npm run build:tedrisat",
+    "build:tedrisat": "cd src/tedrisat/generated && npm run build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "clean": "rm -rf .turbo node_modules dist",
-    "typecheck": "tsc --noEmit"
+    "clean": "rm -rf .turbo node_modules dist src/*/generated",
+    "check-types": "tsc --noEmit"
   },
   "devDependencies": {
     "@madrasah/eslint-config": "*",
     "@madrasah/typescript-config": "*",
+    "@openapitools/openapi-generator-cli": "^2.24.0",
     "@types/node": "^24",
     "esbuild": "^0.21.5",
     "eslint": "^9.34.0",
+    "onchange": "^7.1.0",
     "typescript": "^5.4.5"
   }
 }

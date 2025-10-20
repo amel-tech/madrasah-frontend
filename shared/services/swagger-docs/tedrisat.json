@@ -1,0 +1,1024 @@
+{
+    "openapi": "3.0.0",
+    "paths": {
+        "/": {
+            "get": {
+                "description": "Returns a greeting message from the Tedrisat service",
+                "operationId": "getHello",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Greeting message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "summary": "Get hello message",
+                "tags": [
+                    "Tedrisat Service"
+                ]
+            }
+        },
+        "/health": {
+            "get": {
+                "description": "Returns the health status of the Tedrisat service",
+                "operationId": "getHealth",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Service health information",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HealthCheckDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "summary": "Health check",
+                "tags": [
+                    "Tedrisat Service"
+                ]
+            }
+        },
+        "/throw-error": {
+            "get": {
+                "description": "Test endpoint that throws a validation error for demonstration purposes",
+                "operationId": "throwTestError",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "summary": "Throw a dummy error",
+                "tags": [
+                    "Tedrisat Service"
+                ]
+            }
+        },
+        "/secure": {
+            "get": {
+                "description": "Returns a secure hello message from the Tedrisat service",
+                "operationId": "getSecureHello",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Secure hello message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "summary": "Get secure hello message",
+                "tags": [
+                    "Tedrisat Service"
+                ]
+            }
+        },
+        "/examples": {
+            "get": {
+                "description": "Retrieves a complete list of all available examples in the system",
+                "operationId": "getAllExamples",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "List of examples"
+                    }
+                },
+                "summary": "Get all examples",
+                "tags": [
+                    "Examples"
+                ]
+            },
+            "post": {
+                "description": "Creates a new example with the provided data and returns the created example",
+                "operationId": "createExample",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateExampleDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Example created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MedarisResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "summary": "Create a new example",
+                "tags": [
+                    "Examples"
+                ]
+            }
+        },
+        "/examples/{id}": {
+            "get": {
+                "description": "Retrieves a specific example by its unique identifier",
+                "operationId": "getExampleById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "description": "Example ID",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Example found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MedarisResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Example not found"
+                    }
+                },
+                "summary": "Get example by ID",
+                "tags": [
+                    "Examples"
+                ]
+            },
+            "delete": {
+                "description": "Permanently deletes an example by its ID. This action cannot be undone.",
+                "operationId": "deleteExample",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "description": "Example ID",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Example deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MedarisResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "summary": "Delete example by ID",
+                "tags": [
+                    "Examples"
+                ]
+            }
+        },
+        "/flashcard/cards/{id}": {
+            "get": {
+                "description": "Retrieves a specific flashcard by its unique identifier",
+                "operationId": "getFlashcardById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FlashcardResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": ""
+                    }
+                },
+                "summary": "Get a single flashcard",
+                "tags": [
+                    "flashcard-cards"
+                ]
+            },
+            "put": {
+                "description": "Replaces all properties of an existing flashcard with new values. This is a complete replacement operation.",
+                "operationId": "replaceFlashcard",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateFlashcardDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FlashcardResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": ""
+                    }
+                },
+                "summary": "Replace a flashcard completely",
+                "tags": [
+                    "flashcard-cards"
+                ]
+            },
+            "patch": {
+                "description": "Updates specific properties of an existing flashcard. Only provided fields will be updated.",
+                "operationId": "updateFlashcard",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateFlashcardDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FlashcardResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": ""
+                    }
+                },
+                "summary": "Update a flashcard partially",
+                "tags": [
+                    "flashcard-cards"
+                ]
+            },
+            "delete": {
+                "description": "Permanently deletes a flashcard by its ID. This action cannot be undone.",
+                "operationId": "deleteFlashcard",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "summary": "Delete a flashcard",
+                "tags": [
+                    "flashcard-cards"
+                ]
+            }
+        },
+        "/flashcard/decks/{deckId}/cards": {
+            "post": {
+                "description": "Creates multiple flashcards within a specified deck. All cards will be assigned to the same deck and author.",
+                "operationId": "createFlashcards",
+                "parameters": [
+                    {
+                        "name": "deckId",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/CreateFlashcardDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/FlashcardResponse"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "summary": "Create multiple flashcards in a deck",
+                "tags": [
+                    "flashcard-cards"
+                ]
+            }
+        },
+        "/flashcard/decks/{id}": {
+            "get": {
+                "description": "Retrieves a single flashcard deck by its ID with optional includes for related data such as tags and flashcards.",
+                "operationId": "getFlashcardDeckById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "include",
+                        "required": false,
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "tags",
+                                    "flashcards",
+                                    "flashcards:user_data"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FlashcardDeckResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": ""
+                    }
+                },
+                "summary": "Get flashcard deck by ID",
+                "tags": [
+                    "flashcard-decks"
+                ]
+            },
+            "put": {
+                "description": "Replaces all properties of an existing flashcard deck with new values. This is a complete replacement operation.",
+                "operationId": "replaceFlashcardDeck",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ReplaceFlashcardDeckDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/FlashcardDeckResponse"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "summary": "Replace a flashcard deck completely",
+                "tags": [
+                    "flashcard-decks"
+                ]
+            },
+            "patch": {
+                "description": "Updates specific properties of an existing flashcard deck. Only provided fields will be updated.",
+                "operationId": "updateFlashcardDeck",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateFlashcardDeckDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FlashcardDeckResponse"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": ""
+                    }
+                },
+                "summary": "Update a flashcard deck partially",
+                "tags": [
+                    "flashcard-decks"
+                ]
+            },
+            "delete": {
+                "description": "Permanently deletes a flashcard deck by its ID. This action cannot be undone and will also remove all associated flashcards.",
+                "operationId": "deleteFlashcardDeck",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "summary": "Delete a flashcard deck",
+                "tags": [
+                    "flashcard-decks"
+                ]
+            }
+        },
+        "/flashcard/decks/{id}/cards": {
+            "get": {
+                "description": "Retrieves a flashcard deck by its ID with all flashcards automatically included, plus optional additional includes.",
+                "operationId": "getFlashcardDeckWithCards",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "include",
+                        "required": false,
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "tags",
+                                    "flashcards",
+                                    "flashcards:user_data"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FlashcardDeckResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": ""
+                    }
+                },
+                "summary": "Get flashcard deck with cards",
+                "tags": [
+                    "flashcard-decks"
+                ]
+            }
+        },
+        "/flashcard/decks": {
+            "get": {
+                "description": "Retrieves all flashcard decks with optional includes for related data such as tags and flashcards.",
+                "operationId": "getAllFlashcardDecks",
+                "parameters": [
+                    {
+                        "name": "include",
+                        "required": false,
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "tags",
+                                    "flashcards",
+                                    "flashcards:user_data"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/FlashcardDeckResponse"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "summary": "Get all flashcard decks",
+                "tags": [
+                    "flashcard-decks"
+                ]
+            },
+            "post": {
+                "description": "Creates a new flashcard deck with the provided details. Tags can be optionally associated with the deck.",
+                "operationId": "createFlashcardDeck",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateFlashcardDeckDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FlashcardDeckResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "summary": "Create a new flashcard deck",
+                "tags": [
+                    "flashcard-decks"
+                ]
+            }
+        }
+    },
+    "info": {
+        "title": "Tedrisat Service API",
+        "description": "Education management service for Madrasah platform",
+        "version": "1.0.0",
+        "contact": {}
+    },
+    "tags": [
+        {
+            "name": "tedrisat",
+            "description": "Education management endpoints"
+        }
+    ],
+    "servers": [],
+    "components": {
+        "schemas": {
+            "HealthCheckDto": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "description": "Service health status",
+                        "enum": [
+                            "ok",
+                            "error",
+                            "degraded"
+                        ],
+                        "example": "ok"
+                    },
+                    "timestamp": {
+                        "type": "string",
+                        "description": "Timestamp when health check was performed",
+                        "example": "2024-01-01T00:00:00.000Z"
+                    },
+                    "service": {
+                        "type": "string",
+                        "description": "Name of the service",
+                        "example": "teskilat"
+                    },
+                    "version": {
+                        "type": "string",
+                        "description": "Version of the service",
+                        "example": "1.0.0"
+                    },
+                    "environment": {
+                        "type": "string",
+                        "description": "Environment the service is running in",
+                        "example": "development"
+                    }
+                },
+                "required": [
+                    "status",
+                    "timestamp",
+                    "service"
+                ]
+            },
+            "MedarisMetaPaginationResponse": {
+                "type": "object",
+                "properties": {
+                    "itemCount": {
+                        "type": "number",
+                        "minimum": 0,
+                        "description": "Number of items on the current page"
+                    },
+                    "currentPage": {
+                        "type": "number",
+                        "minimum": 1,
+                        "description": "Current page number (starting from 1)"
+                    },
+                    "totalItems": {
+                        "type": "number",
+                        "minimum": 0,
+                        "description": "Total number of available items"
+                    },
+                    "itemsPerPage": {
+                        "type": "number",
+                        "minimum": 0,
+                        "description": "Maximum number of items per page"
+                    },
+                    "totalPages": {
+                        "type": "number",
+                        "minimum": 0,
+                        "description": "Total number of pages available"
+                    }
+                },
+                "description": "Pagination metadata returned under the meta.pagination field in paginated API responses.",
+                "required": [
+                    "itemCount",
+                    "currentPage",
+                    "totalItems",
+                    "itemsPerPage",
+                    "totalPages"
+                ]
+            },
+            "MedarisMetaResponse": {
+                "type": "object",
+                "properties": {
+                    "pagination": {
+                        "$ref": "#/components/schemas/MedarisMetaPaginationResponse"
+                    }
+                }
+            },
+            "MedarisResponse": {
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "type": "boolean",
+                        "description": "Indicates if the request was successful",
+                        "example": true
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "Human-readable message describing the result",
+                        "example": "Operation completed successfully"
+                    },
+                    "data": {
+                        "type": "object",
+                        "description": "The actual data payload"
+                    },
+                    "meta": {
+                        "description": "Additional metadata about the response",
+                        "example": {
+                            "timestamp": "2024-01-15T10:30:00.000Z",
+                            "version": "1.0.0"
+                        },
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/MedarisMetaResponse"
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "success",
+                    "message"
+                ]
+            },
+            "CreateExampleDto": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Example name",
+                        "example": "Sample Example",
+                        "maxLength": 255
+                    }
+                },
+                "required": [
+                    "name"
+                ]
+            },
+            "FlashcardResponse": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "VOCABULARY",
+                            "HADEETH"
+                        ]
+                    },
+                    "contentFront": {
+                        "type": "string"
+                    },
+                    "contentBack": {
+                        "type": "string"
+                    },
+                    "contentMeta": {
+                        "type": "object"
+                    },
+                    "id": {
+                        "type": "number"
+                    },
+                    "deckId": {
+                        "type": "number"
+                    },
+                    "authorId": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "type",
+                    "contentFront",
+                    "contentBack",
+                    "id",
+                    "deckId",
+                    "authorId"
+                ]
+            },
+            "CreateFlashcardDto": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "VOCABULARY",
+                            "HADEETH"
+                        ]
+                    },
+                    "contentFront": {
+                        "type": "string"
+                    },
+                    "contentBack": {
+                        "type": "string"
+                    },
+                    "contentMeta": {
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "type",
+                    "contentFront",
+                    "contentBack"
+                ]
+            },
+            "UpdateFlashcardDto": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "VOCABULARY",
+                            "HADEETH"
+                        ]
+                    },
+                    "contentFront": {
+                        "type": "string"
+                    },
+                    "contentBack": {
+                        "type": "string"
+                    },
+                    "contentMeta": {
+                        "type": "object"
+                    }
+                }
+            },
+            "FlashcardTagResponse": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "title"
+                ]
+            },
+            "FlashcardDeckResponse": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "example": "Colours - Vocabulary Deck"
+                    },
+                    "isPublic": {
+                        "type": "boolean"
+                    },
+                    "id": {
+                        "type": "number"
+                    },
+                    "description": {
+                        "type": "object"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/FlashcardTagResponse"
+                        }
+                    },
+                    "flashcards": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/FlashcardResponse"
+                        }
+                    }
+                },
+                "required": [
+                    "title",
+                    "isPublic",
+                    "id",
+                    "description"
+                ]
+            },
+            "CreateFlashcardDeckDto": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "example": "Colours - Vocabulary Deck"
+                    },
+                    "isPublic": {
+                        "type": "boolean"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "tagIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        }
+                    }
+                },
+                "required": [
+                    "title",
+                    "isPublic"
+                ]
+            },
+            "ReplaceFlashcardDeckDto": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "example": "Colours - Vocabulary Deck"
+                    },
+                    "isPublic": {
+                        "type": "boolean"
+                    },
+                    "description": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "title",
+                    "isPublic"
+                ]
+            },
+            "UpdateFlashcardDeckDto": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "example": "Colours - Vocabulary Deck"
+                    },
+                    "isPublic": {
+                        "type": "boolean"
+                    },
+                    "description": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

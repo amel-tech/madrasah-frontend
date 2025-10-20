@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.2.0](https://github.com/amel-tech/madrasah-frontend/compare/tedris-web-v1.1.0...tedris-web-v1.2.0) (2025-10-16)
+
+
+### Features
+
+* **toaster:** added sonner toaster ([e0132be](https://github.com/amel-tech/madrasah-frontend/commit/e0132be0a888baeff8c987610719a6b5360704f0))
+* **toaster:** added sonner toaster ([6c998f8](https://github.com/amel-tech/madrasah-frontend/commit/6c998f856a26bd6447a2d1956426daa7127f9276))
+* **toaster:** created toast-helper class ([7243fe8](https://github.com/amel-tech/madrasah-frontend/commit/7243fe83896df298ff7a58694991d31f1e191049))
+
 ## [1.1.0](https://github.com/amel-tech/madrasah-frontend/compare/tedris-web-v1.0.0...tedris-web-v1.1.0) (2025-09-18)
 
 

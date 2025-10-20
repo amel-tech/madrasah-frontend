@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.3.1](https://github.com/amel-tech/madrasah-frontend/compare/keycloak-theme-v1.3.0...keycloak-theme-v1.3.1) (2025-10-10)
+
+
+### Bug Fixes
+
+* keep the aspect of the illustration ([2c20b25](https://github.com/amel-tech/madrasah-frontend/commit/2c20b25bedc21c4b03ae6bb6dd32cfbfce1a95cf))
+* keep the aspect of the illustration ([b6a8777](https://github.com/amel-tech/madrasah-frontend/commit/b6a8777d30ebf50e29869ce7056619a748b2d965))
+
 ## [1.3.0](https://github.com/amel-tech/madrasah-frontend/compare/keycloak-theme-v1.2.0...keycloak-theme-v1.3.0) (2025-09-18)
 
 

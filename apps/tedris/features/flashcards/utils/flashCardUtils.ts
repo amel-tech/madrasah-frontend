@@ -1,7 +1,7 @@
 'use client'
 
-import { Card } from '@madrasah/services/tedrisat'
+import { FlashcardResponse } from '@madrasah/services/tedrisat'
 
-export function toDisplay(card: Card): Card {
+export function toDisplay(card: FlashcardResponse): FlashcardResponse {
   return card
 }

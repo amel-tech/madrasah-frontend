@@ -3,12 +3,11 @@
 import { CaretLeftIcon, CaretRightIcon } from '@madrasah/icons'
 import { useState } from 'react'
 
-import { Card } from '@madrasah/services/tedrisat'
-
 import FlashCardContent from './flashcard-content'
+import { FlashcardResponse } from '@madrasah/services/tedrisat'
 
 type FlashCardListProps = {
-  cards: Card[]
+  cards: FlashcardResponse[]
 }
 
 export default function FlashCardList({ cards }: FlashCardListProps) {

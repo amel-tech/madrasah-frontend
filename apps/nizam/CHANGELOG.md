@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.1.4](https://github.com/amel-tech/madrasah-frontend/compare/nizam-web-v0.1.3...nizam-web-v0.1.4) (2025-10-16)
+
+
+### Features
+
+* **deck-cards:** implement deck cards management ([a75c6ff](https://github.com/amel-tech/madrasah-frontend/commit/a75c6ffecd0d84d45e1bd18d1eabe1a3cf654f64))
+* **service:** replaced all the service functions ([671c781](https://github.com/amel-tech/madrasah-frontend/commit/671c78187b200088a6dbf9a17fdbfa75374ba3c2))
+
+## [0.1.3](https://github.com/amel-tech/madrasah-frontend/compare/nizam-web-v0.1.2...nizam-web-v0.1.3) (2025-09-24)
+
+
+### Features
+
+* openTelemetry integration completed ([1f4cd4e](https://github.com/amel-tech/madrasah-frontend/commit/1f4cd4eccb4df78ed262c88e397f2b6d272e62a9))
+* openTelemetry integration completed ([04fb452](https://github.com/amel-tech/madrasah-frontend/commit/04fb45231c23969464e51960a8b45534a73a769c))
+* pr updated ([e11123f](https://github.com/amel-tech/madrasah-frontend/commit/e11123fdbd15f2d63eb85fc28151d22180aee521))
+
 ## [0.1.2](https://github.com/amel-tech/madrasah-frontend/compare/nizam-web-v0.1.1...nizam-web-v0.1.2) (2025-09-18)
 
 
