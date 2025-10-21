@@ -7,15 +7,14 @@
     "shared/*"
   ],
   "scripts": {
-    "build": "turbo distribute && turbo build",
+    "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "check-types": "turbo run check-types",
     "lint:fix": "turbo lint -- --fix",
     "clean": "turbo clean && rm -rf node_modules .turbo dist",
     "prepare": "husky",
-    "test": "turbo test",
-    "distribute": "turbo distribute"
+    "test": "turbo test"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
