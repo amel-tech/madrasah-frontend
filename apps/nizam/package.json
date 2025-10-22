@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@madrasah/icons": "^1.0.0",
-    "@madrasah/services": "^0.1.0",
+    "@madrasah/services": "*",
     "@madrasah/ui": "*",
     "@opentelemetry/api": "^1.9.0",
     "@t3-oss/env-nextjs": "^0.13.8",
