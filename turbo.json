@@ -21,9 +21,6 @@
     },
     "test": {
       "dependsOn": ["^test"]
-    },
-    "distribute": {
-      "dependsOn": ["^distribute"]
     }
   }
 }
