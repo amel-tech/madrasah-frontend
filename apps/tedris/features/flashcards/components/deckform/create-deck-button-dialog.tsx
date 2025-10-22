@@ -27,7 +27,7 @@ export default function CreateDeckButtonDialog() {
     defaultValues: {
       name: '',
       description: '',
-      tags: [''],
+      tags: [],
       is_public: false,
     },
   })
