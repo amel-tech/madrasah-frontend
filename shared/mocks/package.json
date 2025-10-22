@@ -1,20 +1,12 @@
 {
-  "name": "@madrasah/msw",
+  "name": "@madrasah/mocks",
   "version": "1.0.0",
   "type": "module",
-  "main": "index.js",
- "exports": {
-    "./tedrisat": {
-      "types": "./src/tedrisat/index.ts",
-      "import": "./src/tedrisat/index.ts",
-      "require": "./src/tedrisat/index.ts"
-    }
-  },
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
+  "scripts": { },
   "devDependencies": {
     "@faker-js/faker": "^9.9.0",
-    "msw": "^2.10.5"
-  },
-  "dependencies": {
     "@madrasah/services": "^0.1.0"
   }
 }

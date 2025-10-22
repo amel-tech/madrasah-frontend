@@ -6,7 +6,9 @@
     "moduleResolution": "bundler",
     "paths": {
       "~/*": ["./src/*"]
-    }
+    },
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "dist"]

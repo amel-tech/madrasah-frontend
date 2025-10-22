@@ -9,11 +9,11 @@ import { Card } from '@madrasah/ui/components/card'
 
 type Props = {
   title: string
-  author: string
-  cardCount: number
-  rating: number
-  downloadCount: number
-  description: string
+  cardCount?: number
+  downloadCount?: number
+  description?: string
+  author?: string
+  rating?: number
 }
 
 function DeckCard({

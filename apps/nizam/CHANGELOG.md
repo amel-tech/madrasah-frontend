@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.1.5](https://github.com/amel-tech/madrasah-frontend/compare/nizam-web-v0.1.4...nizam-web-v0.1.5) (2025-10-21)
+
+
+### Bug Fixes
+
+* revert-nizam-port-change ([ebc6af5](https://github.com/amel-tech/madrasah-frontend/commit/ebc6af5b396f59235396efbeb52cd825d6a2631a))
+* revert-nizam-port-change ([0fb493d](https://github.com/amel-tech/madrasah-frontend/commit/0fb493de6d7203939b11ab5a69983a97a9021deb))
+
+## [0.1.4](https://github.com/amel-tech/madrasah-frontend/compare/nizam-web-v0.1.3...nizam-web-v0.1.4) (2025-10-16)
+
+
+### Features
+
+* **deck-cards:** implement deck cards management ([a75c6ff](https://github.com/amel-tech/madrasah-frontend/commit/a75c6ffecd0d84d45e1bd18d1eabe1a3cf654f64))
+* **service:** replaced all the service functions ([671c781](https://github.com/amel-tech/madrasah-frontend/commit/671c78187b200088a6dbf9a17fdbfa75374ba3c2))
+
 ## [0.1.3](https://github.com/amel-tech/madrasah-frontend/compare/nizam-web-v0.1.2...nizam-web-v0.1.3) (2025-09-24)
 
 

@@ -325,7 +325,6 @@ export default function Template(
         <img
           src={BackgroundImage}
           alt="Madrasah Background"
-          className="h-10/12"
         />
       </div>
     </div>

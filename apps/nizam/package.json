@@ -1,6 +1,6 @@
 {
   "name": "nizam-web",
-  "version": "0.1.3",
+  "version": "0.1.5",
   "private": true,
   "type": "module",
   "scripts": {
@@ -12,16 +12,23 @@
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
-    "@madrasah/ui": "^0.0.0",
+    "@madrasah/icons": "^1.0.0",
+    "@madrasah/services": "^0.1.0",
+    "@madrasah/ui": "*",
     "@opentelemetry/api": "^1.9.0",
+    "@t3-oss/env-nextjs": "^0.13.8",
     "@vercel/otel": "^1.13.0",
-    "next": "15.4.6",
+    "next": "^15.5.4",
+    "next-auth": "^4.24.11",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "xlsx": "^0.18.5",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@madrasah/eslint-config": "^0.0.0",
+    "@madrasah/mocks": "*",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19.1.10",

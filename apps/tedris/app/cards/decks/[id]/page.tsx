@@ -1,22 +1,28 @@
 import { cookies } from 'next/headers'
+
 import FlashCardList from '~/features/flashcards/components/flashcard-list'
-import { getAuthenticatedApiService } from '~/lib/services'
+import { env } from '~/env'
+import { createServerTedrisatAPIs, FlashcardResponse } from '@madrasah/services/tedrisat'
 
-export default async function Page() {
+async function getDeckCards(deckId: string): Promise<FlashcardResponse[]> {
   const cookieStore = await cookies()
-  const api = getAuthenticatedApiService(cookieStore)
-  const { data: cards, error } = await api.getDeckCards('asdkjaskw13892013')
+  const { decks } = await createServerTedrisatAPIs(cookieStore, env.TEDRISAT_API_BASE_URL)
 
-  if (error) {
-    return (
-      <div>
-        Error:
-        <div>
-          {error}
-        </div>
-      </div>
-    )
-  }
+  const deck = await decks.getFlashcardDeckWithCards({
+    id: Number(deckId),
+    include: ['flashcards'],
+  })
+
+  return deck.flashcards || []
+}
+
+export default async function Page({ params }: {
+  params: Promise<{
+    id: string
+  }>
+}) {
+  const { id } = await params
+  const cards = await getDeckCards(id)
 
   return (
     <div className="flex items-center justify-center h-full">
