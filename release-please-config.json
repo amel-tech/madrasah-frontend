@@ -5,6 +5,42 @@
   "bump-patch-for-minor-pre-major": true,
   "separate-pull-requests": true,
   "packages": {
+    "shared/services": {
+      "release-type": "node",
+      "package-name": "@madrasah/services",
+      "include-component-in-tag": true,
+      "pull-request-title-pattern": "chore(services): release ${version}",
+      "pull-request-header": "Release for Services",
+      "component": "services",
+      "path": "shared/services"
+    },
+    "shared/icons": {
+      "release-type": "node",
+      "package-name": "@madrasah/icons",
+      "include-component-in-tag": true,
+      "pull-request-title-pattern": "chore(icons): release ${version}",
+      "pull-request-header": "Release for Icons",
+      "component": "icons",
+      "path": "shared/icons"
+    },
+    "shared/tokens": {
+      "release-type": "node",
+      "package-name": "@madrasah/tokens",
+      "include-component-in-tag": true,
+      "pull-request-title-pattern": "chore(tokens): release ${version}",
+      "pull-request-header": "Release for Tokens",
+      "component": "tokens",
+      "path": "shared/tokens"
+    },
+    "shared/mocks": {
+      "release-type": "node",
+      "package-name": "@madrasah/mocks",
+      "include-component-in-tag": true,
+      "pull-request-title-pattern": "chore(mocks): release ${version}",
+      "pull-request-header": "Release for Mocks",
+      "component": "mocks",
+      "path": "shared/mocks"
+    },
     "apps/keycloak-theme": {
       "release-type": "node",
       "package-name": "madrasah-keycloak-theme",

@@ -1,4 +1,8 @@
 {
+  "shared/services": "0.1.0",
+  "shared/icons": "1.0.0",
+  "shared/tokens": "1.0.0",
+  "shared/mocks": "1.0.0",
   "apps/tedris": "1.2.0",
   "apps/keycloak-theme": "1.3.1",
   "apps/nizam": "0.1.5",
