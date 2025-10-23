@@ -1,0 +1,113 @@
+name: CI Dev Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  # Build and push Nazir, Nizam, and Tedris WEB Docker image to GitHub Container Registry
+  # with nazir-dev, nizam-dev and tedris-dev tags respectively
+  build-and-push-nazir-web:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Login to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker Nazir WEB
+        id: nazir_meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}-nazir-web
+          tags: nazir-dev
+
+      - name: Build and push Docker image Nazir WEB
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./apps/nazir/Dockerfile
+          push: true
+          tags: ${{ steps.nazir_meta.outputs.tags }}
+          labels: ${{ steps.nazir_meta.outputs.labels }}
+
+      - name: Deploy Nazir to Coolify
+        run: | 
+         curl --request GET '${{ secrets.NAZIR_WEB_COOLIFY_WEBHOOK }}' --header 'Authorization: Bearer ${{ secrets.COOLIFY_DEPLOY_TOKEN }}'
+
+  build-and-push-nizam-web:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Login to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker Nizam WEB
+        id: nizam_meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}-nizam-web
+          tags: nizam-dev
+
+      - name: Build and push Docker image Nizam WEB
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./apps/nizam/Dockerfile
+          push: true
+          tags: ${{ steps.nizam_meta.outputs.tags }}
+          labels: ${{ steps.nizam_meta.outputs.labels }}
+
+      - name: Deploy Nizam to Coolify
+        run: | 
+         curl --request GET '${{ secrets.NIZAM_WEB_COOLIFY_WEBHOOK }}' --header 'Authorization: Bearer ${{ secrets.COOLIFY_DEPLOY_TOKEN }}'
+
+  build-and-push-tedris-web:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Login to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker Tedris WEB
+        id: tedris_meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}-tedris-web
+          tags: tedris-dev
+
+      - name: Build and push Docker image Tedris WEB
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./apps/tedris/Dockerfile
+          push: true
+          tags: ${{ steps.tedris_meta.outputs.tags }}
+          labels: ${{ steps.tedris_meta.outputs.labels }}
+
+      - name: Deploy Tedris to Coolify
+        run: | 
+         curl --request GET '${{ secrets.TEDRIS_WEB_COOLIFY_WEBHOOK }}' --header 'Authorization: Bearer ${{ secrets.COOLIFY_DEPLOY_TOKEN }}'
