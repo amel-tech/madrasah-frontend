@@ -1,20 +1,23 @@
 'use client'
 
+import React from 'react'
 import { ColumnDef } from '@tanstack/react-table'
 import { FlashcardDeckResponse } from '@madrasah/services/tedrisat'
+import { createInputColumn } from '~/components/data-table/editable'
 
-export const columns: ColumnDef<FlashcardDeckResponse>[] = [
-  {
-    id: 'title',
-    accessorFn: row => row.title,
-    header: 'Title',
-  },
-  {
-    id: 'description',
-    accessorFn: row => row.description,
-    header: 'Description',
-    size: 300,
-    minSize: 150,
-    maxSize: 400,
-  },
-]
+export function useDecksColumns() {
+  return React.useMemo<ColumnDef<FlashcardDeckResponse>[]>(() => [
+    {
+      accessorKey: 'title',
+      header: 'Title',
+      cell: ({ row }) => row.original.title,
+    },
+    createInputColumn<FlashcardDeckResponse>(
+      'description',
+      { header: 'Description' },
+      {
+        placeholder: 'Enter deck description...',
+      },
+    ),
+  ], [])
+}

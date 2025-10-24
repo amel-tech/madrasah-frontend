@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   ColumnDef,
   flexRender,
@@ -21,6 +21,7 @@ import {
 export interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  defaultColumn?: Partial<ColumnDef<TData, TValue>>
   onRowUpdate?: (updatedRow: TData) => Promise<boolean> | void
   onRowClick?: (row: TData) => void
   onRowDelete?: (id: number) => Promise<boolean> | void
@@ -30,53 +31,70 @@ export interface DataTableProps<TData, TValue> {
 export function DataTable<TData, TValue>({
   columns,
   data,
+  defaultColumn,
   onRowUpdate,
   onRowClick,
   onRowDelete,
   options,
 }: DataTableProps<TData, TValue>) {
+  const [tableData, setTableData] = useState<TData[]>(data)
   const [loadingCells, setLoadingCells] = useState<Set<string>>(new Set())
 
-  // Enhanced update function that handles loading state
-  const handleRowUpdate = async (updatedRow: TData, cellId?: string) => {
-    if (!onRowUpdate) return
+  // Update table data when props change
+  useState(() => {
+    setTableData(data)
+  })
 
-    // If cellId is provided, track loading for that specific cell
-    if (cellId) {
-      setLoadingCells(prev => new Set([...prev, cellId]))
-    }
+  useEffect(() => {
+    setTableData(data)
+  }, [data])
+
+  // TanStack Table style updateData function
+  const handleUpdateData = async (rowIndex: number, columnId: string, value: unknown) => {
+    const cellId = `${rowIndex}-${columnId}`
+
+    // Track loading for this specific cell
+    setLoadingCells(prev => new Set([...prev, cellId]))
 
     try {
-      const result = onRowUpdate(updatedRow)
+      if (onRowUpdate) {
+        const updatedRow = {
+          ...tableData[rowIndex],
+          [columnId]: value,
+        }
 
-      // If it's a promise, wait for it to complete
-      if (result instanceof Promise) {
-        await result
+        const result = onRowUpdate(updatedRow as TData)
+        if (result instanceof Promise) {
+          await result
+        }
       }
+    }
+    catch (error) {
+      // Revert optimistic update on error
+      setTableData(data)
+      console.error('Failed to update row:', error)
     }
     finally {
       // Remove loading state for the cell
-      if (cellId) {
-        setLoadingCells((prev) => {
-          const newSet = new Set(prev)
-          newSet.delete(cellId)
-          return newSet
-        })
-      }
+      setLoadingCells((prev) => {
+        const newSet = new Set(prev)
+        newSet.delete(cellId)
+        return newSet
+      })
     }
   }
 
   const table = useReactTable({
-    data,
+    data: tableData,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    defaultColumn: {
-      size: 500,
+    defaultColumn: (defaultColumn as Partial<ColumnDef<TData, unknown>>) || {
+      size: 200,
       minSize: 50,
-      maxSize: 300,
+      maxSize: 200,
     },
     meta: {
-      updateData: handleRowUpdate,
+      updateData: handleUpdateData,
       onRowClick: onRowClick,
       onRowDelete: onRowDelete,
       loadingCells: loadingCells,

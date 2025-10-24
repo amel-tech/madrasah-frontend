@@ -1,6 +1,7 @@
 'use server'
 
 import { cookies } from 'next/headers'
+import { revalidatePath } from 'next/cache'
 import { CreateFlashcardDtoTypeEnum, createServerTedrisatAPIs } from '@madrasah/services/tedrisat'
 import { env } from '~/env'
 
@@ -19,6 +20,7 @@ export const updateFlashcard = async (cardId: number, updatedCard: {
         contentFront: updatedCard.contentFront,
       },
     })
+
     return true
   }
   catch (error) {
@@ -43,6 +45,7 @@ export const createFlashcards = async (deckId: number, newCards: {
         contentBack: card.contentBack,
       })),
     })
+    revalidatePath(`/decks/${deckId}/cards`)
     return response
   }
   catch (error) {
@@ -51,12 +54,15 @@ export const createFlashcards = async (deckId: number, newCards: {
   }
 }
 
-export const deleteFlashcard = async (cardId: number) => {
+export const deleteFlashcard = async (cardId: number, deckId?: string) => {
   const cookieStore = await cookies()
   const { cards } = await createServerTedrisatAPIs(cookieStore, env.TEDRISAT_API_BASE_URL)
 
   try {
     await cards.deleteFlashcard({ id: cardId })
+
+    // Revalidate the cards page to refresh server-side data
+    revalidatePath(`/decks/${deckId}/cards`)
     return true
   }
   catch (error) {
