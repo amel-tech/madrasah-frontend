@@ -11,13 +11,16 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@madrasah/ui/components/dialog'
-import DeckMetaForm, { IDeckMeta } from './deck-meta-form'
+import DeckMetaForm from './deck-meta-form'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { Form } from '@madrasah/ui/custom/form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { toastHelper } from '@madrasah/ui/lib/toast-helper'
 import z from 'zod'
 import { deckMetaFormSchema } from '../../validations/deck-meta-form-schema'
+import { createFlashCardDeck } from '~/features/flashcards/actions'
+import { CreateFlashcardDeckDto } from '@madrasah/services/tedrisat'
 
 export default function CreateDeckButtonDialog() {
   const router = useRouter()
@@ -25,17 +28,42 @@ export default function CreateDeckButtonDialog() {
   const form = useForm<z.infer<typeof deckMetaFormSchema>>({
     resolver: zodResolver(deckMetaFormSchema),
     defaultValues: {
-      name: '',
+      title: '',
       description: '',
-      tags: [],
-      is_public: false,
+      tagIds: [],
+      isPublic: false,
     },
   })
 
-  const onSubmit = (data: IDeckMeta) => {
+  const onSubmit = async (data: CreateFlashcardDeckDto) => {
     // handle form submission logic here
-    console.log('Deck Meta:', data)
-    router.push('/cards/decks/create')
+    try {
+      const response = await createFlashCardDeck(data)
+
+      if (response) {
+        toastHelper.success({
+          title: 'Card Created',
+          description: 'Flashcard was created successfully.',
+        })
+
+        router.push('/cards/decks/create')
+      }
+      else {
+        toastHelper.error({
+          title: 'Creation Failed',
+          description: 'Failed to create the flashcard. Please try again.',
+        })
+        return false
+      }
+    }
+    catch (error) {
+      console.error('Error updating flashcard:', error)
+      toastHelper.error({
+        title: 'Creation Error',
+        description: 'An error occurred while creating the flashcard.',
+      })
+      return false
+    }
   }
 
   return (

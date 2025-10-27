@@ -7,13 +7,6 @@ import ATFormGroupTextArea from '@madrasah/ui/custom/form-group-text-area'
 import ATFormGroupTabs from '@madrasah/ui/custom/form-group-tabs'
 import { deckMetaFormSchema } from '~/features/flashcards/validations/deck-meta-form-schema'
 
-export interface IDeckMeta {
-  name: string
-  description: string
-  tags: string[]
-  is_public: boolean
-}
-
 interface IDeckMetaFormProps {
   control: Control<z.infer<typeof deckMetaFormSchema>>
 }
@@ -22,7 +15,7 @@ export default function DeckMetaForm({ control }: IDeckMetaFormProps) {
   return (
     <>
       <ATFormGroup
-        name="name"
+        name="title"
         label="Deck Name"
         placeholder="Deck Name"
         required
@@ -36,7 +29,7 @@ export default function DeckMetaForm({ control }: IDeckMetaFormProps) {
         required
       />
       <ATFormGroupTagsInput
-        name="tags"
+        name="tagIds"
         label="Tags"
         placeholder="Add tags"
         control={control}
@@ -45,7 +38,7 @@ export default function DeckMetaForm({ control }: IDeckMetaFormProps) {
         required
       />
       <ATFormGroupTabs
-        name="is_public"
+        name="isPublic"
         label="Who can see this deck?"
         tabs={[
           { value: true, label: 'Public' },
