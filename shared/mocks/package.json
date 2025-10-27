@@ -7,6 +7,6 @@
   "scripts": { },
   "devDependencies": {
     "@faker-js/faker": "^9.9.0",
-    "@madrasah/services": "^0.1.0"
+    "@madrasah/services": "*"
   }
 }

@@ -1,7 +1,7 @@
 {
   "name": "@madrasah/services",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "files": [
     "dist"
   ],
@@ -17,8 +17,8 @@
     "dev:tedrisat": "onchange 'swagger-docs/tedrisat.json' --initial -- npm run generate:tedrisat && npm run build:tedrisat",
     "generate": "npm run generate:tedrisat && npm run lint:fix",
     "generate:tedrisat": "openapi-generator-cli generate -i swagger-docs/tedrisat.json -g typescript-fetch -o src/tedrisat/generated --additional-properties=typescriptThreePlus=true,supportsES6=true,npmName=@madrasah/tedrisatapi",
-    "prebuild": "npm run generate",
-    "build": "npm run generate && npm run build:tedrisat",
+    "prebuild": "echo 'All pre-generated.'",
+    "build": "cd src/tedrisat/generated && npm run prepare",
     "build:tedrisat": "cd src/tedrisat/generated && npm run build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",

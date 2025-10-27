@@ -1,19 +1,19 @@
 {
   "name": "nizam-web",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev --turbopack --port 4001",
+    "dev": "next dev --turbopack --port 3001",
     "build": "next build",
-    "start": "next start --port 4001",
+    "start": "next start --port 3001",
     "clean": "rm -rf .turbo .next node_modules dist",
     "lint": "next lint",
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
     "@madrasah/icons": "^1.0.0",
-    "@madrasah/services": "^0.1.0",
+    "@madrasah/services": "*",
     "@madrasah/ui": "*",
     "@opentelemetry/api": "^1.9.0",
     "@t3-oss/env-nextjs": "^0.13.8",
