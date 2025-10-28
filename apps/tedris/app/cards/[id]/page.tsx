@@ -1,42 +1,45 @@
-import { cookies } from 'next/headers'
 import Link from 'next/link'
-import { getAuthenticatedApiService } from '~/lib/services'
+import { cookies } from 'next/headers'
 
-export default async function Card({
+import { env } from '~/env'
+import { createServerTedrisatAPIs, FlashcardResponse } from '@madrasah/services/tedrisat'
+
+async function getCard(cardId: number): Promise<FlashcardResponse> {
+  const cookieStore = await cookies()
+  const { cards } = await createServerTedrisatAPIs(cookieStore, env.TEDRISAT_API_BASE_URL)
+
+  return cards.getFlashcardById({ id: cardId })
+}
+
+export default async function CardPage({
   params,
 }: {
-  params: Promise<{ id: string }>
+  params: Promise<{
+    id: number
+  }>
 }) {
   const { id } = await params
+  const card = await getCard(id)
 
-  const cookieStore = await cookies()
-  const api = getAuthenticatedApiService(cookieStore)
-  const { data: card, error } = await api.getDeckCards(id)
-
-  if (error) {
-    return (
-      <div>
-        Error:
-        {error}
-      </div>
-    )
+  if (!card) {
+    return <div>Card not found</div>
   }
 
   return (
     <div>
       <ul>
-        <Link href={`/cards/${card[0].id}`} key={card[0].id}>
+        <Link href={`/cards/${card.id}`} key={card.id}>
           <li>
-            {card[0].content.front}
+            {card.contentFront}
             {' '}
             (
-            {card[0].type}
+            {card.type}
             )
-            {card[0].content.back && (
+            {card.contentBack && (
               <>
                 {' '}
                 -
-                {card[0].content.back}
+                {card.contentBack}
               </>
             )}
           </li>

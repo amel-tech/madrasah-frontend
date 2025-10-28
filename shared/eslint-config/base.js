@@ -21,7 +21,7 @@ export const baseConfig = [
       '@stylistic': stylistic,
     },
     rules: {
-      'turbo/no-undeclared-env-vars': 'off'
+      'turbo/no-undeclared-env-vars': 'off',
     },
   },
   {

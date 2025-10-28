@@ -13,7 +13,7 @@ export const env = createEnv({
     OTEL_EXPORTER_OTLP_ENDPOINT: z.string().min(1).url().optional(),
     OTEL_SERVICE_NAME: z.string().min(1).optional(),
     API_MOCKING: z.enum(['enabled', 'disabled']).default('disabled'),
-    TEDRISAT_API_BASE_URL: z.string().min(1).url().optional(),
+    TEDRISAT_API_BASE_URL: z.string().min(1).url()
   },
   client: {
     NEXT_PUBLIC_KEYCLOAK_ISSUER: z.string().min(1).url(),

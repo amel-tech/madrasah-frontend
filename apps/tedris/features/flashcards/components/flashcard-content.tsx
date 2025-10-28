@@ -4,12 +4,12 @@ import { BookBookmarkIcon, BookOpenIcon } from '@madrasah/icons'
 import { MouseEvent, TouchEvent, useState } from 'react'
 
 import { toDisplay } from '../utils/flashCardUtils'
-import { Card } from '@madrasah/services/tedrisat'
 
 import { useFlashCards } from '../hooks/useFlashCards'
 import FlashCardComponent from './flashcard'
+import { FlashcardResponse } from '@madrasah/services/tedrisat'
 
-export default function FlashCardContent(card: Card) {
+export default function FlashCardContent(card: FlashcardResponse) {
   const [flipped, setFlipped] = useState(false)
   const [touchStart, setTouchStart] = useState<number | null>(null)
   const data = toDisplay(card)
@@ -61,7 +61,7 @@ export default function FlashCardContent(card: Card) {
             {/* TODO: is this needed? */}
             <Header title="Card" />
             <p className="whitespace-pre-wrap break-words text-lg text-gray-400 sm:text-xl">
-              {data.content.front}
+              {data.contentFront}
             </p>
             <CardActions
               onFlip={handleCardFlip}
@@ -86,7 +86,7 @@ export default function FlashCardContent(card: Card) {
           <FlashCardComponent className="mx-auto">
             <Header title="Card" />
             <p className="text-primary whitespace-pre-wrap break-words text-lg font-semibold sm:text-xl">
-              {data.content.back}
+              {data.contentBack}
             </p>
             <CardActions
               onFlip={handleCardFlip}

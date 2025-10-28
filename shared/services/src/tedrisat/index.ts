@@ -1,3 +1,5 @@
-export * from './client'
-export * from './service'
-export * from './types'
+// Generated API exports
+export * from './generated'
+
+// API factory and utilities
+export * from './api-factory'

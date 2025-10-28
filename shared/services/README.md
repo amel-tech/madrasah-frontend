@@ -1,108 +1,124 @@
 # @madrasah/services
 
-This package provides a centralized, type-safe way to interact with backend APIs across the Madrasah frontend monorepo. It standardizes data fetching, authentication, and error handling for all applications.
+Shared service layer for Madrasah applications with auto-generated API clients from OpenAPI specifications.
 
-## Architecture
+## Overview
 
-The architecture is designed to be simple, scalable, and easy to use in both server-side and client-side contexts.
+This package provides TypeScript API clients generated from OpenAPI/Swagger specifications for various Madrasah backend services. The clients are automatically generated during build time to ensure they stay in sync with the backend APIs.
 
-  - **`createHttpClient`**: A core factory function that creates a reusable, configured `fetch` client. It handles setting the base URL, authentication headers, and standardizing the response format.
-  - **Domain-Specific Services**: For each backend service (e.g., `tedrisat`), a dedicated class (`TedrisatService`) is created. This class encapsulates all the related API endpoints, providing a clean and discoverable interface.
+## Structure
 
-## Usage on Next.js
+```
+shared/services/
+├── swagger-docs/           # OpenAPI specifications
+│   ├── tedrisat.json      # Tedrisat service API spec
+│   └── README.md          # Documentation for swagger specs
+├── src/
+│   ├── tedrisat/          # Tedrisat service client
+│   │   ├── generated/     # Auto-generated API client (do not edit)
+│   │   ├── api-factory.ts # Factory for creating authenticated clients
+│   │   └── index.ts       # Public exports
+│   └── core/              # Core utilities and shared types
+└── openapitools.json      # OpenAPI generator configuration
+```
 
-The services can be used in both Server Components and Client Components.
+## Usage
 
-### 1\. Server-Side Usage (in Server Components)
-
-For server-side data fetching (e.g., in a Next.js page), use the `getAuthenticatedApiService` utility.
+### Basic API Client Usage
 
 ```typescript
-import { cookies } from "next/headers";
-import { getAuthenticatedApiService } from "~/lib/services";
+import { createTedrisatAPIs, DeckInclude } from '@madrasah/services/tedrisat'
 
-export default async function Page() {
-  const cookieStore = await cookies();
-  const api = getAuthenticatedApiService(cookieStore);
-  const { data: cards, error } = await api.getCards();
+// Create API clients
+const { decks, cards, service } = createTedrisatAPIs({
+  baseUrl: 'https://tedrisat-api.madrasah.com',
+  token: 'your-auth-token'
+})
 
-  if (error) {
-    return <div>Error: {error}</div>;
+// Use the generated API methods
+const deckList = await decks.getAllFlashcardDecks({ 
+  include: [DeckInclude.Tags] 
+})
+
+const deck = await decks.getFlashcardDeckById({ 
+  id: 123, 
+  include: [DeckInclude.Flashcards] 
+})
+```
+
+### Server-Side Usage (Next.js)
+
+```typescript
+import { createServerTedrisatAPIs } from '@madrasah/services/tedrisat'
+import { cookies } from 'next/headers'
+
+// In server components or API routes
+const cookieStore = await cookies()
+const { decks } = await createServerTedrisatAPIs(
+  cookieStore, 
+  process.env.TEDRISAT_API_BASE_URL!
+)
+
+const decks = await decks.getAllFlashcardDecks()
+```
+
+### Client-Side Usage (React)
+
+```typescript
+import { createTedrisatAPIs } from '@madrasah/services/tedrisat'
+import { useSession } from 'next-auth/react'
+
+function MyComponent() {
+  const { data: session } = useSession()
+  
+  const fetchData = async () => {
+    const { decks } = createTedrisatAPIs({
+      baseUrl: process.env.NEXT_PUBLIC_TEDRISAT_API_BASE_URL!,
+      token: session?.accessToken
+    })
+    
+    return await decks.getAllFlashcardDecks()
   }
-
-  // Render cards...
 }
 ```
 
-### 2\. Client-Side Usage (with Hooks)
+## Development
 
-For client-side components, the `useApi` hook provides an authenticated instance of the `TedrisatService`.
+### Generate API Clients
 
-```typescript
-// apps/tedris/hooks/useApi.ts
-import { useSession } from 'next-auth/react';
-import { useMemo } from 'react';
-import { TedrisatService, createTedrisatClient } from '@madrasah/services/tedrisat';
-import { env } from '~/env';
+```bash
+# Generate all API clients
+npm run generate
 
-export const useApi = () => {
-  const { data: session, status } = useSession();
-  const accessToken = session?.accessToken;
+# Generate specific service
+npm run generate:tedrisat
 
-  const apiServiceInstance = useMemo(() => {
-    if (status !== 'authenticated' || !accessToken) {
-      return null;
-    }
-    const client = createTedrisatClient({
-      baseUrl: env.NEXT_PUBLIC_TEDRISAT_API_BASE_URL!,
-      token: accessToken
-    });
-    return new TedrisatService(client);
-  }, [accessToken, status]);
-
-  return { api: apiServiceInstance, status };
-};
+# Build (automatically runs generation first)
+npm run build
 ```
 
-## How to Add a New Service
+### Adding New Services
 
-1.  **Create a New Directory**:
-    Under `src/`, create a new directory for your service (e.g., `src/another-service`).
+1. **Add OpenAPI specification**: Place the swagger JSON file in `swagger-docs/`
+2. **Add generation script**: Update `package.json` scripts
+3. **Create API factory**: Create factory function for the new service
+4. **Add package export**: Update main `package.json` exports
 
-2.  **Define Types**:
-    Create a `types.ts` file to define the data structures for the new service.
+### Available Services
 
-3.  **Create the Client**:
-    Create a `client.ts` file that uses the core `createHttpClient` with the specific configuration for this new service.
+- **Tedrisat** (`@madrasah/services/tedrisat`) - Education management service
 
-4.  **Create the Service Class**:
-    In `service.ts`, create a class that uses the client and defines methods for each endpoint.
+## Scripts
 
-5.  **Export Everything**:
-    Export all the necessary modules from an `index.ts` file in your service's directory.
+- `npm run generate` - Generate all API clients from swagger specs
+- `npm run generate:tedrisat` - Generate Tedrisat API client only
+- `npm run build` - Build the package (runs generation first)
+- `npm run clean` - Clean build artifacts and generated files
+- `npm run typecheck` - Run TypeScript type checking
+- `npm run lint` - Run ESLint
 
-6.  **Update `package.json`**:
-    Add an export path for the new service in `shared/services/package.json` to make it accessible to other packages in the monorepo.
+## Notes
 
-## Error Handling
-
-The `createHttpClient` is designed to provide a consistent and predictable error handling mechanism. It always returns an object with either `data` or `error`.
-
-```typescript
-const { data, error } = await api.getCards();
-
-if (error) {
-  // Handle the error string
-  console.error(error);
-} else {
-  // Work with the data
-  console.log(data);
-}
-```
-
-This prevents runtime errors from unhandled promise rejections and simplifies data fetching logic in the components.
-
-## Available Scripts
-
-  - **`npm run lint`**: Lints the code in the package.
-  - **`npm run typecheck`**: Runs the TypeScript compiler to check for type errors.
+- **Generated files**: Never manually edit files in `src/*/generated/` directories
+- **Regeneration**: API clients are automatically regenerated during build
+- **Swagger specs**: Keep swagger-docs files up to date with backend APIs
