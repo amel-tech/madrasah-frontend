@@ -39,6 +39,7 @@ export default function CreateDeckButtonDialog() {
     // handle form submission logic here
     try {
       const response = await createFlashCardDeck(data)
+      const id = response?.id || null
 
       if (response) {
         toastHelper.success({
@@ -46,7 +47,7 @@ export default function CreateDeckButtonDialog() {
           description: 'Flashcard was created successfully.',
         })
 
-        router.push('/cards/decks/create')
+        router.push(`/cards/decks/${id}/cards`)
       }
       else {
         toastHelper.error({
