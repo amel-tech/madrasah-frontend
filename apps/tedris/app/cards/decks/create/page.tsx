@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import DeckForm from '~/features/flashcards/components/deck-form'
+import DeckForm from '~/features/flashcards/components/deckform'
 
 function Page() {
   return (

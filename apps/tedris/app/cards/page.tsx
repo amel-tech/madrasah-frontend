@@ -1,9 +1,9 @@
 import Link from 'next/link'
 
-import { PlusIcon } from '@madrasah/icons/ssr'
 import { Button } from '@madrasah/ui/components/button'
 
 import DeckCard from '~/features/flashcards/components/deck/deck-card'
+
 import { cookies } from 'next/headers'
 import { env } from '~/env'
 import {
@@ -11,6 +11,7 @@ import {
   type FlashcardDeckResponse,
   type FlashcardTagResponse,
 } from '@madrasah/services/tedrisat'
+import CreateDeckButtonDialog from '~/features/flashcards/components/deckform/create-deck-button-dialog'
 
 async function getDecks(): Promise<FlashcardDeckResponse[]> {
   try {
@@ -72,14 +73,7 @@ export default async function Page() {
             private
           </Button>
         </div>
-        <div>
-          <Link href="/cards/decks/create">
-            <Button variant="default" size="sm" className="text-white">
-              <PlusIcon weight="bold" />
-              create new deck
-            </Button>
-          </Link>
-        </div>
+        <CreateDeckButtonDialog />
       </div>
       <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6 mb-12">
         {decks?.map(deck => (
