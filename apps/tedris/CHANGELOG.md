@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.3.0](https://github.com/amel-tech/madrasah-frontend/compare/tedris-web-v1.2.0...tedris-web-v1.3.0) (2025-10-30)
+
+
+### Features
+
+* added tags input component ([8afa6d7](https://github.com/amel-tech/madrasah-frontend/commit/8afa6d7152174d6c90068f7d8e06792411758b82))
+* **create-deck-dialog:** use service to create deck ([0a67e7e](https://github.com/amel-tech/madrasah-frontend/commit/0a67e7ead48540ca70cde10e3a4cc6e8e9ea224c))
+* **flashcards:** change tedris flashcards edit screen to table ([ca15f63](https://github.com/amel-tech/madrasah-frontend/commit/ca15f6376dd4b8daf9c2532a2e24c7f4bf1a6dff))
+* **flashcard:** turn create-deck action into dialog ([f383604](https://github.com/amel-tech/madrasah-frontend/commit/f383604588952240bb59870eadb5c0cb5ea34dbd))
+* **tedris:** implementing accesibilities ([6cce759](https://github.com/amel-tech/madrasah-frontend/commit/6cce7595728ca2a861a7e4629254084f7a09fae6))
+
 ## [1.2.0](https://github.com/amel-tech/madrasah-frontend/compare/tedris-web-v1.1.0...tedris-web-v1.2.0) (2025-10-16)
 
 
