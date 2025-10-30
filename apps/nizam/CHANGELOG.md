@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.1.6](https://github.com/amel-tech/madrasah-frontend/compare/nizam-web-v0.1.5...nizam-web-v0.1.6) (2025-10-30)
+
+
+### Features
+
+* **flashcards:** change tedris flashcards edit screen to table ([ca15f63](https://github.com/amel-tech/madrasah-frontend/commit/ca15f6376dd4b8daf9c2532a2e24c7f4bf1a6dff))
+* **flashcard:** turn create-deck action into dialog ([f383604](https://github.com/amel-tech/madrasah-frontend/commit/f383604588952240bb59870eadb5c0cb5ea34dbd))
+* **nizam:** using the new editable columns ([0562fbc](https://github.com/amel-tech/madrasah-frontend/commit/0562fbc73df46812061d67b496de92327d916299))
+
 ## [0.1.5](https://github.com/amel-tech/madrasah-frontend/compare/nizam-web-v0.1.4...nizam-web-v0.1.5) (2025-10-21)
 
 
