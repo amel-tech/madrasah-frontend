@@ -23,7 +23,7 @@ export function useFlashcardColumns() {
       { header: 'Front Face' },
       {
         placeholder: 'Enter front content...',
-        className: 'font-medium',
+        className: '!text-lg',
       },
     ),
     createTextareaColumn(
@@ -31,7 +31,7 @@ export function useFlashcardColumns() {
       { header: 'Back Face' },
       {
         placeholder: 'Enter back content...',
-        className: 'font-medium',
+        className: 'font-light text-sm',
       },
     ),
     {
