@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react'
-import { BaseFlashCard } from '../types'
-
-interface FlashCard extends BaseFlashCard {
-  lastReviewed: string
-}
+import { FlashcardResponse } from '@madrasah/services/tedrisat'
 
 export function useFlashCards() {
-  const [cards, setCards] = useState<FlashCard[]>([])
+  const [cards, setCards] = useState<{
+    id: FlashcardResponse['id']
+    type: FlashcardResponse['type']
+  }[]>([])
 
   useEffect(() => {
     const savedCards = localStorage.getItem('memorizedCards')
@@ -31,11 +30,16 @@ export function useFlashCards() {
     }
   }, [cards])
 
-  const addMemorizedCard = ({ id, type }: BaseFlashCard) => {
-    const newCard: FlashCard = {
+  const addMemorizedCard = ({
+    id,
+    type,
+  }: {
+    id: FlashcardResponse['id']
+    type: FlashcardResponse['type']
+  }) => {
+    const newCard = {
       id: id,
       type: type,
-      lastReviewed: new Date().toISOString(),
     }
     setCards(prev => [...prev, newCard])
   }
@@ -48,18 +52,23 @@ export function useFlashCards() {
     return cards.some(c => c.id === id)
   }
 
-  const toggleMemorized = ({ id, type }: BaseFlashCard) => {
+  const toggleMemorized = ({ id, type }: {
+    id: FlashcardResponse['id']
+    type: FlashcardResponse['type']
+  }) => {
     if (isCardMemorized(id)) {
       removeMemorizedCard(id)
     }
     else {
-      addMemorizedCard({ id, type })
+      addMemorizedCard({
+        id,
+        type,
+      })
     }
   }
 
   return {
     cards,
-    addMemorizedCard,
     removeMemorizedCard,
     isCardMemorized,
     toggleMemorized,

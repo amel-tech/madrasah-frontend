@@ -13,7 +13,7 @@ export default function FlashCard({ children, className }: FlashCardProps) {
   return (
     <Card
       className={cn(
-        'relative flex h-[500px] w-[300px] select-none flex-col justify-center rounded-2xl p-4 text-center shadow-lg sm:p-6',
+        'relative flex w-full md:w-[500px] select-none flex-col justify-center rounded-2xl p-4 text-center shadow-lg sm:p-6',
         className,
       )}
     >

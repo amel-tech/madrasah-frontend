@@ -1,20 +1,27 @@
 'use client'
 
-import { BookBookmarkIcon, BookOpenIcon } from '@madrasah/icons'
-import { MouseEvent, TouchEvent, useState } from 'react'
+import { BookOpenIcon, CheckIcon, EyeIcon, RepeatIcon } from '@madrasah/icons'
+import { MouseEvent, TouchEvent, useEffect, useRef, useState } from 'react'
+import { Kbd } from '@madrasah/ui/components/kbd'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@madrasah/ui/components/tooltip'
 
 import { toDisplay } from '../utils/flashCardUtils'
 
 import { useFlashCards } from '../hooks/useFlashCards'
 import FlashCardComponent from './flashcard'
 import { FlashcardResponse } from '@madrasah/services/tedrisat'
+import { Button } from '@madrasah/ui/components/button'
 
 export default function FlashCardContent(card: FlashcardResponse) {
   const [flipped, setFlipped] = useState(false)
   const [touchStart, setTouchStart] = useState<number | null>(null)
   const data = toDisplay(card)
-  const { isCardMemorized } = useFlashCards()
+  const { isCardMemorized, toggleMemorized } = useFlashCards()
   const memorized = isCardMemorized(data.id)
+
+  const frontfaceRef = useRef<HTMLDivElement>(null)
+  const backfaceRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   const handleTouchStart = (e: TouchEvent | MouseEvent) => {
     const clientX = 'touches' in e ? e.touches[0]?.clientX : e.clientX
@@ -36,13 +43,43 @@ export default function FlashCardContent(card: FlashcardResponse) {
 
   const handleCardFlip = () => setFlipped(prev => !prev)
 
+  useEffect(() => {
+    // get the height of frontface and backface and set the height of container to the max height
+    const frontHeight = frontfaceRef.current?.offsetHeight || 0
+    const backHeight = backfaceRef.current?.offsetHeight || 0
+
+    if (containerRef.current) {
+      containerRef.current.style.height = flipped ? `${backHeight}px` : `${frontHeight}px`
+    }
+  }, [flipped, data])
+
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === ' ' || e.key === 'Space') {
+        e.preventDefault()
+        handleCardFlip()
+      }
+      if (e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault()
+        toggleMemorized({ id: data.id, type: data.type })
+      }
+    }
+
+    window.addEventListener('keydown', onKeyDown)
+
+    return () => {
+      window.removeEventListener('keydown', onKeyDown)
+    }
+  }, [data.id, flipped, toggleMemorized])
+
   return (
-    <div className="relative h-[500px] w-full" style={{ perspective: '1000px' }}>
+    <div className="relative" style={{ perspective: '1000px' }}>
       <div
-        className={`absolute w-full transition-transform duration-500 ease-in-out ${flipped ? 'rotate-y-180' : ''}`}
+        className={`w-full transition-transform duration-500 ease-in-out ${flipped ? 'rotate-y-180' : ''}`}
         style={{
           transformStyle: 'preserve-3d',
         }}
+        ref={containerRef}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
         onMouseDown={handleTouchStart}
@@ -52,6 +89,7 @@ export default function FlashCardContent(card: FlashcardResponse) {
         {/* Ön Yüz */}
         <div
           className="backface-hidden absolute w-full"
+          ref={frontfaceRef}
           style={{
             backfaceVisibility: 'hidden',
             WebkitBackfaceVisibility: 'hidden',
@@ -66,10 +104,8 @@ export default function FlashCardContent(card: FlashcardResponse) {
             <CardActions
               onFlip={handleCardFlip}
               memorized={memorized}
-              onToggleMemorized={() =>
-                console.log('memorized')
-                // toggleMemorized({ id: data.id, type: data.type })}
-              }
+              onToggleMemorized={() => toggleMemorized({ id: data.id, type: data.type })}
+
             />
           </FlashCardComponent>
         </div>
@@ -77,6 +113,7 @@ export default function FlashCardContent(card: FlashcardResponse) {
         {/* Arka Yüz */}
         <div
           className="rotate-y-180 backface-hidden absolute w-full"
+          ref={backfaceRef}
           style={{
             backfaceVisibility: 'hidden',
             WebkitBackfaceVisibility: 'hidden',
@@ -85,16 +122,14 @@ export default function FlashCardContent(card: FlashcardResponse) {
         >
           <FlashCardComponent className="mx-auto">
             <Header title="Card" />
-            <p className="text-primary whitespace-pre-wrap break-words text-lg font-semibold sm:text-xl">
+            <p className="text-primary whitespace-pre-wrap break-words text-md font-semibold sm:text-lg">
               {data.contentBack}
             </p>
             <CardActions
               onFlip={handleCardFlip}
               memorized={memorized}
               onToggleMemorized={() =>
-                console.log('memorized')
-                // toggleMemorized({ id: data.id, type: data.type })
-              }
+                toggleMemorized({ id: data.id, type: data.type })}
             />
           </FlashCardComponent>
         </div>
@@ -124,25 +159,52 @@ function CardActions({
   onToggleMemorized,
 }: CardActionsProps) {
   return (
-    <div className="mt-4 flex flex-col items-center gap-4">
-      <button
-        onClick={onFlip}
-        className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full p-2 transition-colors"
-      >
-        <BookOpenIcon size={20} />
-      </button>
-      <button
-        onClick={onToggleMemorized}
-        className={`flex items-center gap-2 rounded-full px-3 py-2 transition-colors ${memorized
-          ? 'bg-green-500 text-white hover:bg-green-600'
-          : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-        }`}
-      >
-        <BookBookmarkIcon size={16} />
-        <span className="text-sm font-medium">
-          {memorized ? 'Tekrarla' : 'Ezberledim'}
-        </span>
-      </button>
+    <div className="mt-4 flex flex-row justify-center items-center gap-4">
+      <Tooltip delayDuration={750}>
+        <TooltipTrigger asChild>
+          <Button
+            onClick={onFlip}
+            className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full p-2 transition-colors"
+          >
+            <EyeIcon size={20} />
+            Flip
+
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <div className="flex items-center gap-2">
+            Flip the card
+            {' '}
+            <Kbd>Space</Kbd>
+          </div>
+        </TooltipContent>
+      </Tooltip>
+      <Tooltip delayDuration={750}>
+        <TooltipTrigger asChild>
+          <Button
+            onClick={onToggleMemorized}
+            className={`flex items-center gap-2 rounded-full px-3 py-2 transition-colors ${memorized
+              ? 'bg-green-500 text-white hover:bg-green-600'
+              : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+            }`}
+          >
+            {
+              memorized ? <RepeatIcon size={16} /> : <CheckIcon size={16} />
+            }
+            <span className="text-sm font-medium">
+              {memorized ? 'Repeat' : 'Mark as Memorized'}
+            </span>
+          </Button>
+
+        </TooltipTrigger>
+        <TooltipContent>
+          <div className="flex items-center gap-2">
+            {memorized ? 'Mark as to review later' : 'Mark as memorized'}
+            {' '}
+            <Kbd>Enter</Kbd>
+          </div>
+        </TooltipContent>
+      </Tooltip>
     </div>
   )
 }
