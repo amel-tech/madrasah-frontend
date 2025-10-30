@@ -1,6 +1,6 @@
 import React from 'react'
 import { ColumnDef } from '@tanstack/react-table'
-import { createInputColumn } from '~/components/data-table/editable'
+import { createTextareaColumn } from '~/components/data-table/editable'
 import { FlashcardResponse } from '@madrasah/services/tedrisat'
 import {
   AlertDialog,
@@ -18,7 +18,7 @@ import { Button } from '@madrasah/ui/components/button'
 
 export function useFlashcardColumns() {
   return React.useMemo<ColumnDef<FlashcardResponse>[]>(() => [
-    createInputColumn(
+    createTextareaColumn(
       'contentFront',
       { header: 'Front Face' },
       {
@@ -26,7 +26,7 @@ export function useFlashcardColumns() {
         className: 'font-medium',
       },
     ),
-    createInputColumn(
+    createTextareaColumn(
       'contentBack',
       { header: 'Back Face' },
       {
@@ -38,32 +38,34 @@ export function useFlashcardColumns() {
       id: 'actions',
       size: 10,
       cell: ({ row, table }) => (
-        <AlertDialog>
-          <AlertDialogTrigger asChild>
-            <Button variant="outline">
-              <TrashIcon size={16} />
-            </Button>
-          </AlertDialogTrigger>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>
-                Emin misin?
-              </AlertDialogTitle>
-              <AlertDialogDescription>
-                Bu kart ve karta kayıtlı bilgileriniz silinecek. Bu işlem geri alınamaz.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>İptal</AlertDialogCancel>
-              <AlertDialogAction onClick={
-                () => table.options.meta?.onRowDelete?.(row.original.id)
-              }
-              >
-                Sil
-              </AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
+        <div className="flex gap-2 justify-end">
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button variant="outline">
+                <TrashIcon size={16} />
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>
+                  Are you sure?
+                </AlertDialogTitle>
+                <AlertDialogDescription>
+                  This card and all associated information will be deleted. This action cannot be undone.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction onClick={
+                  () => table.options.meta?.onRowDelete?.(row.original.id)
+                }
+                >
+                  Delete
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        </div>
       ),
       enableSorting: false,
       enableColumnFilter: false,

@@ -140,6 +140,7 @@ export function DataTable<TData, TValue>({
                       <TableCell
                         key={cell.id}
                         style={{ width: cell.column.getSize() }}
+                        className="align-top"
                       >
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                       </TableCell>

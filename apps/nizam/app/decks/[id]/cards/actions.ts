@@ -54,7 +54,7 @@ export const createFlashcards = async (deckId: number, newCards: {
   }
 }
 
-export const deleteFlashcard = async (cardId: number, deckId?: string) => {
+export const deleteFlashcard = async (cardId: number, deckId?: number) => {
   const cookieStore = await cookies()
   const { cards } = await createServerTedrisatAPIs(cookieStore, env.TEDRISAT_API_BASE_URL)
 

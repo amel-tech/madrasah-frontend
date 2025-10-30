@@ -18,5 +18,5 @@ export default async function DeckCardsPage({
 
   const result = await decks.getFlashcardDeckWithCards({ id: Number(id) })
 
-  return <DeckCards deckId={id} flashcards={result.flashcards} />
+  return <DeckCards deck={result} />
 }
