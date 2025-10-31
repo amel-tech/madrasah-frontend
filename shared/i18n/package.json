@@ -1,0 +1,42 @@
+{
+  "name": "@madrasah/i18n",
+  "private": true,
+  "version": "1.0.0",
+  "description": "i18n for madrasah apps.",
+  "license": "ISC",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -b && cp -R src/@types dist/ && node scripts/patch-types.js",
+    "interface": "i18next-resources-for-ts interface -i src/locales/en -o src/@types/resources.d.ts && prettier --write src/@types/resources.d.ts && npm run lint:fix",
+    "lint": "eslint . --max-warnings 0",
+    "lint:fix": "eslint . --max-warnings 0 --fix",
+    "pull": "tolgee pull",
+    "push": "tolgee push"
+  },
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "i18next": "^25.2.1"
+  },
+  "devDependencies": {
+    "@tolgee/cli": "^2.10.2",
+    "i18next-resources-for-ts": "^1.6.0",
+    "typescript": "^5.9.2",
+    "eslint": "^9.28.0",
+    "@madrasah/eslint-config": "*",
+    "@madrasah/typescript-config": "*"
+  },
+  "eslintIgnore": [
+    "/node_modules",
+    "/dist"
+  ],
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  }
+}
