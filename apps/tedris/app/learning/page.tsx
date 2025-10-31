@@ -1,7 +1,6 @@
+import { getTranslations } from 'next-intl/server'
+
 export default async function Learning() {
-  return (
-    <main>
-      Learning
-    </main>
-  )
+  const t = await getTranslations('common')
+  return <div>{t('welcome')}</div>
 }

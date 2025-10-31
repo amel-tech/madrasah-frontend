@@ -9,8 +9,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc -b && cp -R src/@types dist/ && node scripts/patch-types.js",
-    "interface": "i18next-resources-for-ts interface -i src/locales/en -o src/@types/resources.d.ts && prettier --write src/@types/resources.d.ts && npm run lint:fix",
+    "build": "tsc -b",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --max-warnings 0 --fix",
     "pull": "tolgee pull",
@@ -35,8 +34,7 @@
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "import": "./dist/index.js"
     }
   }
 }

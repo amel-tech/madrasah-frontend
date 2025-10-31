@@ -1,9 +1,9 @@
 import * as en from './en'
-import * as ar from './ar'
 import * as tr from './tr'
+import * as ar from './ar'
 
 export const resources = {
   en,
-  ar,
   tr,
+  ar,
 } as const
