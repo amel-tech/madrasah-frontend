@@ -16,7 +16,7 @@ const resolveMessagesForLang = async (locale: keyof typeof resources = 'en', ns:
 export default getRequestConfig(async () => {
   const locale = 'en'
 
-  const messages = await resolveMessagesForLang(locale, ['common', 'tedris'])
+  const messages = await resolveMessagesForLang(locale, ['common', 'nizam'])
 
   return {
     locale,
