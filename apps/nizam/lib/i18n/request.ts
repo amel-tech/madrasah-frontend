@@ -23,7 +23,10 @@ export default getRequestConfig(async ({
     ? requested
     : routing.defaultLocale
 
-  const messages = await resolveMessagesForLang(locale, ['common', 'nizam'])
+  const messages = await resolveMessagesForLang(locale,
+    // Load only app-specific namespaces. This prevents using cross-app locale strings.
+    ['common', 'nizam'],
+  )
 
   return {
     locale,
