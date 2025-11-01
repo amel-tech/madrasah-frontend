@@ -19,12 +19,10 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "dotenv": "^16.5.0",
-    "i18next": "^25.2.1"
+    "dotenv": "^16.5.0"
   },
   "devDependencies": {
     "@tolgee/cli": "^2.10.2",
-    "i18next-resources-for-ts": "^1.6.0",
     "typescript": "^5.9.2",
     "eslint": "^9.28.0",
     "@madrasah/eslint-config": "*",
