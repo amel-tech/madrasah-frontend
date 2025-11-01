@@ -1,10 +1,12 @@
 'use client'
 
 import { cn } from '@madrasah/ui/lib/utils'
+import { useTranslations } from 'next-intl'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname } from '~/lib/i18n/navigation'
 
 export const TabView = ({ children }: { children: React.ReactNode }) => {
+  const t = useTranslations('tedris')
   const pathname = usePathname()
 
   return (
@@ -19,7 +21,7 @@ export const TabView = ({ children }: { children: React.ReactNode }) => {
               && 'text-brand-primary border-b-2 border-brand-primary',
             )}
           >
-            <span>Home</span>
+            <span>{t('TabView.home')}</span>
           </Link>
           <Link
             prefetch
@@ -30,7 +32,7 @@ export const TabView = ({ children }: { children: React.ReactNode }) => {
               && 'text-brand-primary border-b-2 border-brand-primary',
             )}
           >
-            <span>Learning</span>
+            <span>{t('TabView.learning')}</span>
           </Link>
           <Link
             prefetch
@@ -41,7 +43,7 @@ export const TabView = ({ children }: { children: React.ReactNode }) => {
               && 'text-brand-primary border-b-2 border-brand-primary',
             )}
           >
-            <span>Cards</span>
+            <span>{t('TabView.decks')}</span>
           </Link>
         </div>
       </div>
