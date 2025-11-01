@@ -1,3 +1,8 @@
 {
+  "locales": {
+    "ar": "العربية",
+    "en": "English",
+    "tr": "Türkçe"
+  },
   "welcome": "مرحباً"
 }
