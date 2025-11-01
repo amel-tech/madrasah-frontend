@@ -11,9 +11,12 @@
   "scripts": {
     "build": "tsc -b",
     "lint": "eslint . --max-warnings 0",
+    "dev": "tsc -b --watch",
     "lint:fix": "eslint . --max-warnings 0 --fix",
     "pull": "tolgee pull",
-    "push": "tolgee push"
+    "push": "tolgee push",
+    "sync": "tolgee sync",
+    "clean": "rm -rf dist"
   },
   "dependencies": {
     "dotenv": "^16.5.0",

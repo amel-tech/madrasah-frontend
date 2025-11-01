@@ -1,3 +1,7 @@
 {
-  "tedris-namespace-placeholder": "tedris"
+  "TabView": {
+    "decks": "Decks",
+    "home": "Home",
+    "learning": "Learning"
+  }
 }

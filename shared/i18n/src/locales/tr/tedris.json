@@ -1,3 +1,7 @@
 {
-  "tedris-namespace-placeholder": "tedris"
+  "TabView": {
+    "decks": "Desteler",
+    "home": "Anasayfa",
+    "learning": "Öğrenme"
+  }
 }

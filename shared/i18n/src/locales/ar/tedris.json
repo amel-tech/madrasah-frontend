@@ -1,3 +1,7 @@
 {
-  "tedris-namespace-placeholder": "تدريس"
+  "TabView": {
+    "decks": "مجموعة أوراق",
+    "home": "الرئيسية",
+    "learning": "التعلم"
+  }
 }

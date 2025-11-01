@@ -1,3 +1,8 @@
 {
-  "nizam-namespace-placeholder": "nizam"
+  "DecksPage": {
+    "Table": {
+      "descriptionColumn": "Açıklama",
+      "titleColumn": "Başlık"
+    }
+  }
 }
