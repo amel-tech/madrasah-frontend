@@ -5,6 +5,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 import AppLayout from '~/components/layout/app-layout'
 import { ClientProviders } from '~/components/providers/client-providers'
+import { NextIntlClientProvider } from 'next-intl'
 
 export const metadata: Metadata = {
   title: 'Nizam',
@@ -19,9 +20,11 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ClientProviders>
-          <AppLayout>{children}</AppLayout>
-        </ClientProviders>
+        <NextIntlClientProvider locale="en" timeZone="UTC">
+          <ClientProviders>
+            <AppLayout>{children}</AppLayout>
+          </ClientProviders>
+        </NextIntlClientProvider>
       </body>
     </html>
   )
