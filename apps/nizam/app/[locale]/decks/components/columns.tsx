@@ -23,5 +23,5 @@ export function useDecksColumns() {
         placeholder: 'Enter deck description...',
       },
     ),
-  ], [])
+  ], [t])
 }

@@ -1,36 +1,123 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nizam - Madrasah Admin Application
 
-## Getting Started
+Nizam is a Next.js application that serves as the administrative interface for the Madrasah platform. It provides comprehensive management tools and dashboards for platform administration.
 
-First, run the development server:
+## 🚀 Features
+
+- **Next.js 14** - React framework with App Router
+- **TypeScript** - Type-safe development
+- **Tailwind CSS** - Utility-first CSS framework
+- **NextAuth.js** - Authentication with Keycloak integration
+- **next-intl** - Internationalization with routing support
+- **Radix UI** - Accessible component primitives
+- **T3 Env** - Type-safe environment variable validation
+- **Monorepo Components** - Shared UI components and utilities
+
+## 📦 Installation
 
 ```bash
+# Install dependencies
+npm install
+
+# Copy environment variables
+cp env.sample .env.local
+```
+
+## 🚀 Development
+
+```bash
+# Start the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3001](http://localhost:3001) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🌍 Internationalization (i18n)
 
-## Learn More
+Nizam uses **next-intl** for internationalization, integrating with the shared `@madrasah/i18n` package for centralized translation management.
 
-To learn more about Next.js, take a look at the following resources:
+### Supported Languages
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **English (en)** - Default language
+- **Turkish (tr)**  
+- **Arabic (ar)**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Configuration
 
-## Deploy on Vercel
+The i18n setup includes:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Routing**: Automatic locale detection and URL-based routing (`/en/home`, `/tr/home`, `/ar/home`)
+- **Middleware**: Route matching and locale resolution
+- **Request Configuration**: Server-side message loading with namespace filtering
+- **Navigation**: Type-safe navigation hooks and components
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Usage Examples
+
+#### Using Translations in Components
+
+```tsx
+import { useTranslations } from 'next-intl'
+
+export function TabView() {
+  const t = useTranslations('nizam')
+  
+  return (
+    <div>
+      <h1>{t('TabView.home')}</h1>
+      <p>{t('TabView.decks')}</p>
+    </div>
+  )
+}
+```
+
+#### Navigation with Locale Support
+
+Make sure to use the locale-aware `Link` and navigation hooks from the i18n navigation module. That replaces standard Next.js navigation components to ensure locale is preserved.
+
+```tsx
+import { Link, useRouter, usePathname } from '~/lib/i18n/navigation'
+
+export function Navigation() {
+  const router = useRouter()
+  const pathname = usePathname()
+  
+  return (
+    <nav>
+      <Link href="/home">Home</Link>
+      <button onClick={() => router.push('/learning')}>
+        Go to Learning
+      </button>
+    </nav>
+  )
+}
+```
+
+### Available Namespaces
+
+- **`common`** - Shared translations (locale names, common UI elements)
+- **`nizam`** - Nizam-specific translations (components, features)
+
+See the readme of the `@madrasah/i18n` package for detailed instructions on adding new translations and managing them.
+
+
+## 🛠️ Built With
+
+- [Next.js](https://nextjs.org/) - React framework
+- [next-intl](https://next-intl.dev/) - Internationalization
+- [Tailwind CSS](https://tailwindcss.com/) - Styling
+- [Radix UI](https://www.radix-ui.com/) - UI Components
+- [NextAuth.js](https://next-auth.js.org/) - Authentication
+
+## 📚 Additional Resources
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [next-intl Documentation](https://next-intl.dev/docs)
+- [Madrasah i18n Package](../../shared/i18n/README.md)
+
+## 🤝 Contributing
+
+1. Follow the existing code structure and patterns
+2. Add translations for new features to all supported languages
+3. Test internationalization with different locales
+4. Update this README when adding new features or configurations
