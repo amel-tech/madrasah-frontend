@@ -18,13 +18,16 @@ import {
 import { Button } from '@madrasah/ui/components/button'
 import { EyeIcon, TrashIcon } from '@madrasah/icons'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 
 export function useDecksColumns() {
   const router = useRouter()
+  const t = useTranslations('nizam')
+
   return React.useMemo<ColumnDef<FlashcardDeckResponse>[]>(() => [
     createInputColumn<FlashcardDeckResponse>(
       'title',
-      { header: 'Title' },
+      { header: t('DecksPage.Table.titleColumn') },
       {
         placeholder: 'Enter deck title...',
         className: 'font-medium',
@@ -32,7 +35,8 @@ export function useDecksColumns() {
     ),
     createInputColumn<FlashcardDeckResponse>(
       'description',
-      { header: 'Description' },
+      { header: t('DecksPage.Table.descriptionColumn'),
+      },
       {
         placeholder: 'Enter deck description...',
         className: 'font-medium',
@@ -86,5 +90,5 @@ export function useDecksColumns() {
       enableSorting: false,
       enableColumnFilter: false,
     },
-  ], [])
+  ], [router])
 }

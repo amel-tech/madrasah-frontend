@@ -17,6 +17,7 @@ import Link from 'next/link'
 import { routes } from './nav-routes'
 import { useSession } from 'next-auth/react'
 import KeycloakLogin from '~/components/keycloak/login'
+import LocaleSwitcher from '../i18n/locale-switcher'
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname()
@@ -66,6 +67,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarFooter>
         {data?.user && <NavUser user={user} />}
         {!data?.user && <KeycloakLogin />}
+        <LocaleSwitcher />
       </SidebarFooter>
     </Sidebar>
   )
