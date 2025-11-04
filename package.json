@@ -14,9 +14,20 @@
     "lint:fix": "turbo lint -- --fix",
     "clean": "turbo clean && rm -rf node_modules .turbo dist",
     "prepare": "husky",
-    "test": "turbo test",
-    "test:e2e": "turbo test:e2e",
-    "test:e2e:open": "turbo test:e2e:open"
+    
+    "start:mocks": "npm run start:mocks --workspace=@madrasah/services",
+    "start:apps": "turbo run start --filter=tedris-web --filter=nizam-web",
+
+    "test:e2e": "concurrently \"npm:start:mocks\" \"npm:start:apps\" \"npm:run:tests\" --kill-others --success first",
+    "run:tests": "wait-on http://localhost:5339 http://localhost:3000 http://localhost:3001 && turbo run test:e2e",
+
+    "test:e2e:open:tedris": "concurrently \"npm:start:mocks\" \"npm:start:tedris-web\" \"npm:run:open:tedris-web\" --kill-others",
+    "start:tedris": "npm run start --workspace=tedris-web",
+    "run:open:tedris": "wait-on http://localhost:5339 http://localhost:3000 && npm run test:e2e:open --workspace=tedris-web",
+
+    "test:e2e:open:nizam": "concurrently \"npm:start:mocks\" \"npm:start:nizam-web\" \"npm:run:open:nizam-web\" --kill-others",
+    "start:app2": "npm run start --workspace=nizam-web",
+    "run:open:app2": "wait-on http://localhost:5339 http://localhost:3001 && npm run test:e2e:open --workspace=nizam-web"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",

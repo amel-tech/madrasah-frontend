@@ -14,8 +14,6 @@
     "test": "echo 'Tests not implemented'",
     "test:e2e": "cypress run",
     "test:e2e:open": "cypress open",
-    "test:e2e:with-mocks": "concurrently \"npm run start:mocks --workspace=@madrasah/services\" \"npm start\" \"wait-on http://localhost:3000 http://localhost:5339 && npm run test:e2e\" --kill-others --success first",
-    "test:e2e:dev": "concurrently \"npm run start:mocks --workspace=@madrasah/services\" \"npm start\" \"wait-on http://localhost:3000 http://localhost:5339 && npm run test:e2e:open\" --kill-others",
     "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
