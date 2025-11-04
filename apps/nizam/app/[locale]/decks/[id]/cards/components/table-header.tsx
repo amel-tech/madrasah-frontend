@@ -1,34 +1,46 @@
+import { UploadIcon } from '@madrasah/icons'
 import { DownloadIcon } from '@madrasah/icons/ssr'
 import { Button } from '@madrasah/ui/components/button'
 import { useRef } from 'react'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@madrasah/ui/components/dropdown-menu'
 
-export const TableHeader = ({ onDeckFileImport, onClickDownloadSampleFile }: {
+export const TableHeader = ({
+  title,
+  description,
+  onDeckFileImport,
+  onClickDownloadSampleFile,
+}: {
+  title: string
+  description: string
   onDeckFileImport: (file: File) => void
   onClickDownloadSampleFile: () => void
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null)
 
-  const onButtonClick = () => {
+  const handleUploadClick = () => {
     fileInputRef.current?.click()
   }
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
+    console.log(file)
     if (file) {
       onDeckFileImport(file)
       e.target.value = '' // reset input so same file can be uploaded again
     }
   }
   return (
-    <div className="flex justify-between mb-4">
+    <div className="flex items-end justify-between mb-4">
+      <div>
+        <h1 className="text-2xl font-bold">{title}</h1>
+        <p className="text-muted-foreground">{description}</p>
+      </div>
       <div className="flex gap-2">
-        <Button onClick={onButtonClick}>
-          <DownloadIcon />
-          {' '}
-          <small>
-            Import From Excel
-          </small>
-        </Button>
         <input
           ref={fileInputRef}
           type="file"
@@ -36,14 +48,31 @@ export const TableHeader = ({ onDeckFileImport, onClickDownloadSampleFile }: {
           style={{ display: 'none' }}
           onChange={handleFileChange}
         />
+        <DropdownMenu modal>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline">
+              Bulk Actions
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-60">
+            <DropdownMenuItem onClick={handleUploadClick}>
+              <UploadIcon />
+              {' '}
+              Import from Excel
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={onClickDownloadSampleFile} disabled>
+              <DownloadIcon />
+              {' '}
+              Download as Excel
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={onClickDownloadSampleFile}>
+              <DownloadIcon />
+              {' '}
+              Download Sample File
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
 
-        <Button onClick={onClickDownloadSampleFile} variant="outline">
-          <DownloadIcon />
-          {' '}
-          <small>
-            Download Sample File
-          </small>
-        </Button>
       </div>
     </div>
   )

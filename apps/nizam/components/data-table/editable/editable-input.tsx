@@ -19,13 +19,21 @@ export const EditableInput: React.FC<{
     )
   }
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      onBlur()
+    }
+  }
+
   return (
     <Input
       value={value}
       onChange={e => onChange(e.target.value)}
       onBlur={onBlur}
+      onKeyDown={handleKeyDown}
       placeholder={placeholder}
       disabled={disabled}
+      onClick={e => e.stopPropagation()}
       className={cn('border border-transparent shadow-none focus-visible:ring-0 p-1 hover:border hover:border-gray-200', className)}
     />
   )

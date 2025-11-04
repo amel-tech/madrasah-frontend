@@ -54,10 +54,10 @@ export interface FlashcardDeckResponse {
     id: number;
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof FlashcardDeckResponse
      */
-    description: object;
+    description: string;
     /**
      * 
      * @type {Array<FlashcardTagResponse>}

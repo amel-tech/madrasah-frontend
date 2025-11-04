@@ -10,9 +10,11 @@ declare module '@tanstack/react-table' {
   }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface ColumnMeta<TData, TValue> {
-    inputType?: 'input' | 'select' | 'textarea'
-    options?: Array<{ value: string, label: string }>
-    optionsProvider?: (data: TData[], rowIndex: number) => Array<{ value: string, label: string }>
+    inputType?: 'input' | 'select' | 'textarea' | 'switch'
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    options?: Array<{ value: any | boolean, label: string }>
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    optionsProvider?: (data: TData[], rowIndex: number) => Array<{ value: any, label: string }>
     placeholder?: string
     disabled?: boolean
     className?: string

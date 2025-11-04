@@ -4,6 +4,7 @@ import React from 'react'
 import { EditableInput } from './editable-input'
 import { EditableSelect } from './editable-select'
 import { EditableTextarea } from './editable-textarea'
+import { EditableSwitch } from './editable-switch'
 
 export function EditableCell<TData>(props: CellContext<TData, unknown>) {
   const { getValue, row: { index }, column: { id }, table, column: { columnDef } } = props
@@ -29,7 +30,7 @@ export function EditableCell<TData>(props: CellContext<TData, unknown>) {
     : options
 
   // When the input is blurred, we'll call our table meta's updateData function
-  const onBlur = () => {
+  const handleSave = () => {
     // Only trigger update if the value has actually changed
     if (value !== initialValue) {
       table.options.meta?.updateData(index, id, value)
@@ -42,7 +43,7 @@ export function EditableCell<TData>(props: CellContext<TData, unknown>) {
     setValue(initialValue)
   }, [initialValue])
 
-  const handleChange = (newValue: string) => {
+  const handleChange = (newValue: string | boolean) => {
     setValue(newValue)
   }
 
@@ -53,7 +54,7 @@ export function EditableCell<TData>(props: CellContext<TData, unknown>) {
         <EditableSelect
           value={value as string}
           onChange={handleChange}
-          onBlur={onBlur}
+          onBlur={handleSave}
           options={dynamicOptions}
           placeholder={placeholder}
           disabled={disabled || isLoading}
@@ -66,8 +67,19 @@ export function EditableCell<TData>(props: CellContext<TData, unknown>) {
         <EditableTextarea
           value={value as string}
           onChange={handleChange}
-          onBlur={onBlur}
+          onBlur={handleSave}
           placeholder={placeholder}
+          disabled={disabled || isLoading}
+          className={className}
+          isLoading={isLoading}
+        />
+      )
+    case 'switch':
+      return (
+        <EditableSwitch
+          value={value as boolean}
+          onChange={handleChange}
+          onBlur={handleSave}
           disabled={disabled || isLoading}
           className={className}
           isLoading={isLoading}
@@ -79,7 +91,7 @@ export function EditableCell<TData>(props: CellContext<TData, unknown>) {
         <EditableInput
           value={value as string}
           onChange={handleChange}
-          onBlur={onBlur}
+          onBlur={handleSave}
           placeholder={placeholder}
           disabled={disabled || isLoading}
           className={className}

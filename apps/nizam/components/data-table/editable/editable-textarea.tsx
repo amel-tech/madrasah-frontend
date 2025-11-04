@@ -2,6 +2,7 @@ import React from 'react'
 import { ColumnDef } from '@tanstack/react-table'
 import { Skeleton } from '@madrasah/ui/components/skeleton'
 import { cn } from '@madrasah/ui/lib/utils'
+import { Textarea } from '@madrasah/ui/components/textarea'
 
 export const EditableTextarea: React.FC<{
   value: string
@@ -19,15 +20,15 @@ export const EditableTextarea: React.FC<{
   }
 
   return (
-    <textarea
-      value={value}
+    <Textarea
+      defaultValue={value}
       onChange={e => onChange(e.target.value)}
       onBlur={onBlur}
       placeholder={placeholder}
       disabled={disabled}
-      className={cn('border-0 shadow-none focus-visible:ring-0 p-1 resize-none', className)}
-      rows={2}
-    />
+      className={cn('border border-transparent shadow-none focus-visible:ring-0 p-1 hover:border hover:border-gray-200 resize-none', className)}
+    >
+    </Textarea>
   )
 }
 

@@ -6,7 +6,7 @@ import { updateFlashcard, createFlashcards, deleteFlashcard } from '../actions'
 
 import { DataTable } from '~/components/data-table'
 import { TableHeader } from './table-header'
-import { FlashcardResponse, FlashcardResponseTypeEnum } from '@madrasah/services/tedrisat'
+import { FlashcardDeckResponse, FlashcardResponse, FlashcardResponseTypeEnum } from '@madrasah/services/tedrisat'
 import { toastHelper } from '@madrasah/ui/lib/toast-helper'
 import { useFlashcardColumns } from './columns'
 import { createDefaultColumn } from '~/components/data-table/editable'
@@ -20,11 +20,9 @@ type SpreadsheetCardRepresentation = {
 }
 
 export default function DeckCards({
-  deckId,
-  flashcards,
+  deck,
 }: {
-  deckId: string
-  flashcards: FlashcardResponse[] | undefined
+  deck: FlashcardDeckResponse
 }) {
   const columns = useFlashcardColumns()
 
@@ -77,18 +75,20 @@ export default function DeckCards({
       type: row.type,
       contentFront: row.contentFront,
       contentBack: row.contentBack,
-      deckId: Number(deckId),
+      deckId: Number(deck.id),
       authorId: 1,
     }))
 
-    await createFlashcards(Number(deckId), cardsToImport)
+    console.log(cardsToImport)
+
+    await createFlashcards(Number(deck.id), cardsToImport)
     toastHelper.success({ title: 'Cards Imported', description: `${cardsToImport.length} cards were imported successfully.` })
   }
 
   const onRowDelete = async (id: number) => {
     try {
       // Pass deckId to server action for automatic revalidatePath
-      const response = await deleteFlashcard(id, deckId)
+      const response = await deleteFlashcard(id, deck.id)
       if (response) {
         toastHelper.success({ title: 'Card Deleted', description: `Card with ID ${id} was deleted.` }, { cardId: id })
         return true
@@ -109,7 +109,7 @@ export default function DeckCards({
         type: FlashcardResponseTypeEnum.Vocabulary,
         contentFront: `Front word ${index + 1}`,
         contentBack: `Back word ${index + 1}`,
-        deckId: Number(deckId),
+        deckId: deck.id,
         is_public: true,
       }
     })
@@ -126,10 +126,15 @@ export default function DeckCards({
 
   return (
     <div>
-      <TableHeader onClickDownloadSampleFile={onClickDownloadSampleFile} onDeckFileImport={onDeckFileImport} />
+      <TableHeader
+        title={deck.title}
+        description={deck.description || ''}
+        onClickDownloadSampleFile={onClickDownloadSampleFile}
+        onDeckFileImport={onDeckFileImport}
+      />
       <DataTable
         columns={columns}
-        data={flashcards || []}
+        data={deck.flashcards || []}
         onRowUpdate={onRowUpdate}
         defaultColumn={defaultColumn}
         onRowDelete={onRowDelete}
