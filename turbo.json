@@ -28,9 +28,6 @@
     },
     "test:e2e:open": {
       "cache": false
-    },
-    "distribute": {
-      "dependsOn": ["^distribute"]
     }
   }
 }

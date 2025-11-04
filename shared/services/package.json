@@ -22,7 +22,7 @@
     "build:tedrisat": "cd src/tedrisat/generated && npm run build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "clean": "rm -rf .turbo node_modules dist src/*/generated",
+    "clean": "rm -rf .turbo node_modules dist",
     "check-types": "tsc --noEmit",
     "start:mocks": "npm run start:tedrisat:mocks",
     "start:tedrisat:mocks": "scalar document mock ./swagger-docs/tedrisat.json --watch --port 5339"

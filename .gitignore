@@ -12,9 +12,6 @@ dist/
 out/
 .output/
 
-# Generated mock files
-apps/*/public/mocks/
-
 # Turborepo
 .turbo/
 .turbo

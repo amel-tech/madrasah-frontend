@@ -7,7 +7,7 @@
     "shared/*"
   ],
   "scripts": {
-    "build": "turbo distribute && turbo build",
+    "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "check-types": "turbo run check-types",
@@ -16,8 +16,7 @@
     "prepare": "husky",
     "test": "turbo test",
     "test:e2e": "turbo test:e2e",
-    "test:e2e:open": "turbo test:e2e:open",
-    "distribute": "turbo distribute"
+    "test:e2e:open": "turbo test:e2e:open"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
