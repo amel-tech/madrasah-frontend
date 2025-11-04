@@ -1,7 +1,6 @@
 'use client'
 
 import { useMemo } from 'react'
-import * as XLSX from 'xlsx'
 import { updateFlashcard, createFlashcards, deleteFlashcard } from '../actions'
 
 import { DataTable } from '~/components/data-table'
@@ -10,13 +9,12 @@ import { FlashcardDeckResponse, FlashcardResponse, FlashcardResponseTypeEnum } f
 import { toastHelper } from '@madrasah/ui/lib/toast-helper'
 import { useFlashcardColumns } from './columns'
 import { createDefaultColumn } from '~/components/data-table/editable'
+import { FlashcardFile } from '../lib/flashcard-file'
 
 type SpreadsheetCardRepresentation = {
-  id: number
   type: FlashcardResponseTypeEnum
   contentFront: string
   contentBack: string
-  is_public?: boolean
 }
 
 export default function DeckCards({
@@ -60,29 +58,23 @@ export default function DeckCards({
   }
 
   const onDeckFileImport = async (file: File) => {
-    const data = await file.arrayBuffer()
-    const workbook = XLSX.read(data, { type: 'array' })
-    const sheetName = workbook.SheetNames[0] || ''
-    const worksheet = workbook.Sheets[sheetName]
-
-    if (!worksheet) {
-      return console.error('No worksheet found in the uploaded file')
+    const flashcardFileReader = new FlashcardFile({
+      columns: ['type', 'contentFront', 'contentBack'],
+    })
+    try {
+      const cardsToImport = await flashcardFileReader.parseExcelFileAsJSON<SpreadsheetCardRepresentation>(file)
+      await createFlashcards(Number(deck.id), cardsToImport)
+      toastHelper.success({ title: 'Cards Imported', description: `${cardsToImport.length} cards were imported successfully.` })
     }
-
-    const json = XLSX.utils.sheet_to_json<SpreadsheetCardRepresentation>(worksheet)
-    const cardsToImport: FlashcardResponse[] = json.map((row, index) => ({
-      id: index,
-      type: row.type,
-      contentFront: row.contentFront,
-      contentBack: row.contentBack,
-      deckId: Number(deck.id),
-      authorId: 1,
-    }))
-
-    console.log(cardsToImport)
-
-    await createFlashcards(Number(deck.id), cardsToImport)
-    toastHelper.success({ title: 'Cards Imported', description: `${cardsToImport.length} cards were imported successfully.` })
+    catch (error) {
+      console.error('Error importing cards:', error)
+      if (error instanceof Error) {
+        toastHelper.error({ title: 'Import Error', description: error.message })
+      }
+      else {
+        toastHelper.error({ title: 'Import Error', description: 'An unknown error occurred during import.' })
+      }
+    }
   }
 
   const onRowDelete = async (id: number) => {
@@ -103,7 +95,7 @@ export default function DeckCards({
   }
 
   const onClickDownloadSampleFile = async () => {
-    const sampleCards: SpreadsheetCardRepresentation[] = Array.from({ length: 5 }).map((_, index) => {
+    const sampleData = Array.from({ length: 5 }).map((_, index) => {
       return {
         id: index,
         type: FlashcardResponseTypeEnum.Vocabulary,
@@ -113,11 +105,7 @@ export default function DeckCards({
         is_public: true,
       }
     })
-
-    const worksheet = XLSX.utils.json_to_sheet(sampleCards)
-    const workbook = XLSX.utils.book_new()
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'SampleCards')
-    await XLSX.writeFile(workbook, 'sample_cards.xlsx')
+    FlashcardFile.createSampleFile(sampleData, 'sample_cards.xlsx')
   }
 
   const defaultColumn = useMemo(() => {
