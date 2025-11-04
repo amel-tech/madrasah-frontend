@@ -27,6 +27,7 @@ function ATFormGroupTextArea<T extends FieldValues = FieldValues>({
   control,
   inputClassName = "",
   onChange,
+  ...rest
 }: IATFormGroupTextAreaProps<T>) {
   return (
     <FormField
@@ -48,6 +49,7 @@ function ATFormGroupTextArea<T extends FieldValues = FieldValues>({
             className={`${inputClassName} ${error ? "border-red-500 focus-visible:border-red-500" : ""}`}
             {...field}
             {...(onChange && { onChange: onChange })}
+            {...rest}
           />
           {error && (<small className="text-red-500 text-xs">{error.message}</small>)}
         </FormItem>

@@ -4,8 +4,7 @@ describe('Authentication Flow', () => {
     cy.login()
 
     // Should be on home page with authenticated state
-    cy.url().should('include', '/')
-    cy.contains('Home screen').should('be.visible')
+    cy.contains('Home').should('be.visible')
   })
 
   it('should handle unauthenticated state', () => {

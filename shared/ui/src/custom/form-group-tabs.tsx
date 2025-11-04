@@ -27,6 +27,7 @@ function ATFormGroupTabs<T extends FieldValues = FieldValues>({
   control,
   tabs,
   required,
+  ...rest
 }: IATFormGroupProps<T>) {
   return (
     <FormField
@@ -48,6 +49,7 @@ function ATFormGroupTabs<T extends FieldValues = FieldValues>({
               field.onChange(opt)
             }}
             className="w-[400px]"
+            {...rest}
           >
             <TabsList>
               {tabs.map(tab => (

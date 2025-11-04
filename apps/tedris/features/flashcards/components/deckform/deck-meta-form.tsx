@@ -20,6 +20,7 @@ export default function DeckMetaForm({ control }: IDeckMetaFormProps) {
         placeholder="Deck Name"
         required
         control={control}
+        data-testid="deck-title-input"
       />
       <ATFormGroupTextArea
         name="description"
@@ -27,6 +28,7 @@ export default function DeckMetaForm({ control }: IDeckMetaFormProps) {
         placeholder="Description"
         control={control}
         required
+        data-testid="deck-description-input"
       />
       <ATFormGroupTagsInput
         name="tagIds"

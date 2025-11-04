@@ -43,8 +43,8 @@ export default function CreateDeckButtonDialog() {
 
       if (response) {
         toastHelper.success({
-          title: 'Card Created',
-          description: 'Flashcard was created successfully.',
+          title: 'Deck Created',
+          description: 'Deck created successfully.',
         })
 
         router.push(`/cards/decks/${id}/cards`)
@@ -70,12 +70,12 @@ export default function CreateDeckButtonDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="default" size="sm" className="text-white">
+        <Button variant="default" size="sm" className="text-white" data-testid="create-deck-button">
           <PlusIcon weight="bold" />
           create new deck
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[620px]">
+      <DialogContent className="sm:max-w-[620px]" data-testid="create-deck-dialog">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <DialogHeader className="mb-6">
@@ -86,7 +86,7 @@ export default function CreateDeckButtonDialog() {
               <DialogClose asChild>
                 <Button variant="outline">Cancel</Button>
               </DialogClose>
-              <Button type="submit">Create Deck</Button>
+              <Button type="submit" data-testid="save-deck-button">Create Deck</Button>
             </DialogFooter>
           </form>
         </Form>

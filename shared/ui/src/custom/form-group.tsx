@@ -24,6 +24,7 @@ function ATFormGroup<T extends FieldValues = FieldValues>({
   control,
   required,
   onChange,
+  ...rest
 }: IATFormGroupProps<T>) {
   return (
     <FormField
@@ -44,12 +45,12 @@ function ATFormGroup<T extends FieldValues = FieldValues>({
             {...field}
             className={error ? "border-red-500 focus-visible:border-red-500" : ""}
             {...(onChange && { onChange: onChange })}
+            {...rest}
           />
           {error && (<small className="text-red-500 text-xs">{error.message}</small>)}
         </FormItem>
       )}
     />
-
   )
 }
 
