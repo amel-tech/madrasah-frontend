@@ -9,7 +9,9 @@
     "start": "next start --port 3001",
     "clean": "rm -rf .turbo .next node_modules dist",
     "lint": "next lint",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "test:e2e": "cypress run",
+    "test:e2e:open": "cypress open"
   },
   "dependencies": {
     "@madrasah/i18n": "*",

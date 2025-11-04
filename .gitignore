@@ -24,6 +24,12 @@ coverage/
 .nyc_output/
 *.lcov
 
+# Cypress
+**/cypress/screenshots/
+**/cypress/videos/
+**/cypress/downloads/
+**/cypress/fixtures/examples.json
+
 # Environment files
 .env
 .env.local
