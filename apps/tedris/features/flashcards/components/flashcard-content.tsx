@@ -11,6 +11,8 @@ import { useFlashCards } from '../hooks/useFlashCards'
 import FlashCardComponent from './flashcard'
 import { FlashcardResponse } from '@madrasah/services/tedrisat'
 import { Button } from '@madrasah/ui/components/button'
+import '@fontsource/scheherazade-new/400.css'
+import '@fontsource/scheherazade-new/700.css'
 
 export default function FlashCardContent(card: FlashcardResponse) {
   const [flipped, setFlipped] = useState(false)
@@ -96,16 +98,22 @@ export default function FlashCardContent(card: FlashcardResponse) {
           }}
         >
           <FlashCardComponent className="mx-auto">
-            {/* TODO: is this needed? */}
             <Header title="Card" />
-            <p className="whitespace-pre-wrap break-words text-lg text-gray-400 sm:text-xl">
+            <p
+              className="whitespace-pre-wrap break-words text-lg text-gray-400 sm:text-xl"
+              style={{
+                fontFamily: '\'Scheherazade New\', serif',
+                direction: 'rtl',
+                textAlign: 'right',
+              }}
+            >
               {data.contentFront}
             </p>
+
             <CardActions
               onFlip={handleCardFlip}
               memorized={memorized}
               onToggleMemorized={() => toggleMemorized({ id: data.id, type: data.type })}
-
             />
           </FlashCardComponent>
         </div>
@@ -122,7 +130,12 @@ export default function FlashCardContent(card: FlashcardResponse) {
         >
           <FlashCardComponent className="mx-auto">
             <Header title="Card" />
-            <p className="text-primary whitespace-pre-wrap break-words text-md font-semibold sm:text-lg">
+            <p
+              className="text-primary whitespace-pre-wrap break-words text-md font-semibold sm:text-lg"
+              style={{
+                color: '#0C4A6E',
+              }}
+            >
               {data.contentBack}
             </p>
             <CardActions

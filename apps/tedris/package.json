@@ -15,6 +15,7 @@
     "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
+    "@fontsource/scheherazade-new": "^5.2.8",
     "@hookform/resolvers": "^5.2.2",
     "@madrasah/hooks": "*",
     "@madrasah/i18n": "*",
