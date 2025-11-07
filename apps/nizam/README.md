@@ -30,7 +30,7 @@ cp env.sample .env.local
 npm run dev
 ```
 
-Open [http://localhost:3001](http://localhost:3001) with your browser to see the result.
+Open [http://localhost:4001](http://localhost:4001) with your browser to see the result.
 
 
 ## 🌍 Internationalization (i18n)
