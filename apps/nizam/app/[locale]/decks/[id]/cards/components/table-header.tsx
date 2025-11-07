@@ -8,6 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@madrasah/ui/components/dropdown-menu'
+import { useTranslations } from 'next-intl'
 
 export const TableHeader = ({
   title,
@@ -20,6 +21,7 @@ export const TableHeader = ({
   onDeckFileImport: (file: File) => void
   onClickDownloadSampleFile: () => void
 }) => {
+  const t = useTranslations('nizam.DeckCardsPage')
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const handleUploadClick = () => {
@@ -51,24 +53,24 @@ export const TableHeader = ({
         <DropdownMenu modal>
           <DropdownMenuTrigger asChild>
             <Button variant="outline">
-              Bulk Actions
+              {t('bulkActions')}
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-60">
             <DropdownMenuItem onClick={handleUploadClick}>
               <UploadIcon />
               {' '}
-              Import from Excel
+              {t('importFromExcel')}
             </DropdownMenuItem>
             <DropdownMenuItem onClick={onClickDownloadSampleFile} disabled>
               <DownloadIcon />
               {' '}
-              Download as Excel
+              {t('downloadAsExcel')}
             </DropdownMenuItem>
             <DropdownMenuItem onClick={onClickDownloadSampleFile}>
               <DownloadIcon />
               {' '}
-              Download Sample File
+              {t('downloadSampleFile')}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

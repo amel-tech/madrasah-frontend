@@ -13,8 +13,8 @@ import { routing } from '~/lib/i18n/routing'
 import { setRequestLocale } from 'next-intl/server'
 
 export const metadata: Metadata = {
-  title: 'Madrasah - Online Medrese',
-  description: 'Online Medrese Projesi',
+  title: 'Tedris - Online Madrasah',
+  description: 'Online Madrasah Project',
 }
 
 export default async function LocaleLayout({

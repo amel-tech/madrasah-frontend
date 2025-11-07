@@ -1,8 +1,66 @@
 {
+  "HomePage": {
+    "greeting": "السلام عليكم!"
+  },
   "DecksPage": {
+    "title": "مجموعات البطاقات التعليمية",
+    "description": "إدارة مجموعات البطاقات التعليمية ومواد الدراسة الخاصة بك.",
+    "newDeckButton": "مجموعة جديدة",
+    "Dialog": {
+      "title": "إنشاء مجموعة جديدة",
+      "description": "إنشاء مجموعة بطاقات تعليمية جديدة لتنظيم مواد الدراسة الخاصة بك.",
+      "titleLabel": "العنوان *",
+      "titlePlaceholder": "أدخل عنوان المجموعة...",
+      "descriptionLabel": "الوصف",
+      "descriptionPlaceholder": "أدخل وصف المجموعة...",
+      "publicLabel": "اجعل هذه المجموعة عامة",
+      "cancelButton": "إلغاء",
+      "creatingButton": "جاري الإنشاء...",
+      "createButton": "إنشاء المجموعة"
+    },
+    "Toast": {
+      "validationError": "خطأ في التحقق",
+      "titleRequired": "عنوان المجموعة مطلوب.",
+      "deckCreated": "تم إنشاء المجموعة",
+      "deckCreatedSuccess": "تم إنشاء مجموعة البطاقات التعليمية الجديدة بنجاح.",
+      "creationFailed": "فشل الإنشاء",
+      "creationFailedMessage": "فشل إنشاء المجموعة. يرجى المحاولة مرة أخرى.",
+      "creationError": "خطأ في الإنشاء",
+      "creationErrorMessage": "حدث خطأ غير متوقع أثناء إنشاء المجموعة."
+    },
     "Table": {
-      "descriptionColumn": "وصف",
+      "descriptionColumn": "الوصف",
       "titleColumn": "العنوان"
+    }
+  },
+  "DeckCardsPage": {
+    "bulkActions": "إجراءات جماعية",
+    "importFromExcel": "استيراد من Excel",
+    "downloadAsExcel": "تنزيل كـ Excel",
+    "downloadSampleFile": "تنزيل ملف نموذجي",
+    "Columns": {
+      "frontFace": "الوجه الأمامي",
+      "backFace": "الوجه الخلفي",
+      "frontPlaceholder": "أدخل المحتوى الأمامي...",
+      "backPlaceholder": "أدخل المحتوى الخلفي...",
+      "cancelButton": "إلغاء",
+      "deleteButton": "حذف"
+    },
+    "Toast": {
+      "cardUpdated": "تم تحديث البطاقة",
+      "cardUpdatedSuccess": "تم تحديث البطاقة بنجاح.",
+      "updateError": "خطأ في التحديث",
+      "updateErrorMessage": "فشل تحديث البطاقة.",
+      "cardsImported": "تم استيراد البطاقات",
+      "cardsImportedSuccess": "تم استيراد {{count}} بطاقة بنجاح.",
+      "cardDeleted": "تم حذف البطاقة",
+      "cardDeletedSuccess": "تم حذف البطاقة ذات الرقم {{id}}.",
+      "deleteError": "خطأ في الحذف",
+      "deleteErrorMessage": "فشل حذف البطاقة."
+    },
+    "SampleFile": {
+      "frontWord": "كلمة أمامية {{index}}",
+      "backWord": "كلمة خلفية {{index}}"
     }
   }
 }

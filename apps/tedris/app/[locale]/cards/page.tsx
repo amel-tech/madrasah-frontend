@@ -12,6 +12,7 @@ import {
   type FlashcardTagResponse,
 } from '@madrasah/services/tedrisat'
 import CreateDeckButtonDialog from '~/features/flashcards/components/deckform/create-deck-button-dialog'
+import { getTranslations } from 'next-intl/server'
 
 async function getDecks(): Promise<FlashcardDeckResponse[]> {
   try {
@@ -59,18 +60,20 @@ export default async function Page() {
     getTags(),
   ])
 
+  const t = await getTranslations('tedris')
+
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
           <Button variant="default" size="sm" className="mr-2">
-            all
+            {t('CardsPage.filterAll')}
           </Button>
           <Button variant="secondary" size="sm" className="mr-2">
-            public
+            {t('CardsPage.filterPublic')}
           </Button>
           <Button variant="secondary" size="sm" className="mr-2">
-            private
+            {t('CardsPage.filterPrivate')}
           </Button>
         </div>
         <CreateDeckButtonDialog />
@@ -86,8 +89,8 @@ export default async function Page() {
         ))}
       </div>
       <div className="flex items-center justify-between mb-4">
-        <h1 className="text-xl font-semibold">explore</h1>
-        <p className="text-sm">see all</p>
+        <h1 className="text-xl font-semibold">{t('CardsPage.exploreTitle')}</h1>
+        <p className="text-sm">{t('CardsPage.seeAll')}</p>
       </div>
       <div className="mb-6">
         {tags.map((tag, index) => (

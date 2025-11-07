@@ -1,8 +1,66 @@
 {
+  "HomePage": {
+    "greeting": "Assalamu alaikum!"
+  },
   "DecksPage": {
+    "title": "Flashcard Decks",
+    "description": "Manage your flashcard decks and study materials.",
+    "newDeckButton": "New Deck",
+    "Dialog": {
+      "title": "Create New Deck",
+      "description": "Create a new flashcard deck to organize your study materials.",
+      "titleLabel": "Title *",
+      "titlePlaceholder": "Enter deck title...",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Enter deck description...",
+      "publicLabel": "Make this deck public",
+      "cancelButton": "Cancel",
+      "creatingButton": "Creating...",
+      "createButton": "Create Deck"
+    },
+    "Toast": {
+      "validationError": "Validation Error",
+      "titleRequired": "Deck title is required.",
+      "deckCreated": "Deck Created",
+      "deckCreatedSuccess": "New flashcard deck was created successfully.",
+      "creationFailed": "Creation Failed",
+      "creationFailedMessage": "Failed to create the deck. Please try again.",
+      "creationError": "Creation Error",
+      "creationErrorMessage": "An unexpected error occurred while creating the deck."
+    },
     "Table": {
       "descriptionColumn": "Description",
       "titleColumn": "Title"
+    }
+  },
+  "DeckCardsPage": {
+    "bulkActions": "Bulk Actions",
+    "importFromExcel": "Import from Excel",
+    "downloadAsExcel": "Download as Excel",
+    "downloadSampleFile": "Download Sample File",
+    "Columns": {
+      "frontFace": "Front Face",
+      "backFace": "Back Face",
+      "frontPlaceholder": "Enter front content...",
+      "backPlaceholder": "Enter back content...",
+      "cancelButton": "Cancel",
+      "deleteButton": "Delete"
+    },
+    "Toast": {
+      "cardUpdated": "Card Updated",
+      "cardUpdatedSuccess": "Card updated successfully.",
+      "updateError": "Update Error",
+      "updateErrorMessage": "Failed to update the flashcard.",
+      "cardsImported": "Cards Imported",
+      "cardsImportedSuccess": "{{count}} cards were imported successfully.",
+      "cardDeleted": "Card Deleted",
+      "cardDeletedSuccess": "Card with ID {{id}} was deleted.",
+      "deleteError": "Delete Error",
+      "deleteErrorMessage": "Failed to delete the flashcard."
+    },
+    "SampleFile": {
+      "frontWord": "Front word {{index}}",
+      "backWord": "Back word {{index}}"
     }
   }
 }

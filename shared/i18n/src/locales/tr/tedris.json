@@ -3,5 +3,18 @@
     "decks": "Desteler",
     "home": "Ana Sayfa",
     "learning": "Öğrenme"
+  },
+  "CardsPage": {
+    "filterAll": "tümü",
+    "filterPublic": "herkese açık",
+    "filterPrivate": "özel",
+    "exploreTitle": "keşfet",
+    "seeAll": "tümünü gör"
+  },
+  "HomePage": {
+    "title": "Ana ekran"
+  },
+  "Metadata": {
+    "description": "Çevrimiçi Medrese Projesi"
   }
 }

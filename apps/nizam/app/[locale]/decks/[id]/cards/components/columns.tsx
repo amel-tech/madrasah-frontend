@@ -15,22 +15,25 @@ import {
 } from '@madrasah/ui/components/alert-dialog'
 import { TrashIcon } from '@madrasah/icons'
 import { Button } from '@madrasah/ui/components/button'
+import { useTranslations } from 'next-intl'
 
 export function useFlashcardColumns() {
+  const t = useTranslations('nizam.DeckCardsPage.Columns')
+
   return React.useMemo<ColumnDef<FlashcardResponse>[]>(() => [
     createTextareaColumn(
       'contentFront',
-      { header: 'Front Face' },
+      { header: t('frontFace') },
       {
-        placeholder: 'Enter front content...',
+        placeholder: t('frontPlaceholder'),
         className: '!text-lg',
       },
     ),
     createTextareaColumn(
       'contentBack',
-      { header: 'Back Face' },
+      { header: t('backFace') },
       {
-        placeholder: 'Enter back content...',
+        placeholder: t('backPlaceholder'),
         className: 'font-light text-sm',
       },
     ),
@@ -55,12 +58,12 @@ export function useFlashcardColumns() {
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogCancel>{t('cancelButton')}</AlertDialogCancel>
                 <AlertDialogAction onClick={
                   () => table.options.meta?.onRowDelete?.(row.original.id)
                 }
                 >
-                  Delete
+                  {t('deleteButton')}
                 </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
@@ -70,5 +73,5 @@ export function useFlashcardColumns() {
       enableSorting: false,
       enableColumnFilter: false,
     },
-  ], [])
+  ], [t])
 }
