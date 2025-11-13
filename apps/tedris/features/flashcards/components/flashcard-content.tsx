@@ -11,8 +11,6 @@ import { useFlashCards } from '../hooks/useFlashCards'
 import FlashCardComponent from './flashcard'
 import { FlashcardResponse } from '@madrasah/services/tedrisat'
 import { Button } from '@madrasah/ui/components/button'
-import '@fontsource/scheherazade-new/400.css'
-import '@fontsource/scheherazade-new/700.css'
 
 export default function FlashCardContent(card: FlashcardResponse) {
   const [flipped, setFlipped] = useState(false)
@@ -99,14 +97,7 @@ export default function FlashCardContent(card: FlashcardResponse) {
         >
           <FlashCardComponent className="mx-auto">
             <Header title="Card" />
-            <p
-              className="whitespace-pre-wrap break-words text-lg text-gray-400 sm:text-xl"
-              style={{
-                fontFamily: '\'Scheherazade New\', serif',
-                direction: 'rtl',
-                textAlign: 'right',
-              }}
-            >
+            <p className="font-scheherazade whitespace-pre-wrap break-words text-xl text-gray-500">
               {data.contentFront}
             </p>
 
