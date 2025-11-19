@@ -13,6 +13,8 @@ const authOptions: AuthOptions = {
   ],
   callbacks: {
     async jwt({ token, account }) {
+      console.log('token: ', token)
+      console.log('account: ', account)
       if (account) {
         token.accessToken = account.access_token
         token.idToken = account.id_token
@@ -20,6 +22,8 @@ const authOptions: AuthOptions = {
       return token
     },
     async session({ session, token }) {
+      console.log('session: ', session)
+      console.log('token: ', token)
       session.accessToken = token.accessToken
       session.idToken = token.idToken as string
       return session

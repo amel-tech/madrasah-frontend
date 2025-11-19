@@ -32,12 +32,12 @@ export function createTedrisatAPIs(config: TedrisatAPIConfig) {
 }
 
 /**
- * Convenience function for server-side usage with cookies
+ * Convenience function for server-side usage with token
  */
 export async function createServerTedrisatAPIs(
-  cookieStore: any,
+  token: string | undefined,
   baseUrl: string,
 ) {
-  const token = cookieStore.get('next-auth.session-token')?.value
+  console.log(token)
   return createTedrisatAPIs({ baseUrl, token })
 }
