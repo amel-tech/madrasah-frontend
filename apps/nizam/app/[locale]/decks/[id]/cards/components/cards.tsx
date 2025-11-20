@@ -79,8 +79,6 @@ export default function DeckCards({
       authorId: 1,
     }))
 
-    console.log(cardsToImport)
-
     await createFlashcards(Number(deck.id), cardsToImport)
     toastHelper.success({ title: 'Cards Imported', description: `${cardsToImport.length} cards were imported successfully.` })
   }

@@ -38,6 +38,5 @@ export async function createServerTedrisatAPIs(
   token: string | undefined,
   baseUrl: string,
 ) {
-  console.log(token)
   return createTedrisatAPIs({ baseUrl, token })
 }

@@ -10,7 +10,6 @@ export default async function DeckCardsPage() {
 
   const { decks } = await createServerTedrisatAPIs(token, env.TEDRISAT_API_BASE_URL)
   const result = await decks.getAllFlashcardDecks()
-  console.log(result)
 
   return <Decks decks={result} />
 }
