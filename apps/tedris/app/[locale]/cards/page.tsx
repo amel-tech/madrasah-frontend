@@ -11,12 +11,11 @@ import {
   type FlashcardTagResponse,
 } from '@madrasah/services/tedrisat'
 import CreateDeckButtonDialog from '~/features/flashcards/components/deckform/create-deck-button-dialog'
-import { getServerSession } from 'next-auth'
-import authOptions from '~/lib/auth_options'
+import { auth } from '~/lib/auth_options'
 
 async function getDecks(): Promise<FlashcardDeckResponse[]> {
   try {
-    const session = await getServerSession(authOptions)
+    const session = await auth()
     const token = session?.accessToken
 
     const { decks } = await createServerTedrisatAPIs(token, env.TEDRISAT_API_BASE_URL)
@@ -34,7 +33,7 @@ async function getDecks(): Promise<FlashcardDeckResponse[]> {
 async function getTags(): Promise<FlashcardTagResponse[]> {
   try {
     // Extract tags from decks (since there's no dedicated tags endpoint)
-    const session = await getServerSession(authOptions)
+    const session = await auth()
     const token = session?.accessToken
 
     const { decks } = await createServerTedrisatAPIs(token, env.TEDRISAT_API_BASE_URL)

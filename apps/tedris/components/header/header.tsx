@@ -1,13 +1,13 @@
-import { getServerSession } from 'next-auth'
 import KeycloakLogin from '~/features/keycloak/login'
-import authOptions from '~/lib/auth_options'
+import { auth } from '~/lib/auth_options'
 import { MadrasahLogoIcon } from '@madrasah/icons/ssr'
 import { Input } from '@madrasah/ui/components/input'
 import { UserHeaderMenu } from './user-header-menu'
 import { UserNotifications } from './user-notification-menu'
 import LocaleSwitcher from '../i18n/locale-switcher'
+
 export const Header = async () => {
-  const session = await getServerSession(authOptions)
+  const session = await auth()
 
   return (
     <header className="flex justify-between items-center container mx-auto py-8">

@@ -1,4 +1,5 @@
-import { AuthOptions } from 'next-auth'
+import { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from 'next'
+import { AuthOptions, getServerSession } from 'next-auth'
 import { JWT } from 'next-auth/jwt'
 import KeycloakProvider from 'next-auth/providers/keycloak'
 import { env } from '~/env'
@@ -89,3 +90,12 @@ const authOptions: AuthOptions = {
   },
 }
 export default authOptions
+
+export function auth(
+  ...args:
+    | [GetServerSidePropsContext['req'], GetServerSidePropsContext['res']]
+    | [NextApiRequest, NextApiResponse]
+    | []
+) {
+  return getServerSession(...args, authOptions)
+}

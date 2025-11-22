@@ -50,11 +50,10 @@ const deck = await decks.getFlashcardDeckById({
 
 ```typescript
 import { createServerTedrisatAPIs } from '@madrasah/services/tedrisat'
-import { getServerSession } from 'next-auth'
-import authOptions from '~/lib/auth_options'
+import { auth } from '~/lib/auth_options'
 
 // In server components or API routes
-const session = await getServerSession(authOptions)
+const session = await auth()
 const { decks } = await createServerTedrisatAPIs(session?.accessToken, env.TEDRISAT_API_BASE_URL)
 
 const decks = await decks.getAllFlashcardDecks()

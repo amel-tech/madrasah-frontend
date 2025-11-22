@@ -3,11 +3,10 @@
 import { createServerTedrisatAPIs, CreateFlashcardDeckDto } from '@madrasah/services/tedrisat'
 import { env } from '~/env'
 import { revalidatePath } from 'next/cache'
-import { getServerSession } from 'next-auth'
-import authOptions from '~/lib/auth_options'
+import { auth } from '~/lib/auth_options'
 
 export const createFlashcardDeck = async (deckData: CreateFlashcardDeckDto) => {
-  const session = await getServerSession(authOptions)
+  const session = await auth()
 
   const { decks } = await createServerTedrisatAPIs(session?.accessToken, env.TEDRISAT_API_BASE_URL)
 
@@ -30,7 +29,7 @@ export const updateFlashcardDeck = async (deckId: number, updatedDeck: {
   title?: string
   description?: string
 }) => {
-  const session = await getServerSession(authOptions)
+  const session = await auth()
   const { decks } = await createServerTedrisatAPIs(session?.accessToken, env.TEDRISAT_API_BASE_URL)
 
   try {
@@ -53,7 +52,7 @@ export const updateFlashcardDeck = async (deckId: number, updatedDeck: {
 }
 
 export const deleteFlashcardDeck = async (deckId: number) => {
-  const session = await getServerSession(authOptions)
+  const session = await auth()
   const { decks } = await createServerTedrisatAPIs(session?.accessToken, env.TEDRISAT_API_BASE_URL)
 
   try {
