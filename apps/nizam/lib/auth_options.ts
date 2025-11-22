@@ -14,7 +14,12 @@ import { env } from '~/env'
  */
 const refreshAccessToken = async (token: JWT) => {
   try {
-    if (Date.now() > token.refreshTokenExpireIn) throw Error
+    if (Date.now() > token.refreshTokenExpireIn) {
+      return {
+        ...token,
+        error: 'RefreshTokenExpired',
+      }
+    }
 
     const url = `${env.KEYCLOAK_ISSUER}/protocol/openid-connect/token`
 
@@ -46,7 +51,7 @@ const refreshAccessToken = async (token: JWT) => {
   }
   catch (error) {
     // TODO: log this to monitoring service
-    console.log('refreshToken error: ', error)
+    console.log(error)
 
     return {
       ...token,
