@@ -15,9 +15,9 @@ const authMiddleware = withAuth(
   },
   {
     callbacks: {
-      authorized: (data) => {
+      authorized: ({ token }) => {
         // console.log('Auth middleware - authorized callback:', data)
-        return data.token !== null
+        return token !== null && !token.error
       },
     },
   },
