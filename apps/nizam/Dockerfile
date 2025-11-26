@@ -22,7 +22,7 @@ RUN npm run build -- --filter=nizam-web...
 
 WORKDIR /app/apps/nizam
 
-# Expose the port (Next.js default is 4000)
+# Expose the port (Next.js default is 4001)
 EXPOSE 4001
 
 # Start the production server
