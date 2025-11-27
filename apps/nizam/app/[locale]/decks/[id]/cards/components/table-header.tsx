@@ -28,7 +28,6 @@ export const TableHeader = ({
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
-    console.log(file)
     if (file) {
       onDeckFileImport(file)
       e.target.value = '' // reset input so same file can be uploaded again

@@ -2,7 +2,7 @@ import DeckCards from './components/cards'
 
 import { createServerTedrisatAPIs } from '@madrasah/services/tedrisat'
 import { env } from '~/env'
-import { cookies } from 'next/headers'
+import { auth } from '~/lib/auth_options'
 
 export default async function DeckCardsPage({
   params,
@@ -13,8 +13,10 @@ export default async function DeckCardsPage({
 }) {
   const { id } = await params
 
-  const cookieStore = await cookies()
-  const { decks } = await createServerTedrisatAPIs(cookieStore, env.TEDRISAT_API_BASE_URL)
+  const session = await auth()
+  const token = session?.accessToken
+
+  const { decks } = await createServerTedrisatAPIs(token, env.TEDRISAT_API_BASE_URL)
 
   const result = await decks.getFlashcardDeckWithCards({ id: Number(id) })
 
