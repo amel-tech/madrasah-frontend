@@ -1,5 +1,29 @@
 # Changelog
 
+## [1.4.0](https://github.com/amel-tech/madrasah-frontend/compare/tedris-web-v1.3.0...tedris-web-v1.4.0) (2025-12-06)
+
+
+### Features
+
+* added uthman font ([091232b](https://github.com/amel-tech/madrasah-frontend/commit/091232b88ac0ebf2a4ba9d7996a50aa573acd516))
+* added uthman font ([fb7488e](https://github.com/amel-tech/madrasah-frontend/commit/fb7488e3291ca25b9b74260f77523a7a9d71d36f))
+* **authentication:** add refresh token rotation ([efd21b6](https://github.com/amel-tech/madrasah-frontend/commit/efd21b6f53860bbb038e9fe5f4cf486d600e950d))
+* **authentication:** add route protection and redirect if not authenticated ([5d08bea](https://github.com/amel-tech/madrasah-frontend/commit/5d08bea98f5edb588db7babbdc9358e8e68bf38a))
+* **authentication:** add route protection and redirect if not authenticated on tedris ([019dea2](https://github.com/amel-tech/madrasah-frontend/commit/019dea224aef656eaabdf11431d7be7314ca4f20))
+* **authentication:** simplify, session obtaining by a helper func ([71bc996](https://github.com/amel-tech/madrasah-frontend/commit/71bc996ad32c3e639599ab117f027d6d4d993d26))
+* creating i18n package ([8664c1d](https://github.com/amel-tech/madrasah-frontend/commit/8664c1dba4bc9b691304696891a9c5eba1850d68))
+* **i18n:** implement internationalization and routing for the tedris application ([1d5897c](https://github.com/amel-tech/madrasah-frontend/commit/1d5897c0b82f30c2b8a260ca3b7fd8b06ff3a898))
+* **i18n:** integrate NextIntlClientProvider into layout components ([17df792](https://github.com/amel-tech/madrasah-frontend/commit/17df7924e15a8803f7b5c9498791a261cac34f81))
+* implementing next-intl package on nizam ([ebe3922](https://github.com/amel-tech/madrasah-frontend/commit/ebe392294eb9b51de3f07cf410d1630ff546347d))
+* implementing next-intl package on tedris ([37d8790](https://github.com/amel-tech/madrasah-frontend/commit/37d8790ef636e42cca73a5a6d12a21f64a4a1452))
+
+
+### Bug Fixes
+
+* **authentication:** use session.accesToken instead of session-token, which was jwe token ([5d7d556](https://github.com/amel-tech/madrasah-frontend/commit/5d7d556b601793f51b5cc12e2c9d6e9aad0cbd74))
+* **authentication:** use session.accesToken instead of session-token,… ([7d40a3f](https://github.com/amel-tech/madrasah-frontend/commit/7d40a3f1d55accd1e30dc963c26add318faaf58d))
+* update local urls and expose new ports for nazar, nizam, and tedris applications ([cd87b5f](https://github.com/amel-tech/madrasah-frontend/commit/cd87b5ff5e1a1491a1486324e20b2a8af89a0869))
+
 ## [1.3.0](https://github.com/amel-tech/madrasah-frontend/compare/tedris-web-v1.2.0...tedris-web-v1.3.0) (2025-10-30)
 
 
