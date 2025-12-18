@@ -6,3 +6,12 @@
   --font-scheherazade: 'Scheherazade New', serif;
 }
  
+
+
+@font-face {
+  font-family: "UthmanNaskh";
+  src: url("/apps/tedris/public/fonts/uthman/uthman.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

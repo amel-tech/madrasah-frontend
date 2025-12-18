@@ -1,12 +1,14 @@
 import Link from 'next/link'
-import { cookies } from 'next/headers'
 
 import { env } from '~/env'
 import { createServerTedrisatAPIs, FlashcardResponse } from '@madrasah/services/tedrisat'
+import { auth } from '~/lib/auth_options'
 
 async function getCard(cardId: number): Promise<FlashcardResponse> {
-  const cookieStore = await cookies()
-  const { cards } = await createServerTedrisatAPIs(cookieStore, env.TEDRISAT_API_BASE_URL)
+  const session = await auth()
+  const token = session?.accessToken
+
+  const { cards } = await createServerTedrisatAPIs(token, env.TEDRISAT_API_BASE_URL)
 
   return cards.getFlashcardById({ id: cardId })
 }
