@@ -1,7 +1,7 @@
 'use client'
 
 import { signOut, useSession } from 'next-auth/react'
-import { BookIcon, CaretDownIcon, CircleNotchIcon, GearIcon, GlobeIcon, QuestionIcon, SignOutIcon, UserIcon } from '@madrasah/icons'
+import { BookIcon, CaretDownIcon, CircleNotchIcon, GearIcon, QuestionIcon, SignOutIcon, UserIcon } from '@madrasah/icons'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -51,12 +51,6 @@ export const UserHeaderMenu = () => {
           <GearIcon className="text-neutral-primary" />
           <p className="text-neutral-primary text-sm">
             Account Settings
-          </p>
-        </DropdownMenuItem>
-        <DropdownMenuItem disabled>
-          <GlobeIcon className="text-neutral-primary" />
-          <p className="text-neutral-primary text-sm">
-            Language
           </p>
         </DropdownMenuItem>
         <DropdownMenuItem disabled>

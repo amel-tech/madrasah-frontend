@@ -1,0 +1,41 @@
+{
+  "name": "@madrasah/i18n",
+  "private": true,
+  "version": "1.0.0",
+  "description": "i18n for madrasah apps.",
+  "license": "ISC",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -b",
+    "lint": "eslint . --max-warnings 0",
+    "dev": "tsc -b --watch",
+    "lint:fix": "eslint . --max-warnings 0 --fix",
+    "pull": "tolgee pull",
+    "push": "tolgee push",
+    "sync": "tolgee sync",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "dotenv": "^16.5.0"
+  },
+  "devDependencies": {
+    "@tolgee/cli": "^2.10.2",
+    "typescript": "^5.9.2",
+    "eslint": "^9.28.0",
+    "@madrasah/eslint-config": "*",
+    "@madrasah/typescript-config": "*"
+  },
+  "eslintIgnore": [
+    "/node_modules",
+    "/dist"
+  ],
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    }
+  }
+}

@@ -1,14 +1,14 @@
 import { NextResponse } from 'next/server'
-import { cookies } from 'next/headers'
 import { env } from '~/env'
 import { createServerTedrisatAPIs } from '@madrasah/services/tedrisat'
+import { auth } from '~/lib/auth_options'
 
 export async function GET() {
   try {
     // Check if mocking is enabled
     // Direct API usage - no wrapper layers
-    const cookieStore = await cookies()
-    const { decks } = await createServerTedrisatAPIs(cookieStore, env.TEDRISAT_API_BASE_URL)
+    const session = await auth()
+    const { decks } = await createServerTedrisatAPIs(session?.accessToken, env.TEDRISAT_API_BASE_URL)
 
     const result = await decks.getAllFlashcardDecks({
       include: ['tags', 'flashcards'],

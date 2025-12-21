@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.1.4](https://github.com/amel-tech/madrasah-frontend/compare/nazir-web-v0.1.3...nazir-web-v0.1.4) (2025-12-06)
+
+
+### Features
+
+* added uthman font ([091232b](https://github.com/amel-tech/madrasah-frontend/commit/091232b88ac0ebf2a4ba9d7996a50aa573acd516))
+* added uthman font ([fb7488e](https://github.com/amel-tech/madrasah-frontend/commit/fb7488e3291ca25b9b74260f77523a7a9d71d36f))
+
+
+### Bug Fixes
+
+* update local urls and expose new ports for nazar, nizam, and ted… ([5f6b16f](https://github.com/amel-tech/madrasah-frontend/commit/5f6b16f414151d72455e2be935cf64ec811e449a))
+* update local urls and expose new ports for nazar, nizam, and tedris applications ([cd87b5f](https://github.com/amel-tech/madrasah-frontend/commit/cd87b5ff5e1a1491a1486324e20b2a8af89a0869))
+
 ## [0.1.3](https://github.com/amel-tech/madrasah-frontend/compare/nazir-web-v0.1.2...nazir-web-v0.1.3) (2025-10-16)
 
 

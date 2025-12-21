@@ -1,0 +1,13 @@
+{
+  "extends": "@madrasah/typescript-config/base",
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleDetection": "force",
+    "moduleResolution": "Bundler",
+    "lib": ["ESNext", "DOM"],
+    "outDir": "./dist",
+    "isolatedModules": false
+  },
+  "include": ["src/**/*", "src/**/*.json"],
+  "exclude": ["node_modules"]
+}

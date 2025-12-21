@@ -1,12 +1,12 @@
 {
   "name": "tedris-web",
-  "version": "1.2.0",
+  "version": "1.4.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev --port 3000",
+    "dev": "next dev --port 4000",
     "build": "next build",
-    "start": "next start --port 3000",
+    "start": "next start --port 4000",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "clean": "rm -rf .turbo .next node_modules dist",
@@ -15,7 +15,9 @@
     "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
     "@madrasah/hooks": "*",
+    "@madrasah/i18n": "*",
     "@madrasah/icons": "*",
     "@madrasah/tokens": "*",
     "@madrasah/types": "*",
@@ -32,6 +34,7 @@
     "next-auth": "^4.24.11",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-hook-form": "^7.65.0",
     "tailwind-merge": "^1.14.0",
     "tailwindcss": "^4.1.11",
     "tailwindcss-animate": "^1.0.7",
@@ -40,7 +43,6 @@
   "devDependencies": {
     "@madrasah/eslint-config": "*",
     "@madrasah/mocks": "*",
-    "@madrasah/msw": "*",
     "@madrasah/services": "*",
     "@tailwindcss/postcss": "^4.1.12",
     "@types/node": "^24",
@@ -50,7 +52,7 @@
     "eslint": "^9.33.0",
     "eslint-config-next": "^15.4.6",
     "lightningcss": "^1.30.1",
-    "msw": "^2.10.5",
+    "next-intl": "^4.4.0",
     "postcss": "^8",
     "typescript": "^5"
   }

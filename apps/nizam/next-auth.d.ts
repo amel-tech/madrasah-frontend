@@ -54,6 +54,7 @@ declare module 'next-auth' {
     'idToken': string
     'access_token': string
     'expires_in': number
+    'expires_at': number
     'refresh_expires_in': number
     'refresh_token': string
     'token_type': string
@@ -82,13 +83,9 @@ declare module 'next-auth/jwt' {
     name: string
     email: string
     sub: string
-    name: string
-    email: string
-    sub: string
-    accessToken: string
     refreshToken: string
     accessTokenExpired: number
-    refreshTokenExpired: number
+    refreshTokenExpireIn: number
     user: User
     error: string
     accessToken?: string

@@ -1,41 +1,55 @@
 import React from "react"
 import { Label } from "../components/label"
 import { Input } from "../components/input"
+import { FieldValues, Path, Control } from "react-hook-form"
+import { FormField, FormItem } from "./form"
 
-interface IATFormGroupProps {
-  id: string
+interface IATFormGroupProps<T extends FieldValues = FieldValues> {
+  name: Path<T>
   label?: string
   wrapperClass?: string
   placeholder?: string
+  required?: boolean
+  control: Control<T>
   type?: string
-  value: string | number
-  onChange: React.ChangeEventHandler<HTMLInputElement>
+  onChange?: React.ChangeEventHandler<HTMLInputElement>
 }
 
-function ATFormGroup({
-  id,
+function ATFormGroup<T extends FieldValues = FieldValues>({
+  name,
   label,
-  wrapperClass = "mb-6",
+  wrapperClass = "mb-4",
   placeholder,
   type = "text",
-  value,
+  control,
+  required,
   onChange,
-}: IATFormGroupProps) {
+}: IATFormGroupProps<T>) {
   return (
-    <div className={wrapperClass}>
-      {label && (
-        <Label htmlFor={id} className="mb-3">
-          {label}
-        </Label>
+    <FormField
+      control={control}
+      name={name}
+      render={({ field, fieldState: { error } }) => (
+        <FormItem className={wrapperClass}>
+          {label && (
+            <Label htmlFor={name as string} className="mb-3">
+              {label}
+              {required && <span className="text-red-500">*</span>}
+            </Label>
+          )}
+          <Input
+            key={name as string}
+            type={type}
+            placeholder={placeholder}
+            {...field}
+            className={error ? "border-red-500 focus-visible:border-red-500" : ""}
+            {...(onChange && { onChange: onChange })}
+          />
+          {error && (<small className="text-red-500 text-xs">{error.message}</small>)}
+        </FormItem>
       )}
-      <Input
-        key={id}
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-      />
-    </div>
+    />
+
   )
 }
 

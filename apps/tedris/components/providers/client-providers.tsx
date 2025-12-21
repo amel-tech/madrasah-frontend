@@ -1,4 +1,5 @@
 'use client'
+
 import { SessionProvider } from 'next-auth/react'
 import { Toaster } from '@madrasah/ui/components/sonner'
 
