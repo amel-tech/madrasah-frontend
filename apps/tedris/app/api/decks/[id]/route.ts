@@ -12,7 +12,7 @@ export async function GET(
     const session = await auth()
     const { decks } = await createServerTedrisatAPIs(session?.accessToken, env.TEDRISAT_API_BASE_URL)
 
-    const result = await decks.getFlashcardDeckById({ id: Number(id) })
+    const result = await decks.getFlashcardDeckById({ id })
     const card = result || null
 
     if (!card) {

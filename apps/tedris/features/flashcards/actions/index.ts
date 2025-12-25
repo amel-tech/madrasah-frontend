@@ -20,7 +20,7 @@ export const createFlashCardDeck = async (createFlashcardDeckDto: CreateFlashcar
   }
 }
 
-export const updateFlashcard = async (cardId: number, updatedCard: {
+export const updateFlashcard = async (cardId: string, updatedCard: {
   contentFront?: string
   contentBack?: string
 }) => {
@@ -44,7 +44,7 @@ export const updateFlashcard = async (cardId: number, updatedCard: {
   }
 }
 
-export const createFlashcards = async (deckId: number, newCards: {
+export const createFlashcards = async (deckId: string, newCards: {
   contentFront: string
   contentBack: string
 }[]) => {
@@ -69,7 +69,7 @@ export const createFlashcards = async (deckId: number, newCards: {
   }
 }
 
-export const deleteFlashcard = async (cardId: number, deckId?: string) => {
+export const deleteFlashcard = async (cardId: string, deckId?: string) => {
   const session = await auth()
   const { cards } = await createServerTedrisatAPIs(session?.accessToken, env.TEDRISAT_API_BASE_URL)
 

@@ -25,7 +25,7 @@ export const createFlashcardDeck = async (deckData: CreateFlashcardDeckDto) => {
   }
 }
 
-export const updateFlashcardDeck = async (deckId: number, updatedDeck: {
+export const updateFlashcardDeck = async (deckId: string, updatedDeck: {
   title?: string
   description?: string
 }) => {
@@ -51,7 +51,7 @@ export const updateFlashcardDeck = async (deckId: number, updatedDeck: {
   }
 }
 
-export const deleteFlashcardDeck = async (deckId: number) => {
+export const deleteFlashcardDeck = async (deckId: string) => {
   const session = await auth()
   const { decks } = await createServerTedrisatAPIs(session?.accessToken, env.TEDRISAT_API_BASE_URL)
 

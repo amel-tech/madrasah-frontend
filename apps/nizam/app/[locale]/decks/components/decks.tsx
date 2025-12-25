@@ -15,7 +15,7 @@ export default function Decks({
 }) {
   const columns = useDecksColumns()
 
-  const handleRowDelete = async (id: number) => {
+  const handleRowDelete = async (id: string) => {
     try {
       const response = await deleteFlashcardDeck(id)
       if (response) {

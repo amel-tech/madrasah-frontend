@@ -8,7 +8,6 @@ import { env } from '~/env'
 import {
   createServerTedrisatAPIs,
   type FlashcardDeckResponse,
-  type FlashcardTagResponse,
 } from '@madrasah/services/tedrisat'
 import CreateDeckButtonDialog from '~/features/flashcards/components/deckform/create-deck-button-dialog'
 import { auth } from '~/lib/auth_options'
@@ -20,9 +19,7 @@ async function getDecks(): Promise<FlashcardDeckResponse[]> {
 
     const { decks } = await createServerTedrisatAPIs(token, env.TEDRISAT_API_BASE_URL)
 
-    return decks.getAllFlashcardDecks({
-      include: ['tags', 'flashcards'],
-    })
+    return decks.getAllFlashcardDecks()
   }
   catch (error) {
     console.error('Error fetching decks:', error)
@@ -30,35 +27,12 @@ async function getDecks(): Promise<FlashcardDeckResponse[]> {
   }
 }
 
-async function getTags(): Promise<FlashcardTagResponse[]> {
-  try {
-    // Extract tags from decks (since there's no dedicated tags endpoint)
-    const session = await auth()
-    const token = session?.accessToken
-
-    const { decks } = await createServerTedrisatAPIs(token, env.TEDRISAT_API_BASE_URL)
-
-    const deckList = await decks.getAllFlashcardDecks({
-      include: ['tags'],
-    })
-
-    // Extract unique tags
-    const allTags = deckList
-      .flatMap(deck => deck.tags || [])
-      .filter((tag, index, self) =>
-        index === self.findIndex(t => t.title === tag.title),
-      )
-
-    return allTags
-  }
-  catch (error) {
-    console.error('Error fetching tags:', error)
-    return []
-  }
+async function getTags(): Promise<[]> {
+  return []
 }
 
 export default async function Page() {
-  const [decks, tags] = await Promise.all([
+  const [decks] = await Promise.all([
     getDecks(),
     getTags(),
   ])
@@ -84,7 +58,7 @@ export default async function Page() {
           <Link href={`/cards/decks/${deck.id}`} key={deck.id}>
             <DeckCard
               title={deck.title}
-              cardCount={deck.flashcards.length}
+              cardCount={0}
             />
           </Link>
         ))}
@@ -92,16 +66,6 @@ export default async function Page() {
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-xl font-semibold">explore</h1>
         <p className="text-sm">see all</p>
-      </div>
-      <div className="mb-6">
-        {tags.map((tag, index) => (
-          <span
-            key={index}
-            className="bg-neutral-300 px-3 py-2 mr-4 text-sm rounded-xs inline-block"
-          >
-            {tag.title}
-          </span>
-        ))}
       </div>
       <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
         {decks?.map(deck => (

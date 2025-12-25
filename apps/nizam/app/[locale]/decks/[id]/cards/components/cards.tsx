@@ -12,7 +12,7 @@ import { useFlashcardColumns } from './columns'
 import { createDefaultColumn } from '~/components/data-table/editable'
 
 type SpreadsheetCardRepresentation = {
-  id: number
+  id: string
   type: FlashcardResponseTypeEnum
   contentFront: string
   contentBack: string
@@ -21,8 +21,10 @@ type SpreadsheetCardRepresentation = {
 
 export default function DeckCards({
   deck,
+  cards,
 }: {
   deck: FlashcardDeckResponse
+  cards: FlashcardResponse[]
 }) {
   const columns = useFlashcardColumns()
 
@@ -71,19 +73,19 @@ export default function DeckCards({
 
     const json = XLSX.utils.sheet_to_json<SpreadsheetCardRepresentation>(worksheet)
     const cardsToImport: FlashcardResponse[] = json.map((row, index) => ({
-      id: index,
+      id: index.toString(),
       type: row.type,
       contentFront: row.contentFront,
       contentBack: row.contentBack,
-      deckId: Number(deck.id),
-      authorId: 1,
+      deckId: deck.id,
+      authorId: '1',
     }))
 
-    await createFlashcards(Number(deck.id), cardsToImport)
+    await createFlashcards(deck.id, cardsToImport)
     toastHelper.success({ title: 'Cards Imported', description: `${cardsToImport.length} cards were imported successfully.` })
   }
 
-  const onRowDelete = async (id: number) => {
+  const onRowDelete = async (id: string) => {
     try {
       // Pass deckId to server action for automatic revalidatePath
       const response = await deleteFlashcard(id, deck.id)
@@ -103,7 +105,7 @@ export default function DeckCards({
   const onClickDownloadSampleFile = async () => {
     const sampleCards: SpreadsheetCardRepresentation[] = Array.from({ length: 5 }).map((_, index) => {
       return {
-        id: index,
+        id: index.toString(),
         type: FlashcardResponseTypeEnum.Vocabulary,
         contentFront: `Front word ${index + 1}`,
         contentBack: `Back word ${index + 1}`,
@@ -132,7 +134,7 @@ export default function DeckCards({
       />
       <DataTable
         columns={columns}
-        data={deck.flashcards || []}
+        data={cards}
         onRowUpdate={onRowUpdate}
         defaultColumn={defaultColumn}
         onRowDelete={onRowDelete}

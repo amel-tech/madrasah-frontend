@@ -51,7 +51,7 @@ export default function DeckCards({
     }
   }
 
-  const onRowDelete = async (id: number) => {
+  const onRowDelete = async (id: string) => {
     try {
       // Pass deckId to server action for automatic revalidatePath
       const response = await deleteFlashcard(id, deckId)

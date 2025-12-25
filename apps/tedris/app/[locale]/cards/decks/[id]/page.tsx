@@ -7,14 +7,11 @@ async function getDeckCards(deckId: string): Promise<FlashcardResponse[]> {
   const session = await auth()
   const token = session?.accessToken
 
-  const { decks } = await createServerTedrisatAPIs(token, env.TEDRISAT_API_BASE_URL)
+  const API = await createServerTedrisatAPIs(token, env.TEDRISAT_API_BASE_URL)
 
-  const deck = await decks.getFlashcardDeckWithCards({
-    id: Number(deckId),
-    include: ['flashcards'],
-  })
+  const cards = await API.cards.getFlashcardByDeckId({ deckId })
 
-  return deck.flashcards || []
+  return cards || []
 }
 
 export default async function Page({ params }: {
