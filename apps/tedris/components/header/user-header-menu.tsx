@@ -26,7 +26,7 @@ export const UserHeaderMenu = () => {
         <div className="flex items-center gap-2 cursor-pointer select-none hover:bg-gray-100 rounded-md">
           <UserAvatar user={session?.user} />
           <div className="flex flex-col text-left">
-            <p className="text-sm whitespace-nowrap">{session.user.name}</p>
+            <p className="text-sm whitespace-nowrap">{session?.user?.name}</p>
             <p className="text-xs whitespace-nowrap text-neutral-tertiary">Talebe</p>
           </div>
           <CaretDownIcon size={16} />
