@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/amel-tech/madrasah-frontend/compare/tedris-web-v1.4.0...tedris-web-v1.4.1) (2025-12-25)
+
+
+### Bug Fixes
+
+* add optional chaining for user name in UserHeaderMenu component ([33cdc9a](https://github.com/amel-tech/madrasah-frontend/commit/33cdc9a0e197924caaab9da665023937f9d67b23))
+
 ## [1.4.0](https://github.com/amel-tech/madrasah-frontend/compare/tedris-web-v1.3.0...tedris-web-v1.4.0) (2025-12-06)
 
 
