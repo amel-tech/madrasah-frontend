@@ -15,7 +15,6 @@ The mocks package uses a **distribution system** to share mock data across apps:
 - **`src/tedrisat/faker.ts`**: Custom Faker.js instance with domain-specific generators
 - **`src/tedrisat/generate-mock.ts`**: Script to generate fresh mock data with proper relationships
 - **`src/tedrisat/mock.json`**: Pre-generated JSON file with realistic mock data
-- **`scripts/distribute.js`**: Distribution script that copies mock files to consuming apps
 
 ### Type-Safe Mock Data
 

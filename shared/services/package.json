@@ -18,7 +18,7 @@
     "generate": "npm run generate:tedrisat && npm run lint:fix",
     "generate:tedrisat": "openapi-generator-cli generate -i swagger-docs/tedrisat.json -g typescript-fetch -o src/tedrisat/generated --additional-properties=typescriptThreePlus=true,supportsES6=true,npmName=@madrasah/tedrisatapi",
     "prebuild": "echo 'All pre-generated.'",
-    "build": "cd src/tedrisat/generated && npm run prepare",
+    "build": "npm run generate && cd src/tedrisat/generated && npm run prepare",
     "build:tedrisat": "cd src/tedrisat/generated && npm run build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
