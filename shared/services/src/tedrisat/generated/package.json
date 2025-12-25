@@ -1,6 +1,6 @@
 {
   "name": "@madrasah/tedrisatapi",
-  "version": "1.0.0",
+  "version": "0.1.4",
   "description": "OpenAPI client for @madrasah/tedrisatapi",
   "author": "OpenAPI-Generator",
   "repository": {

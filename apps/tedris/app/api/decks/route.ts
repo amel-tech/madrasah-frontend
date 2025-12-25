@@ -8,11 +8,9 @@ export async function GET() {
     // Check if mocking is enabled
     // Direct API usage - no wrapper layers
     const session = await auth()
-    const { decks } = await createServerTedrisatAPIs(session?.accessToken, env.TEDRISAT_API_BASE_URL)
+    const API = await createServerTedrisatAPIs(session?.accessToken, env.TEDRISAT_API_BASE_URL)
 
-    const result = await decks.getAllFlashcardDecks({
-      include: ['tags', 'flashcards'],
-    })
+    const result = await API.decks.getAllFlashcardDecks()
 
     return NextResponse.json({ data: result, error: null })
   }

@@ -10,25 +10,13 @@ export async function GET(
     const { id } = await params
 
     const session = await auth()
-    const { decks } = await createServerTedrisatAPIs(session?.accessToken, env.TEDRISAT_API_BASE_URL)
+    const API = await createServerTedrisatAPIs(session?.accessToken, env.TEDRISAT_API_BASE_URL)
 
-    const result = await decks.getFlashcardDeckWithCards({ id: Number(id) })
-    const card = result || null
-
-    if (!card) {
-      return NextResponse.json(
-        { error: 'Card not found' },
-        { status: 404 },
-      )
-    }
-
-    return NextResponse.json(card)
+    const result = await API.cards.getFlashcardByDeckId({ deckId: id })
+    return NextResponse.json(result || [])
   }
   catch (error) {
-    console.error('Error fetching card:', error)
-    return NextResponse.json(
-      { error: 'Failed to fetch card' },
-      { status: 500 },
-    )
+    console.error('Error fetching cards:', error)
+    return NextResponse.json([], { status: 500 })
   }
 }

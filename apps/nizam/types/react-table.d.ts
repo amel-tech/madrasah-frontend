@@ -5,7 +5,7 @@ declare module '@tanstack/react-table' {
   interface TableMeta<TData extends Record<string, any>> {
     updateData: (rowIndex: number, columnId: string, value: unknown) => void
     onRowClick?: (row: TData) => void
-    onRowDelete?: (id: number) => Promise<boolean> | void
+    onRowDelete?: (id: string) => Promise<boolean> | void
     loadingCells?: Set<string>
   }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

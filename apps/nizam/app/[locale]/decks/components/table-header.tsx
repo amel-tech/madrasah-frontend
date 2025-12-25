@@ -27,7 +27,6 @@ export function TableHeader() {
     title: '',
     description: '',
     isPublic: true,
-    tagIds: [],
   })
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -56,7 +55,6 @@ export function TableHeader() {
           title: '',
           description: '',
           isPublic: false,
-          tagIds: [],
         })
       }
       else {

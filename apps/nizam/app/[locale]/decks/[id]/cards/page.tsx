@@ -16,9 +16,12 @@ export default async function DeckCardsPage({
   const session = await auth()
   const token = session?.accessToken
 
-  const { decks } = await createServerTedrisatAPIs(token, env.TEDRISAT_API_BASE_URL)
+  const API = await createServerTedrisatAPIs(token, env.TEDRISAT_API_BASE_URL)
 
-  const result = await decks.getFlashcardDeckWithCards({ id: Number(id) })
+  const [deck, cards] = await Promise.all([
+    API.decks.getFlashcardDeckById({ id }),
+    API.cards.getFlashcardByDeckId({ deckId: id }),
+  ])
 
-  return <DeckCards deck={result} />
+  return <DeckCards deck={deck} cards={cards || []} />
 }

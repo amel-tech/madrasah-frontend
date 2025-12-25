@@ -11,7 +11,7 @@ export async function GET({ params }: { params: Promise<{ id: string }> },
     const session = await auth()
     const { cards } = await createServerTedrisatAPIs(session?.accessToken, env.TEDRISAT_API_BASE_URL)
 
-    const result = await cards.getFlashcardById({ id: Number(id) })
+    const result = await cards.getFlashcardById({ id })
     const card = result || null
 
     if (!card) {

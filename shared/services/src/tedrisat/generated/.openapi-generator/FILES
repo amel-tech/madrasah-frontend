@@ -11,14 +11,15 @@ src/index.ts
 src/models/CreateExampleDto.ts
 src/models/CreateFlashcardDeckDto.ts
 src/models/CreateFlashcardDto.ts
+src/models/CreateFlashcardProgressDto.ts
 src/models/FlashcardDeckResponse.ts
+src/models/FlashcardDeckUserResponse.ts
+src/models/FlashcardProgressResponse.ts
 src/models/FlashcardResponse.ts
-src/models/FlashcardTagResponse.ts
 src/models/HealthCheckDto.ts
 src/models/MedarisMetaPaginationResponse.ts
 src/models/MedarisMetaResponse.ts
 src/models/MedarisResponse.ts
-src/models/ReplaceFlashcardDeckDto.ts
 src/models/UpdateFlashcardDeckDto.ts
 src/models/UpdateFlashcardDto.ts
 src/models/index.ts

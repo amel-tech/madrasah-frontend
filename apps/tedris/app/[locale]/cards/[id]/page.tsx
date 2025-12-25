@@ -4,7 +4,7 @@ import { env } from '~/env'
 import { createServerTedrisatAPIs, FlashcardResponse } from '@madrasah/services/tedrisat'
 import { auth } from '~/lib/auth_options'
 
-async function getCard(cardId: number): Promise<FlashcardResponse> {
+async function getCard(cardId: string): Promise<FlashcardResponse> {
   const session = await auth()
   const token = session?.accessToken
 
@@ -17,7 +17,7 @@ export default async function CardPage({
   params,
 }: {
   params: Promise<{
-    id: number
+    id: string
   }>
 }) {
   const { id } = await params
