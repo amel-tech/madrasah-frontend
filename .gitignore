@@ -14,7 +14,7 @@ out/
 
 # Generated mock files
 apps/*/public/mocks/
-shared/services/src/**/generated/*
+shared/services/src/**/generated
 
 # Turborepo
 .turbo/
