@@ -23,7 +23,9 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "clean": "rm -rf .turbo node_modules dist src/*/generated",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "pull:swagger:tedrisat": "curl -o swagger-docs/tedrisat.json ${OPENAPI_URL}/docs-json",
+    "pull:swagger:all": "npm run pull:swagger:tedrisat"
   },
   "devDependencies": {
     "@madrasah/eslint-config": "*",
