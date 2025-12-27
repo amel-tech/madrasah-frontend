@@ -81,7 +81,7 @@ function DeckCard({
   }
 
   return (
-    <Card className="p-6 gap-0 hover:bg-neutral-100 has-[.bookmark-icon:hover]:bg-white cursor-pointer transition-all duration-200 ease-in-out h-full">
+    <Card className="p-6 gap-0 hover:bg-neutral-100 has-[.bookmark-icon:hover]:bg-white cursor-pointer transition-all duration-200 ease-in-out h-full" data-testid="deck-item">
       <div className="flex justify-between items-center ">
         <div className="font-medium">{title}</div>
         <button

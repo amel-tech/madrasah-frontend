@@ -12,9 +12,6 @@ dist/
 out/
 .output/
 
-# Generated mock files
-apps/*/public/mocks/
-
 # Turborepo
 .turbo/
 .turbo
@@ -23,6 +20,12 @@ apps/*/public/mocks/
 coverage/
 .nyc_output/
 *.lcov
+
+# Cypress
+**/cypress/screenshots/
+**/cypress/videos/
+**/cypress/downloads/
+**/cypress/fixtures/examples.json
 
 # Environment files
 .env

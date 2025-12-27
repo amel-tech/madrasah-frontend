@@ -23,7 +23,7 @@ function ATFormGroupTagsInput<T extends FieldValues = FieldValues>({
   required,
   control,
   className,
-  ...props
+  ...rest
 }: IATFormGroupTagsInputProps<T>) {
   return (
     <FormField
@@ -53,7 +53,7 @@ function ATFormGroupTagsInput<T extends FieldValues = FieldValues>({
               className,
             )}
             variant={error ? "destructive" : "default"}
-            {...props}
+            {...rest}
           />
 
           {error && (

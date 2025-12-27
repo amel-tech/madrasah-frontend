@@ -22,13 +22,16 @@
     "build:tedrisat": "cd src/tedrisat/generated && npm run build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "clean": "rm -rf .turbo node_modules dist src/*/generated",
-    "check-types": "tsc --noEmit"
+    "clean": "rm -rf .turbo node_modules dist",
+    "check-types": "tsc --noEmit",
+    "start:mocks": "npm run start:tedrisat:mocks",
+    "start:tedrisat:mocks": "scalar document mock ./swagger-docs/tedrisat.json --watch --port 5339"
   },
   "devDependencies": {
     "@madrasah/eslint-config": "*",
     "@madrasah/typescript-config": "*",
     "@openapitools/openapi-generator-cli": "^2.24.0",
+    "@scalar/cli": "^1.3.5",
     "@types/node": "^24",
     "esbuild": "^0.21.5",
     "eslint": "^9.34.0",

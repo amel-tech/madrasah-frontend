@@ -90,5 +90,5 @@ export function useDecksColumns() {
       enableSorting: false,
       enableColumnFilter: false,
     },
-  ], [router])
+  ], [router, t])
 }

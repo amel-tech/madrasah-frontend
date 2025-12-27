@@ -59,10 +59,11 @@ export default function FlashCardList({ cards }: FlashCardListProps) {
         <button
           onClick={handlePrevious}
           className="rounded-full p-2 transition-colors hover:bg-gray-100"
+          data-testid="previous-card-button"
         >
           <CaretLeftIcon size={24} />
         </button>
-        <span className="text-sm text-gray-500">
+        <span className="text-sm text-gray-500" data-testid="card-counter">
           {currentIndex + 1}
           {' '}
           /
@@ -71,6 +72,7 @@ export default function FlashCardList({ cards }: FlashCardListProps) {
         <button
           onClick={handleNext}
           className="rounded-full p-2 transition-colors hover:bg-gray-100"
+          data-testid="next-card-button"
         >
           <CaretRightIcon size={24} />
         </button>

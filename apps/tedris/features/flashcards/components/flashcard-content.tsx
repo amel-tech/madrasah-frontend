@@ -94,11 +94,12 @@ export default function FlashCardContent(card: FlashcardResponse) {
             backfaceVisibility: 'hidden',
             WebkitBackfaceVisibility: 'hidden',
           }}
+          data-testid="card-front-container"
         >
           <FlashCardComponent className="mx-auto">
             {/* TODO: is this needed? */}
             <Header title="Card" />
-            <p className="whitespace-pre-wrap break-words text-lg text-gray-400 sm:text-xl">
+            <p className="whitespace-pre-wrap break-words text-lg text-gray-400 sm:text-xl" data-testid="card-front">
               {data.contentFront}
             </p>
             <CardActions
@@ -119,10 +120,11 @@ export default function FlashCardContent(card: FlashcardResponse) {
             WebkitBackfaceVisibility: 'hidden',
             transform: 'rotateY(180deg)',
           }}
+          data-testid="card-back-container"
         >
           <FlashCardComponent className="mx-auto">
             <Header title="Card" />
-            <p className="text-primary whitespace-pre-wrap break-words text-md font-semibold sm:text-lg">
+            <p className="text-primary whitespace-pre-wrap break-words text-md font-semibold sm:text-lg" data-testid="card-back">
               {data.contentBack}
             </p>
             <CardActions
@@ -165,6 +167,7 @@ function CardActions({
           <Button
             onClick={onFlip}
             className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full p-2 transition-colors"
+            data-testid="show-answer-button"
           >
             <EyeIcon size={20} />
             Flip
@@ -187,6 +190,7 @@ function CardActions({
               ? 'bg-green-500 text-white hover:bg-green-600'
               : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
             }`}
+            data-testid="toggle-memorized-button"
           >
             {
               memorized ? <RepeatIcon size={16} /> : <CheckIcon size={16} />

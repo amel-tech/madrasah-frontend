@@ -22,8 +22,12 @@
     "test": {
       "dependsOn": ["^test"]
     },
-    "distribute": {
-      "dependsOn": ["^distribute"]
+    "test:e2e": {
+      "dependsOn": ["^build"],
+      "cache": false
+    },
+    "test:e2e:open": {
+      "cache": false
     }
   }
 }
