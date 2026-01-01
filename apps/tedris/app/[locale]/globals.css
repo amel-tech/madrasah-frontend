@@ -1,5 +1,11 @@
 @import 'tailwindcss';
 @import '@madrasah/tokens/css';
+@import '@fontsource/scheherazade-new';
+ 
+@theme {
+  --font-scheherazade: 'Scheherazade New', serif;
+}
+ 
 
 
 @font-face {
