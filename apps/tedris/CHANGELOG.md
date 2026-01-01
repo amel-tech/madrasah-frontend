@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.5.0](https://github.com/amel-tech/madrasah-frontend/compare/tedris-web-v1.4.1...tedris-web-v1.5.0) (2026-01-01)
+
+
+### Features
+
+* apply Scheherazade Arabic font and change back side text color ([63dda81](https://github.com/amel-tech/madrasah-frontend/commit/63dda818f93e9c737af592e9fed7ca21d9fdd453))
+* pr updated flash cards ([cf77f24](https://github.com/amel-tech/madrasah-frontend/commit/cf77f2496180a606532b00d06940b359572a0209))
+
 ## [1.4.1](https://github.com/amel-tech/madrasah-frontend/compare/tedris-web-v1.4.0...tedris-web-v1.4.1) (2025-12-25)
 
 
