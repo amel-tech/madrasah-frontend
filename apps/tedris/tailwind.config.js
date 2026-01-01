@@ -8,13 +8,6 @@ const config = {
     '../../shared/ui/components/**/*.{js,ts,jsx,tsx}',
     '../../shared/ui/src/**/*.{js,ts,jsx,tsx}',
   ],
-  theme: {
-    extend: {
-      colors: {
-        flashCardColor: '#0C4A6E',
-      },
-    },
-  },
 }
 
 export default config

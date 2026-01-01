@@ -121,9 +121,7 @@ export default function FlashCardContent(card: FlashcardResponse) {
         >
           <FlashCardComponent className="mx-auto">
             <Header title="Card" />
-            <p
-              className="text-flashCardColor whitespace-pre-wrap break-words text-md font-semibold sm:text-lg"
-            >
+            <p className="text-[var(--text-color-brand-primary)] whitespace-pre-wrap break-words text-md font-semibold sm:text-lg">
               {data.contentBack}
             </p>
             <CardActions
