@@ -103,3 +103,33 @@ export const deleteFlashcard = async (cardId: string, deckId?: string) => {
     throw error
   }
 }
+
+export const addDeckToCollection = async (deckId: string) => {
+  const session = await auth()
+  const { decks } = await createServerTedrisatAPIs(session?.accessToken, env.TEDRISAT_API_BASE_URL)
+
+  try {
+    await decks.createFlashcardDeckUser({ id: deckId })
+    revalidatePath(`/decks/${deckId}`)
+    return true
+  }
+  catch (error) {
+    console.log('Error adding deck to collection:', error)
+    return false
+  }
+}
+
+export const removeDeckFromCollection = async (deckId: string) => {
+  const session = await auth()
+  const { decks } = await createServerTedrisatAPIs(session?.accessToken, env.TEDRISAT_API_BASE_URL)
+
+  try {
+    await decks.deleteFlashcardDeckUser({ id: deckId })
+    revalidatePath(`/decks/${deckId}`)
+    return true
+  }
+  catch (error) {
+    console.log('Error removing deck from collection:', error)
+    return false
+  }
+}
