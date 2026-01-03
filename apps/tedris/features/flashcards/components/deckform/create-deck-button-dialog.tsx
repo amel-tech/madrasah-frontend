@@ -30,40 +30,25 @@ export default function CreateDeckButtonDialog() {
     defaultValues: {
       title: '',
       description: '',
-      tagIds: [],
       isPublic: false,
     },
   })
 
   const onSubmit = async (data: CreateFlashcardDeckDto) => {
-    // handle form submission logic here
     try {
-      const response = await createFlashCardDeck(data)
-      const id = response?.id || null
-
-      if (response) {
-        toastHelper.success({
-          title: 'Card Created',
-          description: 'Flashcard was created successfully.',
-        })
-
-        router.push(`/cards/decks/${id}/cards`)
-      }
-      else {
-        toastHelper.error({
-          title: 'Creation Failed',
-          description: 'Failed to create the flashcard. Please try again.',
-        })
-        return false
-      }
+      const createdDeck = await createFlashCardDeck(data)
+      toastHelper.success({
+        title: 'Deck Created',
+        description: 'Deck was created successfully.',
+      })
+      router.push(`/cards/decks/${createdDeck.id}/cards`)
     }
     catch (error) {
-      console.error('Error updating flashcard:', error)
+      console.error('Error creating deck:', error)
       toastHelper.error({
         title: 'Creation Error',
-        description: 'An error occurred while creating the flashcard.',
+        description: error instanceof Error ? error.message : 'An error occurred while creating the deck.',
       })
-      return false
     }
   }
 
