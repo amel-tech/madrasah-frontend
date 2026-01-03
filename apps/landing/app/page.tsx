@@ -153,24 +153,24 @@ export default function Home() {
           <div>
             <h4 className="font-semibold mb-4">Product</h4>
             <ul className="space-y-2 text-sm text-gray-500">
-              <li><Link href="#" className="hover:text-foreground">Features</Link></li>
-              <li><Link href="#" className="hover:text-foreground">Pricing</Link></li>
-              <li><Link href="#" className="hover:text-foreground">Updates</Link></li>
+              <li><Link href="#features" className="hover:text-foreground">Features</Link></li>
+              <li><Link href="#pricing" className="hover:text-foreground">Pricing</Link></li>
+              <li><Link href="#updates" className="hover:text-foreground">Updates</Link></li>
             </ul>
           </div>
           <div>
             <h4 className="font-semibold mb-4">Company</h4>
             <ul className="space-y-2 text-sm text-gray-500">
-               <li><Link href="#" className="hover:text-foreground">About Us</Link></li>
-               <li><Link href="#" className="hover:text-foreground">Careers</Link></li>
-               <li><Link href="#" className="hover:text-foreground">Contact</Link></li>
+               <li><Link href="#about" className="hover:text-foreground">About Us</Link></li>
+               <li><Link href="#careers" className="hover:text-foreground">Careers</Link></li>
+               <li><Link href="#contact" className="hover:text-foreground">Contact</Link></li>
             </ul>
           </div>
           <div>
             <h4 className="font-semibold mb-4">Legal</h4>
             <ul className="space-y-2 text-sm text-gray-500">
-               <li><Link href="#" className="hover:text-foreground">Privacy Policy</Link></li>
-               <li><Link href="#" className="hover:text-foreground">Terms of Service</Link></li>
+               <li><Link href="#privacy-policy" className="hover:text-foreground">Privacy Policy</Link></li>
+               <li><Link href="#terms-of-service" className="hover:text-foreground">Terms of Service</Link></li>
             </ul>
           </div>
         </div>
