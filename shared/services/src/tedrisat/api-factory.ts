@@ -3,7 +3,23 @@ import {
   FlashcardDecksApi,
   FlashcardCardsApi,
   TedrisatServiceApi,
-} from './generated'
+} from './generated/src'
+
+// Re-export types that are used in other apps
+export type {
+  FlashcardDeckResponse,
+  FlashcardResponse,
+  CreateFlashcardDeckDto,
+  CreateFlashcardDto,
+  UpdateFlashcardDeckDto,
+  UpdateFlashcardDto,
+} from './generated/src'
+
+// Re-export enum constants (they are used at runtime as values)
+import { FlashcardResponseTypeEnum } from './generated/src/models/FlashcardResponse'
+import { CreateFlashcardDtoTypeEnum } from './generated/src/models/CreateFlashcardDto'
+
+export { FlashcardResponseTypeEnum, CreateFlashcardDtoTypeEnum }
 
 export interface TedrisatAPIConfig {
   baseUrl: string
