@@ -24,7 +24,7 @@ export interface DataTableProps<TData, TValue> {
   defaultColumn?: Partial<ColumnDef<TData, TValue>>
   onRowUpdate?: (updatedRow: TData) => Promise<boolean> | void
   onRowClick?: (row: TData) => void
-  onRowDelete?: (id: number) => Promise<boolean> | void
+  onRowDelete?: (id: string) => Promise<boolean> | void
   options?: TableOptions<TData>
 }
 

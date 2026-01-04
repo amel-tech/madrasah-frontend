@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
-import { cookies } from 'next/headers'
 import { env } from '~/env'
 import { createServerTedrisatAPIs } from '@madrasah/services/tedrisat'
+import { auth } from '~/lib/auth_options'
 
 export async function GET(
   { params }: { params: Promise<{ id: string }> },
@@ -9,26 +9,14 @@ export async function GET(
   try {
     const { id } = await params
 
-    const cookieStore = await cookies()
-    const { decks } = await createServerTedrisatAPIs(cookieStore, env.TEDRISAT_API_BASE_URL)
+    const session = await auth()
+    const API = await createServerTedrisatAPIs(session?.accessToken, env.TEDRISAT_API_BASE_URL)
 
-    const result = await decks.getFlashcardDeckWithCards({ id: Number(id) })
-    const card = result || null
-
-    if (!card) {
-      return NextResponse.json(
-        { error: 'Card not found' },
-        { status: 404 },
-      )
-    }
-
-    return NextResponse.json(card)
+    const result = await API.cards.getFlashcardByDeckId({ deckId: id })
+    return NextResponse.json(result || [])
   }
   catch (error) {
-    console.error('Error fetching card:', error)
-    return NextResponse.json(
-      { error: 'Failed to fetch card' },
-      { status: 500 },
-    )
+    console.error('Error fetching cards:', error)
+    return NextResponse.json([], { status: 500 })
   }
 }

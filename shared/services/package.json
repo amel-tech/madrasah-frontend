@@ -10,6 +10,11 @@
       "types": "./src/tedrisat/index.ts",
       "import": "./src/tedrisat/index.ts",
       "require": "./src/tedrisat/index.ts"
+    },
+    "./utils": {
+      "types": "./src/utils/index.ts",
+      "import": "./src/utils/index.ts",
+      "require": "./src/utils/index.ts"
     }
   },
   "scripts": {

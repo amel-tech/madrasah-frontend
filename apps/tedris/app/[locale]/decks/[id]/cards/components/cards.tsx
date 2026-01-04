@@ -51,15 +51,12 @@ export default function DeckCards({
     }
   }
 
-  const onRowDelete = async (id: number) => {
+  const onRowDelete = async (id: string) => {
     try {
       // Pass deckId to server action for automatic revalidatePath
-      const response = await deleteFlashcard(id, deckId)
-      if (response) {
-        toastHelper.success({ title: 'Card Deleted', description: `Card with ID ${id} was deleted.` }, { cardId: id })
-        return true
-      }
-      return false
+      await deleteFlashcard(id, deckId)
+      toastHelper.success({ title: 'Card Deleted', description: `Card with ID ${id} was deleted.` }, { cardId: id })
+      return true
     }
     catch (error) {
       console.error('Error deleting flashcard:', error)

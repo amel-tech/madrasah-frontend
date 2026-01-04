@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
-import { cookies } from 'next/headers'
 import { env } from '~/env'
 import { createServerTedrisatAPIs } from '@madrasah/services/tedrisat'
+import { auth } from '~/lib/auth_options'
 
 export async function GET(
   { params }: { params: Promise<{ id: string }> },
@@ -9,10 +9,10 @@ export async function GET(
   try {
     const { id } = await params
 
-    const cookieStore = await cookies()
-    const { decks } = await createServerTedrisatAPIs(cookieStore, env.TEDRISAT_API_BASE_URL)
+    const session = await auth()
+    const { decks } = await createServerTedrisatAPIs(session?.accessToken, env.TEDRISAT_API_BASE_URL)
 
-    const result = await decks.getFlashcardDeckById({ id: Number(id) })
+    const result = await decks.getFlashcardDeckById({ id })
     const card = result || null
 
     if (!card) {

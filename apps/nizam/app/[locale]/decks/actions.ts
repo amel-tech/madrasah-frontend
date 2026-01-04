@@ -1,13 +1,14 @@
 'use server'
 
-import { cookies } from 'next/headers'
 import { createServerTedrisatAPIs, CreateFlashcardDeckDto } from '@madrasah/services/tedrisat'
 import { env } from '~/env'
 import { revalidatePath } from 'next/cache'
+import { auth } from '~/lib/auth_options'
 
 export const createFlashcardDeck = async (deckData: CreateFlashcardDeckDto) => {
-  const cookieStore = await cookies()
-  const { decks } = await createServerTedrisatAPIs(cookieStore, env.TEDRISAT_API_BASE_URL)
+  const session = await auth()
+
+  const { decks } = await createServerTedrisatAPIs(session?.accessToken, env.TEDRISAT_API_BASE_URL)
 
   try {
     const response = await decks.createFlashcardDeck({
@@ -24,12 +25,12 @@ export const createFlashcardDeck = async (deckData: CreateFlashcardDeckDto) => {
   }
 }
 
-export const updateFlashcardDeck = async (deckId: number, updatedDeck: {
+export const updateFlashcardDeck = async (deckId: string, updatedDeck: {
   title?: string
   description?: string
 }) => {
-  const cookieStore = await cookies()
-  const { decks } = await createServerTedrisatAPIs(cookieStore, env.TEDRISAT_API_BASE_URL)
+  const session = await auth()
+  const { decks } = await createServerTedrisatAPIs(session?.accessToken, env.TEDRISAT_API_BASE_URL)
 
   try {
     await decks.updateFlashcardDeck({
@@ -50,9 +51,9 @@ export const updateFlashcardDeck = async (deckId: number, updatedDeck: {
   }
 }
 
-export const deleteFlashcardDeck = async (deckId: number) => {
-  const cookieStore = await cookies()
-  const { decks } = await createServerTedrisatAPIs(cookieStore, env.TEDRISAT_API_BASE_URL)
+export const deleteFlashcardDeck = async (deckId: string) => {
+  const session = await auth()
+  const { decks } = await createServerTedrisatAPIs(session?.accessToken, env.TEDRISAT_API_BASE_URL)
 
   try {
     const response = await decks.deleteFlashcardDeck({
