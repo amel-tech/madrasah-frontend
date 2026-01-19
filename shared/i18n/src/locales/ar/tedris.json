@@ -3,5 +3,18 @@
     "decks": "مجموعة أوراق",
     "home": "الرئيسية",
     "learning": "التعلم"
+  },
+  "CardsPage": {
+    "filterAll": "الكل",
+    "filterPublic": "عام",
+    "filterPrivate": "خاص",
+    "exploreTitle": "استكشف",
+    "seeAll": "عرض الكل"
+  },
+  "HomePage": {
+    "title": "الشاشة الرئيسية"
+  },
+  "Metadata": {
+    "description": "مشروع المدرسة الإلكترونية"
   }
 }

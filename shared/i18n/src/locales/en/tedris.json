@@ -3,5 +3,18 @@
     "decks": "Decks",
     "home": "Home",
     "learning": "Learning"
+  },
+  "CardsPage": {
+    "filterAll": "all",
+    "filterPublic": "public",
+    "filterPrivate": "private",
+    "exploreTitle": "explore",
+    "seeAll": "see all"
+  },
+  "HomePage": {
+    "title": "Home screen"
+  },
+  "Metadata": {
+    "description": "Online Medrese Projesi"
   }
 }

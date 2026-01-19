@@ -1,8 +1,66 @@
 {
+  "HomePage": {
+    "greeting": "Esselamü aleyküm!"
+  },
   "DecksPage": {
+    "title": "Kart Desteleri",
+    "description": "Kart destelerinizi ve çalışma materyallerinizi yönetin.",
+    "newDeckButton": "Yeni Deste",
+    "Dialog": {
+      "title": "Yeni Deste Oluştur",
+      "description": "Çalışma materyallerinizi organize etmek için yeni bir kart destesi oluşturun.",
+      "titleLabel": "Başlık *",
+      "titlePlaceholder": "Deste başlığını girin...",
+      "descriptionLabel": "Açıklama",
+      "descriptionPlaceholder": "Deste açıklamasını girin...",
+      "publicLabel": "Bu desteyi herkese açık yap",
+      "cancelButton": "İptal",
+      "creatingButton": "Oluşturuluyor...",
+      "createButton": "Deste Oluştur"
+    },
+    "Toast": {
+      "validationError": "Doğrulama Hatası",
+      "titleRequired": "Deste başlığı gereklidir.",
+      "deckCreated": "Deste Oluşturuldu",
+      "deckCreatedSuccess": "Yeni kart destesi başarıyla oluşturuldu.",
+      "creationFailed": "Oluşturma Başarısız",
+      "creationFailedMessage": "Deste oluşturulamadı. Lütfen tekrar deneyin.",
+      "creationError": "Oluşturma Hatası",
+      "creationErrorMessage": "Deste oluşturulurken beklenmeyen bir hata oluştu."
+    },
     "Table": {
       "descriptionColumn": "Açıklama",
       "titleColumn": "Başlık"
+    }
+  },
+  "DeckCardsPage": {
+    "bulkActions": "Toplu İşlemler",
+    "importFromExcel": "Excel'den İçe Aktar",
+    "downloadAsExcel": "Excel Olarak İndir",
+    "downloadSampleFile": "Örnek Dosyayı İndir",
+    "Columns": {
+      "frontFace": "Ön Yüz",
+      "backFace": "Arka Yüz",
+      "frontPlaceholder": "Ön yüz içeriğini girin...",
+      "backPlaceholder": "Arka yüz içeriğini girin...",
+      "cancelButton": "İptal",
+      "deleteButton": "Sil"
+    },
+    "Toast": {
+      "cardUpdated": "Kart Güncellendi",
+      "cardUpdatedSuccess": "Kart başarıyla güncellendi.",
+      "updateError": "Güncelleme Hatası",
+      "updateErrorMessage": "Kart güncellenemedi.",
+      "cardsImported": "Kartlar İçe Aktarıldı",
+      "cardsImportedSuccess": "{{count}} kart başarıyla içe aktarıldı.",
+      "cardDeleted": "Kart Silindi",
+      "cardDeletedSuccess": "{{id}} ID'li kart silindi.",
+      "deleteError": "Silme Hatası",
+      "deleteErrorMessage": "Kart silinemedi."
+    },
+    "SampleFile": {
+      "frontWord": "Ön kelime {{index}}",
+      "backWord": "Arka kelime {{index}}"
     }
   }
 }

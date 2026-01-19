@@ -19,8 +19,10 @@ import {
 import { PlusIcon } from '@madrasah/icons'
 import { createFlashcardDeck } from '../actions'
 import { CreateFlashcardDeckDto } from '@madrasah/services/tedrisat'
+import { useTranslations } from 'next-intl'
 
 export function TableHeader() {
+  const t = useTranslations('nizam.DecksPage')
   const [open, setOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState<CreateFlashcardDeckDto>({
@@ -34,8 +36,8 @@ export function TableHeader() {
 
     if (!formData.title.trim()) {
       toastHelper.error({
-        title: 'Validation Error',
-        description: 'Deck title is required.',
+        title: t('Toast.validationError'),
+        description: t('Toast.titleRequired'),
       })
       return
     }
@@ -47,8 +49,8 @@ export function TableHeader() {
 
       if (result.success) {
         toastHelper.success({
-          title: 'Deck Created',
-          description: 'New flashcard deck was created successfully.',
+          title: t('Toast.deckCreated'),
+          description: t('Toast.deckCreatedSuccess'),
         })
         setOpen(false)
         setFormData({
@@ -59,16 +61,16 @@ export function TableHeader() {
       }
       else {
         toastHelper.error({
-          title: 'Creation Failed',
-          description: result.error || 'Failed to create the deck. Please try again.',
+          title: t('Toast.creationFailed'),
+          description: result.error || t('Toast.creationFailedMessage'),
         })
       }
     }
     catch (error) {
       console.error('Error creating deck:', error)
       toastHelper.error({
-        title: 'Creation Error',
-        description: 'An unexpected error occurred while creating the deck.',
+        title: t('Toast.creationError'),
+        description: t('Toast.creationErrorMessage'),
       })
     }
     finally {
@@ -86,46 +88,46 @@ export function TableHeader() {
   return (
     <div className="flex items-center justify-between mb-4">
       <div>
-        <h1 className="text-2xl font-bold">Flashcard Decks</h1>
-        <p className="text-muted-foreground">Manage your flashcard decks and study materials.</p>
+        <h1 className="text-2xl font-bold">{t('title')}</h1>
+        <p className="text-muted-foreground">{t('description')}</p>
       </div>
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button>
             <PlusIcon className="h-4 w-4" />
-            New Deck
+            {t('newDeckButton')}
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <form onSubmit={handleSubmit}>
             <DialogHeader>
-              <DialogTitle>Create New Deck</DialogTitle>
+              <DialogTitle>{t('Dialog.title')}</DialogTitle>
               <DialogDescription>
-                Create a new flashcard deck to organize your study materials.
+                {t('Dialog.description')}
               </DialogDescription>
             </DialogHeader>
 
             <div className="grid gap-4 py-4">
               <div className="grid gap-2">
-                <Label htmlFor="title">Title *</Label>
+                <Label htmlFor="title">{t('Dialog.titleLabel')}</Label>
                 <Input
                   id="title"
                   value={formData.title}
                   onChange={e => handleInputChange('title', e.target.value)}
-                  placeholder="Enter deck title..."
+                  placeholder={t('Dialog.titlePlaceholder')}
                   required
                   disabled={isLoading}
                 />
               </div>
 
               <div className="grid gap-2">
-                <Label htmlFor="description">Description</Label>
+                <Label htmlFor="description">{t('Dialog.descriptionLabel')}</Label>
                 <Textarea
                   id="description"
                   value={formData.description || ''}
                   onChange={e => handleInputChange('description', e.target.value)}
-                  placeholder="Enter deck description..."
+                  placeholder={t('Dialog.descriptionPlaceholder')}
                   rows={3}
                   disabled={isLoading}
                 />
@@ -138,7 +140,7 @@ export function TableHeader() {
                   onCheckedChange={(checked: boolean) => handleInputChange('isPublic', checked)}
                   disabled={true}
                 />
-                <Label htmlFor="isPublic">Make this deck public</Label>
+                <Label htmlFor="isPublic">{t('Dialog.publicLabel')}</Label>
               </div>
             </div>
 
@@ -149,10 +151,10 @@ export function TableHeader() {
                 onClick={() => setOpen(false)}
                 disabled={isLoading}
               >
-                Cancel
+                {t('Dialog.cancelButton')}
               </Button>
               <Button type="submit" disabled={isLoading}>
-                {isLoading ? 'Creating...' : 'Create Deck'}
+                {isLoading ? t('Dialog.creatingButton') : t('Dialog.createButton')}
               </Button>
             </DialogFooter>
           </form>

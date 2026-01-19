@@ -1,7 +1,11 @@
+import { useTranslations } from 'next-intl'
+
 export default function Page() {
+  const t = useTranslations('nizam')
+
   return (
     <div className="container">
-      Assalamu alaikum!
+      {t('HomePage.greeting')}
     </div>
   )
 }
