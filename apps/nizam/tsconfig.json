@@ -19,6 +19,8 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "target": "ES2017",
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
     "paths": {
       "~/env": [
         "./env.ts"

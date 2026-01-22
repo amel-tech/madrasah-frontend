@@ -1,4 +1,11 @@
 {
+  "CardsPage": {
+    "exploreTitle": "يستكشف",
+    "filterAll": "الجميع",
+    "filterPrivate": "خاص",
+    "filterPublic": "عام",
+    "seeAll": "عرض الكل"
+  },
   "CreateDeckButtonDialog": {
     "cancel": "يلغي",
     "cardCreated": "تم إنشاء البطاقة",
@@ -106,6 +113,9 @@
   },
   "FlashCardList": {
     "noCardsFound": "لم يتم العثور على أي بطاقات حتى الآن."
+  },
+  "HomePage": {
+    "greeting": "السلام عليكم!"
   },
   "KeycloakLogout": {
     "button": "تسجيل الخروج"

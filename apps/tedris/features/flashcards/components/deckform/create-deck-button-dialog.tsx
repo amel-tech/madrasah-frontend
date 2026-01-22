@@ -32,13 +32,11 @@ export default function CreateDeckButtonDialog() {
     defaultValues: {
       title: '',
       description: '',
-      tagIds: [],
       isPublic: false,
     },
   })
 
   const onSubmit = async (data: CreateFlashcardDeckDto) => {
-    // handle form submission logic here
     try {
       const response = await createFlashCardDeck(data)
       const id = response?.id || null
@@ -60,12 +58,11 @@ export default function CreateDeckButtonDialog() {
       }
     }
     catch (error) {
-      console.error('Error updating flashcard:', error)
+      console.error('Error creating deck:', error)
       toastHelper.error({
         title: t('CreateDeckButtonDialog.creationError'),
         description: t('CreateDeckButtonDialog.creationErrorDescription'),
       })
-      return false
     }
   }
 

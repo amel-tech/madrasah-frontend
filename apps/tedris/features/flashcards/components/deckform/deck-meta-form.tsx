@@ -3,7 +3,6 @@ import { Control } from 'react-hook-form'
 import { useTranslations } from 'next-intl'
 
 import ATFormGroup from '@madrasah/ui/custom/form-group'
-import ATFormGroupTagsInput from '@madrasah/ui/custom/form-group-tags-input'
 import ATFormGroupTextArea from '@madrasah/ui/custom/form-group-text-area'
 import ATFormGroupTabs from '@madrasah/ui/custom/form-group-tabs'
 import { deckMetaFormSchema } from '~/features/flashcards/validations/deck-meta-form-schema'
@@ -28,15 +27,6 @@ export default function DeckMetaForm({ control }: IDeckMetaFormProps) {
         label={t('DeckMetaForm.description')}
         placeholder={t('DeckMetaForm.descriptionPlaceholder')}
         control={control}
-        required
-      />
-      <ATFormGroupTagsInput
-        name="tagIds"
-        label={t('DeckMetaForm.tags')}
-        placeholder={t('DeckMetaForm.tagsPlaceholder')}
-        control={control}
-        showDropdownTrigger
-        defaultValue={[]}
         required
       />
       <ATFormGroupTabs

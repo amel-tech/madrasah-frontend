@@ -33,9 +33,34 @@
     "titlePlaceholder": "Enter deck title..."
   },
   "DecksPage": {
+    "description": "Manage your flashcard decks and study materials.",
+    "Dialog": {
+      "cancelButton": "Cancel",
+      "createButton": "Create Deck",
+      "creatingButton": "Creating...",
+      "description": "Create a new flashcard deck to organize your study materials.",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Enter deck description...",
+      "publicLabel": "Make this deck public",
+      "title": "Create New Deck",
+      "titleLabel": "Title *",
+      "titlePlaceholder": "Enter deck title..."
+    },
+    "newDeckButton": "New Deck",
     "Table": {
       "descriptionColumn": "Description",
       "titleColumn": "Title"
+    },
+    "title": "Flashcard Decks",
+    "Toast": {
+      "creationError": "Creation Error",
+      "creationErrorMessage": "An unexpected error occurred while creating the deck.",
+      "creationFailed": "Creation Failed",
+      "creationFailedMessage": "Failed to create the deck. Please try again.",
+      "deckCreated": "Deck Created",
+      "deckCreatedSuccess": "New flashcard deck was created successfully.",
+      "titleRequired": "Deck title is required.",
+      "validationError": "Validation Error"
     }
   },
   "FlashcardColumns": {
@@ -66,6 +91,10 @@
   },
   "NavRoutes": {
     "decks": "Decks"
+  },
+  "SampleFile": {
+    "backWord": "Sample Translation {index}",
+    "frontWord": "Sample Word {index}"
   },
   "TableHeader": {
     "cancel": "Cancel",

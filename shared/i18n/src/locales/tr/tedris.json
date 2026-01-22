@@ -1,4 +1,11 @@
 {
+  "CardsPage": {
+    "exploreTitle": "Keşfetmek",
+    "filterAll": "Tüm",
+    "filterPrivate": "Özel",
+    "filterPublic": "Halk",
+    "seeAll": "Tümünü Gör"
+  },
   "CreateDeckButtonDialog": {
     "cancel": "İptal etmek",
     "cardCreated": "Kart Oluşturuldu",
@@ -9,7 +16,7 @@
     "creationErrorDescription": "Bilgi kartı oluşturulurken bir hata oluştu.",
     "creationFailed": "Oluşturma Başarısız",
     "creationFailedDescription": "Bilgi kartı oluşturulamadı. Lütfen tekrar deneyin.",
-    "newDeck": "Yeni Güverte"
+    "newDeck": "Yeni Deste"
   },
   "DataTable": {
     "noResults": "Sonuç bulunamadı."
@@ -70,7 +77,7 @@
     "public": "Halk",
     "tags": "Etiketler",
     "tagsPlaceholder": "Etiket ekle",
-    "whoCanSee": "Bu güverteyi kimler görebilir?"
+    "whoCanSee": "Bu desteyi kimler görebilir?"
   },
   "DecksPage": {
     "all": "Tümü",
@@ -82,8 +89,8 @@
   },
   "ExploreDecksClient": {
     "all": "Tüm",
-    "deck": "güverte",
-    "decks": "güverteler",
+    "deck": "deste",
+    "decks": "desteler",
     "filter": "Filtrele",
     "found": "kurmak",
     "loadingMore": "Daha fazlası yükleniyor...",
@@ -106,6 +113,9 @@
   },
   "FlashCardList": {
     "noCardsFound": "Henüz hiçbir kart bulunamadı."
+  },
+  "HomePage": {
+    "greeting": "Selamünaleyküm!"
   },
   "KeycloakLogout": {
     "button": "Çıkış yap"

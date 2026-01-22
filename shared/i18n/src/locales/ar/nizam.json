@@ -33,9 +33,34 @@
     "titlePlaceholder": "أدخل عنوان المجموعة..."
   },
   "DecksPage": {
+    "description": "إدارة مجموعات البطاقات التعليمية ومواد الدراسة الخاصة بك.",
+    "Dialog": {
+      "cancelButton": "إلغاء",
+      "createButton": "إنشاء المجموعة",
+      "creatingButton": "جاري الإنشاء...",
+      "description": "إنشاء مجموعة بطاقات تعليمية جديدة لتنظيم مواد الدراسة الخاصة بك.",
+      "descriptionLabel": "الوصف",
+      "descriptionPlaceholder": "أدخل وصف المجموعة...",
+      "publicLabel": "اجعل هذه المجموعة عامة",
+      "title": "إنشاء مجموعة جديدة",
+      "titleLabel": "العنوان *",
+      "titlePlaceholder": "أدخل عنوان المجموعة..."
+    },
+    "newDeckButton": "مجموعة جديدة",
     "Table": {
-      "descriptionColumn": "وصف",
+      "descriptionColumn": "الوصف",
       "titleColumn": "العنوان"
+    },
+    "title": "مجموعات البطاقات التعليمية",
+    "Toast": {
+      "creationError": "خطأ في الإنشاء",
+      "creationErrorMessage": "حدث خطأ غير متوقع أثناء إنشاء المجموعة.",
+      "creationFailed": "فشل الإنشاء",
+      "creationFailedMessage": "فشل إنشاء المجموعة. يرجى المحاولة مرة أخرى.",
+      "deckCreated": "تم إنشاء المجموعة",
+      "deckCreatedSuccess": "تم إنشاء مجموعة البطاقات التعليمية الجديدة بنجاح.",
+      "titleRequired": "عنوان المجموعة مطلوب.",
+      "validationError": "خطأ في التحقق"
     }
   },
   "FlashcardColumns": {
@@ -66,6 +91,10 @@
   },
   "NavRoutes": {
     "decks": "مجموعة أوراق"
+  },
+  "SampleFile": {
+    "backWord": "ترجمة نموذجية {index}",
+    "frontWord": "كلمة نموذجية {index}"
   },
   "TableHeader": {
     "cancel": "يلغي",

@@ -109,8 +109,8 @@ export default function DeckCards({
       return {
         id: index.toString(),
         type: FlashcardResponseTypeEnum.Vocabulary,
-        contentFront: `Front word ${index + 1}`,
-        contentBack: `Back word ${index + 1}`,
+        contentFront: t('SampleFile.frontWord', { index: index + 1 }),
+        contentBack: t('SampleFile.backWord', { index: index + 1 }),
         deckId: deck.id,
         is_public: true,
       }

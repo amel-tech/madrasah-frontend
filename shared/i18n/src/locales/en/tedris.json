@@ -1,4 +1,11 @@
 {
+  "CardsPage": {
+    "exploreTitle": "Explore",
+    "filterAll": "All",
+    "filterPrivate": "Private",
+    "filterPublic": "Public",
+    "seeAll": "See All"
+  },
   "CreateDeckButtonDialog": {
     "cancel": "Cancel",
     "cardCreated": "Card Created",
@@ -106,6 +113,9 @@
   },
   "FlashCardList": {
     "noCardsFound": "No cards found yet."
+  },
+  "HomePage": {
+    "greeting": "Assalamu alaikum!"
   },
   "KeycloakLogout": {
     "button": "Logout"

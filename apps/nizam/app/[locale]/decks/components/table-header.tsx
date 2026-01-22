@@ -110,7 +110,11 @@ export function TableHeader() {
 
             <div className="grid gap-4 py-4">
               <div className="grid gap-2">
-                <Label htmlFor="title">{t('TableHeader.title')} *</Label>
+                <Label htmlFor="title">
+                  {t('TableHeader.title')}
+                  {' '}
+                  *
+                </Label>
                 <Input
                   id="title"
                   value={formData.title}

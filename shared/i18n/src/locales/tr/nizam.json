@@ -33,9 +33,34 @@
     "titlePlaceholder": "Deste başlığını girin..."
   },
   "DecksPage": {
+    "description": "Kart destelerinizi ve çalışma materyallerinizi yönetin.",
+    "Dialog": {
+      "cancelButton": "İptal",
+      "createButton": "Deste Oluştur",
+      "creatingButton": "Oluşturuluyor...",
+      "description": "Çalışma materyallerinizi organize etmek için yeni bir kart destesi oluşturun.",
+      "descriptionLabel": "Açıklama",
+      "descriptionPlaceholder": "Deste açıklamasını girin...",
+      "publicLabel": "Bu desteyi herkese açık yap",
+      "title": "Yeni Deste Oluştur",
+      "titleLabel": "Başlık *",
+      "titlePlaceholder": "Deste başlığını girin..."
+    },
+    "newDeckButton": "Yeni Deste",
     "Table": {
       "descriptionColumn": "Açıklama",
       "titleColumn": "Başlık"
+    },
+    "title": "Kart Desteleri",
+    "Toast": {
+      "creationError": "Oluşturma Hatası",
+      "creationErrorMessage": "Deste oluşturulurken beklenmeyen bir hata oluştu.",
+      "creationFailed": "Oluşturma Başarısız",
+      "creationFailedMessage": "Deste oluşturulamadı. Lütfen tekrar deneyin.",
+      "deckCreated": "Deste Oluşturuldu",
+      "deckCreatedSuccess": "Yeni kart destesi başarıyla oluşturuldu.",
+      "titleRequired": "Deste başlığı gereklidir.",
+      "validationError": "Doğrulama Hatası"
     }
   },
   "FlashcardColumns": {
@@ -66,6 +91,10 @@
   },
   "NavRoutes": {
     "decks": "Desteler"
+  },
+  "SampleFile": {
+    "backWord": "Örnek Çeviri {index}",
+    "frontWord": "Örnek Kelime {index}"
   },
   "TableHeader": {
     "cancel": "İptal etmek",

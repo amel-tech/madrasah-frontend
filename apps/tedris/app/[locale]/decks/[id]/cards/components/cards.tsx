@@ -57,7 +57,7 @@ export default function DeckCards({
     try {
       // Pass deckId to server action for automatic revalidatePath
       const response = await deleteFlashcard(id, deckId)
-      if (response) {
+      if (response !== undefined) {
         toastHelper.success({ title: t('DeckCards.cardDeleted'), description: t('DeckCards.cardDeletedDescription', { id }) }, { cardId: id })
         return true
       }

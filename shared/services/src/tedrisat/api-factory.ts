@@ -3,7 +3,7 @@ import {
   FlashcardDecksApi,
   FlashcardCardsApi,
   TedrisatServiceApi,
-} from './generated'
+} from './generated/src'
 
 export interface TedrisatAPIConfig {
   baseUrl: string
