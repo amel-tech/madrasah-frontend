@@ -21,8 +21,10 @@ import z from 'zod'
 import { deckMetaFormSchema } from '../../validations/deck-meta-form-schema'
 import { createFlashCardDeck } from '~/features/flashcards/actions'
 import { CreateFlashcardDeckDto } from '@madrasah/services/tedrisat'
+import { useTranslations } from 'next-intl'
 
 export default function CreateDeckButtonDialog() {
+  const t = useTranslations('tedris')
   const router = useRouter()
 
   const form = useForm<z.infer<typeof deckMetaFormSchema>>({
@@ -43,16 +45,16 @@ export default function CreateDeckButtonDialog() {
 
       if (response) {
         toastHelper.success({
-          title: 'Card Created',
-          description: 'Flashcard was created successfully.',
+          title: t('CreateDeckButtonDialog.cardCreated'),
+          description: t('CreateDeckButtonDialog.cardCreatedDescription'),
         })
 
         router.push(`/cards/decks/${id}/cards`)
       }
       else {
         toastHelper.error({
-          title: 'Creation Failed',
-          description: 'Failed to create the flashcard. Please try again.',
+          title: t('CreateDeckButtonDialog.creationFailed'),
+          description: t('CreateDeckButtonDialog.creationFailedDescription'),
         })
         return false
       }
@@ -60,8 +62,8 @@ export default function CreateDeckButtonDialog() {
     catch (error) {
       console.error('Error updating flashcard:', error)
       toastHelper.error({
-        title: 'Creation Error',
-        description: 'An error occurred while creating the flashcard.',
+        title: t('CreateDeckButtonDialog.creationError'),
+        description: t('CreateDeckButtonDialog.creationErrorDescription'),
       })
       return false
     }
@@ -72,21 +74,21 @@ export default function CreateDeckButtonDialog() {
       <DialogTrigger asChild>
         <Button variant="default" size="sm" className="text-white">
           <PlusIcon weight="bold" />
-          create new deck
+          {t('CreateDeckButtonDialog.createNewDeck')}
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[620px]">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <DialogHeader className="mb-6">
-              <DialogTitle>New Deck</DialogTitle>
+              <DialogTitle>{t('CreateDeckButtonDialog.newDeck')}</DialogTitle>
             </DialogHeader>
             <DeckMetaForm control={form.control} />
             <DialogFooter>
               <DialogClose asChild>
-                <Button variant="outline">Cancel</Button>
+                <Button variant="outline">{t('CreateDeckButtonDialog.cancel')}</Button>
               </DialogClose>
-              <Button type="submit">Create Deck</Button>
+              <Button type="submit">{t('CreateDeckButtonDialog.createDeck')}</Button>
             </DialogFooter>
           </form>
         </Form>

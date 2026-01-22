@@ -15,22 +15,24 @@ import {
 } from '@madrasah/ui/components/alert-dialog'
 import { TrashIcon } from '@madrasah/icons'
 import { Button } from '@madrasah/ui/components/button'
+import { useTranslations } from 'next-intl'
 
 export function useFlashcardColumns() {
+  const t = useTranslations('nizam')
   return React.useMemo<ColumnDef<FlashcardResponse>[]>(() => [
     createTextareaColumn(
       'contentFront',
-      { header: 'Front Face' },
+      { header: t('FlashcardColumns.frontFace') },
       {
-        placeholder: 'Enter front content...',
+        placeholder: t('FlashcardColumns.frontFacePlaceholder'),
         className: '!text-lg',
       },
     ),
     createTextareaColumn(
       'contentBack',
-      { header: 'Back Face' },
+      { header: t('FlashcardColumns.backFace') },
       {
-        placeholder: 'Enter back content...',
+        placeholder: t('FlashcardColumns.backFacePlaceholder'),
         className: 'font-light text-sm',
       },
     ),
@@ -48,19 +50,19 @@ export function useFlashcardColumns() {
             <AlertDialogContent>
               <AlertDialogHeader>
                 <AlertDialogTitle>
-                  Are you sure?
+                  {t('FlashcardColumns.areYouSure')}
                 </AlertDialogTitle>
                 <AlertDialogDescription>
-                  This card and all associated information will be deleted. This action cannot be undone.
+                  {t('FlashcardColumns.deleteConfirmation')}
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogCancel>{t('TableHeader.cancel')}</AlertDialogCancel>
                 <AlertDialogAction onClick={
                   () => table.options.meta?.onRowDelete?.(row.original.id)
                 }
                 >
-                  Delete
+                  {t('FlashcardColumns.delete')}
                 </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
@@ -70,5 +72,5 @@ export function useFlashcardColumns() {
       enableSorting: false,
       enableColumnFilter: false,
     },
-  ], [])
+  ], [t])
 }

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 
 import { Button } from '@madrasah/ui/components/button'
 import { Badge } from '@madrasah/ui/components/badge'
@@ -35,6 +36,7 @@ const MOCK_RATING = 0
 const MOCK_STUDENTS = 0
 
 export default function DeckDetailClient({ deck, cards, isInCollection: initialIsInCollection }: DeckDetailClientProps) {
+  const t = useTranslations('tedris')
   const [isInCollection, setIsInCollection] = useState(initialIsInCollection)
   const [isProcessing, setIsProcessing] = useState(false)
   const cardCount = cards.length
@@ -56,26 +58,29 @@ export default function DeckDetailClient({ deck, cards, isInCollection: initialI
       if (success) {
         setIsInCollection(!isInCollection)
         toastHelper.success({
-          title: isInCollection ? 'Removed from Collection' : 'Added to Collection',
+          title: isInCollection ? t('DeckCard.removedFromCollection') : t('DeckCard.addedToCollection'),
           description: isInCollection
-            ? 'Deck has been removed from your collection successfully.'
-            : 'Deck has been added to your collection successfully.',
+            ? t('DeckCard.removedFromCollectionDescription')
+            : t('DeckCard.addedToCollectionDescription'),
         })
       }
       else {
         toastHelper.error({
-          title: isInCollection ? 'Failed to Remove' : 'Failed to Add',
+          title: isInCollection ? t('DeckCard.failedToRemove') : t('DeckCard.failedToAdd'),
           description: isInCollection
-            ? 'Failed to remove deck from your collection. Please try again.'
-            : 'Failed to add deck to your collection. Please try again.',
+            ? t('DeckCard.failedToRemoveDescription')
+            : t('DeckCard.failedToAddDescription'),
         })
       }
     }
     catch (error) {
       console.error('Error toggling deck collection:', error)
       toastHelper.error({
-        title: 'Error',
-        description: `An error occurred while ${isInCollection ? 'removing' : 'adding'} the deck ${isInCollection ? 'from' : 'to'} your collection.`,
+        title: t('DeckCard.error'),
+        description: t('DeckCard.errorDescription', {
+          action: isInCollection ? 'removing' : 'adding',
+          preposition: isInCollection ? 'from' : 'to',
+        }),
       })
     }
     finally {
@@ -97,7 +102,7 @@ export default function DeckDetailClient({ deck, cards, isInCollection: initialI
                 {author.charAt(0).toUpperCase()}
               </div>
               <span className="text-md text-muted-foreground">
-                by
+                {t('DeckDetailClient.by')}
                 {' '}
                 {author}
               </span>
@@ -110,7 +115,7 @@ export default function DeckDetailClient({ deck, cards, isInCollection: initialI
                 <span>
                   {cardCount}
                   {' '}
-                  cards
+                  {t('DeckDetailClient.cards')}
                 </span>
               </div>
               <div className="flex items-center gap-1 text-sm text-muted-foreground">
@@ -118,7 +123,7 @@ export default function DeckDetailClient({ deck, cards, isInCollection: initialI
                 <span>
                   {rating}
                   {' '}
-                  rating
+                  {t('DeckDetailClient.rating')}
                 </span>
               </div>
               <div className="flex items-center gap-1 text-sm text-muted-foreground">
@@ -126,7 +131,7 @@ export default function DeckDetailClient({ deck, cards, isInCollection: initialI
                 <span>
                   {students}
                   {' '}
-                  students
+                  {t('DeckDetailClient.students')}
                 </span>
               </div>
             </div>
@@ -138,14 +143,14 @@ export default function DeckDetailClient({ deck, cards, isInCollection: initialI
               ? (
                   <Link href={`/decks/study/${deck.id}`}>
                     <Button size="lg" className="gap-2">
-                      Practice Now
+                      {t('DeckDetailClient.practiceNow')}
                       <ArrowRightIcon size={20} />
                     </Button>
                   </Link>
                 )
               : (
                   <Button size="lg" className="gap-2" disabled>
-                    Practice Now
+                    {t('DeckDetailClient.practiceNow')}
                     <ArrowRightIcon size={20} />
                   </Button>
                 )}
@@ -158,8 +163,8 @@ export default function DeckDetailClient({ deck, cards, isInCollection: initialI
             >
               <BookmarkSimpleIcon size={20} weight={isInCollection ? 'fill' : 'regular'} />
               {isProcessing
-                ? (isInCollection ? 'Removing...' : 'Adding...')
-                : (isInCollection ? 'Remove from collection' : 'Add to my collection')}
+                ? (isInCollection ? t('DeckDetailClient.removing') : t('DeckDetailClient.adding'))
+                : (isInCollection ? t('DeckDetailClient.removeFromCollection') : t('DeckDetailClient.addToMyCollection'))}
             </Button>
           </div>
         </div>
@@ -190,18 +195,18 @@ export default function DeckDetailClient({ deck, cards, isInCollection: initialI
       {cardCount > 0
         ? (
             <div className="mt-12">
-              <h2 className="text-2xl font-semibold mb-6">Sample Cards</h2>
+              <h2 className="text-2xl font-semibold mb-6">{t('DeckDetailClient.sampleCards')}</h2>
               <SampleCards cards={sampleCards} />
             </div>
           )
         : (
             <div className="mt-12">
-              <h2 className="text-2xl font-semibold mb-6">Sample Cards</h2>
+              <h2 className="text-2xl font-semibold mb-6">{t('DeckDetailClient.sampleCards')}</h2>
               <div className="flex flex-col items-center justify-center py-12 px-4 bg-muted rounded-lg border-2 border-dashed">
                 <CardsIcon size={48} className="text-muted-foreground mb-4" />
-                <p className="text-lg font-medium text-foreground mb-2">No cards in this deck</p>
+                <p className="text-lg font-medium text-foreground mb-2">{t('DeckDetailClient.noCardsInDeck')}</p>
                 <p className="text-sm text-muted-foreground text-center max-w-md">
-                  This deck doesn&apos;t have any flashcards yet. Add some cards to start practicing.
+                  {t('DeckDetailClient.noCardsDescription')}
                 </p>
               </div>
             </div>

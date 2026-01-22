@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import {
   ColumnDef,
   flexRender,
@@ -37,6 +38,7 @@ export function DataTable<TData, TValue>({
   onRowDelete,
   options,
 }: DataTableProps<TData, TValue>) {
+  const t = useTranslations('nizam')
   const [tableData, setTableData] = useState<TData[]>(data)
   const [loadingCells, setLoadingCells] = useState<Set<string>>(new Set())
 
@@ -150,7 +152,7 @@ export function DataTable<TData, TValue>({
             : (
                 <TableRow>
                   <TableCell colSpan={columns.length} className="h-24 text-center">
-                    No results.
+                    {t('DataTable.noResults')}
                   </TableCell>
                 </TableRow>
               )}

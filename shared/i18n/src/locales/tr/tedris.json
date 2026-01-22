@@ -1,7 +1,138 @@
 {
+  "CreateDeckButtonDialog": {
+    "cancel": "İptal etmek",
+    "cardCreated": "Kart Oluşturuldu",
+    "cardCreatedDescription": "Kartvizit başarıyla oluşturuldu.",
+    "createDeck": "Deste Oluştur",
+    "createNewDeck": "yeni deste oluştur",
+    "creationError": "Oluşturma Hatası",
+    "creationErrorDescription": "Bilgi kartı oluşturulurken bir hata oluştu.",
+    "creationFailed": "Oluşturma Başarısız",
+    "creationFailedDescription": "Bilgi kartı oluşturulamadı. Lütfen tekrar deneyin.",
+    "newDeck": "Yeni Güverte"
+  },
+  "DataTable": {
+    "noResults": "Sonuç bulunamadı."
+  },
+  "DeckCard": {
+    "addedToCollection": "Koleksiyona Eklendi",
+    "addedToCollectionDescription": "Deste koleksiyonunuza başarıyla eklendi.",
+    "by": "ile",
+    "error": "Hata",
+    "errorDescription": "Koleksiyonunuzdaki {preposition} destesini {action} oluştururken bir hata oluştu.",
+    "failedToAdd": "Ekleme başarısız oldu",
+    "failedToAddDescription": "Desteyi koleksiyonunuza ekleyemediniz. Lütfen tekrar deneyin.",
+    "failedToRemove": "Kaldırılamadı",
+    "failedToRemoveDescription": "Desteyi koleksiyonunuzdan kaldırma işlemi başarısız oldu. Lütfen tekrar deneyin.",
+    "removedFromCollection": "Koleksiyondan kaldırıldı",
+    "removedFromCollectionDescription": "Deste koleksiyonunuzdan başarıyla kaldırıldı."
+  },
+  "DeckCards": {
+    "cardDeleted": "Kart Silindi",
+    "cardDeletedDescription": "{xxx} kimlik numaralı kart silindi.",
+    "cardUpdated": "Kart Güncellendi",
+    "cardUpdatedDescription": "Bilgi kartı başarıyla güncellendi.",
+    "deleteError": "Silme Hatası",
+    "deleteErrorDescription": "Bilgi kartını silme işlemi başarısız oldu.",
+    "updateError": "Güncelleme Hatası",
+    "updateErrorDescription": "Bilgi kartı güncellenirken bir hata oluştu.",
+    "updateFailed": "Güncelleme Başarısız",
+    "updateFailedDescription": "Bilgi kartı güncellenemedi. Lütfen tekrar deneyin."
+  },
+  "DeckDetailClient": {
+    "adding": "Ekleniyor...",
+    "addToMyCollection": "Koleksiyonuma ekle",
+    "by": "ile",
+    "cards": "kartlar",
+    "noCardsDescription": "Bu destede henüz hiç bilgi kartı yok. Pratik yapmaya başlamak için birkaç kart ekleyin.",
+    "noCardsInDeck": "Bu destede hiç kart yok.",
+    "practiceNow": "Şimdi Pratik Yapın",
+    "rating": "derecelendirme",
+    "removeFromCollection": "Koleksiyondan kaldır",
+    "removing": "Kaldırılıyor...",
+    "sampleCards": "Örnek Kartlar",
+    "students": "öğrenciler"
+  },
+  "DeckForm": {
+    "addCard": "Kart Ekle",
+    "back": "Geri",
+    "backText": "Geri Metin",
+    "cards": "KARTLAR",
+    "frontText": "Ön Metin",
+    "save": "Kaydetmek"
+  },
+  "DeckMetaForm": {
+    "deckName": "Deste Adı",
+    "deckNamePlaceholder": "Deste Adı",
+    "description": "Açıklama",
+    "descriptionPlaceholder": "Açıklama",
+    "private": "Özel",
+    "public": "Halk",
+    "tags": "Etiketler",
+    "tagsPlaceholder": "Etiket ekle",
+    "whoCanSee": "Bu güverteyi kimler görebilir?"
+  },
+  "DecksPage": {
+    "all": "Tümü",
+    "explore": "keşfetmek",
+    "noDecksInCollection": "Koleksiyonunuzda henüz hiç deste bulunmuyor.",
+    "private": "özel",
+    "public": "halk",
+    "seeAll": "tümünü gör"
+  },
+  "ExploreDecksClient": {
+    "all": "Tüm",
+    "deck": "güverte",
+    "decks": "güverteler",
+    "filter": "Filtrele",
+    "found": "kurmak",
+    "loadingMore": "Daha fazlası yükleniyor...",
+    "noDecksFound": "Hiçbir deste bulunamadı.",
+    "private": "Özel",
+    "public": "Halk",
+    "searchPlaceholder": "Başlığa, açıklamaya göre ara...",
+    "sortBy": "Göre sırala",
+    "titleAsc": "Başlık (A-Z)",
+    "titleDesc": "Başlık (Z-A)"
+  },
+  "FlashCardContent": {
+    "card": "Kart",
+    "flip": "Çevir",
+    "flipTooltip": "Kartı çevirin",
+    "markAsMemorized": "Hafızaya Alındı Olarak İşaretle",
+    "markAsMemorizedTooltip": "Ezbere alındı olarak işaretle",
+    "markAsToReviewLater": "Daha sonra incelemek üzere işaretle.",
+    "repeat": "Tekrarlamak"
+  },
+  "FlashCardList": {
+    "noCardsFound": "Henüz hiçbir kart bulunamadı."
+  },
+  "KeycloakLogout": {
+    "button": "Çıkış yap"
+  },
+  "SampleCards": {
+    "answer": "Cevap",
+    "noAnswer": "Cevap yok",
+    "noContent": "İçerik yok",
+    "question": "Soru"
+  },
   "TabView": {
     "decks": "Desteler",
-    "home": "Ana Sayfa",
+    "home": "Ev",
     "learning": "Öğrenme"
+  },
+  "UserHeaderMenu": {
+    "accountSettings": "Hesap Ayarları",
+    "helpAndSupport": "Yardım ve Destek",
+    "myLearning": "Öğrenimim",
+    "profile": "Profil",
+    "signOut": "oturumu Kapat",
+    "talebe": "Talebe"
+  },
+  "UserNotifications": {
+    "noNewNotifications": "Yeni bildirim yok."
+  },
+  "Version": {
+    "appVersion": "Uygulama sürümü"
   }
 }

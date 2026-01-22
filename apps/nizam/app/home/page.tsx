@@ -1,7 +1,10 @@
-export default function Page() {
+import { getTranslations } from 'next-intl/server'
+
+export default async function Page() {
+  const t = await getTranslations('nizam')
   return (
     <div className="container">
-      Assalamu alaikum!
+      {t('HomePage.greeting')}
     </div>
   )
 }
