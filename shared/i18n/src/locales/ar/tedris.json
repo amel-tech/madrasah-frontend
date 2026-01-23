@@ -1,20 +1,148 @@
 {
+  "CardsPage": {
+    "exploreTitle": "يستكشف",
+    "filterAll": "الجميع",
+    "filterPrivate": "خاص",
+    "filterPublic": "عام",
+    "seeAll": "عرض الكل"
+  },
+  "CreateDeckButtonDialog": {
+    "cancel": "يلغي",
+    "cardCreated": "تم إنشاء البطاقة",
+    "cardCreatedDescription": "تم إنشاء البطاقة التعليمية بنجاح.",
+    "createDeck": "إنشاء مجموعة أوراق اللعب",
+    "createNewDeck": "إنشاء مجموعة جديدة",
+    "creationError": "خطأ في الإنشاء",
+    "creationErrorDescription": "حدث خطأ أثناء إنشاء البطاقة التعليمية.",
+    "creationFailed": "فشل الإنشاء",
+    "creationFailedDescription": "فشل في إنشاء البطاقة التعليمية. الرجاء المحاولة مرة أخرى.",
+    "newDeck": "سطح جديد"
+  },
+  "DataTable": {
+    "noResults": "لا توجد نتائج."
+  },
+  "DeckCard": {
+    "addedToCollection": "تمت إضافته إلى المجموعة",
+    "addedToCollectionDescription": "تمت إضافة القرص إلى مجموعتك بنجاح.",
+    "by": "بواسطة",
+    "error": "خطأ",
+    "errorDescription": "حدث خطأ أثناء {action} مجموعة أوراق اللعب {preposition}.",
+    "failedToAdd": "فشل في الإضافة",
+    "failedToAddDescription": "فشلت إضافة المجموعة إلى مجموعتك. يرجى المحاولة مرة أخرى.",
+    "failedToRemove": "فشل في الإزالة",
+    "failedToRemoveDescription": "فشلت عملية إزالة المجموعة من مجموعتك. يرجى المحاولة مرة أخرى.",
+    "removedFromCollection": "تمت إزالته من المجموعة",
+    "removedFromCollectionDescription": "تمت إزالة القرص من مجموعتك بنجاح."
+  },
+  "DeckCards": {
+    "cardDeleted": "تم حذف البطاقة",
+    "cardDeletedDescription": "تم حذف البطاقة ذات المعرف {id}.",
+    "cardUpdated": "تم تحديث البطاقة",
+    "cardUpdatedDescription": "تم تحديث البطاقة التعليمية بنجاح.",
+    "deleteError": "خطأ في الحذف",
+    "deleteErrorDescription": "فشل حذف البطاقة التعليمية.",
+    "updateError": "خطأ في التحديث",
+    "updateErrorDescription": "حدث خطأ أثناء تحديث البطاقة التعليمية.",
+    "updateFailed": "فشل التحديث",
+    "updateFailedDescription": "فشل تحديث البطاقة التعليمية. يرجى المحاولة مرة أخرى."
+  },
+  "DeckDetailClient": {
+    "adding": "إضافة...",
+    "addToMyCollection": "أضف إلى مجموعتي",
+    "by": "بواسطة",
+    "cards": "بطاقات",
+    "noCardsDescription": "لا تحتوي هذه المجموعة على أي بطاقات تعليمية حتى الآن. أضف بعض البطاقات للبدء في التدريب.",
+    "noCardsInDeck": "لا توجد بطاقات في هذه المجموعة",
+    "practiceNow": "تدرب الآن",
+    "rating": "تصنيف",
+    "removeFromCollection": "إزالة من المجموعة",
+    "removing": "إزالة...",
+    "sampleCards": "بطاقات العينات",
+    "students": "طلاب"
+  },
+  "DeckForm": {
+    "addCard": "أضف البطاقة",
+    "back": "خلف",
+    "backText": "نص الخلف",
+    "cards": "بطاقات",
+    "frontText": "النص الأمامي",
+    "save": "يحفظ"
+  },
+  "DeckMetaForm": {
+    "deckName": "اسم المجموعة",
+    "deckNamePlaceholder": "اسم المجموعة",
+    "description": "وصف",
+    "descriptionPlaceholder": "وصف",
+    "private": "خاص",
+    "public": "عام",
+    "tags": "الوسوم",
+    "tagsPlaceholder": "إضافة علامات",
+    "whoCanSee": "من يستطيع رؤية هذه المجموعة؟"
+  },
+  "DecksPage": {
+    "all": "الجميع",
+    "explore": "يستكشف",
+    "noDecksInCollection": "ليس لديك أي مجموعات أوراق لعب في مجموعتك حتى الآن.",
+    "private": "خاص",
+    "public": "عام",
+    "seeAll": "عرض الكل"
+  },
+  "ExploreDecksClient": {
+    "all": "الجميع",
+    "deck": "ظهر السفينة",
+    "decks": "أسطح السفن",
+    "filter": "فلتر",
+    "found": "وجد",
+    "loadingMore": "جارٍ تحميل المزيد...",
+    "noDecksFound": "لم يتم العثور على أي مجموعات أوراق لعب",
+    "private": "خاص",
+    "public": "عام",
+    "searchPlaceholder": "البحث حسب العنوان والوصف...",
+    "sortBy": "فرز حسب",
+    "titleAsc": "العنوان (من الألف إلى الياء)",
+    "titleDesc": "العنوان (Z-A)"
+  },
+  "FlashCardContent": {
+    "card": "بطاقة",
+    "flip": "نقف",
+    "flipTooltip": "اقلب البطاقة",
+    "markAsMemorized": "ضع علامة كمحفوظ",
+    "markAsMemorizedTooltip": "ضع علامة كما هو محفوظ",
+    "markAsToReviewLater": "ضع علامة للمراجعة لاحقًا",
+    "repeat": "يكرر"
+  },
+  "FlashCardList": {
+    "noCardsFound": "لم يتم العثور على أي بطاقات حتى الآن."
+  },
+  "HomePage": {
+    "greeting": "السلام عليكم!"
+  },
+  "KeycloakLogout": {
+    "button": "تسجيل الخروج"
+  },
+  "SampleCards": {
+    "answer": "إجابة",
+    "noAnswer": "لا إجابة",
+    "noContent": "لا يوجد محتوى",
+    "question": "سؤال"
+  },
   "TabView": {
     "decks": "مجموعة أوراق",
     "home": "الرئيسية",
     "learning": "التعلم"
   },
-  "CardsPage": {
-    "filterAll": "الكل",
-    "filterPublic": "عام",
-    "filterPrivate": "خاص",
-    "exploreTitle": "استكشف",
-    "seeAll": "عرض الكل"
+  "UserHeaderMenu": {
+    "accountSettings": "إعدادات الحساب",
+    "helpAndSupport": "المساعدة والدعم",
+    "myLearning": "تعلمي",
+    "profile": "حساب تعريفي",
+    "signOut": "تسجيل الخروج",
+    "talebe": "طالبي"
   },
-  "HomePage": {
-    "title": "الشاشة الرئيسية"
+  "UserNotifications": {
+    "noNewNotifications": "لا توجد إشعارات جديدة"
   },
-  "Metadata": {
-    "description": "مشروع المدرسة الإلكترونية"
+  "Version": {
+    "appVersion": "إصدار التطبيق"
   }
 }

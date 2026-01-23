@@ -1,5 +1,6 @@
 import z from 'zod'
 import { Control } from 'react-hook-form'
+import { useTranslations } from 'next-intl'
 
 import ATFormGroup from '@madrasah/ui/custom/form-group'
 import ATFormGroupTextArea from '@madrasah/ui/custom/form-group-text-area'
@@ -11,28 +12,29 @@ interface IDeckMetaFormProps {
 }
 
 export default function DeckMetaForm({ control }: IDeckMetaFormProps) {
+  const t = useTranslations('tedris')
   return (
     <>
       <ATFormGroup
         name="title"
-        label="Deck Name"
-        placeholder="Deck Name"
+        label={t('DeckMetaForm.deckName')}
+        placeholder={t('DeckMetaForm.deckNamePlaceholder')}
         required
         control={control}
       />
       <ATFormGroupTextArea
         name="description"
-        label="Description"
-        placeholder="Description"
+        label={t('DeckMetaForm.description')}
+        placeholder={t('DeckMetaForm.descriptionPlaceholder')}
         control={control}
         required
       />
       <ATFormGroupTabs
         name="isPublic"
-        label="Who can see this deck?"
+        label={t('DeckMetaForm.whoCanSee')}
         tabs={[
-          { value: true, label: 'Public' },
-          { value: false, label: 'Private' },
+          { value: true, label: t('DeckMetaForm.public') },
+          { value: false, label: t('DeckMetaForm.private') },
         ]}
         control={control}
       />

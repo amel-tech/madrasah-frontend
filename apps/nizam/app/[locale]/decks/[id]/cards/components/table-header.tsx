@@ -21,7 +21,7 @@ export const TableHeader = ({
   onDeckFileImport: (file: File) => void
   onClickDownloadSampleFile: () => void
 }) => {
-  const t = useTranslations('nizam.DeckCardsPage')
+  const t = useTranslations('nizam')
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const handleUploadClick = () => {
@@ -52,24 +52,24 @@ export const TableHeader = ({
         <DropdownMenu modal>
           <DropdownMenuTrigger asChild>
             <Button variant="outline">
-              {t('bulkActions')}
+              {t('CardsTableHeader.bulkActions')}
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-60">
             <DropdownMenuItem onClick={handleUploadClick}>
               <UploadIcon />
               {' '}
-              {t('importFromExcel')}
+              {t('CardsTableHeader.importFromExcel')}
             </DropdownMenuItem>
             <DropdownMenuItem onClick={onClickDownloadSampleFile} disabled>
               <DownloadIcon />
               {' '}
-              {t('downloadAsExcel')}
+              {t('CardsTableHeader.downloadAsExcel')}
             </DropdownMenuItem>
             <DropdownMenuItem onClick={onClickDownloadSampleFile}>
               <DownloadIcon />
               {' '}
-              {t('downloadSampleFile')}
+              {t('CardsTableHeader.downloadSampleFile')}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

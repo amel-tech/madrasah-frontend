@@ -1,20 +1,148 @@
 {
+  "CardsPage": {
+    "exploreTitle": "Explore",
+    "filterAll": "All",
+    "filterPrivate": "Private",
+    "filterPublic": "Public",
+    "seeAll": "See All"
+  },
+  "CreateDeckButtonDialog": {
+    "cancel": "Cancel",
+    "cardCreated": "Card Created",
+    "cardCreatedDescription": "Flashcard was created successfully.",
+    "createDeck": "Create Deck",
+    "createNewDeck": "create new deck",
+    "creationError": "Creation Error",
+    "creationErrorDescription": "An error occurred while creating the flashcard.",
+    "creationFailed": "Creation Failed",
+    "creationFailedDescription": "Failed to create the flashcard. Please try again.",
+    "newDeck": "New Deck"
+  },
+  "DataTable": {
+    "noResults": "No results."
+  },
+  "DeckCard": {
+    "addedToCollection": "Added to Collection",
+    "addedToCollectionDescription": "Deck has been added to your collection successfully.",
+    "by": "by",
+    "error": "Error",
+    "errorDescription": "An error occurred while {action} the deck {preposition} your collection.",
+    "failedToAdd": "Failed to Add",
+    "failedToAddDescription": "Failed to add deck to your collection. Please try again.",
+    "failedToRemove": "Failed to Remove",
+    "failedToRemoveDescription": "Failed to remove deck from your collection. Please try again.",
+    "removedFromCollection": "Removed from Collection",
+    "removedFromCollectionDescription": "Deck has been removed from your collection successfully."
+  },
+  "DeckCards": {
+    "cardDeleted": "Card Deleted",
+    "cardDeletedDescription": "Card with ID {id} was deleted.",
+    "cardUpdated": "Card Updated",
+    "cardUpdatedDescription": "Flashcard was updated successfully.",
+    "deleteError": "Delete Error",
+    "deleteErrorDescription": "Failed to delete the flashcard.",
+    "updateError": "Update Error",
+    "updateErrorDescription": "An error occurred while updating the flashcard.",
+    "updateFailed": "Update Failed",
+    "updateFailedDescription": "Failed to update the flashcard. Please try again."
+  },
+  "DeckDetailClient": {
+    "adding": "Adding...",
+    "addToMyCollection": "Add to my collection",
+    "by": "by",
+    "cards": "cards",
+    "noCardsDescription": "This deck doesn't have any flashcards yet. Add some cards to start practicing.",
+    "noCardsInDeck": "No cards in this deck",
+    "practiceNow": "Practice Now",
+    "rating": "rating",
+    "removeFromCollection": "Remove from collection",
+    "removing": "Removing...",
+    "sampleCards": "Sample Cards",
+    "students": "students"
+  },
+  "DeckForm": {
+    "addCard": "Add Card",
+    "back": "Back",
+    "backText": "Back Text",
+    "cards": "CARDS",
+    "frontText": "Front Text",
+    "save": "Save"
+  },
+  "DeckMetaForm": {
+    "deckName": "Deck Name",
+    "deckNamePlaceholder": "Deck Name",
+    "description": "Description",
+    "descriptionPlaceholder": "Description",
+    "private": "Private",
+    "public": "Public",
+    "tags": "Tags",
+    "tagsPlaceholder": "Add tags",
+    "whoCanSee": "Who can see this deck?"
+  },
+  "DecksPage": {
+    "all": "all",
+    "explore": "explore",
+    "noDecksInCollection": "You don't have any decks in your collection yet.",
+    "private": "private",
+    "public": "public",
+    "seeAll": "see all"
+  },
+  "ExploreDecksClient": {
+    "all": "All",
+    "deck": "deck",
+    "decks": "decks",
+    "filter": "Filter",
+    "found": "found",
+    "loadingMore": "Loading more...",
+    "noDecksFound": "No decks found",
+    "private": "Private",
+    "public": "Public",
+    "searchPlaceholder": "Search by title, description...",
+    "sortBy": "Sort by",
+    "titleAsc": "Title (A-Z)",
+    "titleDesc": "Title (Z-A)"
+  },
+  "FlashCardContent": {
+    "card": "Card",
+    "flip": "Flip",
+    "flipTooltip": "Flip the card",
+    "markAsMemorized": "Mark as Memorized",
+    "markAsMemorizedTooltip": "Mark as memorized",
+    "markAsToReviewLater": "Mark as to review later",
+    "repeat": "Repeat"
+  },
+  "FlashCardList": {
+    "noCardsFound": "No cards found yet."
+  },
+  "HomePage": {
+    "greeting": "Assalamu alaikum!"
+  },
+  "KeycloakLogout": {
+    "button": "Logout"
+  },
+  "SampleCards": {
+    "answer": "Answer",
+    "noAnswer": "No answer",
+    "noContent": "No content",
+    "question": "Question"
+  },
   "TabView": {
     "decks": "Decks",
     "home": "Home",
     "learning": "Learning"
   },
-  "CardsPage": {
-    "filterAll": "all",
-    "filterPublic": "public",
-    "filterPrivate": "private",
-    "exploreTitle": "explore",
-    "seeAll": "see all"
+  "UserHeaderMenu": {
+    "accountSettings": "Account Settings",
+    "helpAndSupport": "Help and Support",
+    "myLearning": "My Learning",
+    "profile": "Profile",
+    "signOut": "Sign out",
+    "talebe": "Talebe"
   },
-  "HomePage": {
-    "title": "Home screen"
+  "UserNotifications": {
+    "noNewNotifications": "No new notifications"
   },
-  "Metadata": {
-    "description": "Online Medrese Projesi"
+  "Version": {
+    "appVersion": "App version"
   }
 }

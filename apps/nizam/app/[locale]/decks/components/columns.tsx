@@ -29,7 +29,7 @@ export function useDecksColumns() {
       'title',
       { header: t('DecksPage.Table.titleColumn') },
       {
-        placeholder: 'Enter deck title...',
+        placeholder: t('DecksColumns.titlePlaceholder'),
         className: 'font-medium',
       },
     ),
@@ -38,7 +38,7 @@ export function useDecksColumns() {
       { header: t('DecksPage.Table.descriptionColumn'),
       },
       {
-        placeholder: 'Enter deck description...',
+        placeholder: t('DecksColumns.descriptionPlaceholder'),
         className: 'font-medium',
       },
     ),
@@ -65,14 +65,14 @@ export function useDecksColumns() {
             <AlertDialogContent>
               <AlertDialogHeader>
                 <AlertDialogTitle>
-                  Are you sure?
+                  {t('DecksColumns.areYouSure')}
                 </AlertDialogTitle>
                 <AlertDialogDescription>
-                  This deck and all associated information will be deleted. This action cannot be undone.
+                  {t('DecksColumns.deleteConfirmation')}
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogCancel onClick={e => e.stopPropagation()}>Cancel</AlertDialogCancel>
+                <AlertDialogCancel onClick={e => e.stopPropagation()}>{t('TableHeader.cancel')}</AlertDialogCancel>
                 <AlertDialogAction onClick={
                   (event) => {
                     event.stopPropagation()
@@ -80,7 +80,7 @@ export function useDecksColumns() {
                   }
                 }
                 >
-                  Delete
+                  {t('DecksColumns.delete')}
                 </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>

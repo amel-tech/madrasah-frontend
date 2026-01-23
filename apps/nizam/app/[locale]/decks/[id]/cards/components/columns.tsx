@@ -18,22 +18,21 @@ import { Button } from '@madrasah/ui/components/button'
 import { useTranslations } from 'next-intl'
 
 export function useFlashcardColumns() {
-  const t = useTranslations('nizam.DeckCardsPage.Columns')
-
+  const t = useTranslations('nizam')
   return React.useMemo<ColumnDef<FlashcardResponse>[]>(() => [
     createTextareaColumn(
       'contentFront',
-      { header: t('frontFace') },
+      { header: t('FlashcardColumns.frontFace') },
       {
-        placeholder: t('frontPlaceholder'),
+        placeholder: t('FlashcardColumns.frontFacePlaceholder'),
         className: '!text-lg',
       },
     ),
     createTextareaColumn(
       'contentBack',
-      { header: t('backFace') },
+      { header: t('FlashcardColumns.backFace') },
       {
-        placeholder: t('backPlaceholder'),
+        placeholder: t('FlashcardColumns.backFacePlaceholder'),
         className: 'font-light text-sm',
       },
     ),
@@ -51,19 +50,19 @@ export function useFlashcardColumns() {
             <AlertDialogContent>
               <AlertDialogHeader>
                 <AlertDialogTitle>
-                  Are you sure?
+                  {t('FlashcardColumns.areYouSure')}
                 </AlertDialogTitle>
                 <AlertDialogDescription>
-                  This card and all associated information will be deleted. This action cannot be undone.
+                  {t('FlashcardColumns.deleteConfirmation')}
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogCancel>{t('cancelButton')}</AlertDialogCancel>
+                <AlertDialogCancel>{t('TableHeader.cancel')}</AlertDialogCancel>
                 <AlertDialogAction onClick={
                   () => table.options.meta?.onRowDelete?.(row.original.id)
                 }
                 >
-                  {t('deleteButton')}
+                  {t('FlashcardColumns.delete')}
                 </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>

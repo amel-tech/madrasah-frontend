@@ -3,6 +3,7 @@
 import { useMemo } from 'react'
 import * as XLSX from 'xlsx'
 import { updateFlashcard, createFlashcards, deleteFlashcard } from '../actions'
+import { useTranslations } from 'next-intl'
 
 import { DataTable } from '~/components/data-table'
 import { TableHeader } from './table-header'
@@ -10,7 +11,6 @@ import { FlashcardDeckResponse, FlashcardResponse, FlashcardResponseTypeEnum } f
 import { toastHelper } from '@madrasah/ui/lib/toast-helper'
 import { useFlashcardColumns } from './columns'
 import { createDefaultColumn } from '~/components/data-table/editable'
-import { useTranslations } from 'next-intl'
 
 type SpreadsheetCardRepresentation = {
   id: string
@@ -27,7 +27,7 @@ export default function DeckCards({
   deck: FlashcardDeckResponse
   cards: FlashcardResponse[]
 }) {
-  const t = useTranslations('nizam.DeckCardsPage')
+  const t = useTranslations('nizam')
   const columns = useFlashcardColumns()
 
   const onRowUpdate = async (updatedRow: FlashcardResponse) => {
@@ -40,15 +40,15 @@ export default function DeckCards({
 
       if (response) {
         toastHelper.success({
-          title: t('Toast.cardUpdated'),
-          description: t('Toast.cardUpdatedSuccess'),
+          title: t('DeckCards.cardUpdated'),
+          description: t('DeckCards.cardUpdatedDescription'),
         })
         return true
       }
       else {
         toastHelper.error({
-          title: t('Toast.updateError'),
-          description: t('Toast.updateErrorMessage'),
+          title: t('DeckCards.updateFailed'),
+          description: t('DeckCards.updateFailedDescription'),
         })
         return false
       }
@@ -56,8 +56,8 @@ export default function DeckCards({
     catch (error) {
       console.error('Error updating flashcard:', error)
       toastHelper.error({
-        title: t('Toast.updateError'),
-        description: t('Toast.updateErrorMessage'),
+        title: t('DeckCards.updateError'),
+        description: t('DeckCards.updateErrorDescription'),
       })
       return false
     }
@@ -84,10 +84,7 @@ export default function DeckCards({
     }))
 
     await createFlashcards(deck.id, cardsToImport)
-    toastHelper.success({
-      title: t('Toast.cardsImported'),
-      description: t('Toast.cardsImportedSuccess', { count: cardsToImport.length }),
-    })
+    toastHelper.success({ title: t('DeckCards.cardsImported'), description: t('DeckCards.cardsImportedDescription', { count: cardsToImport.length }) })
   }
 
   const onRowDelete = async (id: string) => {
@@ -95,20 +92,14 @@ export default function DeckCards({
       // Pass deckId to server action for automatic revalidatePath
       const response = await deleteFlashcard(id, deck.id)
       if (response) {
-        toastHelper.success({
-          title: t('Toast.cardDeleted'),
-          description: t('Toast.cardDeletedSuccess', { id }),
-        }, { cardId: id })
+        toastHelper.success({ title: t('DeckCards.cardDeleted'), description: t('DeckCards.cardDeletedDescription', { id }) }, { cardId: id })
         return true
       }
       return false
     }
     catch (error) {
       console.error('Error deleting flashcard:', error)
-      toastHelper.error({
-        title: t('Toast.deleteError'),
-        description: t('Toast.deleteErrorMessage'),
-      })
+      toastHelper.error({ title: t('DeckCards.deleteError'), description: t('DeckCards.deleteErrorDescription') })
       return false
     }
   }
