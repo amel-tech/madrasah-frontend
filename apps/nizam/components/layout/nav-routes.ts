@@ -1,4 +1,4 @@
-import { Icon, TableIcon } from '@madrasah/icons'
+import { Icon, TableIcon, House } from '@madrasah/icons'
 
 export type NavigationRouteType = {
   title: string
@@ -20,6 +20,11 @@ export const routes: {
       title: 'Decks',
       url: '/decks',
       icon: TableIcon,
+    },
+    {
+      title: 'Köşkler',
+      url: '/kosks',
+      icon: House,
     },
   ],
 }
