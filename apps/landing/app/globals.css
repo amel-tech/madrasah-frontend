@@ -17,7 +17,18 @@
 @theme {
   --color-brand-700: #0C4A6E;
   --color-brand-600: #075985;
+  --color-brand-50: #E0F2FE;
   --color-accent-500: #B8860B;
+  --color-accent-50: #F5F5DC;
+  --color-blue-200: #BFDBFE;
+  --color-gray-50: #F9FAFB;
+  --color-gray-100: #F3F4F6;
+  --color-gray-200: #E5E7EB;
+  --color-gray-300: #D1D5DB;
   --color-gray-400: #4B5563;
   --color-gray-500: #646464;
+  --color-gray-600: #6B7280;
+  --color-gray-700: #374151;
+  --color-gray-900: #111827;
+  --color-white: #FFFFFF;
 }
