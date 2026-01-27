@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { getTranslations } from 'next-intl/server'
 
 import { Button } from '@madrasah/ui/components/button'
 
@@ -42,6 +43,7 @@ async function getMyDecks(): Promise<FlashcardDeckResponse[]> {
 }
 
 export default async function Page() {
+  const t = await getTranslations('tedris')
   const [decks, myDecks] = await Promise.all([
     getDecks(),
     getMyDecks(),
@@ -52,13 +54,13 @@ export default async function Page() {
       <div className="flex items-center justify-between mb-6">
         <div>
           <Button variant="default" size="sm" className="mr-2">
-            all
+            {t('DecksPage.all')}
           </Button>
           <Button variant="secondary" size="sm" className="mr-2">
-            public
+            {t('DecksPage.public')}
           </Button>
           <Button variant="secondary" size="sm" className="mr-2">
-            private
+            {t('DecksPage.private')}
           </Button>
         </div>
         <CreateDeckButtonDialog />
@@ -81,15 +83,15 @@ export default async function Page() {
             )
           : (
               <div className="flex items-center justify-center py-12 text-muted-foreground">
-                <p>You don&apos;t have any decks in your collection yet.</p>
+                <p>{t('DecksPage.noDecksInCollection')}</p>
               </div>
             )
       }
       <div className="flex items-center justify-between mb-4">
-        <h1 className="text-xl font-semibold">explore</h1>
+        <h1 className="text-xl font-semibold">{t('DecksPage.explore')}</h1>
         <Link href="/decks/explore">
           <Button variant="secondary" size="sm">
-            <p className="text-sm">see all</p>
+            <p className="text-sm">{t('DecksPage.seeAll')}</p>
           </Button>
         </Link>
       </div>

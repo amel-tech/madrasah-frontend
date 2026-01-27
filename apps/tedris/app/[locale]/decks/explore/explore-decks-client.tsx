@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useEffect, useRef } from 'react'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 
 import { Input } from '@madrasah/ui/components/input'
 import {
@@ -27,6 +28,7 @@ interface ExploreDecksClientProps {
 const DECKS_PER_PAGE = 16
 
 export default function ExploreDecksClient({ initialDecks, userDeckIds }: ExploreDecksClientProps) {
+  const t = useTranslations('tedris')
   const [searchQuery, setSearchQuery] = useState('')
   const [sortBy, setSortBy] = useState<SortOption>('title-asc')
   const [filterBy, setFilterBy] = useState<FilterOption>('all')
@@ -129,7 +131,7 @@ export default function ExploreDecksClient({ initialDecks, userDeckIds }: Explor
           />
           <Input
             type="text"
-            placeholder="Search by title, description..."
+            placeholder={t('ExploreDecksClient.searchPlaceholder')}
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
             className="pl-10"
@@ -140,11 +142,11 @@ export default function ExploreDecksClient({ initialDecks, userDeckIds }: Explor
         <div className="flex gap-2">
           <Select value={sortBy} onValueChange={value => setSortBy(value as SortOption)}>
             <SelectTrigger className="w-[140px]">
-              <SelectValue placeholder="Sort by" />
+              <SelectValue placeholder={t('ExploreDecksClient.sortBy')} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="title-asc">Title (A-Z)</SelectItem>
-              <SelectItem value="title-desc">Title (Z-A)</SelectItem>
+              <SelectItem value="title-asc">{t('ExploreDecksClient.titleAsc')}</SelectItem>
+              <SelectItem value="title-desc">{t('ExploreDecksClient.titleDesc')}</SelectItem>
             </SelectContent>
           </Select>
 
@@ -153,12 +155,12 @@ export default function ExploreDecksClient({ initialDecks, userDeckIds }: Explor
             onValueChange={value => setFilterBy(value as FilterOption)}
           >
             <SelectTrigger className="w-[120px]">
-              <SelectValue placeholder="Filter" />
+              <SelectValue placeholder={t('ExploreDecksClient.filter')} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All</SelectItem>
-              <SelectItem value="public">Public</SelectItem>
-              <SelectItem value="private">Private</SelectItem>
+              <SelectItem value="all">{t('ExploreDecksClient.all')}</SelectItem>
+              <SelectItem value="public">{t('ExploreDecksClient.public')}</SelectItem>
+              <SelectItem value="private">{t('ExploreDecksClient.private')}</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -168,9 +170,9 @@ export default function ExploreDecksClient({ initialDecks, userDeckIds }: Explor
       <div className="mb-4 text-sm text-muted-foreground">
         {filteredAndSortedDecks.length}
         {' '}
-        {filteredAndSortedDecks.length === 1 ? 'deck' : 'decks'}
+        {filteredAndSortedDecks.length === 1 ? t('ExploreDecksClient.deck') : t('ExploreDecksClient.decks')}
         {' '}
-        found
+        {t('ExploreDecksClient.found')}
       </div>
 
       {/* Deck Grid */}
@@ -192,14 +194,14 @@ export default function ExploreDecksClient({ initialDecks, userDeckIds }: Explor
           )
         : (
             <div className="flex items-center justify-center py-12 text-muted-foreground">
-              <p>No decks found</p>
+              <p>{t('ExploreDecksClient.noDecksFound')}</p>
             </div>
           )}
 
       {/* Infinite Scroll Trigger */}
       {displayedCount < filteredAndSortedDecks.length && (
         <div ref={observerTarget} className="h-20 flex items-center justify-center">
-          <p className="text-sm text-muted-foreground">Loading more...</p>
+          <p className="text-sm text-muted-foreground">{t('ExploreDecksClient.loadingMore')}</p>
         </div>
       )}
     </div>

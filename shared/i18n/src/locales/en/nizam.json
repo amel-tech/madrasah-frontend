@@ -1,8 +1,195 @@
 {
+  "Breadcrumbs": {
+    "home": "Home"
+  },
+  "CardsTableHeader": {
+    "bulkActions": "Bulk Actions",
+    "downloadAsExcel": "Download as Excel",
+    "downloadSampleFile": "Download Sample File",
+    "importFromExcel": "Import from Excel"
+  },
+  "DataTable": {
+    "noResults": "No results."
+  },
+  "DeckCards": {
+    "cardDeleted": "Card Deleted",
+    "cardDeletedDescription": "Card with ID {id} was deleted.",
+    "cardsImported": "Cards Imported",
+    "cardsImportedDescription": "{count} cards were imported successfully.",
+    "cardUpdated": "Card Updated",
+    "cardUpdatedDescription": "Flashcard was updated successfully.",
+    "deleteError": "Delete Error",
+    "deleteErrorDescription": "Failed to delete the flashcard.",
+    "updateError": "Update Error",
+    "updateErrorDescription": "An error occurred while updating the flashcard.",
+    "updateFailed": "Update Failed",
+    "updateFailedDescription": "Failed to update the flashcard. Please try again."
+  },
+  "DecksColumns": {
+    "areYouSure": "Are you sure?",
+    "delete": "Delete",
+    "deleteConfirmation": "This deck and all associated information will be deleted. This action cannot be undone.",
+    "descriptionPlaceholder": "Enter deck description...",
+    "titlePlaceholder": "Enter deck title..."
+  },
   "DecksPage": {
+    "description": "Manage your flashcard decks and study materials.",
+    "Dialog": {
+      "cancelButton": "Cancel",
+      "createButton": "Create Deck",
+      "creatingButton": "Creating...",
+      "description": "Create a new flashcard deck to organize your study materials.",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Enter deck description...",
+      "publicLabel": "Make this deck public",
+      "title": "Create New Deck",
+      "titleLabel": "Title *",
+      "titlePlaceholder": "Enter deck title..."
+    },
+    "newDeckButton": "New Deck",
     "Table": {
       "descriptionColumn": "Description",
       "titleColumn": "Title"
+    },
+    "title": "Flashcard Decks",
+    "Toast": {
+      "creationError": "Creation Error",
+      "creationErrorMessage": "An unexpected error occurred while creating the deck.",
+      "creationFailed": "Creation Failed",
+      "creationFailedMessage": "Failed to create the deck. Please try again.",
+      "deckCreated": "Deck Created",
+      "deckCreatedSuccess": "New flashcard deck was created successfully.",
+      "titleRequired": "Deck title is required.",
+      "validationError": "Validation Error"
+    }
+  },
+  "FlashcardColumns": {
+    "areYouSure": "Are you sure?",
+    "backFace": "Back Face",
+    "backFacePlaceholder": "Enter back content...",
+    "delete": "Delete",
+    "deleteConfirmation": "This card and all associated information will be deleted. This action cannot be undone.",
+    "frontFace": "Front Face",
+    "frontFacePlaceholder": "Enter front content..."
+  },
+  "HomePage": {
+    "greeting": "Assalamu alaikum!"
+  },
+  "KeycloakLogin": {
+    "signIn": "Sign In"
+  },
+  "KosksPage": {
+    "courseCreatedAt": "Created At",
+    "createNewCourse": "Create New Course",
+    "description": "You can view the kosks and courses under your management here.",
+    "noCoursesAvailable": "No Courses Available",
+    "noCoursesAvailableDescription": "Create your first course to get started.",
+    "title": "Kosks"
+  },
+  "NavMain": {
+    "content": "Content"
+  },
+  "NavRoutes": {
+    "decks": "Decks"
+  },
+  "SampleFile": {
+    "backWord": "Sample Translation {index}",
+    "frontWord": "Sample Word {index}"
+  },
+  "TableHeader": {
+    "cancel": "Cancel",
+    "createDeck": "Create Deck",
+    "createNewDeck": "Create New Deck",
+    "createNewDeckDescription": "Create a new flashcard deck to organize your study materials.",
+    "creating": "Creating...",
+    "creationError": "Creation Error",
+    "creationErrorDescription": "An unexpected error occurred while creating the deck.",
+    "creationFailed": "Creation Failed",
+    "creationFailedDescription": "Failed to create the deck. Please try again.",
+    "deckCreated": "Deck Created",
+    "deckCreatedDescription": "New flashcard deck was created successfully.",
+    "description": "Description",
+    "descriptionPlaceholder": "Enter deck description...",
+    "flashcardDecks": "Flashcard Decks",
+    "makePublic": "Make this deck public",
+    "manageDecks": "Manage your flashcard decks and study materials.",
+    "newDeck": "New Deck",
+    "title": "Title",
+    "titlePlaceholder": "Enter deck title...",
+    "validationError": "Validation Error",
+    "validationErrorDescription": "Deck title is required."
+  },
+  "Wizard": {
+    "BasicInfo": {
+      "descriptionLabel": "Course Description",
+      "descriptionPlaceholder": "Provide information about the course content...",
+      "endDateLabel": "End Date",
+      "startDateLabel": "Start Date",
+      "titleLabel": "Course Title",
+      "titlePlaceholder": "Ex: Basic Fiqh Lessons"
+    },
+    "Buttons": {
+      "back": "Back",
+      "cancel": "Cancel",
+      "create": "Create Course",
+      "next": "Next Step"
+    },
+    "Curriculum": {
+      "addFirstWeek": "Add the first week",
+      "addWeek": "Add Week",
+      "noSyllabus": "No curriculum added yet.",
+      "placeholders": {
+        "resources": "Resource books...",
+        "topic": "Topic title..."
+      },
+      "table": {
+        "delete": "Delete",
+        "order": "Order",
+        "resources": "Resources",
+        "topic": "Topic",
+        "week": "Week"
+      },
+      "title": "Weekly Schedule"
+    },
+    "Header": {
+      "of": "/",
+      "step": "Step",
+      "title": "Create New Course"
+    },
+    "Preview": {
+      "courseInfo": "Course Information",
+      "curriculumTitle": "Curriculum ({count} Weeks)",
+      "description": "Check the information before creating your course.",
+      "end": "End",
+      "noCurriculum": "No curriculum added.",
+      "readyMessage": "All steps completed. You can click the button below to create the course.",
+      "readyTitle": "Ready!",
+      "start": "Start",
+      "teaserLabel": "How many weeks should be shown to guests?",
+      "teaserNote": "The content for the specified number of weeks will be open to users who have not purchased the course.",
+      "teaserOptions": {
+        "none": "None (Titles Only)",
+        "oneWeek": "First 1 Week",
+        "threeWeeks": "First 3 Weeks",
+        "twoWeeks": "First 2 Weeks"
+      },
+      "teaserSettings": "Teaser Settings",
+      "title": "Course Preview"
+    },
+    "Steps": {
+      "basicInfo": "Basic Info",
+      "curriculum": "Curriculum",
+      "preview": "Preview"
+    },
+    "Validation": {
+      "descriptionRequired": "Course description is required",
+      "endDateBeforeStart": "End date cannot be before start date",
+      "endDateRequired": "End date is required",
+      "startDateRequired": "Start date is required",
+      "syllabusMin": "You must add at least 1 week",
+      "titleRequired": "Course title is required",
+      "topicMin": "Topic title must be at least 3 characters",
+      "weekMin": "Week number cannot be less than 1"
     }
   }
 }

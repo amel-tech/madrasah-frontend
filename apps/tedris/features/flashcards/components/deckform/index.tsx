@@ -8,6 +8,7 @@ import { CaretLeftIcon } from '@madrasah/icons'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { Form } from '@madrasah/ui/custom/form'
 import z from 'zod'
+import { useTranslations } from 'next-intl'
 
 import { deckCardsFormSchema } from '~/features/flashcards/validations/deck-cards-form-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -24,6 +25,7 @@ interface ICard {
 }
 
 function DeckForm({ id }: IDeckFormProps) {
+  const t = useTranslations('tedris')
   const router = useRouter()
 
   const form = useForm<z.infer<typeof deckCardsFormSchema>>({
@@ -73,33 +75,33 @@ function DeckForm({ id }: IDeckFormProps) {
               className="cursor-pointer flex items-center gap-2"
             >
               <CaretLeftIcon />
-              Back
+              {t('DeckForm.back')}
             </div>
-            <Button type="submit">Save</Button>
+            <Button type="submit">{t('DeckForm.save')}</Button>
           </div>
 
           <div>
-            <h4 className="mb-4">CARDS</h4>
+            <h4 className="mb-4">{t('DeckForm.cards')}</h4>
             {fields.map((_, index) => (
               <div key={index} className="grid grid-cols-3 gap-4 mb-8">
                 <FlashCard>
                   <ATFormGroupTextArea
                     name={`cards.${index}.content.front`}
-                    placeholder="Front Text"
+                    placeholder={t('DeckForm.frontText')}
                     control={form.control}
                   />
                 </FlashCard>
                 <FlashCard>
                   <ATFormGroupTextArea
                     name={`cards.${index}.content.back`}
-                    placeholder="Back Text"
+                    placeholder={t('DeckForm.backText')}
                     control={form.control}
                   />
                 </FlashCard>
               </div>
             ))}
             <Button variant="secondary" className="w-full" onClick={onAddCard}>
-              Add Card
+              {t('DeckForm.addCard')}
             </Button>
           </div>
         </form>

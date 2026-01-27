@@ -19,8 +19,10 @@ import {
 import { PlusIcon } from '@madrasah/icons'
 import { createFlashcardDeck } from '../actions'
 import { CreateFlashcardDeckDto } from '@madrasah/services/tedrisat'
+import { useTranslations } from 'next-intl'
 
 export function TableHeader() {
+  const t = useTranslations('nizam')
   const [open, setOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState<CreateFlashcardDeckDto>({
@@ -34,8 +36,8 @@ export function TableHeader() {
 
     if (!formData.title.trim()) {
       toastHelper.error({
-        title: 'Validation Error',
-        description: 'Deck title is required.',
+        title: t('TableHeader.validationError'),
+        description: t('TableHeader.validationErrorDescription'),
       })
       return
     }
@@ -47,8 +49,8 @@ export function TableHeader() {
 
       if (result.success) {
         toastHelper.success({
-          title: 'Deck Created',
-          description: 'New flashcard deck was created successfully.',
+          title: t('TableHeader.deckCreated'),
+          description: t('TableHeader.deckCreatedDescription'),
         })
         setOpen(false)
         setFormData({
@@ -59,16 +61,16 @@ export function TableHeader() {
       }
       else {
         toastHelper.error({
-          title: 'Creation Failed',
-          description: result.error || 'Failed to create the deck. Please try again.',
+          title: t('TableHeader.creationFailed'),
+          description: result.error || t('TableHeader.creationFailedDescription'),
         })
       }
     }
     catch (error) {
       console.error('Error creating deck:', error)
       toastHelper.error({
-        title: 'Creation Error',
-        description: 'An unexpected error occurred while creating the deck.',
+        title: t('TableHeader.creationError'),
+        description: t('TableHeader.creationErrorDescription'),
       })
     }
     finally {
@@ -86,46 +88,50 @@ export function TableHeader() {
   return (
     <div className="flex items-center justify-between mb-4">
       <div>
-        <h1 className="text-2xl font-bold">Flashcard Decks</h1>
-        <p className="text-muted-foreground">Manage your flashcard decks and study materials.</p>
+        <h1 className="text-2xl font-bold">{t('TableHeader.flashcardDecks')}</h1>
+        <p className="text-muted-foreground">{t('TableHeader.manageDecks')}</p>
       </div>
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button>
             <PlusIcon className="h-4 w-4" />
-            New Deck
+            {t('TableHeader.newDeck')}
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <form onSubmit={handleSubmit}>
             <DialogHeader>
-              <DialogTitle>Create New Deck</DialogTitle>
+              <DialogTitle>{t('TableHeader.createNewDeck')}</DialogTitle>
               <DialogDescription>
-                Create a new flashcard deck to organize your study materials.
+                {t('TableHeader.createNewDeckDescription')}
               </DialogDescription>
             </DialogHeader>
 
             <div className="grid gap-4 py-4">
               <div className="grid gap-2">
-                <Label htmlFor="title">Title *</Label>
+                <Label htmlFor="title">
+                  {t('TableHeader.title')}
+                  {' '}
+                  *
+                </Label>
                 <Input
                   id="title"
                   value={formData.title}
                   onChange={e => handleInputChange('title', e.target.value)}
-                  placeholder="Enter deck title..."
+                  placeholder={t('TableHeader.titlePlaceholder')}
                   required
                   disabled={isLoading}
                 />
               </div>
 
               <div className="grid gap-2">
-                <Label htmlFor="description">Description</Label>
+                <Label htmlFor="description">{t('TableHeader.description')}</Label>
                 <Textarea
                   id="description"
                   value={formData.description || ''}
                   onChange={e => handleInputChange('description', e.target.value)}
-                  placeholder="Enter deck description..."
+                  placeholder={t('TableHeader.descriptionPlaceholder')}
                   rows={3}
                   disabled={isLoading}
                 />
@@ -138,7 +144,7 @@ export function TableHeader() {
                   onCheckedChange={(checked: boolean) => handleInputChange('isPublic', checked)}
                   disabled={true}
                 />
-                <Label htmlFor="isPublic">Make this deck public</Label>
+                <Label htmlFor="isPublic">{t('TableHeader.makePublic')}</Label>
               </div>
             </div>
 
@@ -149,10 +155,10 @@ export function TableHeader() {
                 onClick={() => setOpen(false)}
                 disabled={isLoading}
               >
-                Cancel
+                {t('TableHeader.cancel')}
               </Button>
               <Button type="submit" disabled={isLoading}>
-                {isLoading ? 'Creating...' : 'Create Deck'}
+                {isLoading ? t('TableHeader.creating') : t('TableHeader.createDeck')}
               </Button>
             </DialogFooter>
           </form>

@@ -2,6 +2,7 @@
 
 import { useMemo } from 'react'
 import { updateFlashcard, deleteFlashcard } from '~/features/flashcards/actions'
+import { useTranslations } from 'next-intl'
 
 import { FlashcardResponse } from '@madrasah/services/tedrisat'
 import { toastHelper } from '@madrasah/ui/lib/toast-helper'
@@ -16,6 +17,7 @@ export default function DeckCards({
   deckId: string
   flashcards: FlashcardResponse[] | undefined
 }) {
+  const t = useTranslations('tedris')
   const columns = useFlashcardColumns()
 
   const onRowUpdate = async (updatedRow: FlashcardResponse) => {
@@ -28,15 +30,15 @@ export default function DeckCards({
 
       if (response) {
         toastHelper.success({
-          title: 'Card Updated',
-          description: 'Flashcard was updated successfully.',
+          title: t('DeckCards.cardUpdated'),
+          description: t('DeckCards.cardUpdatedDescription'),
         })
         return true
       }
       else {
         toastHelper.error({
-          title: 'Update Failed',
-          description: 'Failed to update the flashcard. Please try again.',
+          title: t('DeckCards.updateFailed'),
+          description: t('DeckCards.updateFailedDescription'),
         })
         return false
       }
@@ -44,8 +46,8 @@ export default function DeckCards({
     catch (error) {
       console.error('Error updating flashcard:', error)
       toastHelper.error({
-        title: 'Update Error',
-        description: 'An error occurred while updating the flashcard.',
+        title: t('DeckCards.updateError'),
+        description: t('DeckCards.updateErrorDescription'),
       })
       return false
     }
@@ -55,15 +57,15 @@ export default function DeckCards({
     try {
       // Pass deckId to server action for automatic revalidatePath
       const response = await deleteFlashcard(id, deckId)
-      if (response) {
-        toastHelper.success({ title: 'Card Deleted', description: `Card with ID ${id} was deleted.` }, { cardId: id })
+      if (response !== undefined) {
+        toastHelper.success({ title: t('DeckCards.cardDeleted'), description: t('DeckCards.cardDeletedDescription', { id }) }, { cardId: id })
         return true
       }
       return false
     }
     catch (error) {
       console.error('Error deleting flashcard:', error)
-      toastHelper.error({ title: 'Delete Error', description: 'Failed to delete the flashcard.' })
+      toastHelper.error({ title: t('DeckCards.deleteError'), description: t('DeckCards.deleteErrorDescription') })
       return false
     }
   }

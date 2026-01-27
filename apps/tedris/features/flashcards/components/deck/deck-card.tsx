@@ -10,6 +10,7 @@ import {
 import { Card } from '@madrasah/ui/components/card'
 import { toastHelper } from '@madrasah/ui/lib/toast-helper'
 import { addDeckToCollection, removeDeckFromCollection } from '~/features/flashcards/actions'
+import { useTranslations } from 'next-intl'
 
 type Props = {
   deckId: string
@@ -32,6 +33,7 @@ function DeckCard({
   description,
   isInCollection: initialIsInCollection = false,
 }: Props) {
+  const t = useTranslations('tedris')
   const [isInCollection, setIsInCollection] = useState(initialIsInCollection)
   const [isProcessing, setIsProcessing] = useState(false)
 
@@ -53,26 +55,29 @@ function DeckCard({
       if (success) {
         setIsInCollection(!isInCollection)
         toastHelper.success({
-          title: isInCollection ? 'Removed from Collection' : 'Added to Collection',
+          title: isInCollection ? t('DeckCard.removedFromCollection') : t('DeckCard.addedToCollection'),
           description: isInCollection
-            ? 'Deck has been removed from your collection successfully.'
-            : 'Deck has been added to your collection successfully.',
+            ? t('DeckCard.removedFromCollectionDescription')
+            : t('DeckCard.addedToCollectionDescription'),
         })
       }
       else {
         toastHelper.error({
-          title: isInCollection ? 'Failed to Remove' : 'Failed to Add',
+          title: isInCollection ? t('DeckCard.failedToRemove') : t('DeckCard.failedToAdd'),
           description: isInCollection
-            ? 'Failed to remove deck from your collection. Please try again.'
-            : 'Failed to add deck to your collection. Please try again.',
+            ? t('DeckCard.failedToRemoveDescription')
+            : t('DeckCard.failedToAddDescription'),
         })
       }
     }
     catch (error) {
       console.error('Error toggling deck collection:', error)
       toastHelper.error({
-        title: 'Error',
-        description: `An error occurred while ${isInCollection ? 'removing' : 'adding'} the deck ${isInCollection ? 'from' : 'to'} your collection.`,
+        title: t('DeckCard.error'),
+        description: t('DeckCard.errorDescription', {
+          action: isInCollection ? 'removing' : 'adding',
+          preposition: isInCollection ? 'from' : 'to',
+        }),
       })
     }
     finally {
@@ -94,8 +99,7 @@ function DeckCard({
         </button>
       </div>
       <div className="text-sm mb-2">
-        by
-        {author}
+        {t('DeckCard.by')} {author}
       </div>
       <div className="flex items-center mb-2 text-sm">
         <div className="text-neutral-tertiary flex items-center mr-4">

@@ -4,6 +4,7 @@ import { BookOpenIcon, CheckIcon, EyeIcon, RepeatIcon } from '@madrasah/icons'
 import { MouseEvent, TouchEvent, useEffect, useRef, useState } from 'react'
 import { Kbd } from '@madrasah/ui/components/kbd'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@madrasah/ui/components/tooltip'
+import { useTranslations } from 'next-intl'
 
 import { toDisplay } from '../utils/flashCardUtils'
 
@@ -13,6 +14,7 @@ import { FlashcardResponse } from '@madrasah/services/tedrisat'
 import { Button } from '@madrasah/ui/components/button'
 
 export default function FlashCardContent(card: FlashcardResponse) {
+  const t = useTranslations('tedris')
   const [flipped, setFlipped] = useState(false)
   const [touchStart, setTouchStart] = useState<number | null>(null)
   const data = toDisplay(card)
@@ -96,7 +98,7 @@ export default function FlashCardContent(card: FlashcardResponse) {
           }}
         >
           <FlashCardComponent className="mx-auto">
-            <Header title="Card" />
+            <Header title={t('FlashCardContent.card')} />
             <p className="font-scheherazade whitespace-pre-wrap break-words text-xl text-gray-500">
               {data.contentFront}
             </p>
@@ -120,7 +122,7 @@ export default function FlashCardContent(card: FlashcardResponse) {
           }}
         >
           <FlashCardComponent className="mx-auto">
-            <Header title="Card" />
+            <Header title={t('FlashCardContent.card')} />
             <p className="text-[var(--text-color-brand-primary)] whitespace-pre-wrap break-words text-md font-semibold sm:text-lg">
               {data.contentBack}
             </p>
@@ -157,6 +159,7 @@ function CardActions({
   memorized,
   onToggleMemorized,
 }: CardActionsProps) {
+  const t = useTranslations('tedris')
   return (
     <div className="mt-4 flex flex-row justify-center items-center gap-4">
       <Tooltip delayDuration={750}>
@@ -166,13 +169,13 @@ function CardActions({
             className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full p-2 transition-colors"
           >
             <EyeIcon size={20} />
-            Flip
+            {t('FlashCardContent.flip')}
 
           </Button>
         </TooltipTrigger>
         <TooltipContent>
           <div className="flex items-center gap-2">
-            Flip the card
+            {t('FlashCardContent.flipTooltip')}
             {' '}
             <Kbd>Space</Kbd>
           </div>
@@ -191,14 +194,14 @@ function CardActions({
               memorized ? <RepeatIcon size={16} /> : <CheckIcon size={16} />
             }
             <span className="text-sm font-medium">
-              {memorized ? 'Repeat' : 'Mark as Memorized'}
+              {memorized ? t('FlashCardContent.repeat') : t('FlashCardContent.markAsMemorized')}
             </span>
           </Button>
 
         </TooltipTrigger>
         <TooltipContent>
           <div className="flex items-center gap-2">
-            {memorized ? 'Mark as to review later' : 'Mark as memorized'}
+            {memorized ? t('FlashCardContent.markAsToReviewLater') : t('FlashCardContent.markAsMemorizedTooltip')}
             {' '}
             <Kbd>Enter</Kbd>
           </div>

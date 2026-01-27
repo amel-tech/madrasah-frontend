@@ -2,8 +2,10 @@
 import { SessionProvider, signOut, useSession } from 'next-auth/react'
 import { Button } from '@madrasah/ui/components/button'
 import { env } from '~/env'
+import { useTranslations } from 'next-intl'
 
 const KeycloakLogoutButton = () => {
+  const t = useTranslations('tedris')
   const session = useSession()
   const signOutWithRedirect = async () => {
     const idtoken = session.data?.idToken
@@ -16,7 +18,7 @@ const KeycloakLogoutButton = () => {
     await signOut({ redirect: false, callbackUrl: keycloakLogoutUrl })
     window.location.href = keycloakLogoutUrl
   }
-  return <Button onClick={() => signOutWithRedirect()}>ÇIKIŞ YAP</Button>
+  return <Button onClick={() => signOutWithRedirect()}>{t('KeycloakLogout.button')}</Button>
 }
 const KeycloakLogout = () => {
   return (

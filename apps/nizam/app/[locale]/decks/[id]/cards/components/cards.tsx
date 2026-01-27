@@ -3,6 +3,7 @@
 import { useMemo } from 'react'
 import * as XLSX from 'xlsx'
 import { updateFlashcard, createFlashcards, deleteFlashcard } from '../actions'
+import { useTranslations } from 'next-intl'
 
 import { DataTable } from '~/components/data-table'
 import { TableHeader } from './table-header'
@@ -26,6 +27,7 @@ export default function DeckCards({
   deck: FlashcardDeckResponse
   cards: FlashcardResponse[]
 }) {
+  const t = useTranslations('nizam')
   const columns = useFlashcardColumns()
 
   const onRowUpdate = async (updatedRow: FlashcardResponse) => {
@@ -38,15 +40,15 @@ export default function DeckCards({
 
       if (response) {
         toastHelper.success({
-          title: 'Card Updated',
-          description: 'Flashcard was updated successfully.',
+          title: t('DeckCards.cardUpdated'),
+          description: t('DeckCards.cardUpdatedDescription'),
         })
         return true
       }
       else {
         toastHelper.error({
-          title: 'Update Failed',
-          description: 'Failed to update the flashcard. Please try again.',
+          title: t('DeckCards.updateFailed'),
+          description: t('DeckCards.updateFailedDescription'),
         })
         return false
       }
@@ -54,8 +56,8 @@ export default function DeckCards({
     catch (error) {
       console.error('Error updating flashcard:', error)
       toastHelper.error({
-        title: 'Update Error',
-        description: 'An error occurred while updating the flashcard.',
+        title: t('DeckCards.updateError'),
+        description: t('DeckCards.updateErrorDescription'),
       })
       return false
     }
@@ -82,7 +84,7 @@ export default function DeckCards({
     }))
 
     await createFlashcards(deck.id, cardsToImport)
-    toastHelper.success({ title: 'Cards Imported', description: `${cardsToImport.length} cards were imported successfully.` })
+    toastHelper.success({ title: t('DeckCards.cardsImported'), description: t('DeckCards.cardsImportedDescription', { count: cardsToImport.length }) })
   }
 
   const onRowDelete = async (id: string) => {
@@ -90,14 +92,14 @@ export default function DeckCards({
       // Pass deckId to server action for automatic revalidatePath
       const response = await deleteFlashcard(id, deck.id)
       if (response) {
-        toastHelper.success({ title: 'Card Deleted', description: `Card with ID ${id} was deleted.` }, { cardId: id })
+        toastHelper.success({ title: t('DeckCards.cardDeleted'), description: t('DeckCards.cardDeletedDescription', { id }) }, { cardId: id })
         return true
       }
       return false
     }
     catch (error) {
       console.error('Error deleting flashcard:', error)
-      toastHelper.error({ title: 'Delete Error', description: 'Failed to delete the flashcard.' })
+      toastHelper.error({ title: t('DeckCards.deleteError'), description: t('DeckCards.deleteErrorDescription') })
       return false
     }
   }
@@ -107,8 +109,8 @@ export default function DeckCards({
       return {
         id: index.toString(),
         type: FlashcardResponseTypeEnum.Vocabulary,
-        contentFront: `Front word ${index + 1}`,
-        contentBack: `Back word ${index + 1}`,
+        contentFront: t('SampleFile.frontWord', { index: index + 1 }),
+        contentBack: t('SampleFile.backWord', { index: index + 1 }),
         deckId: deck.id,
         is_public: true,
       }

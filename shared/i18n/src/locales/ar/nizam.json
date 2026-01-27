@@ -1,8 +1,195 @@
 {
+  "Breadcrumbs": {
+    "home": "بيت"
+  },
+  "CardsTableHeader": {
+    "bulkActions": "الإجراءات الجماعية",
+    "downloadAsExcel": "تنزيل كملف Excel",
+    "downloadSampleFile": "تحميل ملف نموذج",
+    "importFromExcel": "استيراد من إكسل"
+  },
+  "DataTable": {
+    "noResults": "لا توجد نتائج."
+  },
+  "DeckCards": {
+    "cardDeleted": "تم حذف البطاقة",
+    "cardDeletedDescription": "تم حذف البطاقة ذات المعرف {id}.",
+    "cardsImported": "بطاقات مستوردة",
+    "cardsImportedDescription": "تم استيراد بطاقات {count} بنجاح.",
+    "cardUpdated": "تم تحديث البطاقة",
+    "cardUpdatedDescription": "تم تحديث البطاقة التعليمية بنجاح.",
+    "deleteError": "خطأ في الحذف",
+    "deleteErrorDescription": "فشل حذف البطاقة التعليمية.",
+    "updateError": "خطأ في التحديث",
+    "updateErrorDescription": "حدث خطأ أثناء تحديث البطاقة التعليمية.",
+    "updateFailed": "فشل التحديث",
+    "updateFailedDescription": "فشل في تحديث البطاقة التعليمية. الرجاء المحاولة مرة أخرى."
+  },
+  "DecksColumns": {
+    "areYouSure": "هل أنت متأكد؟",
+    "delete": "يمسح",
+    "deleteConfirmation": "سيتم حذف هذه المجموعة وجميع المعلومات المرتبطة بها. لا يمكن التراجع عن هذا الإجراء.",
+    "descriptionPlaceholder": "أدخل وصف سطح السفينة...",
+    "titlePlaceholder": "أدخل عنوان المجموعة..."
+  },
   "DecksPage": {
+    "description": "إدارة مجموعات البطاقات التعليمية ومواد الدراسة الخاصة بك.",
+    "Dialog": {
+      "cancelButton": "إلغاء",
+      "createButton": "إنشاء المجموعة",
+      "creatingButton": "جاري الإنشاء...",
+      "description": "إنشاء مجموعة بطاقات تعليمية جديدة لتنظيم مواد الدراسة الخاصة بك.",
+      "descriptionLabel": "الوصف",
+      "descriptionPlaceholder": "أدخل وصف المجموعة...",
+      "publicLabel": "اجعل هذه المجموعة عامة",
+      "title": "إنشاء مجموعة جديدة",
+      "titleLabel": "العنوان *",
+      "titlePlaceholder": "أدخل عنوان المجموعة..."
+    },
+    "newDeckButton": "مجموعة جديدة",
     "Table": {
-      "descriptionColumn": "وصف",
+      "descriptionColumn": "الوصف",
       "titleColumn": "العنوان"
+    },
+    "title": "مجموعات البطاقات التعليمية",
+    "Toast": {
+      "creationError": "خطأ في الإنشاء",
+      "creationErrorMessage": "حدث خطأ غير متوقع أثناء إنشاء المجموعة.",
+      "creationFailed": "فشل الإنشاء",
+      "creationFailedMessage": "فشل إنشاء المجموعة. يرجى المحاولة مرة أخرى.",
+      "deckCreated": "تم إنشاء المجموعة",
+      "deckCreatedSuccess": "تم إنشاء مجموعة البطاقات التعليمية الجديدة بنجاح.",
+      "titleRequired": "عنوان المجموعة مطلوب.",
+      "validationError": "خطأ في التحقق"
+    }
+  },
+  "FlashcardColumns": {
+    "areYouSure": "هل أنت متأكد؟",
+    "backFace": "الوجه الخلفي",
+    "backFacePlaceholder": "العودة إلى المحتوى السابق...",
+    "delete": "يمسح",
+    "deleteConfirmation": "سيتم حذف هذه البطاقة وجميع المعلومات المرتبطة بها. لا يمكن التراجع عن هذا الإجراء.",
+    "frontFace": "الواجهة الأمامية",
+    "frontFacePlaceholder": "أدخل محتوى الجهة الأمامية..."
+  },
+  "HomePage": {
+    "greeting": "السلام عليكم!"
+  },
+  "KeycloakLogin": {
+    "signIn": "تسجيل الدخول"
+  },
+  "KosksPage": {
+    "courseCreatedAt": "تم الإنشاء في",
+    "createNewCourse": "إنشاء دورة جديدة",
+    "description": "يمكنك الاطلاع على الكشك والدورات التدريبية التي تديرها هنا.",
+    "noCoursesAvailable": "لا توجد دورات متاحة",
+    "noCoursesAvailableDescription": "أنشئ دورتك الأولى للبدء.",
+    "title": "كوسكس"
+  },
+  "NavMain": {
+    "content": "محتوى"
+  },
+  "NavRoutes": {
+    "decks": "مجموعة أوراق"
+  },
+  "SampleFile": {
+    "backWord": "ترجمة نموذجية {index}",
+    "frontWord": "كلمة نموذجية {index}"
+  },
+  "TableHeader": {
+    "cancel": "يلغي",
+    "createDeck": "إنشاء مجموعة أوراق اللعب",
+    "createNewDeck": "إنشاء مجموعة جديدة",
+    "createNewDeckDescription": "أنشئ مجموعة جديدة من البطاقات التعليمية لتنظيم مواد دراستك.",
+    "creating": "جارٍ الإنشاء...",
+    "creationError": "خطأ في الإنشاء",
+    "creationErrorDescription": "حدث خطأ غير متوقع أثناء إنشاء المجموعة.",
+    "creationFailed": "فشلت عملية الإنشاء",
+    "creationFailedDescription": "فشل إنشاء المجموعة. يرجى المحاولة مرة أخرى.",
+    "deckCreated": "تم إنشاء المجموعة",
+    "deckCreatedDescription": "تم إنشاء مجموعة البطاقات التعليمية الجديدة بنجاح.",
+    "description": "وصف",
+    "descriptionPlaceholder": "أدخل وصف سطح السفينة...",
+    "flashcardDecks": "مجموعات بطاقات تعليمية",
+    "makePublic": "اجعل هذه المجموعة متاحة للعامة",
+    "manageDecks": "قم بتنظيم مجموعات البطاقات التعليمية ومواد الدراسة الخاصة بك.",
+    "newDeck": "سطح جديد",
+    "title": "العنوان",
+    "titlePlaceholder": "أدخل عنوان المجموعة...",
+    "validationError": "خطأ في التحقق",
+    "validationErrorDescription": "اسم المجموعة مطلوب."
+  },
+  "Wizard": {
+    "BasicInfo": {
+      "descriptionLabel": "وصف المقرر الدراسي",
+      "descriptionPlaceholder": "قدّم معلومات حول محتوى الدورة التدريبية...",
+      "endDateLabel": "تاريخ الانتهاء",
+      "startDateLabel": "تاريخ البدء",
+      "titleLabel": "عنوان الدورة",
+      "titlePlaceholder": "مثال: دروس أساسية في الفقه"
+    },
+    "Buttons": {
+      "back": "خلف",
+      "cancel": "يلغي",
+      "create": "إنشاء دورة تدريبية",
+      "next": "الخطوة التالية"
+    },
+    "Curriculum": {
+      "addFirstWeek": "أضف الأسبوع الأول",
+      "addWeek": "إضافة أسبوع",
+      "noSyllabus": "لم تتم إضافة أي مناهج دراسية حتى الآن.",
+      "placeholders": {
+        "resources": "كتب مرجعية...",
+        "topic": "عنوان الموضوع..."
+      },
+      "table": {
+        "delete": "يمسح",
+        "order": "طلب",
+        "resources": "موارد",
+        "topic": "عنوان",
+        "week": "أسبوع"
+      },
+      "title": "الجدول الأسبوعي"
+    },
+    "Header": {
+      "of": "/",
+      "step": "خطوة",
+      "title": "إنشاء دورة جديدة"
+    },
+    "Preview": {
+      "courseInfo": "معلومات الدورة",
+      "curriculumTitle": "المنهج الدراسي ({count} أسابيع)",
+      "description": "تحقق من المعلومات قبل إنشاء دورتك التدريبية.",
+      "end": "نهاية",
+      "noCurriculum": "لم تتم إضافة أي مناهج دراسية.",
+      "readyMessage": "تم إكمال جميع الخطوات. يمكنك النقر على الزر أدناه لإنشاء الدورة.",
+      "readyTitle": "مستعد!",
+      "start": "يبدأ",
+      "teaserLabel": "كم أسبوعاً يجب عرض الفيلم على الضيوف؟",
+      "teaserNote": "سيكون المحتوى متاحاً لعدد الأسابيع المحدد للمستخدمين الذين لم يشتروا الدورة.",
+      "teaserOptions": {
+        "none": "لا شيء (العنوان فقط)",
+        "oneWeek": "الأسبوع الأول",
+        "threeWeeks": "الأسابيع الثلاثة الأولى",
+        "twoWeeks": "الأسبوعان الأولان"
+      },
+      "teaserSettings": "إعدادات العرض الترويجي",
+      "title": "معاينة الدورة"
+    },
+    "Steps": {
+      "basicInfo": "معلومات أساسية",
+      "curriculum": "مقرر",
+      "preview": "معاينة"
+    },
+    "Validation": {
+      "descriptionRequired": "مطلوب وصف المقرر الدراسي",
+      "endDateBeforeStart": "لا يمكن أن يكون تاريخ الانتهاء قبل تاريخ البدء",
+      "endDateRequired": "تاريخ الانتهاء مطلوب",
+      "startDateRequired": "تاريخ البدء مطلوب",
+      "syllabusMin": "يجب إضافة أسبوع واحد على الأقل",
+      "titleRequired": "عنوان المقرر الدراسي مطلوب",
+      "topicMin": "يجب أن يتكون عنوان الموضوع من 3 أحرف على الأقل",
+      "weekMin": "لا يمكن أن يكون رقم الأسبوع أقل من 1"
     }
   }
 }

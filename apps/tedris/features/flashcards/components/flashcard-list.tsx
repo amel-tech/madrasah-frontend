@@ -2,6 +2,7 @@
 
 import { CaretLeftIcon, CaretRightIcon } from '@madrasah/icons'
 import { useCallback, useEffect, useState } from 'react'
+import { useTranslations } from 'next-intl'
 
 import FlashCardContent from './flashcard-content'
 import { FlashcardResponse } from '@madrasah/services/tedrisat'
@@ -11,6 +12,7 @@ type FlashCardListProps = {
 }
 
 export default function FlashCardList({ cards }: FlashCardListProps) {
+  const t = useTranslations('tedris')
   const [currentIndex, setCurrentIndex] = useState(0)
   const [key, setKey] = useState(0)
 
@@ -44,7 +46,7 @@ export default function FlashCardList({ cards }: FlashCardListProps) {
   if (!cards.length) {
     return (
       <div className="flex items-center justify-center">
-        <p className="text-gray-500">Henüz kart bulunmuyor.</p>
+        <p className="text-gray-500">{t('FlashCardList.noCardsFound')}</p>
       </div>
     )
   }
