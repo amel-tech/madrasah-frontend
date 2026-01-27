@@ -96,16 +96,15 @@ export default function FlashCardContent(card: FlashcardResponse) {
           }}
         >
           <FlashCardComponent className="mx-auto">
-            {/* TODO: is this needed? */}
             <Header title="Card" />
-            <p className="whitespace-pre-wrap break-words text-lg text-gray-400 sm:text-xl">
+            <p className="font-scheherazade whitespace-pre-wrap break-words text-xl text-gray-500">
               {data.contentFront}
             </p>
+
             <CardActions
               onFlip={handleCardFlip}
               memorized={memorized}
               onToggleMemorized={() => toggleMemorized({ id: data.id, type: data.type })}
-
             />
           </FlashCardComponent>
         </div>
@@ -122,7 +121,7 @@ export default function FlashCardContent(card: FlashcardResponse) {
         >
           <FlashCardComponent className="mx-auto">
             <Header title="Card" />
-            <p className="text-primary whitespace-pre-wrap break-words text-md font-semibold sm:text-lg">
+            <p className="text-[var(--text-color-brand-primary)] whitespace-pre-wrap break-words text-md font-semibold sm:text-lg">
               {data.contentBack}
             </p>
             <CardActions

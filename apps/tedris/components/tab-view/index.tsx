@@ -36,10 +36,10 @@ export const TabView = ({ children }: { children: React.ReactNode }) => {
           </Link>
           <Link
             prefetch
-            href="/cards"
+            href="/decks"
             className={cn(
               'px-4 py-2 text-sm font-medium',
-              pathname.startsWith('/cards')
+              pathname.startsWith('/decks')
               && 'text-brand-primary border-b-2 border-brand-primary',
             )}
           >
