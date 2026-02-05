@@ -1,14 +1,5 @@
-'use client'
+import { CreateDeckPage } from '~/features/flashcards/components/create-deck-page'
 
-import React from 'react'
-import DeckForm from '~/features/flashcards/components/deckform'
-
-function Page() {
-  return (
-    <div>
-      <DeckForm />
-    </div>
-  )
+export default function Page() {
+  return <CreateDeckPage />
 }
-
-export default Page
