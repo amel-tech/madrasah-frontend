@@ -32,74 +32,68 @@ export default function DeckCards({
 
   const onRowUpdate = async (updatedRow: FlashcardResponse) => {
     try {
-      // Pass deckId to server action for revalidatePath
-      const response = await updateFlashcard(updatedRow.id, {
+      await updateFlashcard(updatedRow.id, {
         contentFront: updatedRow.contentFront,
         contentBack: updatedRow.contentBack,
       })
-
-      if (response) {
-        toastHelper.success({
-          title: t('DeckCards.cardUpdated'),
-          description: t('DeckCards.cardUpdatedDescription'),
-        })
-        return true
-      }
-      else {
-        toastHelper.error({
-          title: t('DeckCards.updateFailed'),
-          description: t('DeckCards.updateFailedDescription'),
-        })
-        return false
-      }
+      toastHelper.success({
+        title: t('DeckCards.cardUpdated'),
+        description: t('DeckCards.cardUpdatedDescription'),
+      })
+      return true
     }
     catch (error) {
-      console.error('Error updating flashcard:', error)
       toastHelper.error({
         title: t('DeckCards.updateError'),
-        description: t('DeckCards.updateErrorDescription'),
+        description: error instanceof Error ? error.message : t('DeckCards.updateErrorDescription'),
       })
       return false
     }
   }
 
   const onDeckFileImport = async (file: File) => {
-    const data = await file.arrayBuffer()
-    const workbook = XLSX.read(data, { type: 'array' })
-    const sheetName = workbook.SheetNames[0] || ''
-    const worksheet = workbook.Sheets[sheetName]
+    try {
+      const data = await file.arrayBuffer()
+      const workbook = XLSX.read(data, { type: 'array' })
+      const sheetName = workbook.SheetNames[0] || ''
+      const worksheet = workbook.Sheets[sheetName]
 
-    if (!worksheet) {
-      return console.error('No worksheet found in the uploaded file')
+      if (!worksheet) {
+        toastHelper.error({
+          title: t('DeckCards.updateError'),
+          description: 'No worksheet found in the uploaded file',
+        })
+        return
+      }
+
+      const json = XLSX.utils.sheet_to_json<SpreadsheetCardRepresentation>(worksheet)
+      const cardsToImport = json.map(row => ({
+        contentFront: row.contentFront,
+        contentBack: row.contentBack,
+      }))
+
+      await createFlashcards(deck.id, cardsToImport)
+      toastHelper.success({ title: t('DeckCards.cardsImported'), description: t('DeckCards.cardsImportedDescription', { count: cardsToImport.length }) })
     }
-
-    const json = XLSX.utils.sheet_to_json<SpreadsheetCardRepresentation>(worksheet)
-    const cardsToImport: FlashcardResponse[] = json.map((row, index) => ({
-      id: index.toString(),
-      type: row.type,
-      contentFront: row.contentFront,
-      contentBack: row.contentBack,
-      deckId: deck.id,
-      authorId: '1',
-    }))
-
-    await createFlashcards(deck.id, cardsToImport)
-    toastHelper.success({ title: t('DeckCards.cardsImported'), description: t('DeckCards.cardsImportedDescription', { count: cardsToImport.length }) })
+    catch (error) {
+      toastHelper.error({
+        title: t('DeckCards.updateError'),
+        description: error instanceof Error ? error.message : 'Failed to import cards.',
+      })
+    }
   }
 
   const onRowDelete = async (id: string) => {
     try {
-      // Pass deckId to server action for automatic revalidatePath
-      const response = await deleteFlashcard(id, deck.id)
-      if (response) {
-        toastHelper.success({ title: t('DeckCards.cardDeleted'), description: t('DeckCards.cardDeletedDescription', { id }) }, { cardId: id })
-        return true
-      }
-      return false
+      await deleteFlashcard(id, deck.id)
+      toastHelper.success({ title: t('DeckCards.cardDeleted'), description: t('DeckCards.cardDeletedDescription', { id }) }, { cardId: id })
+      return true
     }
     catch (error) {
-      console.error('Error deleting flashcard:', error)
-      toastHelper.error({ title: t('DeckCards.deleteError'), description: t('DeckCards.deleteErrorDescription') })
+      toastHelper.error({
+        title: t('DeckCards.deleteError'),
+        description: error instanceof Error ? error.message : t('DeckCards.deleteErrorDescription'),
+      })
       return false
     }
   }

@@ -22,32 +22,20 @@ export default function DeckCards({
 
   const onRowUpdate = async (updatedRow: FlashcardResponse) => {
     try {
-      // Pass deckId to server action for revalidatePath
-      const response = await updateFlashcard(updatedRow.id, {
+      await updateFlashcard(updatedRow.id, {
         contentFront: updatedRow.contentFront,
         contentBack: updatedRow.contentBack,
       })
-
-      if (response) {
-        toastHelper.success({
-          title: t('DeckCards.cardUpdated'),
-          description: t('DeckCards.cardUpdatedDescription'),
-        })
-        return true
-      }
-      else {
-        toastHelper.error({
-          title: t('DeckCards.updateFailed'),
-          description: t('DeckCards.updateFailedDescription'),
-        })
-        return false
-      }
+      toastHelper.success({
+        title: t('DeckCards.cardUpdated'),
+        description: t('DeckCards.cardUpdatedDescription'),
+      })
+      return true
     }
     catch (error) {
-      console.error('Error updating flashcard:', error)
       toastHelper.error({
         title: t('DeckCards.updateError'),
-        description: t('DeckCards.updateErrorDescription'),
+        description: error instanceof Error ? error.message : t('DeckCards.updateErrorDescription'),
       })
       return false
     }
@@ -55,17 +43,15 @@ export default function DeckCards({
 
   const onRowDelete = async (id: string) => {
     try {
-      // Pass deckId to server action for automatic revalidatePath
-      const response = await deleteFlashcard(id, deckId)
-      if (response !== undefined) {
-        toastHelper.success({ title: t('DeckCards.cardDeleted'), description: t('DeckCards.cardDeletedDescription', { id }) }, { cardId: id })
-        return true
-      }
-      return false
+      await deleteFlashcard(id, deckId)
+      toastHelper.success({ title: t('DeckCards.cardDeleted'), description: t('DeckCards.cardDeletedDescription', { id }) }, { cardId: id })
+      return true
     }
     catch (error) {
-      console.error('Error deleting flashcard:', error)
-      toastHelper.error({ title: t('DeckCards.deleteError'), description: t('DeckCards.deleteErrorDescription') })
+      toastHelper.error({
+        title: t('DeckCards.deleteError'),
+        description: error instanceof Error ? error.message : t('DeckCards.deleteErrorDescription'),
+      })
       return false
     }
   }
