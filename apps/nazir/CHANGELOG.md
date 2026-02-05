@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.5](https://github.com/amel-tech/madrasah-frontend/compare/nazir-web-v0.1.4...nazir-web-v0.1.5) (2026-02-05)
+
+
+### Features
+
+* **i18n:** add translations for nizam and tedris apps ([fa46adb](https://github.com/amel-tech/madrasah-frontend/commit/fa46adbd01dc13abbfdfe92a406d6957d67ac378))
+
 ## [0.1.4](https://github.com/amel-tech/madrasah-frontend/compare/nazir-web-v0.1.3...nazir-web-v0.1.4) (2025-12-06)
 
 
