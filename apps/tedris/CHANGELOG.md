@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.6.0](https://github.com/amel-tech/madrasah-frontend/compare/tedris-web-v1.5.0...tedris-web-v1.6.0) (2026-02-05)
+
+
+### Features
+
+* **i18n:** add translations for nizam and tedris apps ([fa46adb](https://github.com/amel-tech/madrasah-frontend/commit/fa46adbd01dc13abbfdfe92a406d6957d67ac378))
+* **i18n:** translated strings for all hard-coded strings ([7822a7a](https://github.com/amel-tech/madrasah-frontend/commit/7822a7a685cab1518e9ba9cefb8f9f110fd82b4b))
+
+
+### Bug Fixes
+
+* **tedris:** resolve TypeScript errors in cards page ([5d7e4a2](https://github.com/amel-tech/madrasah-frontend/commit/5d7e4a2b3c4d152e31a6292f824570358b6815e6))
+
 ## [1.5.0](https://github.com/amel-tech/madrasah-frontend/compare/tedris-web-v1.4.1...tedris-web-v1.5.0) (2026-01-01)
 
 
