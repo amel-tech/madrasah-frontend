@@ -26,8 +26,8 @@ export default function Home() {
         <SmartDecksSection />
       </section>
 
-      {/* Section 5: Courses + Institute (Full Viewport Height) */}
-      <section id="courses">
+      {/* Section 5: Institute / Become a Partner */}
+      <section id="institute">
         <CoursesInstituteSection />
       </section>
 

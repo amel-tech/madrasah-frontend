@@ -1,56 +1,31 @@
 /**
  * Features Section Data
- * 
+ *
  * Contains all data for the features section
  */
 
-export type IconType = 'youtube' | 'assignments' | 'community'
-
-export interface FeatureCard {
-  readonly icon: IconType
-  readonly title: string
-  readonly description: string
-}
-
-export interface FeaturesColors {
-  readonly title: string
-  readonly subtitle: string
-  readonly card: {
-    readonly background: string
-    readonly title: string
-    readonly description: string
-    readonly iconBackground: string
-    readonly iconBorder: string
-    readonly shadow: string
-    readonly hoverShadow: string
-  }
-}
-
-export interface FeaturesData {
-  readonly title: string
-  readonly subtitle: string
-  readonly cards: readonly FeatureCard[]
-  readonly colors: FeaturesColors
-}
-
-export const featuresData: FeaturesData = {
+export const featuresData = {
   title: 'Why Choose Online Madrasah?',
-  subtitle: 'We combine traditional teaching methods with modern technology to provide the best learning experience.',
+  subtitle:
+    'We combine traditional teaching methods with modern technology to provide the best learning experience.',
   cards: [
     {
       icon: 'youtube',
       title: 'Live Interactive Classes',
-      description: 'Study classical texts with qualified scholars in real-time. Raise your hand, ask questions, and receive direct feedback instantly.',
+      description:
+        'Study classical texts with qualified scholars in real-time. Raise your hand, ask questions, and receive direct feedback instantly.',
     },
     {
       icon: 'assignments',
       title: 'Structural Assignments',
-      description: 'Stay on track with organized homework, quizzes, and progress reports. Never lose sight of your learning goals with our dashboard.',
+      description:
+        'Stay on track with organized homework, quizzes, and progress reports. Never lose sight of your learning goals with our dashboard.',
     },
     {
       icon: 'community',
       title: 'Global Student Community',
-      description: 'Connect with fellow students worldwide. Discuss complex topics, share notes, and grow together in a supportive environment.',
+      description:
+        'Connect with fellow students worldwide. Discuss complex topics, share notes, and grow together in a supportive environment.',
     },
   ],
   colors: {
@@ -66,4 +41,4 @@ export const featuresData: FeaturesData = {
       hoverShadow: 'hover:shadow-lg',
     },
   },
-}
+} as const

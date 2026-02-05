@@ -17,7 +17,7 @@ import { StatisticsSection } from './statistics-section'
  */
 export function HeroStatisticsSection() {
   return (
-    <div className="min-h-[calc(100vh-80px)] sm:h-[calc(100vh-80px)] flex flex-col">
+    <div className="min-h-[calc(100vh-var(--header-height))] sm:h-[calc(100vh-var(--header-height))] flex flex-col">
       {/* Hero Section - Takes remaining space and centers content */}
       <div className="flex-1 flex items-center justify-center py-4 sm:py-0">
         <HeroSection />
