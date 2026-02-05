@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.1.8](https://github.com/amel-tech/madrasah-frontend/compare/nizam-web-v0.1.7...nizam-web-v0.1.8) (2026-01-23)
+
+
+### Features
+
+* **i18n:** add translations for nizam and tedris apps ([fa46adb](https://github.com/amel-tech/madrasah-frontend/commit/fa46adbd01dc13abbfdfe92a406d6957d67ac378))
+* **i18n:** translated strings for all hard-coded strings ([7822a7a](https://github.com/amel-tech/madrasah-frontend/commit/7822a7a685cab1518e9ba9cefb8f9f110fd82b4b))
+* **nizam:** implement course creation wizard ([d952ffd](https://github.com/amel-tech/madrasah-frontend/commit/d952ffda79c6e28754a67253dc4259593fcaf9e1))
+* **nizam:** implement course creation wizard ([a5ce1d7](https://github.com/amel-tech/madrasah-frontend/commit/a5ce1d73968d855b79eb10f255592c4416e03bd5))
+
 ## [0.1.7](https://github.com/amel-tech/madrasah-frontend/compare/nizam-web-v0.1.6...nizam-web-v0.1.7) (2025-12-06)
 
 

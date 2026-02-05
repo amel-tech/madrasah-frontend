@@ -87,7 +87,9 @@ function DeckCard({
         </button>
       </div>
       <div className="text-sm mb-2">
-        {t('DeckCard.by')} {author}
+        {t('DeckCard.by')}
+        {' '}
+        {author}
       </div>
       <div className="flex items-center mb-2 text-sm">
         <div className="text-neutral-tertiary flex items-center mr-4">

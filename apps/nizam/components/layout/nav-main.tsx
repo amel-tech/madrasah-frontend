@@ -37,7 +37,7 @@ export function NavMain({
     <SidebarGroup>
       <SidebarGroupLabel>{t('NavMain.content')}</SidebarGroupLabel>
       <SidebarMenu>
-        {items.map(item => {
+        {items.map((item) => {
           const translatedTitle = getTranslatedTitle(item.title)
           return (
             <Collapsible key={item.title} asChild defaultOpen={item.isActive}>
@@ -65,7 +65,7 @@ export function NavMain({
                         </CollapsibleTrigger>
                         <CollapsibleContent>
                           <SidebarMenuSub>
-                            {item.items?.map(subItem => {
+                            {item.items?.map((subItem) => {
                               const translatedSubTitle = getTranslatedTitle(subItem.title)
                               return (
                                 <SidebarMenuSubItem key={subItem.title}>
