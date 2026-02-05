@@ -1,4 +1,4 @@
-import DeckCards from './components/cards'
+import DeckCards from '~/features/decks/components/cards'
 
 import { createServerTedrisatAPIs } from '@madrasah/services/tedrisat'
 import { env } from '~/env'

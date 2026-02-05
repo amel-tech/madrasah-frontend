@@ -1,5 +1,3 @@
-import FlashCardList from '~/features/flashcards/components/flashcard-list'
-
 import { env } from '~/env'
 import {
   createServerTedrisatAPIs,
@@ -8,14 +6,13 @@ import {
 } from '@madrasah/services/tedrisat'
 import { auth } from '~/lib/auth_options'
 import { notFound } from 'next/navigation'
+import { StudyPage } from '~/features/flashcards/components/study-page'
 
 async function getDeck(deckId: string): Promise<FlashcardDeckResponse | null> {
   try {
     const session = await auth()
     const token = session?.accessToken
-
     const { decks } = await createServerTedrisatAPIs(token, env.TEDRISAT_API_BASE_URL)
-
     const deck = await decks.getFlashcardDeckById({ id: deckId })
     return deck || null
   }
@@ -29,11 +26,8 @@ async function getDeckCards(deckId: string): Promise<FlashcardResponse[]> {
   try {
     const session = await auth()
     const token = session?.accessToken
-
     const API = await createServerTedrisatAPIs(token, env.TEDRISAT_API_BASE_URL)
-
     const cards = await API.cards.getFlashcardByDeckId({ deckId })
-
     return cards || []
   }
   catch (error) {
@@ -42,10 +36,10 @@ async function getDeckCards(deckId: string): Promise<FlashcardResponse[]> {
   }
 }
 
-export default async function StudyPage({ params }: {
-  params: Promise<{
-    id: string
-  }>
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: string }>
 }) {
   const { id } = await params
 
@@ -58,9 +52,5 @@ export default async function StudyPage({ params }: {
     notFound()
   }
 
-  return (
-    <div className="h-full">
-      <FlashCardList cards={cards} />
-    </div>
-  )
+  return <StudyPage cards={cards} />
 }
