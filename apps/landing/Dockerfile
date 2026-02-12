@@ -17,8 +17,8 @@ RUN cp apps/landing/.env.example apps/landing/.env
 # Install dependencies
 RUN npm ci
 
-# Build the application using Turbo
-RUN npm run build -- --filter=landing...
+# Build the application using Turbo (filter by package name so task runs from apps/landing and loads .env)
+RUN npm run build -- --filter=medaris-landing...
 
 WORKDIR /app/apps/landing
 
