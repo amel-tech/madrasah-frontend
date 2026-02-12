@@ -172,7 +172,7 @@ export function HeaderSection() {
           {/* CTA Buttons */}
           <div className="flex items-center gap-3">
             <Link
-              href={env.NEXT_PUBLIC_TEDRIS_APP_URL}
+              href={env.NEXT_PUBLIC_TEDRIS_APP_URL ?? '#'}
               className={cn(
                 'px-5 py-2 border-2 rounded-lg transition-colors font-medium text-sm',
                 headerData.colors.button.signIn.border,
@@ -184,7 +184,7 @@ export function HeaderSection() {
               {headerData.ctaButtons.signIn.label}
             </Link>
             <Link
-              href={env.NEXT_PUBLIC_TEDRIS_APP_URL}
+              href={env.NEXT_PUBLIC_TEDRIS_APP_URL ?? '#'}
               className={cn(
                 'px-5 py-2 rounded-lg transition-colors font-medium text-sm cursor-pointer',
                 headerData.colors.button.joinFree.background,
@@ -215,7 +215,7 @@ export function HeaderSection() {
           {/* CTA Buttons - Centered */}
           <div className="flex items-center gap-2 flex-1 justify-center">
             <Link
-              href={env.NEXT_PUBLIC_TEDRIS_APP_URL}
+              href={env.NEXT_PUBLIC_TEDRIS_APP_URL ?? '#'}
               className={cn(
                 'px-3 py-1.5 border-2 rounded-lg transition-colors font-medium text-xs',
                 headerData.colors.button.signIn.border,
@@ -227,7 +227,7 @@ export function HeaderSection() {
               {headerData.ctaButtons.signIn.label}
             </Link>
             <Link
-              href={env.NEXT_PUBLIC_TEDRIS_APP_URL}
+              href={env.NEXT_PUBLIC_TEDRIS_APP_URL ?? '#'}
               className={cn(
                 'px-3 py-1.5 rounded-lg transition-colors font-medium text-xs cursor-pointer',
                 headerData.colors.button.joinFree.background,

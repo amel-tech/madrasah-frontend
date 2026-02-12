@@ -9,7 +9,7 @@ export const env = createEnv({
     OTEL_SERVICE_NAME: z.string().min(1).optional(),
   },
   client: {
-    NEXT_PUBLIC_TEDRIS_APP_URL: z.string().min(1).url(),
+    NEXT_PUBLIC_TEDRIS_APP_URL: z.string().min(1).url().optional(),
   },
   runtimeEnv: {
     OTEL_EXPORTER_OTLP_ENDPOINT: process.env.OTEL_EXPORTER_OTLP_ENDPOINT,
