@@ -1,6 +1,6 @@
 /**
  * Smart Decks Section Component
- * 
+ *
  * This component displays the Smart Decks feature section
  * with background image, title, description, CTA button, image, and popular courses.
  */
@@ -17,7 +17,7 @@ import { YoutubeIcon } from '~/components/icons/smart-decks/youtube-icon'
 
 /**
  * Smart Decks Component
- * 
+ *
  * Displays the Smart Decks section with background image,
  * promotional content, call-to-action, and popular courses.
  */
@@ -26,12 +26,12 @@ export function SmartDecksSection() {
     <section
       className={cn(
         'relative min-h-screen overflow-visible',
-        smartDecksData.colors.section.background
+        smartDecksData.colors.section.background,
       )}
     >
       {/* Smart Decks Content with Background Image - Container with white margins */}
       <div className="container mx-auto px-4 sm:px-6 max-w-7xl py-8 sm:py-12 md:py-16">
-        <div 
+        <div
           className="relative rounded-2xl py-8 sm:py-12 md:py-16 px-4 sm:px-6 md:px-8 shadow-lg overflow-hidden flex items-center justify-center"
           style={{
             backgroundImage: 'url(/images/background/smart-decks/smart-decks.png)',
@@ -47,7 +47,7 @@ export function SmartDecksSection() {
               <h2
                 className={cn(
                   'text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-5 md:mb-6',
-                  smartDecksData.colors.mainContent.title
+                  smartDecksData.colors.mainContent.title,
                 )}
               >
                 {smartDecksData.title}
@@ -55,7 +55,7 @@ export function SmartDecksSection() {
               <p
                 className={cn(
                   'text-sm sm:text-base md:text-lg lg:text-xl mb-6 sm:mb-7 md:mb-8 leading-relaxed',
-                  smartDecksData.colors.mainContent.description
+                  smartDecksData.colors.mainContent.description,
                 )}
               >
                 {smartDecksData.description}
@@ -67,7 +67,7 @@ export function SmartDecksSection() {
                   smartDecksData.colors.mainContent.button.background,
                   smartDecksData.colors.mainContent.button.text,
                   smartDecksData.colors.mainContent.button.hoverBackground,
-                  smartDecksData.colors.mainContent.button.shadow
+                  smartDecksData.colors.mainContent.button.shadow,
                 )}
               >
                 {smartDecksData.ctaButton.label}
@@ -96,7 +96,7 @@ export function SmartDecksSection() {
         id="courses"
         className={cn(
           'py-8 sm:py-10 md:py-12 overflow-visible',
-          smartDecksData.colors.popularCourses.sectionBackground
+          smartDecksData.colors.popularCourses.sectionBackground,
         )}
       >
         <div className="container mx-auto px-4 sm:px-6 max-w-7xl relative" style={{ paddingBottom: '150px' }}>
@@ -114,91 +114,91 @@ export function SmartDecksSection() {
               unoptimized
             />
           </div>
-          
+
           {/* Content - Above background */}
           <div className="relative z-10">
             <h2
               className={cn(
                 'text-lg sm:text-xl md:text-2xl font-bold mb-6 sm:mb-8 md:mb-12',
-                smartDecksData.colors.popularCourses.title
+                smartDecksData.colors.popularCourses.title,
               )}
             >
               {smartDecksData.popularCourses.title}
             </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
-            {smartDecksData.popularCourses.items.map((course) => (
-              <div
-                key={course.id}
-                className={cn(
-                  'rounded-lg overflow-hidden transition-shadow p-5 sm:p-6 md:p-7 gap-6 flex flex-col',
-                  smartDecksData.colors.popularCourses.card.background,
-                  smartDecksData.colors.popularCourses.card.shadow,
-                  smartDecksData.colors.popularCourses.card.hoverShadow
-                )}
-              >
-                {/* Image Placeholder */}
-                <div className="aspect-video relative">
-                  <Image
-                    src={course.image.src}
-                    alt={course.image.alt}
-                    fill
-                    className="object-cover rounded-lg"
-                    unoptimized
-                  />
-                </div>
-                {/* Content */}
-                <div>
-                  <h3
-                    className={cn(
-                      'text-base sm:text-lg font-bold',
-                      smartDecksData.colors.popularCourses.card.title
-                    )}
-                  >
-                    {course.title}
-                  </h3>
-                  <p
-                    className={cn(
-                      'text-xs sm:text-sm mb-1',
-                      smartDecksData.colors.popularCourses.card.author
-                    )}
-                  >
-                    {course.author}
-                  </p>
-                  
-                  {/* Stats */}
-                  <div
-                    className={cn(
-                      'flex items-center gap-3 sm:gap-4 text-xs mb-2 sm:mb-3',
-                      smartDecksData.colors.popularCourses.card.stats
-                    )}
-                  >
-                    <div className="flex items-center gap-1">
-                      <YoutubeIcon width={12} height={12} />
-                      <span>{course.stats.lessons}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <StarIcon width={12} height={12} />
-                      <span>{course.stats.rating}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <StudentIcon width={12} height={12} />
-                      <span>{course.stats.students}</span>
-                    </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
+              {smartDecksData.popularCourses.items.map(course => (
+                <div
+                  key={course.id}
+                  className={cn(
+                    'rounded-lg overflow-hidden transition-shadow p-5 sm:p-6 md:p-7 gap-6 flex flex-col',
+                    smartDecksData.colors.popularCourses.card.background,
+                    smartDecksData.colors.popularCourses.card.shadow,
+                    smartDecksData.colors.popularCourses.card.hoverShadow,
+                  )}
+                >
+                  {/* Image Placeholder */}
+                  <div className="aspect-video relative">
+                    <Image
+                      src={course.image.src}
+                      alt={course.image.alt}
+                      fill
+                      className="object-cover rounded-lg"
+                      unoptimized
+                    />
                   </div>
-                  
-                  {/* Description */}
-                  <p
-                    className={cn(
-                      'text-xs line-clamp-2',
-                      smartDecksData.colors.popularCourses.card.description
-                    )}
-                  >
-                    {course.description}
-                  </p>
+                  {/* Content */}
+                  <div>
+                    <h3
+                      className={cn(
+                        'text-base sm:text-lg font-bold',
+                        smartDecksData.colors.popularCourses.card.title,
+                      )}
+                    >
+                      {course.title}
+                    </h3>
+                    <p
+                      className={cn(
+                        'text-xs sm:text-sm mb-1',
+                        smartDecksData.colors.popularCourses.card.author,
+                      )}
+                    >
+                      {course.author}
+                    </p>
+
+                    {/* Stats */}
+                    <div
+                      className={cn(
+                        'flex items-center gap-3 sm:gap-4 text-xs mb-2 sm:mb-3',
+                        smartDecksData.colors.popularCourses.card.stats,
+                      )}
+                    >
+                      <div className="flex items-center gap-1">
+                        <YoutubeIcon width={12} height={12} />
+                        <span>{course.stats.lessons}</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <StarIcon width={12} height={12} />
+                        <span>{course.stats.rating}</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <StudentIcon width={12} height={12} />
+                        <span>{course.stats.students}</span>
+                      </div>
+                    </div>
+
+                    {/* Description */}
+                    <p
+                      className={cn(
+                        'text-xs line-clamp-2',
+                        smartDecksData.colors.popularCourses.card.description,
+                      )}
+                    >
+                      {course.description}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 /**
  * Header Section Component
- * 
+ *
  * This component displays the header with logo, navigation links, and CTA buttons.
  */
 
@@ -34,7 +34,7 @@ function scrollToSection(href: string) {
 
       window.scrollTo({
         top: offsetPosition,
-        behavior: 'smooth'
+        behavior: 'smooth',
       })
     }
   }
@@ -50,21 +50,21 @@ function HamburgerIcon({ isOpen }: { isOpen: boolean }) {
         className={cn(
           'block h-0.5 w-6 transition-all duration-300',
           headerData.colors.hamburger.icon,
-          isOpen && 'rotate-45 translate-y-2'
+          isOpen && 'rotate-45 translate-y-2',
         )}
       />
       <span
         className={cn(
           'block h-0.5 w-6 transition-all duration-300',
           headerData.colors.hamburger.icon,
-          isOpen && 'opacity-0'
+          isOpen && 'opacity-0',
         )}
       />
       <span
         className={cn(
           'block h-0.5 w-6 transition-all duration-300',
           headerData.colors.hamburger.icon,
-          isOpen && '-rotate-45 -translate-y-2'
+          isOpen && '-rotate-45 -translate-y-2',
         )}
       />
     </div>
@@ -73,7 +73,7 @@ function HamburgerIcon({ isOpen }: { isOpen: boolean }) {
 
 /**
  * Header Component
- * 
+ *
  * Displays the header with logo, navigation, and CTA buttons.
  * Header becomes sticky with shadow when scrolling.
  * Mobile responsive with hamburger menu.
@@ -104,7 +104,8 @@ export function HeaderSection() {
       document.addEventListener('click', handleClickOutside)
       // Prevent body scroll when menu is open
       document.body.style.overflow = 'hidden'
-    } else {
+    }
+    else {
       document.body.style.overflow = ''
     }
 
@@ -131,7 +132,7 @@ export function HeaderSection() {
       className={cn(
         'sticky top-0 z-50 w-full transition-shadow duration-200',
         headerData.colors.background,
-        isScrolled && 'shadow-sm'
+        isScrolled && 'shadow-sm',
       )}
     >
       <div className="mx-auto px-4 sm:px-6 lg:px-8 py-4 max-w-5xl">
@@ -140,7 +141,7 @@ export function HeaderSection() {
           {/* Logo Section */}
           <Link
             href="#hero"
-            onClick={(e) => handleLinkClick(e, '#hero')}
+            onClick={e => handleLinkClick(e, '#hero')}
             className="flex items-center gap-3 cursor-pointer"
           >
             <BrandLogo
@@ -152,15 +153,15 @@ export function HeaderSection() {
 
           {/* Navigation Links */}
           <nav className="flex items-center gap-8 justify-center">
-            {headerData.navigationLinks.map((link) => (
+            {headerData.navigationLinks.map(link => (
               <Link
                 key={link.href}
                 href={link.href}
-                onClick={(e) => handleLinkClick(e, link.href)}
+                onClick={e => handleLinkClick(e, link.href)}
                 className={cn(
                   'transition-colors font-medium text-sm capitalize cursor-pointer',
                   headerData.colors.text.default,
-                  headerData.colors.text.hover
+                  headerData.colors.text.hover,
                 )}
               >
                 {link.label}
@@ -177,7 +178,7 @@ export function HeaderSection() {
                 headerData.colors.button.signIn.border,
                 headerData.colors.button.signIn.text,
                 headerData.colors.button.signIn.background,
-                headerData.colors.button.signIn.hoverBackground
+                headerData.colors.button.signIn.hoverBackground,
               )}
             >
               {headerData.ctaButtons.signIn.label}
@@ -188,7 +189,7 @@ export function HeaderSection() {
                 'px-5 py-2 rounded-lg transition-colors font-medium text-sm cursor-pointer',
                 headerData.colors.button.joinFree.background,
                 headerData.colors.button.joinFree.text,
-                headerData.colors.button.joinFree.hoverBackground
+                headerData.colors.button.joinFree.hoverBackground,
               )}
             >
               {headerData.ctaButtons.joinFree.label}
@@ -201,7 +202,7 @@ export function HeaderSection() {
           {/* Logo */}
           <Link
             href="#hero"
-            onClick={(e) => handleLinkClick(e, '#hero')}
+            onClick={e => handleLinkClick(e, '#hero')}
             className="flex items-center gap-3 cursor-pointer"
           >
             <BrandLogo
@@ -220,7 +221,7 @@ export function HeaderSection() {
                 headerData.colors.button.signIn.border,
                 headerData.colors.button.signIn.text,
                 headerData.colors.button.signIn.background,
-                headerData.colors.button.signIn.hoverBackground
+                headerData.colors.button.signIn.hoverBackground,
               )}
             >
               {headerData.ctaButtons.signIn.label}
@@ -231,7 +232,7 @@ export function HeaderSection() {
                 'px-3 py-1.5 rounded-lg transition-colors font-medium text-xs cursor-pointer',
                 headerData.colors.button.joinFree.background,
                 headerData.colors.button.joinFree.text,
-                headerData.colors.button.joinFree.hoverBackground
+                headerData.colors.button.joinFree.hoverBackground,
               )}
             >
               {headerData.ctaButtons.joinFree.label}
@@ -253,25 +254,25 @@ export function HeaderSection() {
         <div
           className={cn(
             'md:hidden overflow-hidden transition-all duration-300 ease-in-out',
-            isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+            isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0',
           )}
         >
           <nav
             className={cn(
               'pt-4 pb-4 border-t mt-4',
-              headerData.colors.menu.border
+              headerData.colors.menu.border,
             )}
           >
             <div className="flex flex-col gap-4">
-              {headerData.navigationLinks.map((link) => (
+              {headerData.navigationLinks.map(link => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  onClick={(e) => handleLinkClick(e, link.href)}
+                  onClick={e => handleLinkClick(e, link.href)}
                   className={cn(
                     'transition-colors font-medium text-sm capitalize py-2',
                     headerData.colors.text.default,
-                    headerData.colors.text.hover
+                    headerData.colors.text.hover,
                   )}
                 >
                   {link.label}

@@ -1,6 +1,6 @@
 /**
  * Courses-Institute Section Component
- * 
+ *
  * This component displays Popular Courses and Digitize Your Institute sections.
  */
 
@@ -13,7 +13,7 @@ import { coursesInstituteData } from './data'
 
 /**
  * Courses-Institute Component
- * 
+ *
  * Displays popular courses grid and institute partnership section.
  */
 export function CoursesInstituteSection() {
@@ -21,7 +21,7 @@ export function CoursesInstituteSection() {
     <section
       className={cn(
         'relative min-h-screen py-8 sm:py-12 md:py-16 overflow-visible',
-        coursesInstituteData.colors.section.background
+        coursesInstituteData.colors.section.background,
       )}
       style={{
         backgroundImage: 'url(/images/background/courses-institute/courses-institute-bg.png)',
@@ -53,7 +53,7 @@ export function CoursesInstituteSection() {
               className={cn(
                 'text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold',
                 coursesInstituteData.colors.institute.title,
-                'mb-4 sm:mb-5 md:mb-6'
+                'mb-4 sm:mb-5 md:mb-6',
               )}
             >
               {coursesInstituteData.institute.title}
@@ -62,7 +62,7 @@ export function CoursesInstituteSection() {
               className={cn(
                 'text-sm sm:text-base md:text-lg',
                 coursesInstituteData.colors.institute.description,
-                'mb-6 sm:mb-7 md:mb-8'
+                'mb-6 sm:mb-7 md:mb-8',
               )}
             >
               {coursesInstituteData.institute.description}
@@ -73,7 +73,7 @@ export function CoursesInstituteSection() {
                 'inline-block px-6 py-2.5 sm:px-7 sm:py-2.5 md:px-8 md:py-3 rounded-lg font-medium text-sm sm:text-base transition-colors',
                 coursesInstituteData.colors.institute.button.background,
                 coursesInstituteData.colors.institute.button.text,
-                coursesInstituteData.colors.institute.button.hoverBackground
+                coursesInstituteData.colors.institute.button.hoverBackground,
               )}
             >
               {coursesInstituteData.institute.ctaButton.label}

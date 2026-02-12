@@ -1,6 +1,6 @@
 /**
  * Hero Section Component
- * 
+ *
  * This component displays the hero section with title, subtitle, description, and CTA buttons.
  */
 
@@ -12,7 +12,7 @@ import { heroData } from './data'
 
 /**
  * Hero Component
- * 
+ *
  * Displays the main hero section with background image, title, subtitle, and CTA buttons.
  */
 export function HeroSection() {
@@ -20,7 +20,7 @@ export function HeroSection() {
     <section
       className={cn(
         'relative min-h-[400px] sm:min-h-[500px] md:min-h-[600px] max-w-6xl mx-auto flex items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat',
-        heroData.colors.background
+        heroData.colors.background,
       )}
       style={{
         backgroundImage: heroData.backgroundImage ? `url(${heroData.backgroundImage})` : undefined,
@@ -33,7 +33,7 @@ export function HeroSection() {
           <h1
             className={cn(
               'text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-3 sm:mb-4',
-              heroData.colors.title
+              heroData.colors.title,
             )}
           >
             {heroData.title}
@@ -43,7 +43,7 @@ export function HeroSection() {
           <h2
             className={cn(
               'text-2xl sm:text-3xl md:text-4xl lg:text-6xl mb-4 sm:mb-6',
-              heroData.colors.subtitle
+              heroData.colors.subtitle,
             )}
           >
             {heroData.subtitle}
@@ -53,7 +53,7 @@ export function HeroSection() {
           <p
             className={cn(
               'my-4 sm:my-6 md:my-8 mx-auto max-w-2xl text-sm sm:text-base md:text-lg m-0 p-0',
-              heroData.colors.description
+              heroData.colors.description,
             )}
           >
             {heroData.description}
@@ -61,7 +61,7 @@ export function HeroSection() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mt-6 sm:mt-8">
-            {heroData.ctaButtons.map((button) => (
+            {heroData.ctaButtons.map(button => (
               <Link
                 key={button.href}
                 href={button.href}
@@ -79,7 +79,7 @@ export function HeroSection() {
                         'border-2',
                         heroData.colors.button.secondary.border,
                         heroData.colors.button.secondary.hoverBackground,
-                      ]
+                      ],
                 )}
               >
                 {button.label}

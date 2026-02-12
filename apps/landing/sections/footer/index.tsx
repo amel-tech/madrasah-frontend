@@ -1,6 +1,6 @@
 /**
  * Footer Section Component
- * 
+ *
  * This component displays the footer with logo, navigation links,
  * newsletter signup, and copyright information.
  */
@@ -14,7 +14,7 @@ import { BrandLogo } from '~/components/logos/brand/logo'
 
 /**
  * Footer Component
- * 
+ *
  * Displays the footer section with all navigation and information.
  */
 export function FooterSection() {
@@ -26,7 +26,7 @@ export function FooterSection() {
           className={cn(
             'border rounded-lg p-6 sm:p-7 md:p-8',
             footerData.colors.contentBox.background,
-            footerData.colors.contentBox.border
+            footerData.colors.contentBox.border,
           )}
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7 md:gap-8">
@@ -41,7 +41,7 @@ export function FooterSection() {
                 <h3
                   className={cn(
                     'text-base sm:text-lg font-bold uppercase',
-                    footerData.colors.logo.title
+                    footerData.colors.logo.title,
                   )}
                 >
                   MEDRESE ONLİNE
@@ -50,7 +50,7 @@ export function FooterSection() {
               <p
                 className={cn(
                   'text-xs sm:text-sm mb-3 sm:mb-4',
-                  footerData.colors.tagline
+                  footerData.colors.tagline,
                 )}
               >
                 {footerData.tagline}
@@ -63,7 +63,7 @@ export function FooterSection() {
                     'w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition-colors border',
                     footerData.colors.socialIcons.background,
                     footerData.colors.socialIcons.hoverBackground,
-                    footerData.colors.socialIcons.border
+                    footerData.colors.socialIcons.border,
                   )}
                   aria-label="Facebook"
                 >
@@ -75,7 +75,7 @@ export function FooterSection() {
                     'w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition-colors border',
                     footerData.colors.socialIcons.background,
                     footerData.colors.socialIcons.hoverBackground,
-                    footerData.colors.socialIcons.border
+                    footerData.colors.socialIcons.border,
                   )}
                   aria-label="Twitter"
                 >
@@ -89,20 +89,20 @@ export function FooterSection() {
               <h3
                 className={cn(
                   'font-bold mb-3 sm:mb-4 text-sm sm:text-base',
-                  footerData.colors.headings
+                  footerData.colors.headings,
                 )}
               >
                 Learn
               </h3>
               <ul className="space-y-1.5 sm:space-y-2">
-                {footerData.learnLinks.map((link) => (
+                {footerData.learnLinks.map(link => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
                       className={cn(
                         'transition-colors text-xs sm:text-sm',
                         footerData.colors.links.default,
-                        footerData.colors.links.hover
+                        footerData.colors.links.hover,
                       )}
                     >
                       {link.label}
@@ -117,20 +117,20 @@ export function FooterSection() {
               <h3
                 className={cn(
                   'font-bold mb-3 sm:mb-4 text-sm sm:text-base',
-                  footerData.colors.headings
+                  footerData.colors.headings,
                 )}
               >
                 Company
               </h3>
               <ul className="space-y-1.5 sm:space-y-2">
-                {footerData.companyLinks.map((link) => (
+                {footerData.companyLinks.map(link => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
                       className={cn(
                         'transition-colors text-xs sm:text-sm',
                         footerData.colors.links.default,
-                        footerData.colors.links.hover
+                        footerData.colors.links.hover,
                       )}
                     >
                       {link.label}
@@ -145,7 +145,7 @@ export function FooterSection() {
               <h3
                 className={cn(
                   'font-bold mb-3 sm:mb-4 text-sm sm:text-base',
-                  footerData.colors.newsletter.title
+                  footerData.colors.newsletter.title,
                 )}
               >
                 {footerData.newsletter.title}
@@ -153,7 +153,7 @@ export function FooterSection() {
               <p
                 className={cn(
                   'text-xs sm:text-sm mb-3 sm:mb-4',
-                  footerData.colors.newsletter.description
+                  footerData.colors.newsletter.description,
                 )}
               >
                 {footerData.newsletter.description}
@@ -165,7 +165,7 @@ export function FooterSection() {
                   className={cn(
                     'w-full px-3 py-2 sm:px-4 sm:py-2 border rounded-lg focus:outline-none focus:ring-2 text-xs sm:text-sm',
                     footerData.colors.newsletter.input.border,
-                    footerData.colors.newsletter.input.focusRing
+                    footerData.colors.newsletter.input.focusRing,
                   )}
                 />
                 <button
@@ -174,7 +174,7 @@ export function FooterSection() {
                     'w-full px-3 py-2 sm:px-4 sm:py-2 rounded-lg transition-colors text-xs sm:text-sm font-medium',
                     footerData.colors.newsletter.button.background,
                     footerData.colors.newsletter.button.text,
-                    footerData.colors.newsletter.button.hoverBackground
+                    footerData.colors.newsletter.button.hoverBackground,
                   )}
                 >
                   {footerData.newsletter.buttonLabel}
@@ -187,14 +187,14 @@ export function FooterSection() {
           <div
             className={cn(
               'border-t pt-6 sm:pt-7 md:pt-8 mt-6 sm:mt-7 md:mt-8',
-              footerData.colors.copyright.border
+              footerData.colors.copyright.border,
             )}
           >
             <div className="flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4">
               <p
                 className={cn(
                   'text-xs sm:text-sm text-center md:text-left',
-                  footerData.colors.copyright.text
+                  footerData.colors.copyright.text,
                 )}
               >
                 {`© ${new Date().getFullYear()} ${footerData.copyright.companyName}. ${footerData.copyright.rightsText}`}
@@ -205,7 +205,7 @@ export function FooterSection() {
                   className={cn(
                     'transition-colors text-xs sm:text-sm',
                     footerData.colors.copyright.links.default,
-                    footerData.colors.copyright.links.hover
+                    footerData.colors.copyright.links.hover,
                   )}
                 >
                   {footerData.copyright.privacyPolicy.label}
@@ -215,7 +215,7 @@ export function FooterSection() {
                   className={cn(
                     'transition-colors text-xs sm:text-sm',
                     footerData.colors.copyright.links.default,
-                    footerData.colors.copyright.links.hover
+                    footerData.colors.copyright.links.hover,
                   )}
                 >
                   {footerData.copyright.termsOfService.label}

@@ -1,6 +1,6 @@
 /**
  * Statistics Section Component
- * 
+ *
  * This component displays statistics with numbers and labels.
  */
 
@@ -11,7 +11,7 @@ import { statisticsData } from './data'
 
 /**
  * Statistics Component
- * 
+ *
  * Displays statistics in a grid layout with values and labels.
  */
 export function StatisticsSection() {
@@ -25,7 +25,7 @@ export function StatisticsSection() {
                 <div
                   className={cn(
                     'text-4xl md:text-5xl font-bold mb-2',
-                    statisticsData.colors.value
+                    statisticsData.colors.value,
                   )}
                 >
                   {item.value}
@@ -38,7 +38,7 @@ export function StatisticsSection() {
                 <div
                   className={cn(
                     'w-1 h-[60px] mx-3 hidden md:block',
-                    statisticsData.colors.divider
+                    statisticsData.colors.divider,
                   )}
                 />
               )}

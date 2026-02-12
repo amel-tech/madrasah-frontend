@@ -1,6 +1,6 @@
 /**
  * Hero-Statistics Section Component
- * 
+ *
  * This section combines the Hero and Statistics components
  * in a single viewport-height section.
  */
@@ -12,7 +12,7 @@ import { StatisticsSection } from './statistics-section'
 
 /**
  * Hero-Statistics Component
- * 
+ *
  * Combines Hero and Statistics sections in one full-viewport section.
  */
 export function HeroStatisticsSection() {

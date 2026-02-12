@@ -7,7 +7,7 @@
 export const smartDecksData = {
   title: 'Memorize Faster with Smart Decks',
   description:
-    "Whether it's vocabulary or Quranic verses, create your own flashcards or use community decks powered by spaced repetition.",
+    'Whether it\'s vocabulary or Quranic verses, create your own flashcards or use community decks powered by spaced repetition.',
   ctaButton: {
     label: 'Try Flashcards Demo',
     href: '/flashcards-demo',
