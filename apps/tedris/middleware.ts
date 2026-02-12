@@ -24,7 +24,7 @@ const authMiddleware = withAuth(
 )
 
 export default function middleware(req: NextRequest) {
-  const publicPages = ['/', '/api/auth/signin']
+  const publicPages = ['/', '/home', '/api/auth/signin']
   const locales = routing.locales
 
   const publicPathnameRegex = new RegExp(
