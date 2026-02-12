@@ -9,6 +9,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
+import { cn } from '@madrasah/ui/lib/utils'
 import { smartDecksData } from './data'
 import { StarIcon } from '~/components/icons/smart-decks/star-icon'
 import { StudentIcon } from '~/components/icons/smart-decks/student-icon'
@@ -22,7 +23,12 @@ import { YoutubeIcon } from '~/components/icons/smart-decks/youtube-icon'
  */
 export function SmartDecksSection() {
   return (
-    <section className={`relative min-h-screen ${smartDecksData.colors.section.background} overflow-visible`}>
+    <section
+      className={cn(
+        'relative min-h-screen overflow-visible',
+        smartDecksData.colors.section.background
+      )}
+    >
       {/* Smart Decks Content with Background Image - Container with white margins */}
       <div className="container mx-auto px-4 sm:px-6 max-w-7xl py-8 sm:py-12 md:py-16">
         <div 
@@ -38,15 +44,31 @@ export function SmartDecksSection() {
           <div className="relative z-10 flex flex-col lg:flex-row gap-6 sm:gap-8 md:gap-12 items-center justify-between px-4 sm:px-8 md:px-16 lg:px-32 w-full">
             {/* Left Side - Content */}
             <div className="max-w-md text-center lg:text-left">
-              <h2 className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-5 md:mb-6 ${smartDecksData.colors.mainContent.title}`}>
+              <h2
+                className={cn(
+                  'text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-5 md:mb-6',
+                  smartDecksData.colors.mainContent.title
+                )}
+              >
                 {smartDecksData.title}
               </h2>
-              <p className={`text-sm sm:text-base md:text-lg lg:text-xl ${smartDecksData.colors.mainContent.description} mb-6 sm:mb-7 md:mb-8 leading-relaxed`}>
+              <p
+                className={cn(
+                  'text-sm sm:text-base md:text-lg lg:text-xl mb-6 sm:mb-7 md:mb-8 leading-relaxed',
+                  smartDecksData.colors.mainContent.description
+                )}
+              >
                 {smartDecksData.description}
               </p>
               <Link
                 href={smartDecksData.ctaButton.href}
-                className={`inline-block px-6 py-2.5 sm:px-7 sm:py-2.5 md:px-8 md:py-3 ${smartDecksData.colors.mainContent.button.background} ${smartDecksData.colors.mainContent.button.text} rounded-lg font-medium text-sm sm:text-base ${smartDecksData.colors.mainContent.button.hoverBackground} transition-colors ${smartDecksData.colors.mainContent.button.shadow}`}
+                className={cn(
+                  'inline-block px-6 py-2.5 sm:px-7 sm:py-2.5 md:px-8 md:py-3 rounded-lg font-medium text-sm sm:text-base transition-colors',
+                  smartDecksData.colors.mainContent.button.background,
+                  smartDecksData.colors.mainContent.button.text,
+                  smartDecksData.colors.mainContent.button.hoverBackground,
+                  smartDecksData.colors.mainContent.button.shadow
+                )}
               >
                 {smartDecksData.ctaButton.label}
               </Link>
@@ -70,7 +92,13 @@ export function SmartDecksSection() {
       </div>
 
       {/* Popular Courses Section - White Background */}
-      <div className={`${smartDecksData.colors.popularCourses.sectionBackground} py-8 sm:py-10 md:py-12 overflow-visible`}>
+      <div
+        id="courses"
+        className={cn(
+          'py-8 sm:py-10 md:py-12 overflow-visible',
+          smartDecksData.colors.popularCourses.sectionBackground
+        )}
+      >
         <div className="container mx-auto px-4 sm:px-6 max-w-7xl relative" style={{ paddingBottom: '150px' }}>
           {/* Background Image - Foreground */}
           <div className="absolute left-0 right-0 z-30 pointer-events-none" style={{ top: '-100px', bottom: '-80px' }}>
@@ -89,14 +117,24 @@ export function SmartDecksSection() {
           
           {/* Content - Above background */}
           <div className="relative z-10">
-            <h2 className={`text-lg sm:text-xl md:text-2xl font-bold ${smartDecksData.colors.popularCourses.title} mb-6 sm:mb-8 md:mb-12`}>
+            <h2
+              className={cn(
+                'text-lg sm:text-xl md:text-2xl font-bold mb-6 sm:mb-8 md:mb-12',
+                smartDecksData.colors.popularCourses.title
+              )}
+            >
               {smartDecksData.popularCourses.title}
             </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
             {smartDecksData.popularCourses.items.map((course) => (
               <div
                 key={course.id}
-                className={`${smartDecksData.colors.popularCourses.card.background} rounded-lg overflow-hidden ${smartDecksData.colors.popularCourses.card.shadow} ${smartDecksData.colors.popularCourses.card.hoverShadow} transition-shadow p-5 sm:p-6 md:p-7 gap-6 flex flex-col`}
+                className={cn(
+                  'rounded-lg overflow-hidden transition-shadow p-5 sm:p-6 md:p-7 gap-6 flex flex-col',
+                  smartDecksData.colors.popularCourses.card.background,
+                  smartDecksData.colors.popularCourses.card.shadow,
+                  smartDecksData.colors.popularCourses.card.hoverShadow
+                )}
               >
                 {/* Image Placeholder */}
                 <div className="aspect-video relative">
@@ -110,15 +148,30 @@ export function SmartDecksSection() {
                 </div>
                 {/* Content */}
                 <div>
-                  <h3 className={`text-base sm:text-lg font-bold ${smartDecksData.colors.popularCourses.card.title}`}>
+                  <h3
+                    className={cn(
+                      'text-base sm:text-lg font-bold',
+                      smartDecksData.colors.popularCourses.card.title
+                    )}
+                  >
                     {course.title}
                   </h3>
-                  <p className={`text-xs sm:text-sm ${smartDecksData.colors.popularCourses.card.author} mb-1`}>
+                  <p
+                    className={cn(
+                      'text-xs sm:text-sm mb-1',
+                      smartDecksData.colors.popularCourses.card.author
+                    )}
+                  >
                     {course.author}
                   </p>
                   
                   {/* Stats */}
-                  <div className={`flex items-center gap-3 sm:gap-4 text-xs ${smartDecksData.colors.popularCourses.card.stats} mb-2 sm:mb-3`}>
+                  <div
+                    className={cn(
+                      'flex items-center gap-3 sm:gap-4 text-xs mb-2 sm:mb-3',
+                      smartDecksData.colors.popularCourses.card.stats
+                    )}
+                  >
                     <div className="flex items-center gap-1">
                       <YoutubeIcon width={12} height={12} />
                       <span>{course.stats.lessons}</span>
@@ -134,7 +187,12 @@ export function SmartDecksSection() {
                   </div>
                   
                   {/* Description */}
-                  <p className={`text-xs ${smartDecksData.colors.popularCourses.card.description} line-clamp-2`}>
+                  <p
+                    className={cn(
+                      'text-xs line-clamp-2',
+                      smartDecksData.colors.popularCourses.card.description
+                    )}
+                  >
                     {course.description}
                   </p>
                 </div>

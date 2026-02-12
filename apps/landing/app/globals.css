@@ -1,14 +1,18 @@
 @import 'tailwindcss';
 @import '@madrasah/tokens/css';
 
-  /* Figma_landing-page_header: X0 Y1 Blur4 Color #004F80 @18% */
+:root {
+  --header-height: 80px;
+}
+
+/* Figma_landing-page_header: X0 Y1 Blur4 Color #004F80 @18% */
 .text-shadow-header {
   text-shadow: 0 1px 4px rgb(0 79 128 / 0.18);
 }
 
 @font-face {
   font-family: "UthmanNaskh";
-  src: url("/apps/nazir/public/uthman/uthman.ttf") format("truetype");
+  src: url("/uthman/uthman.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;

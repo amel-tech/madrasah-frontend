@@ -1,75 +1,13 @@
 /**
  * Smart Decks Section Data
- * 
+ *
  * Contains all data for the smart decks section
  */
 
-export interface PopularCourse {
-  readonly id: string
-  readonly title: string
-  readonly author: string
-  readonly stats: {
-    readonly lessons: number
-    readonly rating: number
-    readonly students: number
-  }
-  readonly description: string
-  readonly image: {
-    readonly src: string
-    readonly alt: string
-  }
-}
-
-export interface SmartDecksColors {
-  readonly section: {
-    readonly background: string
-  }
-  readonly mainContent: {
-    readonly title: string
-    readonly description: string
-    readonly button: {
-      readonly background: string
-      readonly text: string
-      readonly hoverBackground: string
-      readonly shadow: string
-    }
-  }
-  readonly popularCourses: {
-    readonly sectionBackground: string
-    readonly title: string
-    readonly card: {
-      readonly background: string
-      readonly title: string
-      readonly author: string
-      readonly stats: string
-      readonly description: string
-      readonly shadow: string
-      readonly hoverShadow: string
-    }
-  }
-}
-
-export interface SmartDecksData {
-  readonly title: string
-  readonly description: string
-  readonly ctaButton: {
-    readonly label: string
-    readonly href: string
-  }
-  readonly image: {
-    readonly src: string
-    readonly alt: string
-  }
-  readonly popularCourses: {
-    readonly title: string
-    readonly items: readonly PopularCourse[]
-  }
-  readonly colors: SmartDecksColors
-}
-
-export const smartDecksData: SmartDecksData = {
+export const smartDecksData = {
   title: 'Memorize Faster with Smart Decks',
-  description: 'Whether it\'s vocabulary or Quranic verses, create your own flashcards or use community decks powered by spaced repetition.',
+  description:
+    "Whether it's vocabulary or Quranic verses, create your own flashcards or use community decks powered by spaced repetition.",
   ctaButton: {
     label: 'Try Flashcards Demo',
     href: '/flashcards-demo',
@@ -90,9 +28,10 @@ export const smartDecksData: SmartDecksData = {
           rating: 4.8,
           students: 317,
         },
-        description: 'Master advanced Arabic with this essential deck. Features high-frequency words, complex grammar and...',
+        description:
+          'Master advanced Arabic with this essential deck. Features high-frequency words, complex grammar and...',
         image: {
-          src: 'https://picsum.photos/200/300',
+          src: '/images/placeholder/course-placeholder.svg',
           alt: 'Advanced Arabic Course',
         },
       },
@@ -105,9 +44,10 @@ export const smartDecksData: SmartDecksData = {
           rating: 4.8,
           students: 317,
         },
-        description: 'Master advanced Arabic with this essential deck. Features high-frequency words, complex grammar and...',
+        description:
+          'Master advanced Arabic with this essential deck. Features high-frequency words, complex grammar and...',
         image: {
-          src: 'https://picsum.photos/200/300',
+          src: '/images/placeholder/course-placeholder.svg',
           alt: 'Advanced Arabic Course',
         },
       },
@@ -120,9 +60,10 @@ export const smartDecksData: SmartDecksData = {
           rating: 4.8,
           students: 317,
         },
-        description: 'Master advanced Arabic with this essential deck. Features high-frequency words, complex grammar and...',
+        description:
+          'Master advanced Arabic with this essential deck. Features high-frequency words, complex grammar and...',
         image: {
-          src: 'https://picsum.photos/200/300',
+          src: '/images/placeholder/course-placeholder.svg',
           alt: 'Advanced Arabic Course',
         },
       },
@@ -135,9 +76,10 @@ export const smartDecksData: SmartDecksData = {
           rating: 4.8,
           students: 317,
         },
-        description: 'Master advanced Arabic with this essential deck. Features high-frequency words, complex grammar and...',
+        description:
+          'Master advanced Arabic with this essential deck. Features high-frequency words, complex grammar and...',
         image: {
-          src: 'https://picsum.photos/200/300',
+          src: '/images/placeholder/course-placeholder.svg',
           alt: 'Advanced Arabic Course',
         },
       },
@@ -171,4 +113,4 @@ export const smartDecksData: SmartDecksData = {
       },
     },
   },
-}
+} as const

@@ -1,49 +1,14 @@
 /**
  * Hero-Statistics Section Data
- * 
+ *
  * Contains all data for both Hero and Statistics components
  */
 
-// Hero Data
-export interface HeroCtaButton {
-  readonly label: string
-  readonly href: string
-  readonly variant: 'primary' | 'secondary'
-}
-
-export interface HeroColors {
-  readonly background: string
-  readonly title: string
-  readonly subtitle: string
-  readonly description: string
-  readonly button: {
-    readonly primary: {
-      readonly background: string
-      readonly text: string
-      readonly hoverBackground: string
-    }
-    readonly secondary: {
-      readonly background: string
-      readonly text: string
-      readonly border: string
-      readonly hoverBackground: string
-    }
-  }
-}
-
-export interface HeroData {
-  readonly title: string
-  readonly subtitle: string
-  readonly description: string
-  readonly ctaButtons: readonly HeroCtaButton[]
-  readonly backgroundImage?: string
-  readonly colors: HeroColors
-}
-
-export const heroData: HeroData = {
+export const heroData = {
   title: 'The Digital Age Madrasa:',
   subtitle: 'Beyond Borders, Bound to Knowledge',
-  description: 'Fiqh, Kalam, Arabic, and Hifz education; featuring live classes, interactive flashcards, and expert scholars on a single platform.',
+  description:
+    'Fiqh, Kalam, Arabic, and Hifz education; featuring live classes, interactive flashcards, and expert scholars on a single platform.',
   ctaButtons: [
     {
       label: 'Start Learning Now',
@@ -76,27 +41,9 @@ export const heroData: HeroData = {
       },
     },
   },
-}
+} as const
 
-// Statistics Data
-export interface StatisticsItem {
-  readonly value: string
-  readonly label: string
-}
-
-export interface StatisticsColors {
-  readonly background: string
-  readonly value: string
-  readonly label: string
-  readonly divider: string
-}
-
-export interface StatisticsData {
-  readonly items: readonly StatisticsItem[]
-  readonly colors: StatisticsColors
-}
-
-export const statisticsData: StatisticsData = {
+export const statisticsData = {
   items: [
     {
       value: '10k+',
@@ -117,4 +64,4 @@ export const statisticsData: StatisticsData = {
     label: 'text-gray-600',
     divider: 'bg-white',
   },
-}
+} as const

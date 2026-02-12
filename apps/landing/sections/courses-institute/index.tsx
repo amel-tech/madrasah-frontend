@@ -8,6 +8,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
+import { cn } from '@madrasah/ui/lib/utils'
 import { coursesInstituteData } from './data'
 
 /**
@@ -17,8 +18,11 @@ import { coursesInstituteData } from './data'
  */
 export function CoursesInstituteSection() {
   return (
-    <section 
-      className={`relative min-h-screen ${coursesInstituteData.colors.section.background} py-8 sm:py-12 md:py-16 overflow-visible`}
+    <section
+      className={cn(
+        'relative min-h-screen py-8 sm:py-12 md:py-16 overflow-visible',
+        coursesInstituteData.colors.section.background
+      )}
       style={{
         backgroundImage: 'url(/images/background/courses-institute/courses-institute-bg.png)',
         backgroundRepeat: 'no-repeat',
@@ -45,15 +49,32 @@ export function CoursesInstituteSection() {
 
           {/* Right Side - Content */}
           <div className="text-center lg:text-left order-1 lg:order-2">
-            <h2 className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold ${coursesInstituteData.colors.institute.title} mb-4 sm:mb-5 md:mb-6`}>
+            <h2
+              className={cn(
+                'text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold',
+                coursesInstituteData.colors.institute.title,
+                'mb-4 sm:mb-5 md:mb-6'
+              )}
+            >
               {coursesInstituteData.institute.title}
             </h2>
-            <p className={`text-sm sm:text-base md:text-lg ${coursesInstituteData.colors.institute.description} mb-6 sm:mb-7 md:mb-8`}>
+            <p
+              className={cn(
+                'text-sm sm:text-base md:text-lg',
+                coursesInstituteData.colors.institute.description,
+                'mb-6 sm:mb-7 md:mb-8'
+              )}
+            >
               {coursesInstituteData.institute.description}
             </p>
             <Link
               href={coursesInstituteData.institute.ctaButton.href}
-              className={`inline-block px-6 py-2.5 sm:px-7 sm:py-2.5 md:px-8 md:py-3 ${coursesInstituteData.colors.institute.button.background} ${coursesInstituteData.colors.institute.button.text} rounded-lg font-medium text-sm sm:text-base ${coursesInstituteData.colors.institute.button.hoverBackground} transition-colors`}
+              className={cn(
+                'inline-block px-6 py-2.5 sm:px-7 sm:py-2.5 md:px-8 md:py-3 rounded-lg font-medium text-sm sm:text-base transition-colors',
+                coursesInstituteData.colors.institute.button.background,
+                coursesInstituteData.colors.institute.button.text,
+                coursesInstituteData.colors.institute.button.hoverBackground
+              )}
             >
               {coursesInstituteData.institute.ctaButton.label}
             </Link>

@@ -1,62 +1,12 @@
 /**
  * Header Section Data
- * 
+ *
  * Contains all data for the header section
  */
 
-export interface NavigationLink {
-  readonly label: string
-  readonly href: string
-}
-
-export interface HeaderColors {
-  readonly background: string
-  readonly text: {
-    readonly default: string
-    readonly hover: string
-  }
-  readonly button: {
-    readonly signIn: {
-      readonly border: string
-      readonly text: string
-      readonly background: string
-      readonly hoverBackground: string
-    }
-    readonly joinFree: {
-      readonly background: string
-      readonly text: string
-      readonly hoverBackground: string
-    }
-  }
-  readonly hamburger: {
-    readonly icon: string
-  }
-  readonly menu: {
-    readonly border: string
-  }
-}
-
-export interface HeaderData {
-  readonly logo: {
-    readonly alt: string
-  }
-  readonly navigationLinks: readonly NavigationLink[]
-  readonly ctaButtons: {
-    readonly signIn: {
-      readonly label: string
-      readonly href: string
-    }
-    readonly joinFree: {
-      readonly label: string
-      readonly href: string
-    }
-  }
-  readonly colors: HeaderColors
-}
-
-export const headerData: HeaderData = {
+export const headerData = {
   logo: {
-    alt: 'Medrese Online Logo'
+    alt: 'Medrese Online Logo',
   },
   navigationLinks: [
     { label: 'courses', href: '#courses' },
@@ -66,11 +16,9 @@ export const headerData: HeaderData = {
   ctaButtons: {
     signIn: {
       label: 'signin',
-      href: '/signin',
     },
     joinFree: {
       label: 'join for free',
-      href: '#hero',
     },
   },
   colors: {
@@ -99,4 +47,4 @@ export const headerData: HeaderData = {
       border: 'border-gray-200',
     },
   },
-}
+} as const
