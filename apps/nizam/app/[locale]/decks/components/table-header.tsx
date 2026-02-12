@@ -45,32 +45,22 @@ export function TableHeader() {
     setIsLoading(true)
 
     try {
-      const result = await createFlashcardDeck(formData)
-
-      if (result.success) {
-        toastHelper.success({
-          title: t('TableHeader.deckCreated'),
-          description: t('TableHeader.deckCreatedDescription'),
-        })
-        setOpen(false)
-        setFormData({
-          title: '',
-          description: '',
-          isPublic: false,
-        })
-      }
-      else {
-        toastHelper.error({
-          title: t('TableHeader.creationFailed'),
-          description: result.error || t('TableHeader.creationFailedDescription'),
-        })
-      }
+      await createFlashcardDeck(formData)
+      toastHelper.success({
+        title: t('TableHeader.deckCreated'),
+        description: t('TableHeader.deckCreatedDescription'),
+      })
+      setOpen(false)
+      setFormData({
+        title: '',
+        description: '',
+        isPublic: false,
+      })
     }
     catch (error) {
-      console.error('Error creating deck:', error)
       toastHelper.error({
         title: t('TableHeader.creationError'),
-        description: t('TableHeader.creationErrorDescription'),
+        description: error instanceof Error ? error.message : t('TableHeader.creationErrorDescription'),
       })
     }
     finally {

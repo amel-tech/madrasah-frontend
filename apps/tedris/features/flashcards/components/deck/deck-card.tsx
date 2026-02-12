@@ -48,33 +48,21 @@ function DeckCard({
 
     setIsProcessing(true)
     try {
-      const success = isInCollection
+      isInCollection
         ? await removeDeckFromCollection(deckId)
         : await addDeckToCollection(deckId)
-
-      if (success) {
-        setIsInCollection(!isInCollection)
-        toastHelper.success({
-          title: isInCollection ? t('DeckCard.removedFromCollection') : t('DeckCard.addedToCollection'),
-          description: isInCollection
-            ? t('DeckCard.removedFromCollectionDescription')
-            : t('DeckCard.addedToCollectionDescription'),
-        })
-      }
-      else {
-        toastHelper.error({
-          title: isInCollection ? t('DeckCard.failedToRemove') : t('DeckCard.failedToAdd'),
-          description: isInCollection
-            ? t('DeckCard.failedToRemoveDescription')
-            : t('DeckCard.failedToAddDescription'),
-        })
-      }
+      setIsInCollection(!isInCollection)
+      toastHelper.success({
+        title: isInCollection ? t('DeckCard.removedFromCollection') : t('DeckCard.addedToCollection'),
+        description: isInCollection
+          ? t('DeckCard.removedFromCollectionDescription')
+          : t('DeckCard.addedToCollectionDescription'),
+      })
     }
     catch (error) {
-      console.error('Error toggling deck collection:', error)
       toastHelper.error({
         title: t('DeckCard.error'),
-        description: t('DeckCard.errorDescription', {
+        description: error instanceof Error ? error.message : t('DeckCard.errorDescription', {
           action: isInCollection ? 'removing' : 'adding',
           preposition: isInCollection ? 'from' : 'to',
         }),
@@ -99,7 +87,9 @@ function DeckCard({
         </button>
       </div>
       <div className="text-sm mb-2">
-        {t('DeckCard.by')} {author}
+        {t('DeckCard.by')}
+        {' '}
+        {author}
       </div>
       <div className="flex items-center mb-2 text-sm">
         <div className="text-neutral-tertiary flex items-center mr-4">
