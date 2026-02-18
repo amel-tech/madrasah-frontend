@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.0.0 (2026-02-18)
+
+
+### Features
+
+* **landing:** creating landing page app ([cb2048d](https://github.com/amel-tech/madrasah-frontend/commit/cb2048d2e2befc484f7b133e058e9710fd76610e))
+* **landing:** PR review fixes - env, tailwind, nav, placeholder images, copyright, package name ([9ccdf33](https://github.com/amel-tech/madrasah-frontend/commit/9ccdf339c742b5713aba3e0095ad28158ad22b7a))
+* **landing:** setup landing page app ([540bbc4](https://github.com/amel-tech/madrasah-frontend/commit/540bbc4eba1158ac048c0eb9611e3894d88b66a6))
+* organize icons into page-specific folders and create brand logo component ([bf40467](https://github.com/amel-tech/madrasah-frontend/commit/bf40467a76864cc0c689de52f73fb3c419c09904))
+
+
+### Bug Fixes
+
+* **landing:** make NEXT_PUBLIC_TEDRIS_APP_URL optional ([c75a023](https://github.com/amel-tech/madrasah-frontend/commit/c75a02316542f2f8b4965ff94cfbc27949bab0a1))
+* **landing:** update build command in Dockerfile to filter by package name ([e4819a5](https://github.com/amel-tech/madrasah-frontend/commit/e4819a50533cdd88baab7ca4f75701d639adb5b8))
+
 ## [0.1.4](https://github.com/amel-tech/madrasah-frontend/compare/nazir-web-v0.1.3...nazir-web-v0.1.4) (2025-12-06)
 
 
