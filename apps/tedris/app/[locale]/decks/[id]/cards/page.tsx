@@ -1,15 +1,12 @@
-import DeckCards from './components/cards'
-
 import { createServerTedrisatAPIs } from '@madrasah/services/tedrisat'
 import { env } from '~/env'
 import { auth } from '~/lib/auth_options'
+import { DeckCardsPage } from '~/features/flashcards/components/deck-cards-page'
 
-export default async function DeckCardsPage({
+export default async function Page({
   params,
 }: {
-  params: Promise<{
-    id: string
-  }>
+  params: Promise<{ id: string }>
 }) {
   const { id } = await params
 
@@ -19,5 +16,10 @@ export default async function DeckCardsPage({
 
   const cards = await API.cards.getFlashcardByDeckId({ deckId: id })
 
-  return <DeckCards deckId={id} flashcards={cards || []} />
+  return (
+    <DeckCardsPage
+      deckId={id}
+      flashcards={cards || []}
+    />
+  )
 }

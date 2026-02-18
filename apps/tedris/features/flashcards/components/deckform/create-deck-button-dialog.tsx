@@ -45,7 +45,7 @@ export default function CreateDeckButtonDialog() {
         title: t('CreateDeckButtonDialog.cardCreated'),
         description: t('CreateDeckButtonDialog.cardCreatedDescription'),
       })
-      router.push(`/cards/decks/${id}/cards`)
+      router.push(`/decks/${id}/cards`)
     }
     catch (error) {
       toastHelper.error({
