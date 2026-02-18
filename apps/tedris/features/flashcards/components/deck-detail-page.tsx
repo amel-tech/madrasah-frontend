@@ -63,10 +63,12 @@ export function DeckDetailPage({
     catch (error) {
       toastHelper.error({
         title: t('DeckCard.error'),
-        description: error instanceof Error ? error.message : t('DeckCard.errorDescription', {
-          action: isInCollection ? 'removing' : 'adding',
-          preposition: isInCollection ? 'from' : 'to',
-        }),
+        description: error instanceof Error
+          ? error.message
+          : t('DeckCard.errorDescription', {
+              action: isInCollection ? 'removing' : 'adding',
+              preposition: isInCollection ? 'from' : 'to',
+            }),
       })
     }
     finally {
