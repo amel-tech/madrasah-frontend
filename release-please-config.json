@@ -44,6 +44,16 @@
       "component": "nazir-web",
       "path": "apps/nazir",
       "extra-files": ["shared/**"]
+    },
+    "apps/landing": {
+      "release-type": "node",
+      "package-name": "landing-web",
+      "include-component-in-tag": true,
+      "pull-request-title-pattern": "chore(landing-web): release ${version}",
+      "pull-request-header": "Release for Landing Web",
+      "component": "landing-web",
+      "path": "apps/landing",
+      "extra-files": ["shared/**"]
     }
   }
 }

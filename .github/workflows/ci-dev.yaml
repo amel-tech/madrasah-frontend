@@ -11,8 +11,8 @@ permissions:
   packages: write
 
 jobs:
-  # Build and push Nazir, Nizam, and Tedris WEB Docker image to GitHub Container Registry
-  # with nazir-dev, nizam-dev and tedris-dev tags respectively
+  # Build and push Nazir, Nizam, Tedris, and Landing WEB Docker image to GitHub Container Registry
+  # with nazir-dev, nizam-dev, tedris-dev and landing-dev tags respectively
   build-and-push-nazir-web:
     runs-on: ubuntu-latest
     steps:
@@ -111,3 +111,36 @@ jobs:
       - name: Deploy Tedris to Coolify
         run: | 
          curl --request GET '${{ secrets.TEDRIS_WEB_COOLIFY_WEBHOOK }}' --header 'Authorization: Bearer ${{ secrets.COOLIFY_DEPLOY_TOKEN }}'
+
+  build-and-push-landing-web:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Login to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker Landing WEB
+        id: landing_meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}-landing-web
+          tags: landing-dev
+
+      - name: Build and push Docker image Landing WEB
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./apps/landing/Dockerfile
+          push: true
+          tags: ${{ steps.landing_meta.outputs.tags }}
+          labels: ${{ steps.landing_meta.outputs.labels }}
+
+      - name: Deploy Landing to Coolify
+        run: | 
+         curl --request GET '${{ secrets.LANDING_WEB_COOLIFY_WEBHOOK }}' --header 'Authorization: Bearer ${{ secrets.COOLIFY_DEPLOY_TOKEN }}'

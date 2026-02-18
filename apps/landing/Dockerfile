@@ -18,11 +18,11 @@ RUN cp apps/landing/.env.example apps/landing/.env
 RUN npm ci
 
 # Build the application using Turbo
-RUN npm run build -- --filter=medaris-landing...
+RUN npm run build -- --filter=landing-web...
 
 WORKDIR /app/apps/landing
 
-# Expose the port (Next.js default is 4002)
+# Expose the port (landing app port 4003)
 EXPOSE 4003
 
 # Start the production server
