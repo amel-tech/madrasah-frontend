@@ -42,37 +42,49 @@ function DeckCard({
     setIsInCollection(initialIsInCollection)
   }, [initialIsInCollection])
 
-  const handleBookmarkClick = async (e: React.MouseEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-
-    setIsProcessing(true)
-    try {
-      isInCollection
-        ? await removeDeckFromCollection(deckId)
-        : await addDeckToCollection(deckId)
-      setIsInCollection(!isInCollection)
+  const handleRemoveDeckFromCollection = async () => {
+    const result = await removeDeckFromCollection(deckId)
+    if (result.success) {
+      setIsInCollection(false)
       toastHelper.success({
-        title: isInCollection ? t('DeckCard.removedFromCollection') : t('DeckCard.addedToCollection'),
-        description: isInCollection
-          ? t('DeckCard.removedFromCollectionDescription')
-          : t('DeckCard.addedToCollectionDescription'),
+        title: t('DeckCard.removedFromCollection'),
+        description: t('DeckCard.removedFromCollectionDescription'),
       })
     }
-    catch (error) {
+    else {
       toastHelper.error({
         title: t('DeckCard.error'),
-        description: error instanceof Error
-          ? error.message
-          : t('DeckCard.errorDescription', {
-              action: isInCollection ? 'removing' : 'adding',
-              preposition: isInCollection ? 'from' : 'to',
-            }),
+        description: t('DeckCard.errorDescription', { action: 'removing', preposition: 'from' }),
       })
     }
-    finally {
-      setIsProcessing(false)
+  }
+
+  const handleAddDeckToCollection = async () => {
+    const result = await addDeckToCollection(deckId)
+    if (result.success) {
+      setIsInCollection(true)
+      toastHelper.success({
+        title: t('DeckCard.addedToCollection'),
+        description: t('DeckCard.addedToCollectionDescription'),
+      })
     }
+    else {
+      toastHelper.error({
+        title: t('DeckCard.error'),
+        description: t('DeckCard.errorDescription', { action: 'adding', preposition: 'to' }),
+      })
+    }
+  }
+
+  const handleBookmarkClick = async () => {
+    setIsProcessing(true)
+    if (isInCollection) {
+      await handleRemoveDeckFromCollection()
+    }
+    else {
+      await handleAddDeckToCollection()
+    }
+    setIsProcessing(false)
   }
 
   return (

@@ -49,9 +49,9 @@ export const createFlashcards = async (deckId: string, newCards: {
 
 export const deleteFlashcard = async (cardId: string, deckId?: string) => {
   return authenticatedAction(async ({ cards }) => {
-    const response = await cards.deleteFlashcardRaw({ id: cardId })
+    await cards.deleteFlashcardRaw({ id: cardId })
     revalidatePath(`/decks/${deckId}/cards`)
-    return response.value()
+    return true
   })
 }
 

@@ -21,6 +21,7 @@ import type {
 } from '@madrasah/services/tedrisat'
 import { SampleCards } from '~/features/flashcards/components/sample-cards'
 import { addDeckToCollection, removeDeckFromCollection } from '~/features/flashcards/actions'
+import { AuthenticatedActionResult } from '~/lib/authenticated-action'
 
 const MOCK_TAGS = ['arabic', 'hadith']
 const MOCK_AUTHOR = 'Imam Yousef'
@@ -46,34 +47,52 @@ export function DeckDetailPage({
   const rating = MOCK_RATING
   const students = MOCK_STUDENTS
 
-  const handleToggleCollection = async () => {
-    setIsProcessing(true)
-    try {
-      isInCollection
-        ? await removeDeckFromCollection(deck.id)
-        : await addDeckToCollection(deck.id)
-      setIsInCollection(!isInCollection)
+  const handleRemoveDeckFromCollection = async () => {
+    const result = await removeDeckFromCollection(deck.id)
+    if (result.success) {
+      setIsInCollection(false)
       toastHelper.success({
-        title: isInCollection ? t('DeckCard.removedFromCollection') : t('DeckCard.addedToCollection'),
-        description: isInCollection
-          ? t('DeckCard.removedFromCollectionDescription')
-          : t('DeckCard.addedToCollectionDescription'),
+        title: t('DeckCard.removedFromCollection'),
+        description: t('DeckCard.removedFromCollectionDescription'),
       })
     }
-    catch (error) {
+    else {
       toastHelper.error({
         title: t('DeckCard.error'),
-        description: error instanceof Error
-          ? error.message
-          : t('DeckCard.errorDescription', {
-              action: isInCollection ? 'removing' : 'adding',
-              preposition: isInCollection ? 'from' : 'to',
-            }),
+        description: t('DeckCard.errorDescription', { action: 'removing', preposition: 'from' }),
       })
     }
-    finally {
-      setIsProcessing(false)
+  }
+
+  const handleAddDeckToCollection = async () => {
+    const result = await addDeckToCollection(deck.id)
+    if (result.success) {
+      setIsInCollection(true)
+      toastHelper.success({
+        title: t('DeckCard.addedToCollection'),
+        description: t('DeckCard.addedToCollectionDescription'),
+      })
     }
+    else {
+      toastHelper.error({
+        title: t('DeckCard.error'),
+        description: t('DeckCard.errorDescription', { action: 'adding', preposition: 'to' }),
+      })
+    }
+    setIsProcessing(false)
+  }
+
+  const handleToggleCollection = async () => {
+    setIsProcessing(true)
+
+    if (isInCollection) {
+      await handleRemoveDeckFromCollection()
+    }
+    else {
+      await handleAddDeckToCollection()
+    }
+
+    setIsProcessing(false)
   }
 
   return (

@@ -10,7 +10,7 @@ export const createFlashcardDeck = async (deckData: CreateFlashcardDeckDto) => {
       createFlashcardDeckDto: deckData,
     })
     revalidatePath(`/decks`)
-    return { success: true, data: response }
+    return response
   })
 }
 
@@ -37,7 +37,7 @@ export const deleteFlashcardDeck = async (deckId: string) => {
       id: deckId,
     })
     revalidatePath(`/decks`)
-    return { success: true, data: response }
+    return response
   })
 }
 

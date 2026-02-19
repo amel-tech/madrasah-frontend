@@ -21,39 +21,39 @@ export function DeckCardsTable({
   const columns = useFlashcardColumns()
 
   const onRowUpdate = async (updatedRow: FlashcardResponse) => {
-    try {
-      await updateFlashcard(updatedRow.id, {
-        contentFront: updatedRow.contentFront,
-        contentBack: updatedRow.contentBack,
-      })
+    const result = await updateFlashcard(updatedRow.id, {
+      contentFront: updatedRow.contentFront,
+      contentBack: updatedRow.contentBack,
+    })
+    if (result.success) {
       toastHelper.success({
         title: t('DeckCards.cardUpdated'),
         description: t('DeckCards.cardUpdatedDescription'),
       })
       return true
     }
-    catch (error) {
+    else {
       toastHelper.error({
         title: t('DeckCards.updateError'),
-        description: error instanceof Error ? error.message : t('DeckCards.updateErrorDescription'),
+        description: t('DeckCards.updateErrorDescription'),
       })
-      return false
     }
+    return false
   }
 
   const onRowDelete = async (id: string) => {
-    try {
-      await deleteFlashcard(id, deckId)
+    const result = await deleteFlashcard(id, deckId)
+    if (result.success) {
       toastHelper.success({ title: t('DeckCards.cardDeleted'), description: t('DeckCards.cardDeletedDescription', { id }) }, { cardId: id })
       return true
     }
-    catch (error) {
+    else {
       toastHelper.error({
         title: t('DeckCards.deleteError'),
-        description: error instanceof Error ? error.message : t('DeckCards.deleteErrorDescription'),
+        description: t('DeckCards.deleteErrorDescription'),
       })
-      return false
     }
+    return false
   }
 
   const defaultColumn = useMemo(() => {
