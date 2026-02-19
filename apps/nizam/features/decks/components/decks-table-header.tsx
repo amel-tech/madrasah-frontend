@@ -44,8 +44,8 @@ export function DecksTableHeader() {
 
     setIsLoading(true)
 
-    try {
-      await createFlashcardDeck(formData)
+    const result = await createFlashcardDeck(formData)
+    if (result.success) {
       toastHelper.success({
         title: t('TableHeader.deckCreated'),
         description: t('TableHeader.deckCreatedDescription'),
@@ -57,15 +57,13 @@ export function DecksTableHeader() {
         isPublic: false,
       })
     }
-    catch (error) {
+    else {
       toastHelper.error({
         title: t('TableHeader.creationError'),
-        description: error instanceof Error ? error.message : t('TableHeader.creationErrorDescription'),
+        description: result.error,
       })
     }
-    finally {
-      setIsLoading(false)
-    }
+    setIsLoading(false)
   }
 
   const handleInputChange = (field: keyof CreateFlashcardDeckDto, value: string | boolean) => {

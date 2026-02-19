@@ -37,20 +37,19 @@ export default function CreateDeckButtonDialog() {
   })
 
   const onSubmit = async (data: CreateFlashcardDeckDto) => {
-    try {
-      const result = await createFlashCardDeck(data)
-      const id = result?.id ?? null
-
+    const result = await createFlashCardDeck(data)
+    if (result.success) {
+      const id = result.data?.id ?? null
       toastHelper.success({
         title: t('CreateDeckButtonDialog.cardCreated'),
         description: t('CreateDeckButtonDialog.cardCreatedDescription'),
       })
       router.push(`/decks/${id}/cards`)
     }
-    catch (error) {
+    else {
       toastHelper.error({
         title: t('CreateDeckButtonDialog.creationError'),
-        description: error instanceof Error ? error.message : t('CreateDeckButtonDialog.creationErrorDescription'),
+        description: t('CreateDeckButtonDialog.creationErrorDescription'),
       })
     }
   }

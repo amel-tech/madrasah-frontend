@@ -31,24 +31,22 @@ export default function DeckCards({
   const columns = useFlashcardColumns()
 
   const onRowUpdate = async (updatedRow: FlashcardResponse) => {
-    try {
-      await updateFlashcard(updatedRow.id, {
-        contentFront: updatedRow.contentFront,
-        contentBack: updatedRow.contentBack,
-      })
+    const result = await updateFlashcard(updatedRow.id, {
+      contentFront: updatedRow.contentFront,
+      contentBack: updatedRow.contentBack,
+    })
+    if (result.success) {
       toastHelper.success({
         title: t('DeckCards.cardUpdated'),
         description: t('DeckCards.cardUpdatedDescription'),
       })
       return true
     }
-    catch (error) {
-      toastHelper.error({
-        title: t('DeckCards.updateError'),
-        description: error instanceof Error ? error.message : t('DeckCards.updateErrorDescription'),
-      })
-      return false
-    }
+    toastHelper.error({
+      title: t('DeckCards.updateError'),
+      description: result.error,
+    })
+    return false
   }
 
   const onDeckFileImport = async (file: File) => {
@@ -72,8 +70,16 @@ export default function DeckCards({
         contentBack: row.contentBack,
       }))
 
-      await createFlashcards(deck.id, cardsToImport)
-      toastHelper.success({ title: t('DeckCards.cardsImported'), description: t('DeckCards.cardsImportedDescription', { count: cardsToImport.length }) })
+      const result = await createFlashcards(deck.id, cardsToImport)
+      if (result.success) {
+        toastHelper.success({ title: t('DeckCards.cardsImported'), description: t('DeckCards.cardsImportedDescription', { count: cardsToImport.length }) })
+      }
+      else {
+        toastHelper.error({
+          title: t('DeckCards.updateError'),
+          description: result.error,
+        })
+      }
     }
     catch (error) {
       toastHelper.error({
@@ -84,18 +90,16 @@ export default function DeckCards({
   }
 
   const onRowDelete = async (id: string) => {
-    try {
-      await deleteFlashcard(id, deck.id)
+    const result = await deleteFlashcard(id, deck.id)
+    if (result.success) {
       toastHelper.success({ title: t('DeckCards.cardDeleted'), description: t('DeckCards.cardDeletedDescription', { id }) }, { cardId: id })
       return true
     }
-    catch (error) {
-      toastHelper.error({
-        title: t('DeckCards.deleteError'),
-        description: error instanceof Error ? error.message : t('DeckCards.deleteErrorDescription'),
-      })
-      return false
-    }
+    toastHelper.error({
+      title: t('DeckCards.deleteError'),
+      description: result.error,
+    })
+    return false
   }
 
   const onClickDownloadSampleFile = async () => {

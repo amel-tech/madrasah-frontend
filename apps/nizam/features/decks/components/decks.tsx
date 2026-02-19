@@ -16,39 +16,35 @@ export default function Decks({
   const columns = useDecksColumns()
 
   const handleRowDelete = async (id: string) => {
-    try {
-      await deleteFlashcardDeck(id)
+    const result = await deleteFlashcardDeck(id)
+    if (result.success) {
       toastHelper.success({ title: 'Card Deleted', description: `Card with ID ${id} was deleted.` }, { cardId: id })
       return true
     }
-    catch (error) {
-      toastHelper.error({
-        title: 'Delete Error',
-        description: error instanceof Error ? error.message : 'Failed to delete the flashcard.',
-      })
-      return false
-    }
+    toastHelper.error({
+      title: 'Delete Error',
+      description: result.error,
+    })
+    return false
   }
 
   const handleRowUpdate = async (updatedRow: FlashcardDeckResponse) => {
-    try {
-      await updateFlashcardDeck(updatedRow.id, {
-        title: updatedRow.title,
-        description: updatedRow.description,
-      })
+    const result = await updateFlashcardDeck(updatedRow.id, {
+      title: updatedRow.title,
+      description: updatedRow.description,
+    })
+    if (result.success) {
       toastHelper.success({
         title: 'Card Updated',
         description: 'Flashcard was updated successfully.',
       })
       return true
     }
-    catch (error) {
-      toastHelper.error({
-        title: 'Update Error',
-        description: error instanceof Error ? error.message : 'An error occurred while updating the flashcard.',
-      })
-      return false
-    }
+    toastHelper.error({
+      title: 'Update Error',
+      description: result.error,
+    })
+    return false
   }
 
   const defaultColumn = createDefaultColumn<FlashcardDeckResponse>()

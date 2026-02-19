@@ -6,36 +6,46 @@ import { env } from '~/env'
 // Infer the API client type so intellisense recognizes the 'api' parameter.
 type ApiClient = Awaited<ReturnType<typeof createServerTedrisatAPIs>>
 
+/** Result type for actions: success with data, or failure with server error message. */
+export type AuthenticatedActionResult<T>
+  = | { success: true, data: T }
+    | { success: false, error: string }
+
 /**
  * Wrapper for Server Actions that require authentication.
- * Automatically obtains the token, creates the API client, and handles errors.
+ * Returns a result object instead of throwing so the client can show server error messages
+ * (Next.js omits thrown error messages in production).
  */
 export async function authenticatedAction<T>(
   action: (api: ApiClient) => Promise<T>,
-): Promise<T> {
-  // 1. Session check
+): Promise<AuthenticatedActionResult<T>> {
   const session = await auth()
 
-  // If no token, throw (can be customized to return null if needed)
   if (!session?.accessToken) {
-    throw new Error('Unauthorized: No access token found')
+    return { success: false, error: 'Unauthorized: No access token found' }
   }
 
-  // 2. Create API client
   const api = await createServerTedrisatAPIs(session.accessToken, env.TEDRISAT_API_BASE_URL)
 
   try {
-    // 3. Run the action
-    return await action(api)
+    const data = await action(api)
+    return { success: true, data }
   }
   catch (error) {
-    // 4. Centralized error handling
     if (error instanceof ResponseError) {
-      const errorBody = await error.response.json()
-      const message = getErrorMessage(errorBody)
-      throw new Error(message)
+      let message: string
+      try {
+        const errorBody = await error.response.json()
+        message = getErrorMessage(errorBody)
+      }
+      catch {
+        message = error.response.statusText || 'Request failed'
+      }
+      return { success: false, error: message }
     }
-    // Re-throw unexpected errors as-is
-    throw error
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'An unexpected error occurred.',
+    }
   }
 }
