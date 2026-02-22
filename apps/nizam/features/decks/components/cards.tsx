@@ -1,24 +1,16 @@
 'use client'
 
 import { useMemo } from 'react'
-import * as XLSX from 'xlsx'
-import { updateFlashcard, createFlashcards, deleteFlashcard } from '~/features/decks/actions'
+import { updateFlashcard, deleteFlashcard, getSeampleFile, uploadFile } from '~/features/decks/actions'
 import { useTranslations } from 'next-intl'
 
 import { DataTable } from '~/components/data-table'
 import { CardsTableHeader } from './cards-table-header'
-import { FlashcardDeckResponse, FlashcardResponse, FlashcardResponseTypeEnum } from '@madrasah/services/tedrisat'
+import { FlashcardDeckResponse, FlashcardResponse } from '@madrasah/services/tedrisat'
 import { toastHelper } from '@madrasah/ui/lib/toast-helper'
 import { useFlashcardColumns } from '~/features/decks/hooks/useFlashcardColumns'
 import { createDefaultColumn } from '~/components/data-table/editable'
 
-type SpreadsheetCardRepresentation = {
-  id: string
-  type: FlashcardResponseTypeEnum
-  contentFront: string
-  contentBack: string
-  is_public?: boolean
-}
 
 export default function DeckCards({
   deck,
@@ -50,41 +42,14 @@ export default function DeckCards({
   }
 
   const onDeckFileImport = async (file: File) => {
-    try {
-      const data = await file.arrayBuffer()
-      const workbook = XLSX.read(data, { type: 'array' })
-      const sheetName = workbook.SheetNames[0] || ''
-      const worksheet = workbook.Sheets[sheetName]
-
-      if (!worksheet) {
-        toastHelper.error({
-          title: t('DeckCards.updateError'),
-          description: 'No worksheet found in the uploaded file',
-        })
-        return
-      }
-
-      const json = XLSX.utils.sheet_to_json<SpreadsheetCardRepresentation>(worksheet)
-      const cardsToImport = json.map(row => ({
-        contentFront: row.contentFront,
-        contentBack: row.contentBack,
-      }))
-
-      const result = await createFlashcards(deck.id, cardsToImport)
-      if (result.success) {
-        toastHelper.success({ title: t('DeckCards.cardsImported'), description: t('DeckCards.cardsImportedDescription', { count: cardsToImport.length }) })
-      }
-      else {
-        toastHelper.error({
-          title: t('DeckCards.updateError'),
-          description: result.error,
-        })
-      }
+    const result = await uploadFile(deck.id, file)
+    if (result.success) {
+      toastHelper.success({ title: t('DeckCards.cardsImported'), description: t('DeckCards.cardsImportedDescription', { count: 0 }) })
     }
-    catch (error) {
+    else {
       toastHelper.error({
         title: t('DeckCards.updateError'),
-        description: error instanceof Error ? error.message : 'Failed to import cards.',
+        description: result.error,
       })
     }
   }
@@ -102,22 +67,25 @@ export default function DeckCards({
     return false
   }
 
-  const onClickDownloadSampleFile = async () => {
-    const sampleCards: SpreadsheetCardRepresentation[] = Array.from({ length: 5 }).map((_, index) => {
-      return {
-        id: index.toString(),
-        type: FlashcardResponseTypeEnum.Vocabulary,
-        contentFront: t('SampleFile.frontWord', { index: index + 1 }),
-        contentBack: t('SampleFile.backWord', { index: index + 1 }),
-        deckId: deck.id,
-        is_public: true,
-      }
-    })
-
-    const worksheet = XLSX.utils.json_to_sheet(sampleCards)
-    const workbook = XLSX.utils.book_new()
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'SampleCards')
-    await XLSX.writeFile(workbook, 'sample_cards.xlsx')
+  const onClickDownloadSampleFile = async (format: 'csv' | 'xlsx') => {
+    const result = await getSeampleFile(format)
+    if (!result.success) {
+      toastHelper.error({ title: t('DeckCards.updateError'), description: result.error })
+      return
+    }
+    const isExcel = format === 'xlsx'
+    const mimeType = isExcel
+      ? 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      : 'text/csv'
+    const fileName = isExcel ? 'sample.xlsx' : 'sample.csv'
+    const bytes = Uint8Array.from(atob(result.data), c => c.charCodeAt(0))
+    const blob = new Blob([bytes], { type: mimeType })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = fileName
+    a.click()
+    URL.revokeObjectURL(url)
   }
 
   const defaultColumn = useMemo(() => {

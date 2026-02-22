@@ -15,6 +15,7 @@
 
 import * as runtime from '../runtime';
 import type {
+  BulkFlashcardResponse,
   CreateFlashcardDto,
   CreateFlashcardProgressDto,
   FlashcardProgressResponse,
@@ -22,6 +23,8 @@ import type {
   UpdateFlashcardDto,
 } from '../models/index';
 import {
+    BulkFlashcardResponseFromJSON,
+    BulkFlashcardResponseToJSON,
     CreateFlashcardDtoFromJSON,
     CreateFlashcardDtoToJSON,
     CreateFlashcardProgressDtoFromJSON,
@@ -39,6 +42,11 @@ export interface CreateFlashcardsRequest {
     createFlashcardDto: Array<CreateFlashcardDto>;
 }
 
+export interface CreateFlashcardsBulkRequest {
+    deckId: string;
+    createFlashcardDto: Array<CreateFlashcardDto>;
+}
+
 export interface DeleteFlashcardRequest {
     id: string;
 }
@@ -51,6 +59,15 @@ export interface GetFlashcardByDeckIdRequest {
 export interface GetFlashcardByIdRequest {
     id: string;
     include?: Array<GetFlashcardByIdIncludeEnum>;
+}
+
+export interface GetSampleFileRequest {
+    format: GetSampleFileFormatEnum;
+}
+
+export interface ImportsCardRequest {
+    deckId: string;
+    file: Blob;
 }
 
 export interface ReplaceFlashcardRequest {
@@ -98,13 +115,10 @@ export class FlashcardCardsApi extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("bearer", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("bearer", []);
         }
+
 
         let urlPath = `/flashcard/decks/{deckId}/cards`;
         urlPath = urlPath.replace(`{${"deckId"}}`, encodeURIComponent(String(requestParameters['deckId'])));
@@ -130,6 +144,60 @@ export class FlashcardCardsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Bulk Body Json
+     * Bulk
+     */
+    async createFlashcardsBulkRaw(requestParameters: CreateFlashcardsBulkRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BulkFlashcardResponse>> {
+        if (requestParameters['deckId'] == null) {
+            throw new runtime.RequiredError(
+                'deckId',
+                'Required parameter "deckId" was null or undefined when calling createFlashcardsBulk().'
+            );
+        }
+
+        if (requestParameters['createFlashcardDto'] == null) {
+            throw new runtime.RequiredError(
+                'createFlashcardDto',
+                'Required parameter "createFlashcardDto" was null or undefined when calling createFlashcardsBulk().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("bearer", []);
+        }
+
+
+        let urlPath = `/flashcard/decks/{deckId}/cards/bulk`;
+        urlPath = urlPath.replace(`{${"deckId"}}`, encodeURIComponent(String(requestParameters['deckId'])));
+
+        const response = await this.request({
+            path: urlPath,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: requestParameters['createFlashcardDto']!.map(CreateFlashcardDtoToJSON),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => BulkFlashcardResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Bulk Body Json
+     * Bulk
+     */
+    async createFlashcardsBulk(requestParameters: CreateFlashcardsBulkRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BulkFlashcardResponse> {
+        const response = await this.createFlashcardsBulkRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * Permanently deletes a flashcard by its ID. This action cannot be undone.
      * Delete a flashcard
      */
@@ -146,13 +214,10 @@ export class FlashcardCardsApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("bearer", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("bearer", []);
         }
+
 
         let urlPath = `/flashcard/cards/{id}`;
         urlPath = urlPath.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
@@ -200,13 +265,10 @@ export class FlashcardCardsApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("bearer", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("bearer", []);
         }
+
 
         let urlPath = `/flashcard/cards`;
 
@@ -250,13 +312,10 @@ export class FlashcardCardsApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("bearer", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("bearer", []);
         }
+
 
         let urlPath = `/flashcard/cards/{id}`;
         urlPath = urlPath.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
@@ -277,6 +336,123 @@ export class FlashcardCardsApi extends runtime.BaseAPI {
      */
     async getFlashcardById(requestParameters: GetFlashcardByIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<FlashcardResponse> {
         const response = await this.getFlashcardByIdRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Downloads a sample file to use as a template for bulk import. Not deck-specific.
+     * Download flashcard import template
+     */
+    async getSampleFileRaw(requestParameters: GetSampleFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>> {
+        if (requestParameters['format'] == null) {
+            throw new runtime.RequiredError(
+                'format',
+                'Required parameter "format" was null or undefined when calling getSampleFile().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['format'] != null) {
+            queryParameters['format'] = requestParameters['format'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("bearer", []);
+        }
+
+
+        let urlPath = `/flashcard/cards/bulk/sample`;
+
+        const response = await this.request({
+            path: urlPath,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse<any>(response);
+    }
+
+    /**
+     * Downloads a sample file to use as a template for bulk import. Not deck-specific.
+     * Download flashcard import template
+     */
+    async getSampleFile(requestParameters: GetSampleFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object> {
+        const response = await this.getSampleFileRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Import flashcards from Excel/CSV
+     */
+    async importsCardRaw(requestParameters: ImportsCardRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BulkFlashcardResponse>> {
+        if (requestParameters['deckId'] == null) {
+            throw new runtime.RequiredError(
+                'deckId',
+                'Required parameter "deckId" was null or undefined when calling importsCard().'
+            );
+        }
+
+        if (requestParameters['file'] == null) {
+            throw new runtime.RequiredError(
+                'file',
+                'Required parameter "file" was null or undefined when calling importsCard().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("bearer", []);
+        }
+
+        const consumes: runtime.Consume[] = [
+            { contentType: 'multipart/form-data' },
+        ];
+        // @ts-ignore: canConsumeForm may be unused
+        const canConsumeForm = runtime.canConsumeForm(consumes);
+
+        let formParams: { append(param: string, value: any): any };
+        let useForm = false;
+        // use FormData to transmit files using content-type "multipart/form-data"
+        useForm = canConsumeForm;
+        if (useForm) {
+            formParams = new FormData();
+        } else {
+            formParams = new URLSearchParams();
+        }
+
+        if (requestParameters['file'] != null) {
+            formParams.append('file', requestParameters['file'] as any);
+        }
+
+
+        let urlPath = `/flashcard/decks/{deckId}/cards/bulk/import`;
+        urlPath = urlPath.replace(`{${"deckId"}}`, encodeURIComponent(String(requestParameters['deckId'])));
+
+        const response = await this.request({
+            path: urlPath,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: formParams,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => BulkFlashcardResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Import flashcards from Excel/CSV
+     */
+    async importsCard(requestParameters: ImportsCardRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BulkFlashcardResponse> {
+        const response = await this.importsCardRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
@@ -306,13 +482,10 @@ export class FlashcardCardsApi extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("bearer", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("bearer", []);
         }
+
 
         let urlPath = `/flashcard/cards/{id}`;
         urlPath = urlPath.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
@@ -355,13 +528,10 @@ export class FlashcardCardsApi extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("bearer", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("bearer", []);
         }
+
 
         let urlPath = `/flashcard/cards/progress`;
 
@@ -410,13 +580,10 @@ export class FlashcardCardsApi extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("bearer", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("bearer", []);
         }
+
 
         let urlPath = `/flashcard/cards/{id}`;
         urlPath = urlPath.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
@@ -457,3 +624,11 @@ export const GetFlashcardByIdIncludeEnum = {
     Progress: 'progress'
 } as const;
 export type GetFlashcardByIdIncludeEnum = typeof GetFlashcardByIdIncludeEnum[keyof typeof GetFlashcardByIdIncludeEnum];
+/**
+ * @export
+ */
+export const GetSampleFileFormatEnum = {
+    Xlsx: 'xlsx',
+    Csv: 'csv'
+} as const;
+export type GetSampleFileFormatEnum = typeof GetSampleFileFormatEnum[keyof typeof GetSampleFileFormatEnum];

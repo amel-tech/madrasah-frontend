@@ -56,21 +56,9 @@ export const updateFlashcard = async (cardId: string, updatedCard: {
   })
 }
 
-export const createFlashcards = async (deckId: string, newCards: {
-  contentFront: string
-  contentBack: string
-}[]) => {
+export const uploadFile = async (deckId: string, blob: Blob) => {
   return authenticatedAction(async ({ cards }) => {
-    const response = await cards.createFlashcards({
-      deckId,
-      createFlashcardDto: newCards.map(card => ({
-        type: CreateFlashcardDtoTypeEnum.Hadeeth,
-        contentFront: card.contentFront,
-        contentBack: card.contentBack,
-      })),
-    })
-    revalidatePath(`/decks/${deckId}/cards`)
-    return response
+    return await cards.importsCard({ deckId, file: blob});
   })
 }
 
@@ -79,5 +67,13 @@ export const deleteFlashcard = async (cardId: string, deckId?: string) => {
     await cards.deleteFlashcard({ id: cardId })
     revalidatePath(`/decks/${deckId}/cards`)
     return true
+  })
+}
+
+export const getSeampleFile = async(format: 'csv' | 'xlsx') => {
+  return authenticatedAction(async ({ cards }) => {
+    var result = await cards.getSampleFileRaw({format})
+    const buffer = await result.raw.arrayBuffer()
+    return Buffer.from(buffer).toString('base64')
   })
 }

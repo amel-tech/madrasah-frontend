@@ -8,6 +8,7 @@ src/apis/FlashcardDecksApi.ts
 src/apis/TedrisatServiceApi.ts
 src/apis/index.ts
 src/index.ts
+src/models/BulkFlashcardResponse.ts
 src/models/CreateExampleDto.ts
 src/models/CreateFlashcardDeckDto.ts
 src/models/CreateFlashcardDto.ts
@@ -16,6 +17,7 @@ src/models/FlashcardDeckResponse.ts
 src/models/FlashcardDeckUserResponse.ts
 src/models/FlashcardProgressResponse.ts
 src/models/FlashcardResponse.ts
+src/models/FlashcardResult.ts
 src/models/HealthCheckDto.ts
 src/models/MedarisMetaPaginationResponse.ts
 src/models/MedarisMetaResponse.ts
