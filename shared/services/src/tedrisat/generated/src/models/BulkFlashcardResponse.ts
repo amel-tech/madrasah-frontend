@@ -13,14 +13,6 @@
  */
 
 import { mapValues } from '../runtime';
-import type { FlashcardResult } from './FlashcardResult';
-import {
-    FlashcardResultFromJSON,
-    FlashcardResultFromJSONTyped,
-    FlashcardResultToJSON,
-    FlashcardResultToJSONTyped,
-} from './FlashcardResult';
-
 /**
  * 
  * @export
@@ -28,32 +20,25 @@ import {
  */
 export interface BulkFlashcardResponse {
     /**
-     * 
-     * @type {Array<FlashcardResult>}
+     * Number of successfully imported flashcards
+     * @type {number}
      * @memberof BulkFlashcardResponse
      */
-    flashcards: Array<FlashcardResult>;
+    count: number;
     /**
      * 
      * @type {boolean}
      * @memberof BulkFlashcardResponse
      */
     isSuccess: boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof BulkFlashcardResponse
-     */
-    errorMessage: string;
 }
 
 /**
  * Check if a given object implements the BulkFlashcardResponse interface.
  */
 export function instanceOfBulkFlashcardResponse(value: object): value is BulkFlashcardResponse {
-    if (!('flashcards' in value) || value['flashcards'] === undefined) return false;
+    if (!('count' in value) || value['count'] === undefined) return false;
     if (!('isSuccess' in value) || value['isSuccess'] === undefined) return false;
-    if (!('errorMessage' in value) || value['errorMessage'] === undefined) return false;
     return true;
 }
 
@@ -67,9 +52,8 @@ export function BulkFlashcardResponseFromJSONTyped(json: any, ignoreDiscriminato
     }
     return {
         
-        'flashcards': ((json['flashcards'] as Array<any>).map(FlashcardResultFromJSON)),
+        'count': json['count'],
         'isSuccess': json['isSuccess'],
-        'errorMessage': json['errorMessage'],
     };
 }
 
@@ -84,9 +68,8 @@ export function BulkFlashcardResponseToJSONTyped(value?: BulkFlashcardResponse |
 
     return {
         
-        'flashcards': ((value['flashcards'] as Array<any>).map(FlashcardResultToJSON)),
+        'count': value['count'],
         'isSuccess': value['isSuccess'],
-        'errorMessage': value['errorMessage'],
     };
 }
 

@@ -34,6 +34,12 @@ export interface FlashcardResult {
      */
     success: boolean;
     /**
+     * Row number in the uploaded file (1-based)
+     * @type {number}
+     * @memberof FlashcardResult
+     */
+    row: number;
+    /**
      * 
      * @type {Array<object>}
      * @memberof FlashcardResult
@@ -52,6 +58,7 @@ export interface FlashcardResult {
  */
 export function instanceOfFlashcardResult(value: object): value is FlashcardResult {
     if (!('success' in value) || value['success'] === undefined) return false;
+    if (!('row' in value) || value['row'] === undefined) return false;
     if (!('errors' in value) || value['errors'] === undefined) return false;
     if (!('flashCardResponse' in value) || value['flashCardResponse'] === undefined) return false;
     return true;
@@ -68,6 +75,7 @@ export function FlashcardResultFromJSONTyped(json: any, ignoreDiscriminator: boo
     return {
         
         'success': json['success'],
+        'row': json['row'],
         'errors': json['errors'],
         'flashCardResponse': FlashcardResponseFromJSON(json['flashCardResponse']),
     };
@@ -85,6 +93,7 @@ export function FlashcardResultToJSONTyped(value?: FlashcardResult | null, ignor
     return {
         
         'success': value['success'],
+        'row': value['row'],
         'errors': value['errors'],
         'flashCardResponse': FlashcardResponseToJSON(value['flashCardResponse']),
     };

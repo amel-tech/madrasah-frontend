@@ -15,6 +15,7 @@
 
 import * as runtime from '../runtime';
 import type {
+  BulkFlashcardErrorResponse,
   BulkFlashcardResponse,
   CreateFlashcardDto,
   CreateFlashcardProgressDto,
@@ -23,6 +24,8 @@ import type {
   UpdateFlashcardDto,
 } from '../models/index';
 import {
+    BulkFlashcardErrorResponseFromJSON,
+    BulkFlashcardErrorResponseToJSON,
     BulkFlashcardResponseFromJSON,
     BulkFlashcardResponseToJSON,
     CreateFlashcardDtoFromJSON,
@@ -49,6 +52,11 @@ export interface CreateFlashcardsBulkRequest {
 
 export interface DeleteFlashcardRequest {
     id: string;
+}
+
+export interface ExportCardsRequest {
+    deckId: string;
+    format?: ExportCardsFormatEnum;
 }
 
 export interface GetFlashcardByDeckIdRequest {
@@ -238,6 +246,52 @@ export class FlashcardCardsApi extends runtime.BaseAPI {
      */
     async deleteFlashcard(requestParameters: DeleteFlashcardRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
         await this.deleteFlashcardRaw(requestParameters, initOverrides);
+    }
+
+    /**
+     * Export flashcards from a deck
+     */
+    async exportCardsRaw(requestParameters: ExportCardsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>> {
+        if (requestParameters['deckId'] == null) {
+            throw new runtime.RequiredError(
+                'deckId',
+                'Required parameter "deckId" was null or undefined when calling exportCards().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['format'] != null) {
+            queryParameters['format'] = requestParameters['format'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("bearer", []);
+        }
+
+
+        let urlPath = `/flashcard/decks/{deckId}/cards/bulk/export`;
+        urlPath = urlPath.replace(`{${"deckId"}}`, encodeURIComponent(String(requestParameters['deckId'])));
+
+        const response = await this.request({
+            path: urlPath,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse<any>(response);
+    }
+
+    /**
+     * Export flashcards from a deck
+     */
+    async exportCards(requestParameters: ExportCardsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object> {
+        const response = await this.exportCardsRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
     /**
@@ -610,6 +664,14 @@ export class FlashcardCardsApi extends runtime.BaseAPI {
 
 }
 
+/**
+ * @export
+ */
+export const ExportCardsFormatEnum = {
+    Xlsx: 'xlsx',
+    Csv: 'csv'
+} as const;
+export type ExportCardsFormatEnum = typeof ExportCardsFormatEnum[keyof typeof ExportCardsFormatEnum];
 /**
  * @export
  */

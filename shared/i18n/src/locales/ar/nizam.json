@@ -6,6 +6,7 @@
     "bulkActions": "الإجراءات الجماعية",
     "downloadAsExcel": "تنزيل كملف Excel",
     "downloadSampleFile": "تحميل ملف نموذج",
+    "exportCards": "تصدير البطاقات",
     "importFromExcel": "استيراد من إكسل"
   },
   "DataTable": {

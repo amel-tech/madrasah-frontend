@@ -6,6 +6,7 @@
     "bulkActions": "Bulk Actions",
     "downloadAsExcel": "Download as Excel",
     "downloadSampleFile": "Download Sample File",
+    "exportCards": "Export Cards",
     "importFromExcel": "Import from Excel"
   },
   "DataTable": {

@@ -1,7 +1,7 @@
 'use client'
 
 import { useMemo } from 'react'
-import { updateFlashcard, deleteFlashcard, getSeampleFile, uploadFile } from '~/features/decks/actions'
+import { updateFlashcard, deleteFlashcard, getSeampleFile, uploadFile, exportCards } from '~/features/decks/actions'
 import { useTranslations } from 'next-intl'
 
 import { DataTable } from '~/components/data-table'
@@ -43,6 +43,7 @@ export default function DeckCards({
 
   const onDeckFileImport = async (file: File) => {
     const result = await uploadFile(deck.id, file)
+    console.log(result);
     if (result.success) {
       toastHelper.success({ title: t('DeckCards.cardsImported'), description: t('DeckCards.cardsImportedDescription', { count: 0 }) })
     }
@@ -65,6 +66,27 @@ export default function DeckCards({
       description: result.error,
     })
     return false
+  }
+
+  const onClickExportCards = async (format: 'csv' | 'xlsx') => {
+    const result = await exportCards(deck.id, format)
+    if (!result.success) {
+      toastHelper.error({ title: t('DeckCards.updateError'), description: result.error })
+      return
+    }
+    const isExcel = format === 'xlsx'
+    const mimeType = isExcel
+      ? 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      : 'text/csv'
+    const fileName = isExcel ? 'cards.xlsx' : 'cards.csv'
+    const bytes = Uint8Array.from(atob(result.data), c => c.charCodeAt(0))
+    const blob = new Blob([bytes], { type: mimeType })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = fileName
+    a.click()
+    URL.revokeObjectURL(url)
   }
 
   const onClickDownloadSampleFile = async (format: 'csv' | 'xlsx') => {
@@ -98,6 +120,7 @@ export default function DeckCards({
         title={deck.title}
         description={deck.description || ''}
         onClickDownloadSampleFile={onClickDownloadSampleFile}
+        onClickExportCards={onClickExportCards}
         onDeckFileImport={onDeckFileImport}
       />
       <DataTable

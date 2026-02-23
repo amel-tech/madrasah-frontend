@@ -58,7 +58,7 @@ export const updateFlashcard = async (cardId: string, updatedCard: {
 
 export const uploadFile = async (deckId: string, blob: Blob) => {
   return authenticatedAction(async ({ cards }) => {
-    return await cards.importsCard({ deckId, file: blob});
+    return await cards.importsCardRaw({ deckId, file: blob});
   })
 }
 
@@ -73,6 +73,14 @@ export const deleteFlashcard = async (cardId: string, deckId?: string) => {
 export const getSeampleFile = async(format: 'csv' | 'xlsx') => {
   return authenticatedAction(async ({ cards }) => {
     var result = await cards.getSampleFileRaw({format})
+    const buffer = await result.raw.arrayBuffer()
+    return Buffer.from(buffer).toString('base64')
+  })
+}
+
+export const exportCards = async(deckId: string, format: 'csv' | 'xlsx') => {
+  return authenticatedAction(async ({ cards }) => {
+    var result = await cards.exportCardsRaw({ deckId, format })
     const buffer = await result.raw.arrayBuffer()
     return Buffer.from(buffer).toString('base64')
   })

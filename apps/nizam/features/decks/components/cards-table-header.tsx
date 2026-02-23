@@ -18,11 +18,13 @@ export const CardsTableHeader = ({
   description,
   onDeckFileImport,
   onClickDownloadSampleFile,
+  onClickExportCards,
 }: {
   title: string
   description: string
   onDeckFileImport: (file: File) => void
   onClickDownloadSampleFile: (format: 'csv' | 'xlsx') => void
+  onClickExportCards: (format: 'csv' | 'xlsx') => void
 }) => {
   const t = useTranslations('nizam')
   const fileInputRef = useRef<HTMLInputElement>(null)
@@ -48,7 +50,7 @@ export const CardsTableHeader = ({
         <input
           ref={fileInputRef}
           type="file"
-          accept=".xlsx,.xls"
+          accept=".xlsx,.xls,.csv"
           style={{ display: 'none' }}
           onChange={handleFileChange}
         />
@@ -75,6 +77,21 @@ export const CardsTableHeader = ({
                   CSV
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => onClickDownloadSampleFile('xlsx')}>
+                  Excel
+                </DropdownMenuItem>
+              </DropdownMenuSubContent>
+            </DropdownMenuSub>
+            <DropdownMenuSub>
+              <DropdownMenuSubTrigger>
+                <DownloadIcon />
+                {' '}
+                {t('CardsTableHeader.exportCards')}
+              </DropdownMenuSubTrigger>
+              <DropdownMenuSubContent>
+                <DropdownMenuItem onClick={() => onClickExportCards('csv')}>
+                  CSV
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => onClickExportCards('xlsx')}>
                   Excel
                 </DropdownMenuItem>
               </DropdownMenuSubContent>
