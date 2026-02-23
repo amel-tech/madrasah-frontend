@@ -1,12 +1,14 @@
 'use client'
 
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { updateFlashcard, deleteFlashcard, getSeampleFile, uploadFile, exportCards } from '~/features/decks/actions'
 import { useTranslations } from 'next-intl'
 
 import { DataTable } from '~/components/data-table'
 import { CardsTableHeader } from './cards-table-header'
+import { ImportErrorsDialog } from './import-errors-dialog'
 import { FlashcardDeckResponse, FlashcardResponse } from '@madrasah/services/tedrisat'
+import type { BulkFlashcardErrorResponse } from '@madrasah/services/tedrisat'
 import { toastHelper } from '@madrasah/ui/lib/toast-helper'
 import { useFlashcardColumns } from '~/features/decks/hooks/useFlashcardColumns'
 import { createDefaultColumn } from '~/components/data-table/editable'
@@ -21,6 +23,7 @@ export default function DeckCards({
 }) {
   const t = useTranslations('nizam')
   const columns = useFlashcardColumns()
+  const [importErrors, setImportErrors] = useState<BulkFlashcardErrorResponse | null>(null)
 
   const onRowUpdate = async (updatedRow: FlashcardResponse) => {
     const result = await updateFlashcard(updatedRow.id, {
@@ -43,15 +46,12 @@ export default function DeckCards({
 
   const onDeckFileImport = async (file: File) => {
     const result = await uploadFile(deck.id, file)
-    console.log(result);
     if (result.success) {
       toastHelper.success({ title: t('DeckCards.cardsImported'), description: t('DeckCards.cardsImportedDescription', { count: 0 }) })
-    }
-    else {
-      toastHelper.error({
-        title: t('DeckCards.updateError'),
-        description: result.error,
-      })
+    } else if ('errorData' in result) {
+      setImportErrors(result.errorData)
+    } else {
+      toastHelper.error({ title: t('DeckCards.updateError'), description: result.error })
     }
   }
 
@@ -116,6 +116,7 @@ export default function DeckCards({
 
   return (
     <div>
+      <ImportErrorsDialog errors={importErrors} onClose={() => setImportErrors(null)} />
       <CardsTableHeader
         title={deck.title}
         description={deck.description || ''}

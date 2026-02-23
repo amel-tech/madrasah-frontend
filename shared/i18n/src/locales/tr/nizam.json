@@ -64,6 +64,10 @@
       "validationError": "Doğrulama Hatası"
     }
   },
+  "ImportErrors": {
+    "title": "İçe Aktarma Hataları",
+    "row": "Satır {row}"
+  },
   "FlashcardColumns": {
     "areYouSure": "Emin misin?",
     "backFace": "Arka Yüz",

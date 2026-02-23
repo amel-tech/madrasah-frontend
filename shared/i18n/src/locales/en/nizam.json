@@ -64,6 +64,10 @@
       "validationError": "Validation Error"
     }
   },
+  "ImportErrors": {
+    "title": "Import Errors",
+    "row": "Row {row}"
+  },
   "FlashcardColumns": {
     "areYouSure": "Are you sure?",
     "backFace": "Back Face",

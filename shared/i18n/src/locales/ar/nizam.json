@@ -64,6 +64,10 @@
       "validationError": "خطأ في التحقق"
     }
   },
+  "ImportErrors": {
+    "title": "أخطاء الاستيراد",
+    "row": "صف {row}"
+  },
   "FlashcardColumns": {
     "areYouSure": "هل أنت متأكد؟",
     "backFace": "الوجه الخلفي",
