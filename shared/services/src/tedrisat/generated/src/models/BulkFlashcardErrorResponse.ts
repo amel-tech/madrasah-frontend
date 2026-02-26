@@ -38,7 +38,7 @@ export interface BulkFlashcardErrorResponse {
      * @type {string}
      * @memberof BulkFlashcardErrorResponse
      */
-    code: string;
+    code?: string;
     /**
      * 
      * @type {number}
@@ -53,16 +53,16 @@ export interface BulkFlashcardErrorResponse {
     message: string;
     /**
      * 
-     * @type {BulkFlashcardErrorContext}
-     * @memberof BulkFlashcardErrorResponse
-     */
-    context: BulkFlashcardErrorContext;
-    /**
-     * 
      * @type {string}
      * @memberof BulkFlashcardErrorResponse
      */
     timestamp: string;
+    /**
+     * 
+     * @type {BulkFlashcardErrorContext}
+     * @memberof BulkFlashcardErrorResponse
+     */
+    context: BulkFlashcardErrorContext;
 }
 
 /**
@@ -70,11 +70,10 @@ export interface BulkFlashcardErrorResponse {
  */
 export function instanceOfBulkFlashcardErrorResponse(value: object): value is BulkFlashcardErrorResponse {
     if (!('type' in value) || value['type'] === undefined) return false;
-    if (!('code' in value) || value['code'] === undefined) return false;
     if (!('status' in value) || value['status'] === undefined) return false;
     if (!('message' in value) || value['message'] === undefined) return false;
-    if (!('context' in value) || value['context'] === undefined) return false;
     if (!('timestamp' in value) || value['timestamp'] === undefined) return false;
+    if (!('context' in value) || value['context'] === undefined) return false;
     return true;
 }
 
@@ -89,11 +88,11 @@ export function BulkFlashcardErrorResponseFromJSONTyped(json: any, ignoreDiscrim
     return {
         
         'type': json['type'],
-        'code': json['code'],
+        'code': json['code'] == null ? undefined : json['code'],
         'status': json['status'],
         'message': json['message'],
-        'context': BulkFlashcardErrorContextFromJSON(json['context']),
         'timestamp': json['timestamp'],
+        'context': BulkFlashcardErrorContextFromJSON(json['context']),
     };
 }
 
@@ -112,8 +111,8 @@ export function BulkFlashcardErrorResponseToJSONTyped(value?: BulkFlashcardError
         'code': value['code'],
         'status': value['status'],
         'message': value['message'],
-        'context': BulkFlashcardErrorContextToJSON(value['context']),
         'timestamp': value['timestamp'],
+        'context': BulkFlashcardErrorContextToJSON(value['context']),
     };
 }
 

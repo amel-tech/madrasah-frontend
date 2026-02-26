@@ -25,12 +25,6 @@ export interface BulkFlashcardResponse {
      * @memberof BulkFlashcardResponse
      */
     count: number;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof BulkFlashcardResponse
-     */
-    isSuccess: boolean;
 }
 
 /**
@@ -38,7 +32,6 @@ export interface BulkFlashcardResponse {
  */
 export function instanceOfBulkFlashcardResponse(value: object): value is BulkFlashcardResponse {
     if (!('count' in value) || value['count'] === undefined) return false;
-    if (!('isSuccess' in value) || value['isSuccess'] === undefined) return false;
     return true;
 }
 
@@ -53,7 +46,6 @@ export function BulkFlashcardResponseFromJSONTyped(json: any, ignoreDiscriminato
     return {
         
         'count': json['count'],
-        'isSuccess': json['isSuccess'],
     };
 }
 
@@ -69,7 +61,6 @@ export function BulkFlashcardResponseToJSONTyped(value?: BulkFlashcardResponse |
     return {
         
         'count': value['count'],
-        'isSuccess': value['isSuccess'],
     };
 }
 
