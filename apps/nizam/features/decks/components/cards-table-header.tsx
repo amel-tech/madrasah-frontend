@@ -1,5 +1,4 @@
-import { UploadIcon } from '@madrasah/icons'
-import { DownloadIcon } from '@madrasah/icons/ssr'
+import { UploadIcon, DownloadIcon, FileCsvIcon, FileXlsIcon, FileArrowDownIcon } from '@madrasah/icons'
 import { Button } from '@madrasah/ui/components/button'
 import { useRef } from 'react'
 import {
@@ -62,36 +61,44 @@ export const CardsTableHeader = ({
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-60">
             <DropdownMenuItem onClick={handleUploadClick}>
-              <UploadIcon />
+              <UploadIcon className="text-gray-500" size={18} />
               {' '}
               {t('CardsTableHeader.importFromExcel')}
             </DropdownMenuItem>
             <DropdownMenuSub>
               <DropdownMenuSubTrigger>
-                <DownloadIcon />
+                <DownloadIcon className="text-gray-500 mr-1.5" size={18} />
                 {' '}
-                {t('CardsTableHeader.downloadSampleFile')}
+                {t('CardsTableHeader.exportCards')}
               </DropdownMenuSubTrigger>
               <DropdownMenuSubContent>
-                <DropdownMenuItem onClick={() => onClickDownloadSampleFile('csv')}>
+                <DropdownMenuItem onClick={() => onClickExportCards('csv')}>
+                  <FileCsvIcon />
+                  {' '}
                   CSV
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => onClickDownloadSampleFile('xlsx')}>
+                <DropdownMenuItem onClick={() => onClickExportCards('xlsx')}>
+                  <FileXlsIcon />
+                  {' '}
                   Excel
                 </DropdownMenuItem>
               </DropdownMenuSubContent>
             </DropdownMenuSub>
             <DropdownMenuSub>
               <DropdownMenuSubTrigger>
-                <DownloadIcon />
+                <FileArrowDownIcon className="text-gray-500 mr-1.5" size={18} />
                 {' '}
-                {t('CardsTableHeader.exportCards')}
+                {t('CardsTableHeader.downloadSampleFile')}
               </DropdownMenuSubTrigger>
               <DropdownMenuSubContent>
-                <DropdownMenuItem onClick={() => onClickExportCards('csv')}>
+                <DropdownMenuItem onClick={() => onClickDownloadSampleFile('csv')}>
+                  <FileCsvIcon />
+                  {' '}
                   CSV
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => onClickExportCards('xlsx')}>
+                <DropdownMenuItem onClick={() => onClickDownloadSampleFile('xlsx')}>
+                  <FileXlsIcon />
+                  {' '}
                   Excel
                 </DropdownMenuItem>
               </DropdownMenuSubContent>
