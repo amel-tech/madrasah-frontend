@@ -13,13 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
-import type { RowError } from './RowError';
+import type { BulkFlashcardErrorContext } from './BulkFlashcardErrorContext';
 import {
-    RowErrorFromJSON,
-    RowErrorFromJSONTyped,
-    RowErrorToJSON,
-    RowErrorToJSONTyped,
-} from './RowError';
+    BulkFlashcardErrorContextFromJSON,
+    BulkFlashcardErrorContextFromJSONTyped,
+    BulkFlashcardErrorContextToJSON,
+    BulkFlashcardErrorContextToJSONTyped,
+} from './BulkFlashcardErrorContext';
 
 /**
  * 
@@ -29,31 +29,52 @@ import {
 export interface BulkFlashcardErrorResponse {
     /**
      * 
-     * @type {Array<RowError>}
+     * @type {string}
      * @memberof BulkFlashcardErrorResponse
      */
-    errors: Array<RowError>;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof BulkFlashcardErrorResponse
-     */
-    isSuccess: boolean;
+    type: string;
     /**
      * 
      * @type {string}
      * @memberof BulkFlashcardErrorResponse
      */
-    errorMessage: string;
+    code: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof BulkFlashcardErrorResponse
+     */
+    status: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof BulkFlashcardErrorResponse
+     */
+    message: string;
+    /**
+     * 
+     * @type {BulkFlashcardErrorContext}
+     * @memberof BulkFlashcardErrorResponse
+     */
+    context: BulkFlashcardErrorContext;
+    /**
+     * 
+     * @type {string}
+     * @memberof BulkFlashcardErrorResponse
+     */
+    timestamp: string;
 }
 
 /**
  * Check if a given object implements the BulkFlashcardErrorResponse interface.
  */
 export function instanceOfBulkFlashcardErrorResponse(value: object): value is BulkFlashcardErrorResponse {
-    if (!('errors' in value) || value['errors'] === undefined) return false;
-    if (!('isSuccess' in value) || value['isSuccess'] === undefined) return false;
-    if (!('errorMessage' in value) || value['errorMessage'] === undefined) return false;
+    if (!('type' in value) || value['type'] === undefined) return false;
+    if (!('code' in value) || value['code'] === undefined) return false;
+    if (!('status' in value) || value['status'] === undefined) return false;
+    if (!('message' in value) || value['message'] === undefined) return false;
+    if (!('context' in value) || value['context'] === undefined) return false;
+    if (!('timestamp' in value) || value['timestamp'] === undefined) return false;
     return true;
 }
 
@@ -67,9 +88,12 @@ export function BulkFlashcardErrorResponseFromJSONTyped(json: any, ignoreDiscrim
     }
     return {
         
-        'errors': ((json['errors'] as Array<any>).map(RowErrorFromJSON)),
-        'isSuccess': json['isSuccess'],
-        'errorMessage': json['errorMessage'],
+        'type': json['type'],
+        'code': json['code'],
+        'status': json['status'],
+        'message': json['message'],
+        'context': BulkFlashcardErrorContextFromJSON(json['context']),
+        'timestamp': json['timestamp'],
     };
 }
 
@@ -84,9 +108,12 @@ export function BulkFlashcardErrorResponseToJSONTyped(value?: BulkFlashcardError
 
     return {
         
-        'errors': ((value['errors'] as Array<any>).map(RowErrorToJSON)),
-        'isSuccess': value['isSuccess'],
-        'errorMessage': value['errorMessage'],
+        'type': value['type'],
+        'code': value['code'],
+        'status': value['status'],
+        'message': value['message'],
+        'context': BulkFlashcardErrorContextToJSON(value['context']),
+        'timestamp': value['timestamp'],
     };
 }
 

@@ -9,7 +9,7 @@ type ApiClient = Awaited<ReturnType<typeof createServerTedrisatAPIs>>
 /** Result type for actions: success with data, or failure with server error message. */
 export type AuthenticatedActionResult<T>
   = | { success: true, data: T }
-    | { success: false, error: string }
+    | { success: false, error: string, errorBody?: unknown }
 
 /**
  * Wrapper for Server Actions that require authentication.
@@ -33,15 +33,13 @@ export async function authenticatedAction<T>(
   }
   catch (error) {
     if (error instanceof ResponseError) {
-      let message: string
       try {
         const errorBody = await error.response.json()
-        message = getErrorMessage(errorBody)
+        return { success: false, error: getErrorMessage(errorBody), errorBody }
       }
       catch {
-        message = error.response.statusText || 'Request failed'
+        return { success: false, error: error.response.statusText || 'Request failed' }
       }
-      return { success: false, error: message }
     }
     return {
       success: false,

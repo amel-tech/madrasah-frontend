@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl'
 import { DataTable } from '~/components/data-table'
 import { CardsTableHeader } from './cards-table-header'
 import { ImportErrorsDialog } from './import-errors-dialog'
-import { FlashcardDeckResponse, FlashcardResponse } from '@madrasah/services/tedrisat'
+import { FlashcardDeckResponse, FlashcardResponse, instanceOfBulkFlashcardErrorResponse } from '@madrasah/services/tedrisat'
 import type { BulkFlashcardErrorResponse } from '@madrasah/services/tedrisat'
 import { toastHelper } from '@madrasah/ui/lib/toast-helper'
 import { downloadBase64File } from '~/features/decks/utils/download-base64-file'
@@ -49,8 +49,8 @@ export default function DeckCards({
     if (result.success) {
       toastHelper.success({ title: t('DeckCards.cardsImported'), description: t('DeckCards.cardsImportedDescription', { count: result.data.count }) })
     }
-    else if ('errorData' in result) {
-      setImportErrors(result.errorData)
+    else if (result.errorBody && instanceOfBulkFlashcardErrorResponse(result.errorBody)) {
+      setImportErrors(result.errorBody)
     }
     else {
       toastHelper.error({ title: t('DeckCards.updateError'), description: result.error })

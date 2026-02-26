@@ -1,5 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
+export * from './BulkFlashcardErrorContext';
 export * from './BulkFlashcardErrorResponse';
 export * from './BulkFlashcardResponse';
 export * from './CreateExampleDto';

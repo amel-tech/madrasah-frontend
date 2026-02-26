@@ -24,10 +24,10 @@ export function ImportErrorsDialog({
       <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>{t('ImportErrors.title')}</DialogTitle>
-          <DialogDescription>{errors?.errorMessage}</DialogDescription>
+          <DialogDescription>{errors?.message}</DialogDescription>
         </DialogHeader>
         <div className="mt-2 space-y-3">
-          {errors?.errors.map(rowError => (
+          {errors?.context.errors.map(rowError => (
             <div key={rowError.row} className="rounded-md border p-3">
               <p className="text-sm font-medium mb-1">{t('ImportErrors.row', { row: rowError.row })}</p>
               <ul className="space-y-1">

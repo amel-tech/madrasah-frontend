@@ -8,6 +8,7 @@ src/apis/FlashcardDecksApi.ts
 src/apis/TedrisatServiceApi.ts
 src/apis/index.ts
 src/index.ts
+src/models/BulkFlashcardErrorContext.ts
 src/models/BulkFlashcardErrorResponse.ts
 src/models/BulkFlashcardResponse.ts
 src/models/CreateExampleDto.ts
