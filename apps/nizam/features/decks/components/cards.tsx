@@ -13,7 +13,6 @@ import { toastHelper } from '@madrasah/ui/lib/toast-helper'
 import { useFlashcardColumns } from '~/features/decks/hooks/useFlashcardColumns'
 import { createDefaultColumn } from '~/components/data-table/editable'
 
-
 export default function DeckCards({
   deck,
   cards,
@@ -47,10 +46,12 @@ export default function DeckCards({
   const onDeckFileImport = async (file: File) => {
     const result = await uploadFile(deck.id, file)
     if (result.success) {
-      toastHelper.success({ title: t('DeckCards.cardsImported'), description: t('DeckCards.cardsImportedDescription', { count: 0 }) })
-    } else if ('errorData' in result) {
+      toastHelper.success({ title: t('DeckCards.cardsImported'), description: t('DeckCards.cardsImportedDescription', { count: result.data.count }) })
+    }
+    else if ('errorData' in result) {
       setImportErrors(result.errorData)
-    } else {
+    }
+    else {
       toastHelper.error({ title: t('DeckCards.updateError'), description: result.error })
     }
   }

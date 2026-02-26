@@ -14,9 +14,9 @@
   },
   "DeckCards": {
     "cardDeleted": "Kart Silindi",
-    "cardDeletedDescription": "{xxx} kimlik numaralı kart silindi.",
+    "cardDeletedDescription": "{id} kimlik numaralı kart silindi.",
     "cardsImported": "İthal Kartlar",
-    "cardsImportedDescription": "{xxx0xx} kart başarıyla içe aktarıldı.",
+    "cardsImportedDescription": "{count} kart başarıyla içe aktarıldı.",
     "cardUpdated": "Kart Güncellendi",
     "cardUpdatedDescription": "Kartvizit başarıyla güncellendi.",
     "deleteError": "Silme Hatası",
