@@ -6,8 +6,8 @@
     "bulkActions": "Bulk Actions",
     "downloadAsExcel": "Download as Excel",
     "downloadSampleFile": "Download Sample File",
-    "exportCards": "Export Cards",
-    "importFromExcel": "Import from Excel"
+    "importFromExcel": "Import from Excel",
+    "exportCards": "Export Cards"
   },
   "DataTable": {
     "noResults": "No results."
@@ -63,10 +63,6 @@
       "titleRequired": "Deck title is required.",
       "validationError": "Validation Error"
     }
-  },
-  "ImportErrors": {
-    "title": "Import Errors",
-    "row": "Row {row}"
   },
   "FlashcardColumns": {
     "areYouSure": "Are you sure?",
@@ -196,5 +192,9 @@
       "topicMin": "Topic title must be at least 3 characters",
       "weekMin": "Week number cannot be less than 1"
     }
+  },
+  "ImportErrors": {
+    "title": "The file could not be imported",
+    "row": "Eror on line {row}"
   }
 }

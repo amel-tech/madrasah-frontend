@@ -6,8 +6,8 @@
     "bulkActions": "Toplu İşlemler",
     "downloadAsExcel": "Excel olarak indir",
     "downloadSampleFile": "Örnek Dosyayı İndir",
-    "exportCards": "Kartları Dışa Aktar",
-    "importFromExcel": "Excel'den İçe Aktar"
+    "importFromExcel": "Excel'den İçe Aktar",
+    "exportCards": "Dışa Aktar"
   },
   "DataTable": {
     "noResults": "Sonuç bulunamadı."
@@ -63,10 +63,6 @@
       "titleRequired": "Deste başlığı gereklidir.",
       "validationError": "Doğrulama Hatası"
     }
-  },
-  "ImportErrors": {
-    "title": "İçe Aktarma Hataları",
-    "row": "Satır {row}"
   },
   "FlashcardColumns": {
     "areYouSure": "Emin misin?",
@@ -196,5 +192,9 @@
       "topicMin": "Konu başlığı en az 3 karakterden oluşmalıdır.",
       "weekMin": "Hafta numarası 1'den küçük olamaz."
     }
+  },
+  "ImportErrors": {
+    "title": "Dosya içe aktarılamadı",
+    "row": "{row}. satırda hata"
   }
 }

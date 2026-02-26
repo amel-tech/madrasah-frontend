@@ -6,8 +6,8 @@
     "bulkActions": "الإجراءات الجماعية",
     "downloadAsExcel": "تنزيل كملف Excel",
     "downloadSampleFile": "تحميل ملف نموذج",
-    "exportCards": "تصدير البطاقات",
-    "importFromExcel": "استيراد من إكسل"
+    "importFromExcel": "استيراد من إكسل",
+    "exportCards": "بطاقات التصدير"
   },
   "DataTable": {
     "noResults": "لا توجد نتائج."
@@ -63,10 +63,6 @@
       "titleRequired": "عنوان المجموعة مطلوب.",
       "validationError": "خطأ في التحقق"
     }
-  },
-  "ImportErrors": {
-    "title": "أخطاء الاستيراد",
-    "row": "صف {row}"
   },
   "FlashcardColumns": {
     "areYouSure": "هل أنت متأكد؟",
@@ -196,5 +192,9 @@
       "topicMin": "يجب أن يتكون عنوان الموضوع من 3 أحرف على الأقل",
       "weekMin": "لا يمكن أن يكون رقم الأسبوع أقل من 1"
     }
+  },
+  "ImportErrors": {
+    "title": "لا يمكن استيراد الملف",
+    "row": "خطأ في السطر {row}"
   }
 }

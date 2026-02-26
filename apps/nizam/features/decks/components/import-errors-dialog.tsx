@@ -33,7 +33,12 @@ export function ImportErrorsDialog({
               <ul className="space-y-1">
                 {rowError.errors.map((fieldError, i) => (
                   <li key={i} className="text-sm text-destructive">
-                    <span className="font-medium">{fieldError.field}:</span> {fieldError.message}
+                    <span className="font-medium">
+                      {fieldError.field}
+                      :
+                    </span>
+                    {' '}
+                    {fieldError.message}
                   </li>
                 ))}
               </ul>
