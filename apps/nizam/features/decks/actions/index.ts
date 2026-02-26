@@ -60,9 +60,9 @@ export const updateFlashcard = async (cardId: string, updatedCard: {
 }
 
 export const uploadFile = async (deckId: string, blob: Blob): Promise<
-  | { success: true; data: BulkFlashcardResponse }
-  | { success: false; error: string }
-  | { success: false; error: string; errorData: BulkFlashcardErrorResponse }
+  | { success: true, data: BulkFlashcardResponse }
+  | { success: false, error: string }
+  | { success: false, error: string, errorData: BulkFlashcardErrorResponse }
 > => {
   const session = await auth()
   if (!session?.accessToken) return { success: false, error: 'Unauthorized: No access token found' }
@@ -73,12 +73,14 @@ export const uploadFile = async (deckId: string, blob: Blob): Promise<
     const response = await api.cards.importsCardRaw({ deckId, file: blob })
     const data = await response.value()
     return { success: true, data }
-  } catch (error) {
+  }
+  catch (error) {
     if (error instanceof ResponseError) {
       try {
         const errorData = BulkFlashcardErrorResponseFromJSON(await error.response.json())
         return { success: false, error: errorData.errorMessage, errorData }
-      } catch {
+      }
+      catch {
         return { success: false, error: error.response.statusText || 'Request failed' }
       }
     }
@@ -94,17 +96,17 @@ export const deleteFlashcard = async (cardId: string, deckId?: string) => {
   })
 }
 
-export const getSampleFile = async(format: 'csv' | 'xlsx') => {
+export const getSampleFile = async (format: 'csv' | 'xlsx') => {
   return authenticatedAction(async ({ cards }) => {
-    var result = await cards.getSampleFileRaw({format})
+    const result = await cards.getSampleFileRaw({ format })
     const buffer = await result.raw.arrayBuffer()
     return Buffer.from(buffer).toString('base64')
   })
 }
 
-export const exportCards = async(deckId: string, format: 'csv' | 'xlsx') => {
+export const exportCards = async (deckId: string, format: 'csv' | 'xlsx') => {
   return authenticatedAction(async ({ cards }) => {
-    var result = await cards.exportCardsRaw({ deckId, format })
+    const result = await cards.exportCardsRaw({ deckId, format })
     const buffer = await result.raw.arrayBuffer()
     return Buffer.from(buffer).toString('base64')
   })

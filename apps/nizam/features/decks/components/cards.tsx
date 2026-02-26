@@ -10,6 +10,7 @@ import { ImportErrorsDialog } from './import-errors-dialog'
 import { FlashcardDeckResponse, FlashcardResponse } from '@madrasah/services/tedrisat'
 import type { BulkFlashcardErrorResponse } from '@madrasah/services/tedrisat'
 import { toastHelper } from '@madrasah/ui/lib/toast-helper'
+import { downloadBase64File } from '~/features/decks/utils/download-base64-file'
 import { useFlashcardColumns } from '~/features/decks/hooks/useFlashcardColumns'
 import { createDefaultColumn } from '~/components/data-table/editable'
 
@@ -75,19 +76,7 @@ export default function DeckCards({
       toastHelper.error({ title: t('DeckCards.updateError'), description: result.error })
       return
     }
-    const isExcel = format === 'xlsx'
-    const mimeType = isExcel
-      ? 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-      : 'text/csv'
-    const fileName = isExcel ? 'cards.xlsx' : 'cards.csv'
-    const bytes = Uint8Array.from(atob(result.data), c => c.charCodeAt(0))
-    const blob = new Blob([bytes], { type: mimeType })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = fileName
-    a.click()
-    URL.revokeObjectURL(url)
+    downloadBase64File(result.data, `cards.${format}`, format)
   }
 
   const onClickDownloadSampleFile = async (format: 'csv' | 'xlsx') => {
@@ -96,19 +85,7 @@ export default function DeckCards({
       toastHelper.error({ title: t('DeckCards.updateError'), description: result.error })
       return
     }
-    const isExcel = format === 'xlsx'
-    const mimeType = isExcel
-      ? 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-      : 'text/csv'
-    const fileName = isExcel ? 'sample.xlsx' : 'sample.csv'
-    const bytes = Uint8Array.from(atob(result.data), c => c.charCodeAt(0))
-    const blob = new Blob([bytes], { type: mimeType })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = fileName
-    a.click()
-    URL.revokeObjectURL(url)
+    downloadBase64File(result.data, `sample.${format}`, format)
   }
 
   const defaultColumn = useMemo(() => {
