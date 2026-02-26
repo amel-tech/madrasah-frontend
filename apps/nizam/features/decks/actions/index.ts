@@ -94,7 +94,7 @@ export const deleteFlashcard = async (cardId: string, deckId?: string) => {
   })
 }
 
-export const getSeampleFile = async(format: 'csv' | 'xlsx') => {
+export const getSampleFile = async(format: 'csv' | 'xlsx') => {
   return authenticatedAction(async ({ cards }) => {
     var result = await cards.getSampleFileRaw({format})
     const buffer = await result.raw.arrayBuffer()

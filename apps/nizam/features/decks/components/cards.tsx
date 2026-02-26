@@ -1,7 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react'
-import { updateFlashcard, deleteFlashcard, getSeampleFile, uploadFile, exportCards } from '~/features/decks/actions'
+import { updateFlashcard, deleteFlashcard, getSampleFile, uploadFile, exportCards } from '~/features/decks/actions'
 import { useTranslations } from 'next-intl'
 
 import { DataTable } from '~/components/data-table'
@@ -91,7 +91,7 @@ export default function DeckCards({
   }
 
   const onClickDownloadSampleFile = async (format: 'csv' | 'xlsx') => {
-    const result = await getSeampleFile(format)
+    const result = await getSampleFile(format)
     if (!result.success) {
       toastHelper.error({ title: t('DeckCards.updateError'), description: result.error })
       return
