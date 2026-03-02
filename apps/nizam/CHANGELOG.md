@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.1.9](https://github.com/amel-tech/madrasah-frontend/compare/nizam-web-v0.1.8...nizam-web-v0.1.9) (2026-03-02)
+
+
+### Features
+
+* **bulk-flashcard:** add import error dialog and improve error handling ([27e5fc9](https://github.com/amel-tech/madrasah-frontend/commit/27e5fc972edf77da29887fc42b68633aeb734446))
+* **bulk-flashcard:** adding export cards ([4e41552](https://github.com/amel-tech/madrasah-frontend/commit/4e41552f078d31e404991937ef8dae03c655d0c8))
+* **bulk-flashcard:** Refactor code structure for improved readability and maintainability ([80a1de7](https://github.com/amel-tech/madrasah-frontend/commit/80a1de7ca33c3a1bbfb7ddc0ee4754df284efc7e))
+
+
+### Bug Fixes
+
+* **bulk-flashcard:** fix deckId param and sync models with API spec ([90ee83d](https://github.com/amel-tech/madrasah-frontend/commit/90ee83dfe48526dd7d7d13c647e37ae609138a27))
+* **deck-cards:** correct function name for fetching sample file ([b2947ab](https://github.com/amel-tech/madrasah-frontend/commit/b2947abca08591df5f24e52a6de8e45fe9d7545d))
+* **deck-cards:** improve success message for card import and update i18n keys ([8fa12a6](https://github.com/amel-tech/madrasah-frontend/commit/8fa12a66b7f4179f36c85ebb17dfbdac34f31ff0))
+* **errorBody:** authenticatedAction was used in the action ([c7e90e2](https://github.com/amel-tech/madrasah-frontend/commit/c7e90e2f1bd939029b661ce9edba249300cb9b71))
+
 ## [0.1.8](https://github.com/amel-tech/madrasah-frontend/compare/nizam-web-v0.1.7...nizam-web-v0.1.8) (2026-01-23)
 
 
