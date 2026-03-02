@@ -6,16 +6,17 @@
     "bulkActions": "Toplu İşlemler",
     "downloadAsExcel": "Excel olarak indir",
     "downloadSampleFile": "Örnek Dosyayı İndir",
-    "importFromExcel": "Excel'den İçe Aktar"
+    "importFromExcel": "Excel'den İçe Aktar",
+    "exportCards": "Dışa Aktar"
   },
   "DataTable": {
     "noResults": "Sonuç bulunamadı."
   },
   "DeckCards": {
     "cardDeleted": "Kart Silindi",
-    "cardDeletedDescription": "{xxx} kimlik numaralı kart silindi.",
+    "cardDeletedDescription": "{id} kimlik numaralı kart silindi.",
     "cardsImported": "İthal Kartlar",
-    "cardsImportedDescription": "{xxx0xx} kart başarıyla içe aktarıldı.",
+    "cardsImportedDescription": "{count} kart başarıyla içe aktarıldı.",
     "cardUpdated": "Kart Güncellendi",
     "cardUpdatedDescription": "Kartvizit başarıyla güncellendi.",
     "deleteError": "Silme Hatası",
@@ -191,5 +192,9 @@
       "topicMin": "Konu başlığı en az 3 karakterden oluşmalıdır.",
       "weekMin": "Hafta numarası 1'den küçük olamaz."
     }
+  },
+  "ImportErrors": {
+    "title": "Dosya içe aktarılamadı",
+    "row": "{row}. satırda hata"
   }
 }

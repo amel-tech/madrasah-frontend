@@ -8,10 +8,14 @@ src/apis/FlashcardDecksApi.ts
 src/apis/TedrisatServiceApi.ts
 src/apis/index.ts
 src/index.ts
+src/models/BulkFlashcardErrorContext.ts
+src/models/BulkFlashcardErrorResponse.ts
+src/models/BulkFlashcardResponse.ts
 src/models/CreateExampleDto.ts
 src/models/CreateFlashcardDeckDto.ts
 src/models/CreateFlashcardDto.ts
 src/models/CreateFlashcardProgressDto.ts
+src/models/FieldError.ts
 src/models/FlashcardDeckResponse.ts
 src/models/FlashcardDeckUserResponse.ts
 src/models/FlashcardProgressResponse.ts
@@ -20,6 +24,7 @@ src/models/HealthCheckDto.ts
 src/models/MedarisMetaPaginationResponse.ts
 src/models/MedarisMetaResponse.ts
 src/models/MedarisResponse.ts
+src/models/RowError.ts
 src/models/UpdateFlashcardDeckDto.ts
 src/models/UpdateFlashcardDto.ts
 src/models/index.ts

@@ -90,13 +90,10 @@ export class FlashcardDecksApi extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("bearer", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("bearer", []);
         }
+
 
         let urlPath = `/flashcard/decks`;
 
@@ -137,13 +134,10 @@ export class FlashcardDecksApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("bearer", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("bearer", []);
         }
+
 
         let urlPath = `/flashcard/decks/{id}/collections`;
         urlPath = urlPath.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
@@ -184,13 +178,10 @@ export class FlashcardDecksApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("bearer", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("bearer", []);
         }
+
 
         let urlPath = `/flashcard/decks/{id}`;
         urlPath = urlPath.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
@@ -229,13 +220,10 @@ export class FlashcardDecksApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("bearer", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("bearer", []);
         }
+
 
         let urlPath = `/flashcard/decks/{id}/collections`;
         urlPath = urlPath.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
@@ -272,13 +260,10 @@ export class FlashcardDecksApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("bearer", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("bearer", []);
         }
+
 
         let urlPath = `/flashcard/decks`;
 
@@ -310,13 +295,10 @@ export class FlashcardDecksApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("bearer", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("bearer", []);
         }
+
 
         let urlPath = `/flashcard/decks/collections`;
 
@@ -359,13 +341,10 @@ export class FlashcardDecksApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("bearer", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("bearer", []);
         }
+
 
         let urlPath = `/flashcard/decks/{id}`;
         urlPath = urlPath.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
@@ -415,13 +394,10 @@ export class FlashcardDecksApi extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("bearer", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("bearer", []);
         }
+
 
         let urlPath = `/flashcard/decks/{id}`;
         urlPath = urlPath.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
@@ -472,13 +448,10 @@ export class FlashcardDecksApi extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("bearer", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("bearer", []);
         }
+
 
         let urlPath = `/flashcard/decks/{id}`;
         urlPath = urlPath.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));

@@ -12,6 +12,7 @@ export const getErrorMessage = (error: any): string => {
 
   // Fallback for other error structures or simple strings
   if (typeof error === 'string') return error
+  if (error?.errorMessage) return error.errorMessage
   if (error?.message) return error.message
 
   return 'An unexpected error occurred.'
