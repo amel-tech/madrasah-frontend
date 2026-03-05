@@ -6,8 +6,8 @@
     "bulkActions": "Bulk Actions",
     "downloadAsExcel": "Download as Excel",
     "downloadSampleFile": "Download Sample File",
-    "importFromExcel": "Import from Excel",
-    "exportCards": "Export Cards"
+    "exportCards": "Export Cards",
+    "importFromExcel": "Import from Excel"
   },
   "DataTable": {
     "noResults": "No results."
@@ -75,6 +75,10 @@
   },
   "HomePage": {
     "greeting": "Assalamu alaikum!"
+  },
+  "ImportErrors": {
+    "row": "Eror on line {row}",
+    "title": "The file could not be imported"
   },
   "KeycloakLogin": {
     "signIn": "Sign In"
@@ -192,9 +196,5 @@
       "topicMin": "Topic title must be at least 3 characters",
       "weekMin": "Week number cannot be less than 1"
     }
-  },
-  "ImportErrors": {
-    "title": "The file could not be imported",
-    "row": "Eror on line {row}"
   }
 }

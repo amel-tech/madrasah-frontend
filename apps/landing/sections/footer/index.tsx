@@ -1,227 +1,94 @@
-/**
- * Footer Section Component
- *
- * This component displays the footer with logo, navigation links,
- * newsletter signup, and copyright information.
- */
-
-'use client'
-
 import Link from 'next/link'
-import { cn } from '@madrasah/ui/lib/utils'
-import { footerData } from './data'
-import { BrandLogo } from '~/components/logos/brand/logo'
+import { Mosque, GlobeSimple, Envelope } from '@madrasah/icons/ssr'
+import { getTranslations } from 'next-intl/server'
+import { footerExploreLinks, footerSupportLinks, footerLegalLinks } from './data'
 
-/**
- * Footer Component
- *
- * Displays the footer section with all navigation and information.
- */
-export function FooterSection() {
+export async function FooterSection() {
+  const t = await getTranslations('landing.footer')
+
   return (
-    <footer className={cn(footerData.colors.background, 'py-8 sm:py-10 md:py-12')}>
-      <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
-        {/* White Content Box with Light Blue Border */}
-        <div
-          className={cn(
-            'border rounded-lg p-6 sm:p-7 md:p-8',
-            footerData.colors.contentBox.background,
-            footerData.colors.contentBox.border,
-          )}
-        >
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7 md:gap-8">
-            {/* Logo and Description */}
-            <div className="text-center sm:text-left">
-              <div className="flex items-center justify-center sm:justify-start gap-2 sm:gap-3 mb-3 sm:mb-4">
-                <BrandLogo
-                  width={32}
-                  height={32}
-                  className="w-7 h-7 sm:w-8 sm:h-8"
-                />
-                <h3
-                  className={cn(
-                    'text-base sm:text-lg font-bold uppercase',
-                    footerData.colors.logo.title,
-                  )}
-                >
-                  MEDRESE ONLİNE
-                </h3>
-              </div>
-              <p
-                className={cn(
-                  'text-xs sm:text-sm mb-3 sm:mb-4',
-                  footerData.colors.tagline,
-                )}
-              >
-                {footerData.tagline}
-              </p>
-              {/* Social Media Icons */}
-              <div className="flex gap-3 sm:gap-4 justify-center sm:justify-start">
-                <Link
-                  href={footerData.socialMedia.facebook}
-                  className={cn(
-                    'w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition-colors border',
-                    footerData.colors.socialIcons.background,
-                    footerData.colors.socialIcons.hoverBackground,
-                    footerData.colors.socialIcons.border,
-                  )}
-                  aria-label="Facebook"
-                >
-                  <span className={cn('text-xs', footerData.colors.socialIcons.icon)}>🌐</span>
-                </Link>
-                <Link
-                  href={footerData.socialMedia.twitter}
-                  className={cn(
-                    'w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition-colors border',
-                    footerData.colors.socialIcons.background,
-                    footerData.colors.socialIcons.hoverBackground,
-                    footerData.colors.socialIcons.border,
-                  )}
-                  aria-label="Twitter"
-                >
-                  <span className={cn('text-xs', footerData.colors.socialIcons.icon)}>✉</span>
-                </Link>
-              </div>
+    <footer className="bg-white pt-20 pb-10 relative overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none opacity-40 pattern-rosette-navy" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+          <div>
+            <div className="flex items-center mb-6">
+              <Mosque className="text-primary" size={30} weight="duotone" />
+              <span className="ms-2 font-display font-bold text-xl text-primary tracking-tight">
+                {t('brand')}
+              </span>
             </div>
-
-            {/* Learn Links */}
-            <div className="text-center sm:text-left">
-              <h3
-                className={cn(
-                  'font-bold mb-3 sm:mb-4 text-sm sm:text-base',
-                  footerData.colors.headings,
-                )}
-              >
-                Learn
-              </h3>
-              <ul className="space-y-1.5 sm:space-y-2">
-                {footerData.learnLinks.map(link => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className={cn(
-                        'transition-colors text-xs sm:text-sm',
-                        footerData.colors.links.default,
-                        footerData.colors.links.hover,
-                      )}
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Company Links */}
-            <div className="text-center sm:text-left">
-              <h3
-                className={cn(
-                  'font-bold mb-3 sm:mb-4 text-sm sm:text-base',
-                  footerData.colors.headings,
-                )}
-              >
-                Company
-              </h3>
-              <ul className="space-y-1.5 sm:space-y-2">
-                {footerData.companyLinks.map(link => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className={cn(
-                        'transition-colors text-xs sm:text-sm',
-                        footerData.colors.links.default,
-                        footerData.colors.links.hover,
-                      )}
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Newsletter */}
-            <div className="text-center sm:text-left">
-              <h3
-                className={cn(
-                  'font-bold mb-3 sm:mb-4 text-sm sm:text-base',
-                  footerData.colors.newsletter.title,
-                )}
-              >
-                {footerData.newsletter.title}
-              </h3>
-              <p
-                className={cn(
-                  'text-xs sm:text-sm mb-3 sm:mb-4',
-                  footerData.colors.newsletter.description,
-                )}
-              >
-                {footerData.newsletter.description}
-              </p>
-              <form className="space-y-2 sm:space-y-3">
-                <input
-                  type="email"
-                  placeholder={footerData.newsletter.placeholder}
-                  className={cn(
-                    'w-full px-3 py-2 sm:px-4 sm:py-2 border rounded-lg focus:outline-none focus:ring-2 text-xs sm:text-sm',
-                    footerData.colors.newsletter.input.border,
-                    footerData.colors.newsletter.input.focusRing,
-                  )}
-                />
-                <button
-                  type="submit"
-                  className={cn(
-                    'w-full px-3 py-2 sm:px-4 sm:py-2 rounded-lg transition-colors text-xs sm:text-sm font-medium',
-                    footerData.colors.newsletter.button.background,
-                    footerData.colors.newsletter.button.text,
-                    footerData.colors.newsletter.button.hoverBackground,
-                  )}
-                >
-                  {footerData.newsletter.buttonLabel}
-                </button>
-              </form>
+            <p className="text-sm text-gray-400 mb-8 leading-relaxed font-light">
+              {t('tagline')}
+            </p>
+            <div className="flex gap-5">
+              <Link className="text-gray-400 hover:text-secondary transition-colors" href="#">
+                <GlobeSimple size={24} />
+              </Link>
+              <Link className="text-gray-400 hover:text-secondary transition-colors" href="#">
+                <Envelope size={24} />
+              </Link>
             </div>
           </div>
 
-          {/* Copyright - Inside White Box */}
-          <div
-            className={cn(
-              'border-t pt-6 sm:pt-7 md:pt-8 mt-6 sm:mt-7 md:mt-8',
-              footerData.colors.copyright.border,
-            )}
-          >
-            <div className="flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4">
-              <p
-                className={cn(
-                  'text-xs sm:text-sm text-center md:text-left',
-                  footerData.colors.copyright.text,
-                )}
-              >
-                {`© ${new Date().getFullYear()} ${footerData.copyright.companyName}. ${footerData.copyright.rightsText}`}
-              </p>
-              <div className="flex gap-3 sm:gap-4">
-                <Link
-                  href={footerData.copyright.privacyPolicy.href}
-                  className={cn(
-                    'transition-colors text-xs sm:text-sm',
-                    footerData.colors.copyright.links.default,
-                    footerData.colors.copyright.links.hover,
-                  )}
-                >
-                  {footerData.copyright.privacyPolicy.label}
-                </Link>
-                <Link
-                  href={footerData.copyright.termsOfService.href}
-                  className={cn(
-                    'transition-colors text-xs sm:text-sm',
-                    footerData.colors.copyright.links.default,
-                    footerData.colors.copyright.links.hover,
-                  )}
-                >
-                  {footerData.copyright.termsOfService.label}
-                </Link>
-              </div>
+          <div>
+            <h3 className="font-bold text-primary mb-8 text-sm tracking-widest uppercase">{t('explore')}</h3>
+            <ul className="space-y-4 text-sm text-gray-500 font-light">
+              {footerExploreLinks.map(link => (
+                <li key={link.key}>
+                  <Link className="hover:text-secondary transition-colors" href={link.href}>
+                    {t(`exploreLinks.${link.key}`)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="font-bold text-primary mb-8 text-sm tracking-widest uppercase">{t('support')}</h3>
+            <ul className="space-y-4 text-sm text-gray-500 font-light">
+              {footerSupportLinks.map(link => (
+                <li key={link.key}>
+                  <Link className="hover:text-secondary transition-colors" href={link.href}>
+                    {t(`supportLinks.${link.key}`)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="font-bold text-primary mb-8 text-sm tracking-widest uppercase">
+              {t('development.title')}
+            </h3>
+            <p className="text-sm text-gray-500 font-light mb-6">
+              {t('development.description')}
+            </p>
+            <div className="flex gap-2">
+              <input
+                className="w-full px-4 py-2 text-sm rounded-lg border border-gray-100 bg-gray-50 text-gray-900 focus:ring-secondary focus:border-secondary outline-none"
+                placeholder={t('development.placeholder')}
+                type="email"
+              />
+              <button className="px-5 py-2 bg-primary text-white text-xs font-bold rounded-lg hover:bg-primary/90 transition-colors">
+                {t('development.buttonLabel')}
+              </button>
             </div>
+          </div>
+        </div>
+
+        <div className="border-t border-gray-100 pt-10 flex flex-col md:flex-row justify-between items-center text-[10px] text-gray-400 tracking-widest uppercase font-bold">
+          <p>{t('copyright')}</p>
+          <div className="flex gap-8 mt-4 md:mt-0">
+            {footerLegalLinks.map(link => (
+              <Link
+                key={link.key}
+                className="hover:text-secondary transition-colors"
+                href={link.href}
+              >
+                {t(link.key)}
+              </Link>
+            ))}
           </div>
         </div>
       </div>
