@@ -1,46 +1,10 @@
-import { GraduationCap, Devices, Leaf, BookOpenText, Lightbulb, Globe } from '@madrasah/icons/ssr'
-import { getTranslations, getLocale } from 'next-intl/server'
+import { GraduationCap, Devices, Leaf } from '@madrasah/icons/ssr'
+import { getTranslations } from 'next-intl/server'
 
 const bentoIcons = { GraduationCap, Devices, Leaf } as const
-const simpleIcons = { BookOpenText, Lightbulb, Globe } as const
-
-const simpleItems = [
-  { key: 'tradition' as const, icon: simpleIcons.BookOpenText },
-  { key: 'innovation' as const, icon: simpleIcons.Lightbulb },
-  { key: 'accessibility' as const, icon: simpleIcons.Globe },
-] as const
 
 export async function VisionSection() {
   const t = await getTranslations('landing.vision')
-  const locale = await getLocale()
-  const isRtl = locale === 'ar'
-
-  if (isRtl) {
-    return (
-      <div className="py-24 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="text-center mb-20">
-            <h2 className="font-display text-4xl font-bold text-primary mb-4">{t('simpleTitle')}</h2>
-            <div className="h-px w-16 bg-secondary/40 mx-auto" />
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            {simpleItems.map(item => {
-              const Icon = item.icon
-              return (
-                <div key={item.key} className="group text-center px-4">
-                  <div className="w-24 h-24 rounded-full concentric-mask flex items-center justify-center mx-auto mb-8 relative">
-                    <Icon className="text-secondary" size={36} />
-                  </div>
-                  <h3 className="font-display text-2xl font-bold text-primary mb-4">{t(`items.${item.key}.title`)}</h3>
-                  <p className="text-gray-500 leading-relaxed font-light">{t(`items.${item.key}.description`)}</p>
-                </div>
-              )
-            })}
-          </div>
-        </div>
-      </div>
-    )
-  }
 
   return (
     <div className="py-24 relative">
