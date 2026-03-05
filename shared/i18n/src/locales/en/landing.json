@@ -1,0 +1,162 @@
+{
+  "header": {
+    "brand": "Madrasah",
+    "nav": {
+      "vision": "OUR VISION",
+      "curriculum": "CURRICULUM",
+      "partnerships": "PARTNERSHIPS"
+    },
+    "cta": "Join the Waitlist"
+  },
+  "hero": {
+    "badge": "Coming Soon 2026",
+    "heading": {
+      "line1": "A New Era of",
+      "line2": "Islamic Education"
+    },
+    "description": "Bridging centuries of tradition with the possibilities of the future. An immersive digital sanctuary for seekers of knowledge.",
+    "cta": "Start Your Journey"
+  },
+  "vision": {
+    "badge": "Core Values",
+    "title": "The Madrasah Vision",
+    "mainCard": {
+      "title": "Authentic Scholarship",
+      "description": "Our curriculum is meticulously developed by world-renowned scholars who bridge traditional knowledge with modern context."
+    },
+    "topRight": {
+      "title": "Modern Accessibility",
+      "description": "A seamless learning experience accessible on any device, anywhere in the world."
+    },
+    "bottomLeft": {
+      "title": "Spiritual Growth",
+      "description": "A holistic approach focused on the purification of character and the soul."
+    },
+    "bottomRight": {
+      "title": "Community-Centric",
+      "description": "Join a global network of students and mentors dedicated to lifelong learning and spiritual excellence.",
+      "cta": "Join the Community"
+    },
+    "simpleTitle": "Our Vision",
+    "items": {
+      "tradition": {
+        "title": "Tradition",
+        "description": "Rooted in authentic classical scholarship, preserving the chains of narration and the purity of sacred knowledge."
+      },
+      "innovation": {
+        "title": "Innovation",
+        "description": "Utilizing cutting-edge cognitive science to make learning intuitive, engaging, and highly effective."
+      },
+      "accessibility": {
+        "title": "Accessibility",
+        "description": "Breaking geographical barriers, ensuring that quality Islamic education is available to every home globally."
+      }
+    }
+  },
+  "features": {
+    "title": "Interactive Learning",
+    "subtitle": "A modern toolkit designed to help you master sacred knowledge with meditative focus.",
+    "mainCard": {
+      "title": "Memorize Decks",
+      "description": "Master knowledge with smart, spaced-repetition flashcards designed for long-term retention.",
+      "flashcardLabel": "Arabic Term",
+      "flashcardArabic": "\u0627\u0644\u0625\u062E\u0644\u0627\u0635",
+      "flashcardTransliteration": "Al-Ikhlas",
+      "hard": "Hard",
+      "easy": "Easy"
+    },
+    "sideCards": {
+      "progressTracking": {
+        "title": "Progress Tracking",
+        "description": "Detailed analytics to visualize your spiritual and academic growth."
+      },
+      "globalCommunity": {
+        "title": "Global Community",
+        "description": "Connect with seekers worldwide."
+      },
+      "expertFeedback": {
+        "title": "Expert Feedback",
+        "description": "Guidance from qualified scholars."
+      }
+    }
+  },
+  "curriculum": {
+    "title": "Explore the Curriculum",
+    "filters": {
+      "all": "All",
+      "arabic": "Arabic",
+      "theology": "Theology",
+      "history": "History",
+      "spirituality": "Spirituality"
+    },
+    "courses": {
+      "classicalArabic": {
+        "title": "Classical Arabic",
+        "level": "Level 1",
+        "lessons": "12 Lessons"
+      },
+      "foundationsAqidah": {
+        "title": "Foundations of Aqidah",
+        "level": "Foundational",
+        "lessons": "15 Lessons"
+      },
+      "goldenAge": {
+        "title": "The Golden Age",
+        "level": "Intermediate",
+        "lessons": "10 Lessons"
+      },
+      "purificationHeart": {
+        "title": "Purification of Heart",
+        "level": "All Levels",
+        "lessons": "8 Lessons"
+      }
+    }
+  },
+  "partnership": {
+    "imageAlt": "Collaborative Vision",
+    "quote": "\"Together, we can preserve and propagate sacred knowledge for the next generation.\"",
+    "title": "Partnership Inquiry",
+    "description": "We are looking for visionary scholars and established traditional institutes to join our early adopter program. Let's work together to digitize your curriculum and reach a global audience.",
+    "institutionSupport": {
+      "title": "Institution Support",
+      "description": "Get early access to our platform tools to host your own courses and manage students."
+    },
+    "scholarNetwork": {
+      "title": "Scholar Network",
+      "description": "Collaborate with our team to shape the pedagogical tools for the digital age."
+    },
+    "cta": "Inquire About Partnership"
+  },
+  "waitlist": {
+    "title": "Be the First to Know",
+    "description": "Our sanctuary for learning is currently under active development. Join our waitlist for development updates and exclusive pre-launch benefits.",
+    "placeholder": "Email address",
+    "buttonLabel": "Join Waitlist",
+    "privacyNotice": "Privacy preserved. No spam."
+  },
+  "footer": {
+    "brand": "MADRASAH",
+    "tagline": "Empowering the Ummah through accessible, authentic, and modern Islamic education. Join our journey toward the future of learning.",
+    "explore": "Explore",
+    "exploreLinks": {
+      "vision": "Our Vision",
+      "curriculum": "Curriculum",
+      "partnerships": "Partnerships"
+    },
+    "support": "Support",
+    "supportLinks": {
+      "faq": "FAQ",
+      "contact": "Contact Us",
+      "privacy": "Privacy Policy"
+    },
+    "development": {
+      "title": "Development",
+      "description": "Follow our progress as we build the sanctuary of knowledge.",
+      "placeholder": "Email",
+      "buttonLabel": "GO"
+    },
+    "copyright": "\u00A9 2026 MADRASAH PLATFORM. UNDER DEVELOPMENT.",
+    "terms": "TERMS",
+    "cookies": "COOKIES"
+  }
+}
