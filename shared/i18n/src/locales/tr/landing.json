@@ -1,2 +1,147 @@
 {
+  "curriculum": {
+    "courses": {
+      "classicalArabic": {
+        "lessons": "12 Ders",
+        "level": "Seviye 1",
+        "title": "Klasik Arapça"
+      },
+      "foundationsAqidah": {
+        "lessons": "15 Ders",
+        "level": "Temel",
+        "title": "Akide'nin Temelleri"
+      },
+      "goldenAge": {
+        "lessons": "10 Ders",
+        "level": "Orta seviye",
+        "title": "Altın Çağ"
+      },
+      "purificationHeart": {
+        "lessons": "8 Ders",
+        "level": "Tüm Seviyeler",
+        "title": "Kalbin Arındırılması"
+      }
+    },
+    "filters": {
+      "all": "Tüm",
+      "arabic": "Arapça",
+      "history": "Tarih",
+      "spirituality": "Maneviyat",
+      "theology": "Teoloji"
+    },
+    "title": "Müfredatı Keşfedin"
+  },
+  "features": {
+    "mainCard": {
+      "description": "Uzun süreli öğrenme için tasarlanmış, akıllı, aralıklı tekrar yöntemine dayalı bilgi kartlarıyla bilginizi geliştirin.",
+      "easy": "Kolay",
+      "flashcardArabic": "الإخلاص",
+      "flashcardLabel": "Arapça Terim",
+      "flashcardTransliteration": "El-İhlas",
+      "hard": "Zor",
+      "title": "Desteleri ezberleyin"
+    },
+    "sideCards": {
+      "expertFeedback": {
+        "description": "Alanında uzman akademisyenlerden rehberlik.",
+        "title": "Uzman Görüşü"
+      },
+      "globalCommunity": {
+        "description": "Dünya çapındaki arayış içindeki insanlarla bağlantı kurun.",
+        "title": "Küresel Topluluk"
+      },
+      "progressTracking": {
+        "description": "Manevi ve akademik gelişiminizi görselleştirmek için detaylı analizler.",
+        "title": "İlerleme Takibi"
+      }
+    },
+    "subtitle": "Meditatif odaklanma ile kutsal bilgiyi öğrenmenize yardımcı olmak için tasarlanmış modern bir araç seti.",
+    "title": "Etkileşimli Öğrenme"
+  },
+  "footer": {
+    "brand": "MEDRESE",
+    "cookies": "ÇEREZLER",
+    "copyright": "© 2026 MADRASA PLATFORM. GELİŞTİRME AŞAMASINDA.",
+    "development": {
+      "buttonLabel": "GİTMEK",
+      "description": "Bilgi mabedini inşa ederken kaydettiğimiz ilerlemeyi takip edin.",
+      "placeholder": "E-posta",
+      "title": "Gelişim"
+    },
+    "explore": "Keşfetmek",
+    "exploreLinks": {
+      "curriculum": "Müfredat",
+      "partnerships": "Ortaklıklar",
+      "vision": "Vizyonumuz"
+    },
+    "support": "Destek",
+    "supportLinks": {
+      "contact": "Bize Ulaşın",
+      "faq": "SSS",
+      "privacy": "Gizlilik Politikası"
+    },
+    "tagline": "Erişilebilir, özgün ve modern İslami eğitim yoluyla ümmeti güçlendirmek. Öğrenmenin geleceğine doğru yolculuğumuza katılın.",
+    "terms": "ŞARTLAR"
+  },
+  "header": {
+    "brand": "Medrese",
+    "cta": "Bekleme Listesine Katıl",
+    "nav": {
+      "curriculum": "MÜFREDAT",
+      "partnerships": "ORTAKLIKLAR",
+      "vision": "VİZYONUMUZ"
+    }
+  },
+  "hero": {
+    "badge": "Yakında Geliyor 2026",
+    "cta": "Yolculuğunuza Başlayın",
+    "description": "Yüzyıllar süren geleneği geleceğin olanaklarıyla birleştiren, bilgi arayanlar için sürükleyici bir dijital sığınak.",
+    "heading": {
+      "line1": "Yeni Bir Çağ",
+      "line2": "İslami Eğitim"
+    }
+  },
+  "partnership": {
+    "cta": "Ortaklık hakkında bilgi almak için iletişime geçin.",
+    "description": "Vizyon sahibi akademisyenler ve köklü geleneksel kurumları, erken benimseyenler programımıza katılmaya davet ediyoruz. Müfredatınızı dijitalleştirmek ve küresel bir kitleye ulaşmak için birlikte çalışalım.",
+    "imageAlt": "İşbirliğine Dayalı Vizyon",
+    "institutionSupport": {
+      "description": "Kendi kurslarınızı oluşturmak ve öğrencilerinizi yönetmek için platform araçlarımıza erken erişim sağlayın.",
+      "title": "Kurumsal Destek"
+    },
+    "quote": "\"Birlikte, kutsal bilgiyi koruyabilir ve gelecek nesiller için aktarabiliriz.\"",
+    "scholarNetwork": {
+      "description": "Dijital çağın pedagojik araçlarını şekillendirmek için ekibimizle işbirliği yapın.",
+      "title": "Akademisyen Ağı"
+    },
+    "title": "Ortaklık Soruşturması"
+  },
+  "vision": {
+    "badge": "Temel Değerler",
+    "bottomLeft": {
+      "description": "Karakterin ve ruhun arındırılmasına odaklanan bütüncül bir yaklaşım.",
+      "title": "Manevi Gelişim"
+    },
+    "bottomRight": {
+      "cta": "Topluluğa Katılın",
+      "description": "Yaşam boyu öğrenmeye ve manevi mükemmelliğe adanmış küresel bir öğrenci ve mentörler ağına katılın.",
+      "title": "Topluluk Merkezli"
+    },
+    "mainCard": {
+      "description": "Müfredatımız, geleneksel bilgiyi modern bağlamla birleştiren dünyaca ünlü akademisyenler tarafından titizlikle geliştirilmiştir.",
+      "title": "Orijinal Burs"
+    },
+    "title": "Medrese Vizyonu",
+    "topRight": {
+      "description": "Dünyanın her yerinden, her cihazdan erişilebilen kusursuz bir öğrenme deneyimi.",
+      "title": "Modern Erişilebilirlik"
+    }
+  },
+  "waitlist": {
+    "buttonLabel": "Bekleme listesine katıl",
+    "description": "Öğrenme merkezimiz şu anda aktif olarak geliştirme aşamasındadır. Geliştirme güncellemeleri ve özel lansman öncesi avantajlardan haberdar olmak için bekleme listemize katılın.",
+    "placeholder": "E-posta adresi",
+    "privacyNotice": "Gizliliğiniz korunacaktır. Spam gönderilmeyecektir.",
+    "title": "İlk bilen siz olun"
+  }
 }
