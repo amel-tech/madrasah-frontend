@@ -6,8 +6,8 @@
     "bulkActions": "الإجراءات الجماعية",
     "downloadAsExcel": "تنزيل كملف Excel",
     "downloadSampleFile": "تحميل ملف نموذج",
-    "importFromExcel": "استيراد من إكسل",
-    "exportCards": "بطاقات التصدير"
+    "exportCards": "بطاقات التصدير",
+    "importFromExcel": "استيراد من إكسل"
   },
   "DataTable": {
     "noResults": "لا توجد نتائج."
@@ -75,6 +75,10 @@
   },
   "HomePage": {
     "greeting": "السلام عليكم!"
+  },
+  "ImportErrors": {
+    "row": "خطأ في السطر {row}",
+    "title": "لا يمكن استيراد الملف"
   },
   "KeycloakLogin": {
     "signIn": "تسجيل الدخول"
@@ -192,9 +196,5 @@
       "topicMin": "يجب أن يتكون عنوان الموضوع من 3 أحرف على الأقل",
       "weekMin": "لا يمكن أن يكون رقم الأسبوع أقل من 1"
     }
-  },
-  "ImportErrors": {
-    "title": "لا يمكن استيراد الملف",
-    "row": "خطأ في السطر {row}"
   }
 }
