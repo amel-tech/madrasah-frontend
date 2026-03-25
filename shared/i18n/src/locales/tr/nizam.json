@@ -6,7 +6,7 @@
     "bulkActions": "Toplu İşlemler",
     "downloadAsExcel": "Excel olarak indir",
     "downloadSampleFile": "Örnek Dosyayı İndir",
-    "importFromExcel": "Excel'den İçe Aktar",
+    "importFromExcel": "Excel veya CSV Dosyasından İçe Aktar",
     "exportCards": "Dışa Aktar"
   },
   "DataTable": {
