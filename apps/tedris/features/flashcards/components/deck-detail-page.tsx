@@ -20,8 +20,10 @@ import type {
   FlashcardResponse,
 } from '@madrasah/services/tedrisat'
 import { SampleCards } from '~/features/flashcards/components/sample-cards'
-import { addDeckToCollection, removeDeckFromCollection } from '~/features/flashcards/actions'
-import { AuthenticatedActionResult } from '~/lib/authenticated-action'
+import {
+  addDeckToCollection,
+  removeDeckFromCollection,
+} from '~/features/flashcards/actions'
 
 const MOCK_TAGS = ['arabic', 'hadith']
 const MOCK_AUTHOR = 'Imam Yousef'
@@ -59,7 +61,10 @@ export function DeckDetailPage({
     else {
       toastHelper.error({
         title: t('DeckCard.error'),
-        description: t('DeckCard.errorDescription', { action: 'removing', preposition: 'from' }),
+        description: t('DeckCard.errorDescription', {
+          action: 'removing',
+          preposition: 'from',
+        }),
       })
     }
   }
@@ -76,7 +81,10 @@ export function DeckDetailPage({
     else {
       toastHelper.error({
         title: t('DeckCard.error'),
-        description: t('DeckCard.errorDescription', { action: 'adding', preposition: 'to' }),
+        description: t('DeckCard.errorDescription', {
+          action: 'adding',
+          preposition: 'to',
+        }),
       })
     }
     setIsProcessing(false)
@@ -164,10 +172,17 @@ export function DeckDetailPage({
               onClick={handleToggleCollection}
               disabled={isProcessing}
             >
-              <BookmarkSimpleIcon size={20} weight={isInCollection ? 'fill' : 'regular'} />
+              <BookmarkSimpleIcon
+                size={20}
+                weight={isInCollection ? 'fill' : 'regular'}
+              />
               {isProcessing
-                ? (isInCollection ? t('DeckDetailClient.removing') : t('DeckDetailClient.adding'))
-                : (isInCollection ? t('DeckDetailClient.removeFromCollection') : t('DeckDetailClient.addToMyCollection'))}
+                ? isInCollection
+                  ? t('DeckDetailClient.removing')
+                  : t('DeckDetailClient.adding')
+                : isInCollection
+                  ? t('DeckDetailClient.removeFromCollection')
+                  : t('DeckDetailClient.addToMyCollection')}
             </Button>
           </div>
         </div>
@@ -194,16 +209,22 @@ export function DeckDetailPage({
       {cardCount > 0
         ? (
             <div className="mt-12">
-              <h2 className="text-2xl font-semibold mb-6">{t('DeckDetailClient.sampleCards')}</h2>
+              <h2 className="text-2xl font-semibold mb-6">
+                {t('DeckDetailClient.sampleCards')}
+              </h2>
               <SampleCards cards={sampleCards} />
             </div>
           )
         : (
             <div className="mt-12">
-              <h2 className="text-2xl font-semibold mb-6">{t('DeckDetailClient.sampleCards')}</h2>
+              <h2 className="text-2xl font-semibold mb-6">
+                {t('DeckDetailClient.sampleCards')}
+              </h2>
               <div className="flex flex-col items-center justify-center py-12 px-4 bg-muted rounded-lg border-2 border-dashed">
                 <CardsIcon size={48} className="text-muted-foreground mb-4" />
-                <p className="text-lg font-medium text-foreground mb-2">{t('DeckDetailClient.noCardsInDeck')}</p>
+                <p className="text-lg font-medium text-foreground mb-2">
+                  {t('DeckDetailClient.noCardsInDeck')}
+                </p>
                 <p className="text-sm text-muted-foreground text-center max-w-md">
                   {t('DeckDetailClient.noCardsDescription')}
                 </p>

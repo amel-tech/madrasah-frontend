@@ -12,7 +12,10 @@ async function getDeck(deckId: string): Promise<FlashcardDeckResponse | null> {
   try {
     const session = await auth()
     const token = session?.accessToken
-    const { decks } = await createServerTedrisatAPIs(token, env.TEDRISAT_API_BASE_URL)
+    const { decks } = await createServerTedrisatAPIs(
+      token,
+      env.TEDRISAT_API_BASE_URL,
+    )
     const deck = await decks.getFlashcardDeckById({ id: deckId })
     return deck || null
   }
@@ -26,8 +29,15 @@ async function getDeckCards(deckId: string): Promise<FlashcardResponse[]> {
   try {
     const session = await auth()
     const token = session?.accessToken
-    const API = await createServerTedrisatAPIs(token, env.TEDRISAT_API_BASE_URL)
-    const cards = await API.cards.getFlashcardByDeckId({ deckId })
+    const API = await createServerTedrisatAPIs(
+      token,
+      env.TEDRISAT_API_BASE_URL,
+    )
+    const cards = await API.cards.getFlashcardByDeckId({
+      deckId,
+      include: ['progress'],
+    })
+
     return cards || []
   }
   catch (error) {
@@ -41,7 +51,10 @@ async function isDeckInCollection(deckId: string): Promise<boolean> {
     const session = await auth()
     const token = session?.accessToken
     if (!token) return false
-    const API = await createServerTedrisatAPIs(token, env.TEDRISAT_API_BASE_URL)
+    const API = await createServerTedrisatAPIs(
+      token,
+      env.TEDRISAT_API_BASE_URL,
+    )
     const userDecks = await API.decks.getAllFlashcardDecksByUser()
     return userDecks.some(deck => deck.id === deckId)
   }
@@ -69,10 +82,6 @@ export default async function Page({
   }
 
   return (
-    <DeckDetailPage
-      deck={deck}
-      cards={cards}
-      isInCollection={isInCollection}
-    />
+    <DeckDetailPage deck={deck} cards={cards} isInCollection={isInCollection} />
   )
 }

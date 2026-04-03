@@ -8,18 +8,25 @@ import { useTranslations } from 'next-intl'
 
 import { toDisplay } from '../utils/flashCardUtils'
 
-import { useFlashCards } from '../hooks/useFlashCards'
 import FlashCardComponent from './flashcard'
 import { FlashcardResponse } from '@madrasah/services/tedrisat'
 import { Button } from '@madrasah/ui/components/button'
 
-export default function FlashCardContent(card: FlashcardResponse) {
+type FlashCardContentProps = {
+  card: FlashcardResponse
+  memorized: boolean
+  onToggleMemorized: () => void
+}
+
+export default function FlashCardContent({
+  card,
+  memorized,
+  onToggleMemorized,
+}: FlashCardContentProps) {
   const t = useTranslations('tedris')
   const [flipped, setFlipped] = useState(false)
   const [touchStart, setTouchStart] = useState<number | null>(null)
   const data = toDisplay(card)
-  const { isCardMemorized, toggleMemorized } = useFlashCards()
-  const memorized = isCardMemorized(data.id)
 
   const frontfaceRef = useRef<HTMLDivElement>(null)
   const backfaceRef = useRef<HTMLDivElement>(null)
@@ -61,9 +68,9 @@ export default function FlashCardContent(card: FlashcardResponse) {
         e.preventDefault()
         handleCardFlip()
       }
-      if (e.key === ' ' || e.key === 'Enter') {
+      if (e.key === 'Enter') {
         e.preventDefault()
-        toggleMemorized({ id: data.id, type: data.type })
+        onToggleMemorized()
       }
     }
 
@@ -72,7 +79,7 @@ export default function FlashCardContent(card: FlashcardResponse) {
     return () => {
       window.removeEventListener('keydown', onKeyDown)
     }
-  }, [data.id, flipped, toggleMemorized])
+  }, [flipped, onToggleMemorized])
 
   return (
     <div className="relative" style={{ perspective: '1000px' }}>
@@ -106,7 +113,7 @@ export default function FlashCardContent(card: FlashcardResponse) {
             <CardActions
               onFlip={handleCardFlip}
               memorized={memorized}
-              onToggleMemorized={() => toggleMemorized({ id: data.id, type: data.type })}
+              onToggleMemorized={onToggleMemorized}
             />
           </FlashCardComponent>
         </div>
@@ -129,8 +136,7 @@ export default function FlashCardContent(card: FlashcardResponse) {
             <CardActions
               onFlip={handleCardFlip}
               memorized={memorized}
-              onToggleMemorized={() =>
-                toggleMemorized({ id: data.id, type: data.type })}
+              onToggleMemorized={onToggleMemorized}
             />
           </FlashCardComponent>
         </div>

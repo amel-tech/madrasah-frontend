@@ -3,22 +3,21 @@ import { env } from '~/env'
 import { createServerTedrisatAPIs } from '@madrasah/services/tedrisat'
 import { auth } from '~/lib/auth_options'
 
-export async function GET({ params }: { params: Promise<{ id: string }> },
-) {
+export async function GET({ params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params
 
     const session = await auth()
-    const { cards } = await createServerTedrisatAPIs(session?.accessToken, env.TEDRISAT_API_BASE_URL)
+    const { cards } = await createServerTedrisatAPIs(
+      session?.accessToken,
+      env.TEDRISAT_API_BASE_URL,
+    )
 
     const result = await cards.getFlashcardById({ id })
     const card = result || null
 
     if (!card) {
-      return NextResponse.json(
-        { error: 'Card not found' },
-        { status: 404 },
-      )
+      return NextResponse.json({ error: 'Card not found' }, { status: 404 })
     }
 
     return NextResponse.json(card)
