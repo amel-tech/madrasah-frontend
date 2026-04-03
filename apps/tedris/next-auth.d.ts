@@ -49,10 +49,8 @@ declare module 'next-auth' {
     'type': string
     'id': string
     'accessToken': string
-    'accessTokenExpires'?: any
     'refreshToken': string
     'idToken': string
-    'access_token': string
     'expires_in': number
     'expires_at': number
     'refresh_expires_in': number

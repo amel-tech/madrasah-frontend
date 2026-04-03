@@ -1,11 +1,8 @@
 'use server'
 
-import { CreateFlashcardDeckDto, BulkFlashcardErrorResponseFromJSON, ResponseError, createServerTedrisatAPIs } from '@madrasah/services/tedrisat'
-import type { BulkFlashcardErrorResponse, BulkFlashcardResponse } from '@madrasah/services/tedrisat'
+import { CreateFlashcardDeckDto } from '@madrasah/services/tedrisat'
 import { revalidatePath } from 'next/cache'
 import { authenticatedAction } from '~/lib/authenticated-action'
-import { auth } from '~/lib/auth_options'
-import { env } from '~/env'
 
 export const createFlashcardDeck = async (deckData: CreateFlashcardDeckDto) => {
   return authenticatedAction(async ({ decks }) => {
@@ -17,10 +14,13 @@ export const createFlashcardDeck = async (deckData: CreateFlashcardDeckDto) => {
   })
 }
 
-export const updateFlashcardDeck = async (deckId: string, updatedDeck: {
-  title?: string
-  description?: string
-}) => {
+export const updateFlashcardDeck = async (
+  deckId: string,
+  updatedDeck: {
+    title?: string
+    description?: string
+  },
+) => {
   return authenticatedAction(async ({ decks }) => {
     await decks.updateFlashcardDeck({
       id: deckId,
@@ -44,10 +44,13 @@ export const deleteFlashcardDeck = async (deckId: string) => {
   })
 }
 
-export const updateFlashcard = async (cardId: string, updatedCard: {
-  contentFront?: string
-  contentBack?: string
-}) => {
+export const updateFlashcard = async (
+  cardId: string,
+  updatedCard: {
+    contentFront?: string
+    contentBack?: string
+  },
+) => {
   return authenticatedAction(({ cards }) => {
     return cards.updateFlashcard({
       id: cardId,
@@ -62,7 +65,7 @@ export const updateFlashcard = async (cardId: string, updatedCard: {
 export const uploadFile = async (deckId: string, blob: Blob) => {
   return authenticatedAction(async ({ cards }) => {
     console.log(deckId)
-    return await cards.importsCard({ deckId, file: blob});
+    return await cards.importsCard({ deckId, file: blob })
   })
 }
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import type { FlashcardResponse } from '@madrasah/services/tedrisat'
 
 interface UseDeckCardsResult {
@@ -13,7 +13,7 @@ export function useDeckCards(deckId: string): UseDeckCardsResult {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  const fetchCards = async () => {
+  const fetchCards = useCallback(async () => {
     try {
       setLoading(true)
       setError(null)
@@ -36,13 +36,13 @@ export function useDeckCards(deckId: string): UseDeckCardsResult {
     finally {
       setLoading(false)
     }
-  }
+  }, [deckId])
 
   useEffect(() => {
     if (deckId) {
       fetchCards()
     }
-  }, [deckId])
+  }, [deckId, fetchCards])
 
   return {
     cards,

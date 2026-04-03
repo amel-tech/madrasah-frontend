@@ -1,76 +1,77 @@
-import { useState, useEffect } from 'react'
-import { FlashcardResponse } from '@madrasah/services/tedrisat'
+'use client'
 
-export function useFlashCards() {
-  const [cards, setCards] = useState<{
-    id: FlashcardResponse['id']
-    type: FlashcardResponse['type']
-  }[]>([])
+import { useCallback, useState, useTransition } from 'react'
+import type { FlashcardResponse } from '@madrasah/services/tedrisat'
+import { updateFlashcardProgress } from '../actions'
 
-  useEffect(() => {
-    const savedCards = localStorage.getItem('memorizedCards')
+function deriveMemorized(cards: FlashcardResponse[]): Set<string> {
+  return new Set(
+    cards
+      .filter(c => c.progress?.some(p => p.status === 'MASTERED'))
+      .map(c => c.id),
+  )
+}
 
-    if (savedCards) {
-      try {
-        const parsedCards = JSON.parse(savedCards)
-        if (parsedCards && parsedCards.length > 0) {
-          setCards(parsedCards)
-          return
+/**
+ * Derives memorized state from server-provided `card.progress` data.
+ * A card is "memorized" if it has a progress entry with status 'MASTERED'.
+ * Uses local state with optimistic updates and persists via the server action.
+ */
+export function useFlashCards(cards: FlashcardResponse[]) {
+  const [memorized, setMemorized] = useState(() => deriveMemorized(cards))
+  const [isPending, startTransition] = useTransition()
+
+  const isCardMemorized = useCallback(
+    (id: string) => memorized.has(id),
+    [memorized],
+  )
+
+  const toggleMemorized = useCallback(
+    (id: string) => {
+      const wasMemorized = memorized.has(id)
+      const newStatus = wasMemorized ? ('NEW' as const) : ('MASTERED' as const)
+
+      // Optimistic: update local state immediately
+      setMemorized((prev) => {
+        const next = new Set(prev)
+        if (wasMemorized) {
+          next.delete(id)
         }
-      }
-      catch (error) {
-        console.error('Error parsing saved cards:', error)
-      }
-    }
-  }, [])
-
-  useEffect(() => {
-    if (cards?.length > 0) {
-      localStorage.setItem('memorizedCards', JSON.stringify(cards))
-    }
-  }, [cards])
-
-  const addMemorizedCard = ({
-    id,
-    type,
-  }: {
-    id: FlashcardResponse['id']
-    type: FlashcardResponse['type']
-  }) => {
-    const newCard = {
-      id: id,
-      type: type,
-    }
-    setCards(prev => [...prev, newCard])
-  }
-
-  const removeMemorizedCard = (id: string | number) => {
-    setCards(prev => prev.filter(card => card.id !== id))
-  }
-
-  const isCardMemorized = (id: string | number) => {
-    return cards.some(c => c.id === id)
-  }
-
-  const toggleMemorized = ({ id, type }: {
-    id: FlashcardResponse['id']
-    type: FlashcardResponse['type']
-  }) => {
-    if (isCardMemorized(id)) {
-      removeMemorizedCard(id)
-    }
-    else {
-      addMemorizedCard({
-        id,
-        type,
+        else {
+          next.add(id)
+        }
+        return next
       })
-    }
-  }
+
+      // Persist to server
+      startTransition(async () => {
+        const result = await updateFlashcardProgress([
+          { flashcardId: id, status: newStatus },
+        ])
+
+        if (result.success === false) {
+          console.error('Failed to update progress:', result.error)
+          // Revert on failure
+          setMemorized((prev) => {
+            const reverted = new Set(prev)
+            if (wasMemorized) {
+              reverted.add(id)
+            }
+            else {
+              reverted.delete(id)
+            }
+            return reverted
+          })
+        }
+      })
+    },
+    [memorized],
+  )
 
   return {
-    cards,
-    removeMemorizedCard,
+    memorized,
     isCardMemorized,
     toggleMemorized,
+    isPending,
   }
 }
