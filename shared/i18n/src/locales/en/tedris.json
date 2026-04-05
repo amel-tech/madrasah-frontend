@@ -31,6 +31,8 @@
     "failedToAddDescription": "Failed to add deck to your collection. Please try again.",
     "failedToRemove": "Failed to Remove",
     "failedToRemoveDescription": "Failed to remove deck from your collection. Please try again.",
+    "private": "Private deck",
+    "public": "Public deck",
     "removedFromCollection": "Removed from Collection",
     "removedFromCollectionDescription": "Deck has been removed from your collection successfully."
   },

@@ -6,8 +6,15 @@ import {
   StarIcon,
   StudentIcon,
   BookmarkSimpleIcon,
+  LockIcon,
+  GlobeIcon,
 } from '@madrasah/icons'
 import { Card } from '@madrasah/ui/components/card'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@madrasah/ui/components/tooltip'
 import { toastHelper } from '@madrasah/ui/lib/toast-helper'
 import { addDeckToCollection, removeDeckFromCollection } from '~/features/flashcards/actions'
 import { useTranslations } from 'next-intl'
@@ -21,6 +28,7 @@ type Props = {
   author?: string
   rating?: number
   isInCollection?: boolean
+  isPublic?: boolean
 }
 
 function DeckCard({
@@ -32,6 +40,7 @@ function DeckCard({
   downloadCount,
   description,
   isInCollection: initialIsInCollection = false,
+  isPublic,
 }: Props) {
   const t = useTranslations('tedris')
   const [isInCollection, setIsInCollection] = useState(initialIsInCollection)
@@ -90,7 +99,37 @@ function DeckCard({
   return (
     <Card className="p-6 gap-0 hover:bg-neutral-100 has-[.bookmark-icon:hover]:bg-white cursor-pointer transition-all duration-200 ease-in-out h-full">
       <div className="flex justify-between items-center ">
-        <div className="font-medium">{title}</div>
+        <div className="flex items-center gap-2 font-medium">
+          {isPublic !== undefined && (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <span className="inline-flex">
+                  {isPublic
+                    ? (
+                        <GlobeIcon
+                          size={16}
+                          weight="regular"
+                          className="text-neutral-tertiary shrink-0"
+                          aria-label={t('DeckCard.public')}
+                        />
+                      )
+                    : (
+                        <LockIcon
+                          size={16}
+                          weight="fill"
+                          className="text-neutral-tertiary shrink-0"
+                          aria-label={t('DeckCard.private')}
+                        />
+                      )}
+                </span>
+              </TooltipTrigger>
+              <TooltipContent>
+                {isPublic ? t('DeckCard.public') : t('DeckCard.private')}
+              </TooltipContent>
+            </Tooltip>
+          )}
+          <span>{title}</span>
+        </div>
         <button
           type="button"
           onClick={handleBookmarkClick}

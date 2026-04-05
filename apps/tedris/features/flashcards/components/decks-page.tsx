@@ -43,6 +43,7 @@ export async function DecksPage({
                       title={deck.title}
                       cardCount={0}
                       isInCollection={true}
+                      isPublic={deck.isPublic}
                     />
                   </Link>
                 ))}
@@ -71,6 +72,7 @@ export async function DecksPage({
                 deckId={deck.id}
                 title={deck.title}
                 isInCollection={isInCollection}
+                isPublic={deck.isPublic}
               />
             </Link>
           )

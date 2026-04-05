@@ -31,6 +31,8 @@
     "failedToAddDescription": "فشلت إضافة المجموعة إلى مجموعتك. يرجى المحاولة مرة أخرى.",
     "failedToRemove": "فشل في الإزالة",
     "failedToRemoveDescription": "فشلت عملية إزالة المجموعة من مجموعتك. يرجى المحاولة مرة أخرى.",
+    "private": "مجموعة خاصة",
+    "public": "مجموعة عامة",
     "removedFromCollection": "تمت إزالته من المجموعة",
     "removedFromCollectionDescription": "تمت إزالة القرص من مجموعتك بنجاح."
   },

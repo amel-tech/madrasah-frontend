@@ -161,6 +161,7 @@ export function ExploreDecksPage({
                     description={deck.description}
                     cardCount={0}
                     isInCollection={userDeckIdsSet.has(deck.id)}
+                    isPublic={deck.isPublic}
                   />
                 </Link>
               ))}
