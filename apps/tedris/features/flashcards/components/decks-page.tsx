@@ -7,28 +7,44 @@ import DeckCard from '~/features/flashcards/components/deck/deck-card'
 import CreateDeckButtonDialog from '~/features/flashcards/components/deckform/create-deck-button-dialog'
 import type { FlashcardDeckResponse } from '@madrasah/services/tedrisat'
 
+type DeckFilter = 'all' | 'public' | 'private'
+
 export async function DecksPage({
   decks,
   myDecks,
+  filter,
 }: {
   decks: FlashcardDeckResponse[]
   myDecks: FlashcardDeckResponse[] | undefined
+  filter: DeckFilter
 }) {
   const t = await getTranslations('tedris')
+
+  const filterOptions: { value: DeckFilter, label: string }[] = [
+    { value: 'all', label: t('DecksPage.all') },
+    { value: 'public', label: t('DecksPage.public') },
+    { value: 'private', label: t('DecksPage.private') },
+  ]
 
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <Button variant="default" size="sm" className="mr-2">
-            {t('DecksPage.all')}
-          </Button>
-          <Button variant="secondary" size="sm" className="mr-2">
-            {t('DecksPage.public')}
-          </Button>
-          <Button variant="secondary" size="sm" className="mr-2">
-            {t('DecksPage.private')}
-          </Button>
+          {filterOptions.map(option => (
+            <Link
+              key={option.value}
+              href={option.value === 'all' ? '/decks' : `/decks?filter=${option.value}`}
+              scroll={false}
+            >
+              <Button
+                variant={filter === option.value ? 'default' : 'secondary'}
+                size="sm"
+                className="mr-2"
+              >
+                {option.label}
+              </Button>
+            </Link>
+          ))}
         </div>
         <CreateDeckButtonDialog />
       </div>
