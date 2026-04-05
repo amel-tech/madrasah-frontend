@@ -85,7 +85,9 @@ function DeckCard({
     }
   }
 
-  const handleBookmarkClick = async () => {
+  const handleBookmarkClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    e.stopPropagation()
     setIsProcessing(true)
     if (isInCollection) {
       await handleRemoveDeckFromCollection()
