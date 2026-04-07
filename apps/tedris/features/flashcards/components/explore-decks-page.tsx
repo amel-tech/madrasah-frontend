@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useEffect, useRef } from 'react'
 import Link from 'next/link'
+import { useRouter, usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 
 import { Input } from '@madrasah/ui/components/input'
@@ -25,14 +26,17 @@ const DECKS_PER_PAGE = 16
 export function ExploreDecksPage({
   initialDecks,
   userDeckIds,
+  filter,
 }: {
   initialDecks: FlashcardDeckResponse[]
   userDeckIds: string[]
+  filter: FilterOption
 }) {
   const t = useTranslations('tedris')
+  const router = useRouter()
+  const pathname = usePathname()
   const [searchQuery, setSearchQuery] = useState('')
   const [sortBy, setSortBy] = useState<SortOption>('title-asc')
-  const [filterBy, setFilterBy] = useState<FilterOption>('all')
   const [displayedCount, setDisplayedCount] = useState(DECKS_PER_PAGE)
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery)
   const observerTarget = useRef<HTMLDivElement>(null)
@@ -55,12 +59,6 @@ export function ExploreDecksPage({
         return titleMatch || descriptionMatch
       })
     }
-    if (filterBy === 'public') {
-      filtered = filtered.filter(deck => deck.isPublic)
-    }
-    else if (filterBy === 'private') {
-      filtered = filtered.filter(deck => !deck.isPublic)
-    }
     filtered.sort((a, b) => {
       const titleA = a.title?.toLowerCase() || ''
       const titleB = b.title?.toLowerCase() || ''
@@ -70,7 +68,7 @@ export function ExploreDecksPage({
       return titleB.localeCompare(titleA)
     })
     return filtered
-  }, [initialDecks, debouncedSearchQuery, sortBy, filterBy])
+  }, [initialDecks, debouncedSearchQuery, sortBy])
 
   const displayedDecks = useMemo(() => {
     return filteredAndSortedDecks.slice(0, displayedCount)
@@ -78,7 +76,7 @@ export function ExploreDecksPage({
 
   useEffect(() => {
     setDisplayedCount(DECKS_PER_PAGE)
-  }, [debouncedSearchQuery, sortBy, filterBy])
+  }, [debouncedSearchQuery, sortBy, filter])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -127,8 +125,14 @@ export function ExploreDecksPage({
             </SelectContent>
           </Select>
           <Select
-            value={filterBy}
-            onValueChange={value => setFilterBy(value as FilterOption)}
+            value={filter}
+            onValueChange={(value) => {
+              const next = value as FilterOption
+              const params = new URLSearchParams()
+              if (next !== 'all') params.set('filter', next)
+              const qs = params.toString()
+              router.push(qs ? `${pathname}?${qs}` : pathname)
+            }}
           >
             <SelectTrigger className="w-[120px]">
               <SelectValue placeholder={t('ExploreDecksClient.filter')} />
@@ -161,6 +165,7 @@ export function ExploreDecksPage({
                     description={deck.description}
                     cardCount={0}
                     isInCollection={userDeckIdsSet.has(deck.id)}
+                    isPublic={deck.isPublic}
                   />
                 </Link>
               ))}

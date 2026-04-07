@@ -31,6 +31,8 @@
     "failedToAddDescription": "Desteyi koleksiyonunuza ekleyemediniz. Lütfen tekrar deneyin.",
     "failedToRemove": "Kaldırılamadı",
     "failedToRemoveDescription": "Desteyi koleksiyonunuzdan kaldırma işlemi başarısız oldu. Lütfen tekrar deneyin.",
+    "private": "Özel deste",
+    "public": "Herkese açık deste",
     "removedFromCollection": "Koleksiyondan kaldırıldı",
     "removedFromCollectionDescription": "Deste koleksiyonunuzdan başarıyla kaldırıldı."
   },
