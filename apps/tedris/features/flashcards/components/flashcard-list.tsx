@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl'
 
 import FlashCardContent from './flashcard-content'
 import { FlashcardResponse } from '@madrasah/services/tedrisat'
+import { useFlashCards } from '../hooks/useFlashCards'
 
 type FlashCardListProps = {
   cards: FlashcardResponse[]
@@ -15,6 +16,7 @@ export default function FlashCardList({ cards }: FlashCardListProps) {
   const t = useTranslations('tedris')
   const [currentIndex, setCurrentIndex] = useState(0)
   const [key, setKey] = useState(0)
+  const { isCardMemorized, toggleMemorized, isPending } = useFlashCards(cards)
 
   const handlePrevious = useCallback(() => {
     setCurrentIndex(prev => (prev > 0 ? prev - 1 : cards.length - 1))
@@ -51,10 +53,18 @@ export default function FlashCardList({ cards }: FlashCardListProps) {
     )
   }
 
+  const currentCard = cards[currentIndex]
+
   return (
     <div className="mx-auto relative h-full w-full max-w-3xl">
-      {cards[currentIndex] && (
-        <FlashCardContent key={key} {...cards[currentIndex]} />
+      {currentCard && (
+        <FlashCardContent
+          key={key}
+          card={currentCard}
+          memorized={isCardMemorized(currentCard.id)}
+          isPending={isPending}
+          onToggleMemorized={() => toggleMemorized(currentCard.id)}
+        />
       )}
 
       <div className="mt-4 flex items-center justify-between">
@@ -66,8 +76,7 @@ export default function FlashCardList({ cards }: FlashCardListProps) {
         </button>
         <span className="text-sm text-gray-500">
           {currentIndex + 1}
-          {' '}
-          /
+          {' / '}
           {cards.length}
         </span>
         <button

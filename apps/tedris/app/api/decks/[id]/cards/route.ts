@@ -12,11 +12,15 @@ export async function GET(
     const session = await auth()
     const API = await createServerTedrisatAPIs(session?.accessToken, env.TEDRISAT_API_BASE_URL)
 
-    const result = await API.cards.getFlashcardByDeckId({ deckId: id })
-    return NextResponse.json(result || [])
+    const result = await API.cards.getFlashcardByDeckId({ deckId: id, include: ['progress'] })
+
+    return NextResponse.json({ data: result || [], error: null })
   }
   catch (error) {
     console.error('Error fetching cards:', error)
-    return NextResponse.json([], { status: 500 })
+    return NextResponse.json(
+      { data: null, error: 'Failed to fetch cards' },
+      { status: 500 },
+    )
   }
 }

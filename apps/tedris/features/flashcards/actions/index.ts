@@ -1,7 +1,7 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-import { CreateFlashcardDeckDto, CreateFlashcardDtoTypeEnum } from '@madrasah/services/tedrisat'
+import { CreateFlashcardDeckDto, CreateFlashcardDtoTypeEnum, type CreateFlashcardProgressDto } from '@madrasah/services/tedrisat'
 import { authenticatedAction } from '~/lib/authenticated-action'
 
 export const createFlashCardDeck = async (createFlashcardDeckDto: CreateFlashcardDeckDto) => {
@@ -68,5 +68,16 @@ export const removeDeckFromCollection = async (deckId: string) => {
     await decks.deleteFlashcardDeckUser({ id: deckId })
     revalidatePath(`/decks/${deckId}`)
     return true
+  })
+}
+
+export const updateFlashcardProgress = async (
+  progressUpdates: CreateFlashcardProgressDto[],
+) => {
+  return authenticatedAction(async ({ cards }) => {
+    const response = await cards.replaceManyFlashcardProgress({
+      createFlashcardProgressDto: progressUpdates,
+    })
+    return response
   })
 }

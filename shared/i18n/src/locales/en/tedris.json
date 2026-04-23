@@ -109,7 +109,8 @@
     "markAsMemorized": "Mark as Memorized",
     "markAsMemorizedTooltip": "Mark as memorized",
     "markAsToReviewLater": "Mark as to review later",
-    "repeat": "Repeat"
+    "repeat": "Repeat",
+    "updating": "Updating..."
   },
   "FlashCardList": {
     "noCardsFound": "No cards found yet."

@@ -27,7 +27,7 @@ async function getDeckCards(deckId: string): Promise<FlashcardResponse[]> {
     const session = await auth()
     const token = session?.accessToken
     const API = await createServerTedrisatAPIs(token, env.TEDRISAT_API_BASE_URL)
-    const cards = await API.cards.getFlashcardByDeckId({ deckId })
+    const cards = await API.cards.getFlashcardByDeckId({ deckId, include: ['progress'] })
     return cards || []
   }
   catch (error) {
