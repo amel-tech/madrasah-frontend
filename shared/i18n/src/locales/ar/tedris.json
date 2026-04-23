@@ -109,7 +109,8 @@
     "markAsMemorized": "ضع علامة كمحفوظ",
     "markAsMemorizedTooltip": "ضع علامة كما هو محفوظ",
     "markAsToReviewLater": "ضع علامة للمراجعة لاحقًا",
-    "repeat": "يكرر"
+    "repeat": "يكرر",
+    "updating": "جارٍ التحديث..."
   },
   "FlashCardList": {
     "noCardsFound": "لم يتم العثور على أي بطاقات حتى الآن."

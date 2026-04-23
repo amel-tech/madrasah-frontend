@@ -109,7 +109,8 @@
     "markAsMemorized": "Hafızaya Alındı Olarak İşaretle",
     "markAsMemorizedTooltip": "Ezbere alındı olarak işaretle",
     "markAsToReviewLater": "Daha sonra incelemek üzere işaretle.",
-    "repeat": "Tekrarlamak"
+    "repeat": "Tekrarlamak",
+    "updating": "Guncelleniyor..."
   },
   "FlashCardList": {
     "noCardsFound": "Henüz hiçbir kart bulunamadı."
