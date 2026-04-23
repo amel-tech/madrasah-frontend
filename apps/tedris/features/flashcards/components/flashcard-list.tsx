@@ -16,7 +16,7 @@ export default function FlashCardList({ cards }: FlashCardListProps) {
   const t = useTranslations('tedris')
   const [currentIndex, setCurrentIndex] = useState(0)
   const [key, setKey] = useState(0)
-  const { isCardMemorized, toggleMemorized } = useFlashCards(cards)
+  const { isCardMemorized, toggleMemorized, isPending } = useFlashCards(cards)
 
   const handlePrevious = useCallback(() => {
     setCurrentIndex(prev => (prev > 0 ? prev - 1 : cards.length - 1))
@@ -62,6 +62,7 @@ export default function FlashCardList({ cards }: FlashCardListProps) {
           key={key}
           card={currentCard}
           memorized={isCardMemorized(currentCard.id)}
+          isPending={isPending}
           onToggleMemorized={() => toggleMemorized(currentCard.id)}
         />
       )}
