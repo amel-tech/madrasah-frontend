@@ -64,7 +64,6 @@ export const updateFlashcard = async (
 
 export const uploadFile = async (deckId: string, blob: Blob) => {
   return authenticatedAction(async ({ cards }) => {
-    console.log(deckId);
     return await cards.importsCard({ deckId, file: blob });
   });
 };
