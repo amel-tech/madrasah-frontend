@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useState, useTransition } from 'react'
+import { useCallback, useEffect, useState, useTransition } from 'react'
 import type { FlashcardResponse } from '@madrasah/services/tedrisat'
 import { updateFlashcardProgress } from '../actions'
 
@@ -20,6 +20,10 @@ function deriveMemorized(cards: FlashcardResponse[]): Set<string> {
 export function useFlashCards(cards: FlashcardResponse[]) {
   const [memorized, setMemorized] = useState(() => deriveMemorized(cards))
   const [isPending, startTransition] = useTransition()
+
+  useEffect(() => {
+    setMemorized(deriveMemorized(cards))
+  }, [cards])
 
   const isCardMemorized = useCallback(
     (id: string) => memorized.has(id),
