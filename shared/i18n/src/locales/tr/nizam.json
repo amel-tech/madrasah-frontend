@@ -6,8 +6,8 @@
     "bulkActions": "Toplu İşlemler",
     "downloadAsExcel": "Excel olarak indir",
     "downloadSampleFile": "Örnek Dosyayı İndir",
-    "importFromExcel": "Excel veya CSV Dosyasından İçe Aktar",
-    "exportCards": "Dışa Aktar"
+    "exportCards": "Dışa Aktar",
+    "importFromExcel": "Excel'den İçe Aktar"
   },
   "DataTable": {
     "noResults": "Sonuç bulunamadı."
@@ -75,6 +75,10 @@
   },
   "HomePage": {
     "greeting": "Selamünaleyküm!"
+  },
+  "ImportErrors": {
+    "row": "{row}. satırda hata",
+    "title": "Dosya içe aktarılamadı"
   },
   "KeycloakLogin": {
     "signIn": "Giriş Yap"
@@ -192,9 +196,5 @@
       "topicMin": "Konu başlığı en az 3 karakterden oluşmalıdır.",
       "weekMin": "Hafta numarası 1'den küçük olamaz."
     }
-  },
-  "ImportErrors": {
-    "title": "Dosya içe aktarılamadı",
-    "row": "{row}. satırda hata"
   }
 }
