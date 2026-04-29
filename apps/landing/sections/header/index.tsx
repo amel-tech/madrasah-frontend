@@ -163,7 +163,7 @@ export function HeaderSection() {
             onClick={e => handleLinkClick(e, '#')}
             className="flex-shrink-0 flex items-center"
           >
-            <MadrasahLogoIcon className="true" size={30} />
+            <MadrasahLogoIcon size={30} />
             <span className="ms-2 font-display font-bold text-xl tracking-tight text-primary">
               {t('brand')}
             </span>
