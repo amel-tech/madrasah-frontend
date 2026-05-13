@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.1.0](https://github.com/amel-tech/madrasah-frontend/compare/landing-web-v1.0.0...landing-web-v1.1.0) (2026-05-13)
+
+
+### Features
+
+* **landing:** add hero, vision, curriculum, partnership, and waitlist sections ([0acaea8](https://github.com/amel-tech/madrasah-frontend/commit/0acaea82909f2ebb748bcfa568e99320d6332d95))
+* **landing:** add i18n support with next-intl ([2380429](https://github.com/amel-tech/madrasah-frontend/commit/23804299365ed62447c6887f7cac8bada2091a42))
+* **landing:** add locale-aware page composing all sections ([acd4146](https://github.com/amel-tech/madrasah-frontend/commit/acd41467389fef909d1175424309f89fe63d75bb))
+* **landing:** redesign header, footer, and features sections ([9faacc4](https://github.com/amel-tech/madrasah-frontend/commit/9faacc4c9f390423de668acc3269f2a8df0a81f0))
+* **landing:** update theme, fonts, config, and add image assets ([f3e85df](https://github.com/amel-tech/madrasah-frontend/commit/f3e85df04f2e11ce0aad7a8b66206b96be09cb92))
+
+
+### Bug Fixes
+
+* **header:** remove unnecessary class from MadrasahLogoIcon component ([f28051f](https://github.com/amel-tech/madrasah-frontend/commit/f28051f4487b78387acff7a0f311057afe912d8e))
+* **landing:** use same bento grid layout for vision section in RTL ([3274e18](https://github.com/amel-tech/madrasah-frontend/commit/3274e18720124f6a0662376b83f9175a7cd9704f))
+
 ## 1.0.0 (2026-02-18)
 
 
