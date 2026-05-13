@@ -1,0 +1,147 @@
+{
+  "curriculum": {
+    "courses": {
+      "classicalArabic": {
+        "lessons": "12 Lessons",
+        "level": "Level 1",
+        "title": "Classical Arabic"
+      },
+      "foundationsAqidah": {
+        "lessons": "15 Lessons",
+        "level": "Foundational",
+        "title": "Foundations of Aqidah"
+      },
+      "goldenAge": {
+        "lessons": "10 Lessons",
+        "level": "Intermediate",
+        "title": "The Golden Age"
+      },
+      "purificationHeart": {
+        "lessons": "8 Lessons",
+        "level": "All Levels",
+        "title": "Purification of Heart"
+      }
+    },
+    "filters": {
+      "all": "All",
+      "arabic": "Arabic",
+      "history": "History",
+      "spirituality": "Spirituality",
+      "theology": "Theology"
+    },
+    "title": "Explore the Curriculum"
+  },
+  "features": {
+    "mainCard": {
+      "description": "Master knowledge with smart, spaced-repetition flashcards designed for long-term retention.",
+      "easy": "Easy",
+      "flashcardArabic": "الإخلاص",
+      "flashcardLabel": "Arabic Term",
+      "flashcardTransliteration": "Al-Ikhlas",
+      "hard": "Hard",
+      "title": "Memorize Decks"
+    },
+    "sideCards": {
+      "expertFeedback": {
+        "description": "Guidance from qualified scholars.",
+        "title": "Expert Feedback"
+      },
+      "globalCommunity": {
+        "description": "Connect with seekers worldwide.",
+        "title": "Global Community"
+      },
+      "progressTracking": {
+        "description": "Detailed analytics to visualize your spiritual and academic growth.",
+        "title": "Progress Tracking"
+      }
+    },
+    "subtitle": "A modern toolkit designed to help you master sacred knowledge with meditative focus.",
+    "title": "Interactive Learning"
+  },
+  "footer": {
+    "brand": "MADRASA",
+    "cookies": "COOKIES",
+    "copyright": "© 2026 MADRASA PLATFORM. UNDER DEVELOPMENT.",
+    "development": {
+      "buttonLabel": "GO",
+      "description": "Follow our progress as we build the sanctuary of knowledge.",
+      "placeholder": "Email",
+      "title": "Development"
+    },
+    "explore": "Explore",
+    "exploreLinks": {
+      "curriculum": "Curriculum",
+      "partnerships": "Partnerships",
+      "vision": "Our Vision"
+    },
+    "support": "Support",
+    "supportLinks": {
+      "contact": "Contact Us",
+      "faq": "FAQ",
+      "privacy": "Privacy Policy"
+    },
+    "tagline": "Empowering the Ummah through accessible, authentic, and modern Islamic education. Join our journey toward the future of learning.",
+    "terms": "TERMS"
+  },
+  "header": {
+    "brand": "Madrasa",
+    "cta": "Join the Waitlist",
+    "nav": {
+      "curriculum": "CURRICULUM",
+      "partnerships": "PARTNERSHIPS",
+      "vision": "OUR VISION"
+    }
+  },
+  "hero": {
+    "badge": "Coming Soon 2026",
+    "cta": "Start Your Journey",
+    "description": "Bridging centuries of tradition with the possibilities of the future. An immersive digital sanctuary for seekers of knowledge.",
+    "heading": {
+      "line1": "A New Era of",
+      "line2": "Islamic Education"
+    }
+  },
+  "partnership": {
+    "cta": "Inquire About Partnership",
+    "description": "We are looking for visionary scholars and established traditional institutes to join our early adopter program. Let's work together to digitize your curriculum and reach a global audience.",
+    "imageAlt": "Collaborative Vision",
+    "institutionSupport": {
+      "description": "Get early access to our platform tools to host your own courses and manage students.",
+      "title": "Institution Support"
+    },
+    "quote": "\"Together, we can preserve and propagate sacred knowledge for the next generation.\"",
+    "scholarNetwork": {
+      "description": "Collaborate with our team to shape the pedagogical tools for the digital age.",
+      "title": "Scholar Network"
+    },
+    "title": "Partnership Inquiry"
+  },
+  "vision": {
+    "badge": "Core Values",
+    "bottomLeft": {
+      "description": "A holistic approach focused on the purification of character and the soul.",
+      "title": "Spiritual Growth"
+    },
+    "bottomRight": {
+      "cta": "Join the Community",
+      "description": "Join a global network of students and mentors dedicated to lifelong learning and spiritual excellence.",
+      "title": "Community-Centric"
+    },
+    "mainCard": {
+      "description": "Our curriculum is meticulously developed by world-renowned scholars who bridge traditional knowledge with modern context.",
+      "title": "Authentic Scholarship"
+    },
+    "title": "The Madrasa Vision",
+    "topRight": {
+      "description": "A seamless learning experience accessible on any device, anywhere in the world.",
+      "title": "Modern Accessibility"
+    }
+  },
+  "waitlist": {
+    "buttonLabel": "Join Waitlist",
+    "description": "Our sanctuary for learning is currently under active development. Join our waitlist for development updates and exclusive pre-launch benefits.",
+    "placeholder": "Email address",
+    "privacyNotice": "Privacy preserved. No spam.",
+    "title": "Be the First to Know"
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "curriculum": {
+    "courses": {
+      "classicalArabic": {
+        "lessons": "12 Ders",
+        "level": "Seviye 1",
+        "title": "Klasik Arapça"
+      },
+      "foundationsAqidah": {
+        "lessons": "15 Ders",
+        "level": "Temel",
+        "title": "Akaid Esasları"
+      },
+      "goldenAge": {
+        "lessons": "10 Ders",
+        "level": "Orta Seviye",
+        "title": "Altın Çağ"
+      },
+      "purificationHeart": {
+        "lessons": "8 Ders",
+        "level": "Tüm Seviyeler",
+        "title": "Kalbin Tezkiyesi"
+      }
+    },
+    "filters": {
+      "all": "Tümü",
+      "arabic": "Arapça",
+      "history": "Tarih",
+      "spirituality": "Tasavvuf",
+      "theology": "Akaid"
+    },
+    "title": "Müfredatı Keşfedin"
+  },
+  "features": {
+    "mainCard": {
+      "description": "Uzun süreli öğrenme için tasarlanmış, akıllı, aralıklı tekrar yöntemine dayalı bilgi kartlarıyla bilginizi geliştirin.",
+      "easy": "Kolay",
+      "flashcardArabic": "الإخلاص",
+      "flashcardLabel": "Arapça Terim",
+      "flashcardTransliteration": "İhlâs",
+      "hard": "Zor",
+      "title": "Desteleri Ezberle"
+    },
+    "sideCards": {
+      "expertFeedback": {
+        "description": "Ehil ulemadan rehberlik.",
+        "title": "Mütehassıs Görüşü"
+      },
+      "globalCommunity": {
+        "description": "Dünya çapındaki ilim talipleriyle bağ kurun.",
+        "title": "Küresel Topluluk"
+      },
+      "progressTracking": {
+        "description": "Manevi ve ilmî gelişiminizi görselleştiren detaylı analizler.",
+        "title": "İlerleme Takibi"
+      }
+    },
+    "subtitle": "İlm-i şerîfi tefekkürî bir odaklanmayla tahsil etmenize yardımcı olmak için tasarlanmış modern bir araç seti.",
+    "title": "Etkileşimli Öğrenme"
+  },
+  "footer": {
+    "brand": "MEDRESE",
+    "cookies": "ÇEREZLER",
+    "copyright": "© 2026 MADRASA PLATFORM. GELİŞTİRME AŞAMASINDA.",
+    "development": {
+      "buttonLabel": "GİT",
+      "description": "Bilgi mabedini inşa ederken kaydettiğimiz ilerlemeyi takip edin.",
+      "placeholder": "E-posta",
+      "title": "Geliştirme"
+    },
+    "explore": "Keşfet",
+    "exploreLinks": {
+      "curriculum": "Müfredat",
+      "partnerships": "Ortaklıklar",
+      "vision": "Vizyonumuz"
+    },
+    "support": "Destek",
+    "supportLinks": {
+      "contact": "Bize Ulaşın",
+      "faq": "SSS",
+      "privacy": "Gizlilik Politikası"
+    },
+    "tagline": "Erişilebilir, asil ve modern İslamî eğitim yoluyla ümmeti güçlendirmek. İlim tahsilinin geleceğine doğru yolculuğumuza katılın.",
+    "terms": "ŞARTLAR"
+  },
+  "header": {
+    "brand": "Medrese",
+    "cta": "Bekleme Listesine Katıl",
+    "nav": {
+      "curriculum": "MÜFREDAT",
+      "partnerships": "ORTAKLIKLAR",
+      "vision": "VİZYONUMUZ"
+    }
+  },
+  "hero": {
+    "badge": "Yakında — 2026",
+    "cta": "Yolculuğunuza Başlayın",
+    "description": "Asırların geleneğini geleceğin imkânlarıyla buluşturan, ilim talipleri için sürükleyici bir dijital sığınak.",
+    "heading": {
+      "line1": "Yeni Bir Çağ",
+      "line2": "İslami Eğitim"
+    }
+  },
+  "partnership": {
+    "cta": "Ortaklık Hakkında Bilgi Al",
+    "description": "Erken benimseyenler programımıza katılacak vizyon sahibi ulema ve köklü geleneksel ilim kurumları arıyoruz. Müfredatınızı dijitalleştirmek ve küresel bir kitleye ulaşmak için birlikte çalışalım.",
+    "imageAlt": "İşbirliğine Dayalı Vizyon",
+    "institutionSupport": {
+      "description": "Kendi kurslarınızı oluşturmak ve öğrencilerinizi yönetmek için platform araçlarımıza erken erişim sağlayın.",
+      "title": "Kurumsal Destek"
+    },
+    "quote": "\"Birlikte, ilm-i şerîfi muhafaza edip gelecek nesillere intikal ettirebiliriz.\"",
+    "scholarNetwork": {
+      "description": "Dijital çağın pedagojik araçlarını şekillendirmek için ekibimizle el ele verin.",
+      "title": "Ulema Ağı"
+    },
+    "title": "Ortaklık Talebi"
+  },
+  "vision": {
+    "badge": "Temel Değerler",
+    "bottomLeft": {
+      "description": "Nefsin tezkiyesi ve ahlakın tehzîbine odaklanan bütüncül bir yaklaşım.",
+      "title": "Manevi Gelişim"
+    },
+    "bottomRight": {
+      "cta": "Topluluğa Katılın",
+      "description": "Ömür boyu talim ve manevi yetkinliğe adanmış küresel bir talebe ve mürşid ağına katılın.",
+      "title": "Topluluk Merkezli"
+    },
+    "mainCard": {
+      "description": "Müfredatımız, kadîm ilmî mirası modern bağlamla buluşturan, dünyaca tanınmış ulema tarafından titizlikle hazırlanmıştır.",
+      "title": "Asil İlim Geleneği"
+    },
+    "title": "Medrese Vizyonu",
+    "topRight": {
+      "description": "Dünyanın her yerinden, her cihazdan erişilebilen kusursuz bir tahsil deneyimi.",
+      "title": "Modern Erişilebilirlik"
+    }
+  },
+  "waitlist": {
+    "buttonLabel": "Bekleme Listesine Katıl",
+    "description": "Öğrenme merkezimiz şu anda aktif olarak geliştirme aşamasındadır. Geliştirme güncellemeleri ve özel lansman öncesi avantajlardan haberdar olmak için bekleme listemize katılın.",
+    "placeholder": "E-posta adresi",
+    "privacyNotice": "Gizliliğiniz korunur. Spam yoktur.",
+    "title": "İlk Öğrenenlerden Olun"
+  }
+}
