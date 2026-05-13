@@ -1,43 +1,18 @@
-import { env } from '~/env'
-import {
-  createServerTedrisatAPIs,
-  type FlashcardDeckResponse,
-} from '@madrasah/services/tedrisat'
-import { auth } from '~/lib/auth_options'
 import { DecksPage } from '~/features/flashcards/components/decks-page'
+import { getDecks, getMyDecks, parseDeckFilter } from '~/features/flashcards/actions'
 
-async function getDecks(): Promise<FlashcardDeckResponse[]> {
-  try {
-    const session = await auth()
-    const token = session?.accessToken
-    const { decks } = await createServerTedrisatAPIs(token, env.TEDRISAT_API_BASE_URL)
-    return decks.getAllFlashcardDecks()
-  }
-  catch (error) {
-    console.error('Error fetching decks:', error)
-    return []
-  }
-}
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ filter?: string }>
+}) {
+  const { filter: filterParam } = await searchParams
+  const filter = await parseDeckFilter(filterParam)
 
-async function getMyDecks(): Promise<FlashcardDeckResponse[] | undefined> {
-  try {
-    const session = await auth()
-    const token = session?.accessToken
-    if (!token) return undefined
-    const API = await createServerTedrisatAPIs(token, env.TEDRISAT_API_BASE_URL)
-    return API.decks.getAllFlashcardDecksByUser()
-  }
-  catch (error) {
-    console.error('Error fetching my decks:', error)
-    return undefined
-  }
-}
-
-export default async function Page() {
   const [decks, myDecks] = await Promise.all([
-    getDecks(),
-    getMyDecks(),
+    getDecks(filter),
+    getMyDecks(filter),
   ])
 
-  return <DecksPage decks={decks} myDecks={myDecks} />
+  return <DecksPage decks={decks} myDecks={myDecks} filter={filter} />
 }

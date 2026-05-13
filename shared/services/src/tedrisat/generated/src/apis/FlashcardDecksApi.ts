@@ -48,6 +48,7 @@ export interface DeleteFlashcardDeckUserRequest {
 }
 
 export interface GetAllFlashcardDecksRequest {
+    isPublic?: boolean;
     include?: Array<number>;
 }
 
@@ -247,11 +248,15 @@ export class FlashcardDecksApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieves all flashcard decks with optional includes for related data such as tags.
-     * Get all flashcard decks
+     * Retrieves all flashcard decks that are either public or owned by the user, with optional includes for related data such as tags.
+     * Get all flashcard decks visible to the user
      */
     async getAllFlashcardDecksRaw(requestParameters: GetAllFlashcardDecksRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<FlashcardDeckResponse>>> {
         const queryParameters: any = {};
+
+        if (requestParameters['isPublic'] != null) {
+            queryParameters['isPublic'] = requestParameters['isPublic'];
+        }
 
         if (requestParameters['include'] != null) {
             queryParameters['include'] = requestParameters['include'];
@@ -278,8 +283,8 @@ export class FlashcardDecksApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieves all flashcard decks with optional includes for related data such as tags.
-     * Get all flashcard decks
+     * Retrieves all flashcard decks that are either public or owned by the user, with optional includes for related data such as tags.
+     * Get all flashcard decks visible to the user
      */
     async getAllFlashcardDecks(requestParameters: GetAllFlashcardDecksRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<FlashcardDeckResponse>> {
         const response = await this.getAllFlashcardDecksRaw(requestParameters, initOverrides);

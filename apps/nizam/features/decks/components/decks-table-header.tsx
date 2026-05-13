@@ -28,7 +28,7 @@ export function DecksTableHeader() {
   const [formData, setFormData] = useState<CreateFlashcardDeckDto>({
     title: '',
     description: '',
-    isPublic: true,
+    isPublic: false,
   })
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -43,7 +43,6 @@ export function DecksTableHeader() {
     }
 
     setIsLoading(true)
-
     const result = await createFlashcardDeck(formData)
     if (result.success) {
       toastHelper.success({
@@ -130,7 +129,7 @@ export function DecksTableHeader() {
                   id="isPublic"
                   checked={formData.isPublic}
                   onCheckedChange={(checked: boolean) => handleInputChange('isPublic', checked)}
-                  disabled={true}
+                  disabled={isLoading}
                 />
                 <Label htmlFor="isPublic">{t('TableHeader.makePublic')}</Label>
               </div>

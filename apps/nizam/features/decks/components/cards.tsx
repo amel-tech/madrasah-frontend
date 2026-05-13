@@ -1,6 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { updateFlashcard, deleteFlashcard, getSampleFile, uploadFile, exportCards } from '~/features/decks/actions'
 import { useTranslations } from 'next-intl'
 
@@ -22,6 +23,7 @@ export default function DeckCards({
   cards: FlashcardResponse[]
 }) {
   const t = useTranslations('nizam')
+  const router = useRouter()
   const columns = useFlashcardColumns()
   const [importErrors, setImportErrors] = useState<BulkFlashcardErrorResponse | null>(null)
 
@@ -48,6 +50,7 @@ export default function DeckCards({
     const result = await uploadFile(deck.id, file)
     if (result.success) {
       toastHelper.success({ title: t('DeckCards.cardsImported'), description: t('DeckCards.cardsImportedDescription', { count: result.data.count }) })
+      router.refresh()
     }
     else if (result.errorBody && instanceOfBulkFlashcardErrorResponse(result.errorBody)) {
       setImportErrors(result.errorBody)
