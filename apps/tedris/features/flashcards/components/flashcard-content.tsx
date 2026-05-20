@@ -1,25 +1,44 @@
 'use client'
 
-import { BookOpenIcon, CheckIcon, EyeIcon, RepeatIcon } from '@madrasah/icons'
+import {
+  BookOpenIcon,
+  CheckIcon,
+  CircleNotchIcon,
+  EyeIcon,
+  RepeatIcon,
+} from '@madrasah/icons'
 import { MouseEvent, TouchEvent, useEffect, useRef, useState } from 'react'
 import { Kbd } from '@madrasah/ui/components/kbd'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@madrasah/ui/components/tooltip'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@madrasah/ui/components/tooltip'
 import { useTranslations } from 'next-intl'
 
 import { toDisplay } from '../utils/flashCardUtils'
 
-import { useFlashCards } from '../hooks/useFlashCards'
 import FlashCardComponent from './flashcard'
 import { FlashcardResponse } from '@madrasah/services/tedrisat'
 import { Button } from '@madrasah/ui/components/button'
 
-export default function FlashCardContent(card: FlashcardResponse) {
+type FlashCardContentProps = {
+  card: FlashcardResponse
+  memorized: boolean
+  isPending: boolean
+  onToggleMemorized: () => void
+}
+
+export default function FlashCardContent({
+  card,
+  memorized,
+  isPending,
+  onToggleMemorized,
+}: FlashCardContentProps) {
   const t = useTranslations('tedris')
   const [flipped, setFlipped] = useState(false)
   const [touchStart, setTouchStart] = useState<number | null>(null)
   const data = toDisplay(card)
-  const { isCardMemorized, toggleMemorized } = useFlashCards()
-  const memorized = isCardMemorized(data.id)
 
   const frontfaceRef = useRef<HTMLDivElement>(null)
   const backfaceRef = useRef<HTMLDivElement>(null)
@@ -51,7 +70,9 @@ export default function FlashCardContent(card: FlashcardResponse) {
     const backHeight = backfaceRef.current?.offsetHeight || 0
 
     if (containerRef.current) {
-      containerRef.current.style.height = flipped ? `${backHeight}px` : `${frontHeight}px`
+      containerRef.current.style.height = flipped
+        ? `${backHeight}px`
+        : `${frontHeight}px`
     }
   }, [flipped, data])
 
@@ -61,9 +82,9 @@ export default function FlashCardContent(card: FlashcardResponse) {
         e.preventDefault()
         handleCardFlip()
       }
-      if (e.key === ' ' || e.key === 'Enter') {
+      if (e.key === 'Enter' && !isPending) {
         e.preventDefault()
-        toggleMemorized({ id: data.id, type: data.type })
+        onToggleMemorized()
       }
     }
 
@@ -72,7 +93,7 @@ export default function FlashCardContent(card: FlashcardResponse) {
     return () => {
       window.removeEventListener('keydown', onKeyDown)
     }
-  }, [data.id, flipped, toggleMemorized])
+  }, [isPending, onToggleMemorized])
 
   return (
     <div className="relative" style={{ perspective: '1000px' }}>
@@ -97,7 +118,7 @@ export default function FlashCardContent(card: FlashcardResponse) {
             WebkitBackfaceVisibility: 'hidden',
           }}
         >
-          <FlashCardComponent className="mx-auto">
+          <FlashCardComponent className="mx-auto overflow-hidden px-4 pt-4 pb-0 sm:px-6 sm:pt-6 sm:pb-0">
             <Header title={t('FlashCardContent.card')} />
             <p className="font-scheherazade whitespace-pre-wrap break-words text-xl text-gray-500">
               {data.contentFront}
@@ -106,7 +127,8 @@ export default function FlashCardContent(card: FlashcardResponse) {
             <CardActions
               onFlip={handleCardFlip}
               memorized={memorized}
-              onToggleMemorized={() => toggleMemorized({ id: data.id, type: data.type })}
+              isPending={isPending}
+              onToggleMemorized={onToggleMemorized}
             />
           </FlashCardComponent>
         </div>
@@ -121,7 +143,7 @@ export default function FlashCardContent(card: FlashcardResponse) {
             transform: 'rotateY(180deg)',
           }}
         >
-          <FlashCardComponent className="mx-auto">
+          <FlashCardComponent className="mx-auto overflow-hidden px-4 pt-4 pb-0 sm:px-6 sm:pt-6 sm:pb-0">
             <Header title={t('FlashCardContent.card')} />
             <p className="text-[var(--text-color-brand-primary)] whitespace-pre-wrap break-words text-md font-semibold sm:text-lg">
               {data.contentBack}
@@ -129,8 +151,8 @@ export default function FlashCardContent(card: FlashcardResponse) {
             <CardActions
               onFlip={handleCardFlip}
               memorized={memorized}
-              onToggleMemorized={() =>
-                toggleMemorized({ id: data.id, type: data.type })}
+              isPending={isPending}
+              onToggleMemorized={onToggleMemorized}
             />
           </FlashCardComponent>
         </div>
@@ -151,26 +173,27 @@ function Header({ title = '' }: { title?: string }) {
 type CardActionsProps = {
   onFlip: () => void
   memorized: boolean
+  isPending: boolean
   onToggleMemorized: () => void
 }
 
 function CardActions({
   onFlip,
   memorized,
+  isPending,
   onToggleMemorized,
 }: CardActionsProps) {
   const t = useTranslations('tedris')
   return (
-    <div className="mt-4 flex flex-row justify-center items-center gap-4">
+    <div className="mt-6 -mx-4 grid w-auto grid-cols-2 overflow-hidden border-t sm:-mx-6">
       <Tooltip delayDuration={750}>
         <TooltipTrigger asChild>
           <Button
             onClick={onFlip}
-            className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full p-2 transition-colors"
+            className="bg-primary text-primary-foreground hover:bg-primary/90 h-12 w-full rounded-none px-4 transition-colors"
           >
             <EyeIcon size={20} />
             {t('FlashCardContent.flip')}
-
           </Button>
         </TooltipTrigger>
         <TooltipContent>
@@ -185,23 +208,38 @@ function CardActions({
         <TooltipTrigger asChild>
           <Button
             onClick={onToggleMemorized}
-            className={`flex items-center gap-2 rounded-full px-3 py-2 transition-colors ${memorized
-              ? 'bg-green-500 text-white hover:bg-green-600'
-              : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+            disabled={isPending}
+            className={`h-12 w-full rounded-none px-4 transition-colors ${
+              memorized
+                ? 'bg-green-500 text-white hover:bg-green-600'
+                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
             }`}
           >
-            {
-              memorized ? <RepeatIcon size={16} /> : <CheckIcon size={16} />
-            }
+            {isPending
+              ? (
+                  <CircleNotchIcon className="h-4 w-4 animate-spin" />
+                )
+              : memorized
+                ? (
+                    <RepeatIcon size={16} />
+                  )
+                : (
+                    <CheckIcon size={16} />
+                  )}
             <span className="text-sm font-medium">
-              {memorized ? t('FlashCardContent.repeat') : t('FlashCardContent.markAsMemorized')}
+              {isPending
+                ? t('FlashCardContent.updating')
+                : memorized
+                  ? t('FlashCardContent.repeat')
+                  : t('FlashCardContent.markAsMemorized')}
             </span>
           </Button>
-
         </TooltipTrigger>
         <TooltipContent>
           <div className="flex items-center gap-2">
-            {memorized ? t('FlashCardContent.markAsToReviewLater') : t('FlashCardContent.markAsMemorizedTooltip')}
+            {memorized
+              ? t('FlashCardContent.markAsToReviewLater')
+              : t('FlashCardContent.markAsMemorizedTooltip')}
             {' '}
             <Kbd>Enter</Kbd>
           </div>

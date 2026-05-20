@@ -1,4 +1,8 @@
-import { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from 'next'
+import {
+  GetServerSidePropsContext,
+  NextApiRequest,
+  NextApiResponse,
+} from 'next'
 import { AuthOptions, getServerSession } from 'next-auth'
 import { JWT } from 'next-auth/jwt'
 import KeycloakProvider from 'next-auth/providers/keycloak'
@@ -6,7 +10,7 @@ import { env } from '~/env'
 
 /**
  * Takes a token, and returns a new token with updated
- * `accessToken` and `accessTokenExpires`. If an error occurs,
+ * `accessToken`  If an error occurs,
  * returns the old token and an error property
  */
 /**
@@ -77,7 +81,8 @@ const authOptions: AuthOptions = {
         token.refreshToken = account.refresh_token
         token.idToken = account.id_token
         // remove 15 seconds to avoid edge cases
-        token.refreshTokenExpireIn = Date.now() + (account.refresh_expires_in - 15) * 1000
+        token.refreshTokenExpireIn
+          = Date.now() + (account.refresh_expires_in - 15) * 1000
         token.user = user
         return token
       }
