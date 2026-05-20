@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.7.0](https://github.com/amel-tech/madrasah-frontend/compare/tedris-web-v1.6.0...tedris-web-v1.7.0) (2026-05-13)
+
+
+### Features
+
+* **add-icon:** add icons for public and private Tedris cards ([b14422e](https://github.com/amel-tech/madrasah-frontend/commit/b14422ed95f0abc1e92ecbd55911a3cab14835cf))
+* **decks-filter:** add server-side isPublic filter for decks and explore pages ([9a5477d](https://github.com/amel-tech/madrasah-frontend/commit/9a5477dcca2de1e014fb3f745f8d0b44677472dd))
+
+
+### Bug Fixes
+
+* **deck-card:** prevent default and stop propagation in handleBookmarkClick ([abeda13](https://github.com/amel-tech/madrasah-frontend/commit/abeda134889280262f57def34969045161f37056))
+
 ## [1.6.0](https://github.com/amel-tech/madrasah-frontend/compare/tedris-web-v1.5.0...tedris-web-v1.6.0) (2026-02-05)
 
 
