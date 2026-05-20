@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.10](https://github.com/amel-tech/madrasah-frontend/compare/nizam-web-v0.1.9...nizam-web-v0.1.10) (2026-05-13)
+
+
+### Bug Fixes
+
+* **deck-cards:** refresh router after successful file import ([6cbb564](https://github.com/amel-tech/madrasah-frontend/commit/6cbb564a9491651c70f6fa3475fb10a48c867d53))
+* **deck-isPublic:** set isPublic=false and disable button via isLoading ([970e387](https://github.com/amel-tech/madrasah-frontend/commit/970e387d45c27736639122a9f23051ac6f1c61e5))
+
 ## [0.1.9](https://github.com/amel-tech/madrasah-frontend/compare/nizam-web-v0.1.8...nizam-web-v0.1.9) (2026-03-02)
 
 
