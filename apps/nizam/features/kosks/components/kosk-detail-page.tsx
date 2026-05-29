@@ -1,5 +1,12 @@
+import Link from 'next/link'
 import { Button } from '@madrasah/ui/components/button'
-import { PlusIcon, UsersIcon, ClockIcon } from '@madrasah/icons/ssr'
+import { Badge } from '@madrasah/ui/components/badge'
+import {
+  PlusIcon,
+  CalendarBlankIcon,
+  PlayCircleIcon,
+  BookOpenIcon,
+} from '@madrasah/icons/ssr'
 import {
   Card,
   CardContent,
@@ -7,16 +14,23 @@ import {
   CardTitle,
   CardDescription,
 } from '@madrasah/ui/components/card'
-import Image from 'next/image'
-import { CourseWizard } from '~/features/kosks/components/wizard/course-wizard'
-import type { Kosk, Course } from '~/features/kosks/types'
+import type {
+  KoskResponse,
+  CourseSummaryResponse,
+} from '@madrasah/services/tedrisat'
+
+const LEVEL_LABELS: Record<string, string> = {
+  BEGINNER: 'Başlangıç',
+  INTERMEDIATE: 'Orta',
+  ADVANCED: 'İleri',
+}
 
 export function KoskDetailPage({
   kosk,
   courses,
 }: {
-  kosk: Kosk
-  courses: Course[]
+  kosk: KoskResponse
+  courses: CourseSummaryResponse[]
 }) {
   return (
     <div className="py-8">
@@ -27,54 +41,81 @@ export function KoskDetailPage({
             Bu köşkte yer alan dersler ve müfredat yönetimi.
           </p>
         </div>
-        <CourseWizard>
-          <Button
-            size="lg"
-            className="bg-emerald-600 hover:bg-emerald-700 text-white gap-2"
-          >
+        <Button
+          asChild
+          size="lg"
+          className="bg-emerald-600 hover:bg-emerald-700 text-white gap-2"
+        >
+          <Link href={`/kosks/${kosk.id}/courses/new`}>
             <PlusIcon className="w-5 h-5" />
             Yeni Ders Aç
-          </Button>
-        </CourseWizard>
+          </Link>
+        </Button>
       </div>
 
       {courses.length > 0
         ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {courses.map(course => (
-                <Card
+                <Link
                   key={course.id}
-                  className="overflow-hidden hover:shadow-lg transition-all duration-300 group"
+                  href={`/kosks/${kosk.id}/courses/${course.id}/edit`}
+                  className="block"
                 >
-                  <div className="relative h-48 w-full">
-                    <Image
-                      src={course.image}
-                      alt={course.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  </div>
-                  <CardHeader>
-                    <CardTitle className="line-clamp-1 text-lg">
-                      {course.title}
-                    </CardTitle>
-                    <CardDescription className="line-clamp-2">
-                      {course.description}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                      <div className="flex items-center gap-1.5">
-                        <UsersIcon className="w-4 h-4" />
-                        <span>{course.students}</span>
-                      </div>
-                      <div className="flex items-center gap-1.5">
-                        <ClockIcon className="w-4 h-4" />
-                        <span>{course.duration}</span>
+                  <Card className="overflow-hidden group pt-0 h-full transition-all hover:shadow-lg">
+                    <div
+                      className="relative h-40 w-full"
+                      style={{
+                        background: `linear-gradient(135deg, oklch(0.94 0.04 ${course.coverHue}) 0%, oklch(0.88 0.07 ${course.coverHue}) 100%)`,
+                      }}
+                    >
+                      <div className="absolute right-3 top-3">
+                        <Badge variant={course.status === 'PUBLISHED' ? 'default' : 'secondary'}>
+                          {course.status === 'PUBLISHED' ? 'Yayında' : 'Taslak'}
+                        </Badge>
                       </div>
                     </div>
-                  </CardContent>
-                </Card>
+                    <CardHeader>
+                      <div className="mb-1 flex items-center gap-2 text-[11px] uppercase tracking-wide text-muted-foreground">
+                        {course.category && <span className="font-semibold">{course.category}</span>}
+                        {course.category && <span className="size-[3px] rounded-full bg-muted-foreground/50" />}
+                        <span>{LEVEL_LABELS[course.level] ?? course.level}</span>
+                      </div>
+                      <CardTitle className="line-clamp-1 text-lg">{course.title}</CardTitle>
+                      {course.subtitle && (
+                        <CardDescription className="line-clamp-2">{course.subtitle}</CardDescription>
+                      )}
+                    </CardHeader>
+                    <CardContent>
+                      <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                        <div className="flex items-center gap-1.5">
+                          <CalendarBlankIcon className="w-4 h-4" />
+                          <span>
+                            {course.weekCount}
+                            {' '}
+                            hafta
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-1.5">
+                          <PlayCircleIcon className="w-4 h-4" />
+                          <span>
+                            {course.lessonCount}
+                            {' '}
+                            ders
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-1.5">
+                          <BookOpenIcon className="w-4 h-4" />
+                          <span>
+                            {course.resourceCount}
+                            {' '}
+                            kaynak
+                          </span>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
               ))}
             </div>
           )

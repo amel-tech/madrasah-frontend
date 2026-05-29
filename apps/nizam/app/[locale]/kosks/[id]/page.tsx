@@ -1,5 +1,5 @@
-import { getKoskById, getCoursesByKoskId } from '~/features/kosks/actions'
 import { notFound } from 'next/navigation'
+import { getKoskById, getKoskCourses } from '~/features/kosks/actions'
 import { KoskDetailPage } from '~/features/kosks/components/kosk-detail-page'
 
 export default async function Page({
@@ -14,7 +14,7 @@ export default async function Page({
     notFound()
   }
 
-  const courses = await getCoursesByKoskId(kosk.id)
+  const courses = await getKoskCourses(kosk.id)
 
   return <KoskDetailPage kosk={kosk} courses={courses} />
 }
