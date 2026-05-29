@@ -17,6 +17,7 @@ import * as runtime from '../runtime';
 import type {
   CreateKoskDto,
   KoskResponse,
+  PaginatedKoskResponse,
   UpdateKoskDto,
 } from '../models/index';
 import {
@@ -24,6 +25,8 @@ import {
     CreateKoskDtoToJSON,
     KoskResponseFromJSON,
     KoskResponseToJSON,
+    PaginatedKoskResponseFromJSON,
+    PaginatedKoskResponseToJSON,
     UpdateKoskDtoFromJSON,
     UpdateKoskDtoToJSON,
 } from '../models/index';
@@ -38,6 +41,11 @@ export interface DeleteKoskRequest {
 
 export interface FollowKoskRequest {
     id: string;
+}
+
+export interface GetAllKosksRequest {
+    page?: number;
+    limit?: number;
 }
 
 export interface GetKoskByIdRequest {
@@ -195,10 +203,18 @@ export class KosksApi extends runtime.BaseAPI {
     }
 
     /**
-     * Get all köşks
+     * Get a paginated list of köşks
      */
-    async getAllKosksRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<KoskResponse>>> {
+    async getAllKosksRaw(requestParameters: GetAllKosksRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PaginatedKoskResponse>> {
         const queryParameters: any = {};
+
+        if (requestParameters['page'] != null) {
+            queryParameters['page'] = requestParameters['page'];
+        }
+
+        if (requestParameters['limit'] != null) {
+            queryParameters['limit'] = requestParameters['limit'];
+        }
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -217,14 +233,14 @@ export class KosksApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(KoskResponseFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => PaginatedKoskResponseFromJSON(jsonValue));
     }
 
     /**
-     * Get all köşks
+     * Get a paginated list of köşks
      */
-    async getAllKosks(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<KoskResponse>> {
-        const response = await this.getAllKosksRaw(initOverrides);
+    async getAllKosks(requestParameters: GetAllKosksRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PaginatedKoskResponse> {
+        const response = await this.getAllKosksRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

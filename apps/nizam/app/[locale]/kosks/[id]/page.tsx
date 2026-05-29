@@ -1,5 +1,9 @@
 import { notFound } from 'next/navigation'
-import { getKoskById, getKoskCourses } from '~/features/kosks/actions'
+import {
+  getKoskById,
+  getKoskCourses,
+  getPendingEnrollments,
+} from '~/features/kosks/actions'
 import { KoskDetailPage } from '~/features/kosks/components/kosk-detail-page'
 
 export default async function Page({
@@ -14,7 +18,16 @@ export default async function Page({
     notFound()
   }
 
-  const courses = await getKoskCourses(kosk.id)
+  const [courses, pendingEnrollments] = await Promise.all([
+    getKoskCourses(kosk.id),
+    getPendingEnrollments(kosk.id),
+  ])
 
-  return <KoskDetailPage kosk={kosk} courses={courses} />
+  return (
+    <KoskDetailPage
+      kosk={kosk}
+      courses={courses}
+      pendingEnrollments={pendingEnrollments}
+    />
+  )
 }

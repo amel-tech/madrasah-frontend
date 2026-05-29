@@ -18,7 +18,9 @@ import type {
   CourseDetailResponse,
   CourseSummaryResponse,
   CreateCourseDto,
+  EnrolledCourseResponse,
   EnrollmentResponse,
+  PendingEnrollmentResponse,
   UpdateCourseDto,
   UpdateProgressDto,
 } from '../models/index';
@@ -29,13 +31,22 @@ import {
     CourseSummaryResponseToJSON,
     CreateCourseDtoFromJSON,
     CreateCourseDtoToJSON,
+    EnrolledCourseResponseFromJSON,
+    EnrolledCourseResponseToJSON,
     EnrollmentResponseFromJSON,
     EnrollmentResponseToJSON,
+    PendingEnrollmentResponseFromJSON,
+    PendingEnrollmentResponseToJSON,
     UpdateCourseDtoFromJSON,
     UpdateCourseDtoToJSON,
     UpdateProgressDtoFromJSON,
     UpdateProgressDtoToJSON,
 } from '../models/index';
+
+export interface ApproveEnrollmentRequest {
+    id: string;
+    userId: string;
+}
 
 export interface CreateCourseRequest {
     koskId: string;
@@ -58,6 +69,15 @@ export interface GetCoursesByKoskRequest {
     koskId: string;
 }
 
+export interface GetPendingEnrollmentsRequest {
+    koskId: string;
+}
+
+export interface RejectEnrollmentRequest {
+    id: string;
+    userId: string;
+}
+
 export interface ReplaceCourseRequest {
     id: string;
     createCourseDto: CreateCourseDto;
@@ -77,6 +97,56 @@ export interface UpdateCourseProgressRequest {
  * 
  */
 export class CoursesApi extends runtime.BaseAPI {
+
+    /**
+     * Approve a pending enrollment (köşk owner only)
+     */
+    async approveEnrollmentRaw(requestParameters: ApproveEnrollmentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EnrollmentResponse>> {
+        if (requestParameters['id'] == null) {
+            throw new runtime.RequiredError(
+                'id',
+                'Required parameter "id" was null or undefined when calling approveEnrollment().'
+            );
+        }
+
+        if (requestParameters['userId'] == null) {
+            throw new runtime.RequiredError(
+                'userId',
+                'Required parameter "userId" was null or undefined when calling approveEnrollment().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("bearer", []);
+        }
+
+
+        let urlPath = `/courses/{id}/enrollments/{userId}/approve`;
+        urlPath = urlPath.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
+        urlPath = urlPath.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId'])));
+
+        const response = await this.request({
+            path: urlPath,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => EnrollmentResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Approve a pending enrollment (köşk owner only)
+     */
+    async approveEnrollment(requestParameters: ApproveEnrollmentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EnrollmentResponse> {
+        const response = await this.approveEnrollmentRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
 
     /**
      * Create a new course under a köşk
@@ -299,6 +369,136 @@ export class CoursesApi extends runtime.BaseAPI {
      */
     async getCoursesByKosk(requestParameters: GetCoursesByKoskRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<CourseSummaryResponse>> {
         const response = await this.getCoursesByKoskRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * List the courses the current talebe is enrolled in
+     */
+    async getEnrolledCoursesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<EnrolledCourseResponse>>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("bearer", []);
+        }
+
+
+        let urlPath = `/courses/enrolled`;
+
+        const response = await this.request({
+            path: urlPath,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(EnrolledCourseResponseFromJSON));
+    }
+
+    /**
+     * List the courses the current talebe is enrolled in
+     */
+    async getEnrolledCourses(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<EnrolledCourseResponse>> {
+        const response = await this.getEnrolledCoursesRaw(initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * List pending enrollment requests for a köşk (owner only)
+     */
+    async getPendingEnrollmentsRaw(requestParameters: GetPendingEnrollmentsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<PendingEnrollmentResponse>>> {
+        if (requestParameters['koskId'] == null) {
+            throw new runtime.RequiredError(
+                'koskId',
+                'Required parameter "koskId" was null or undefined when calling getPendingEnrollments().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("bearer", []);
+        }
+
+
+        let urlPath = `/kosks/{koskId}/enrollments/pending`;
+        urlPath = urlPath.replace(`{${"koskId"}}`, encodeURIComponent(String(requestParameters['koskId'])));
+
+        const response = await this.request({
+            path: urlPath,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PendingEnrollmentResponseFromJSON));
+    }
+
+    /**
+     * List pending enrollment requests for a köşk (owner only)
+     */
+    async getPendingEnrollments(requestParameters: GetPendingEnrollmentsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<PendingEnrollmentResponse>> {
+        const response = await this.getPendingEnrollmentsRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Reject a pending enrollment, deleting it (köşk owner only)
+     */
+    async rejectEnrollmentRaw(requestParameters: RejectEnrollmentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<boolean>> {
+        if (requestParameters['id'] == null) {
+            throw new runtime.RequiredError(
+                'id',
+                'Required parameter "id" was null or undefined when calling rejectEnrollment().'
+            );
+        }
+
+        if (requestParameters['userId'] == null) {
+            throw new runtime.RequiredError(
+                'userId',
+                'Required parameter "userId" was null or undefined when calling rejectEnrollment().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("bearer", []);
+        }
+
+
+        let urlPath = `/courses/{id}/enrollments/{userId}`;
+        urlPath = urlPath.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
+        urlPath = urlPath.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId'])));
+
+        const response = await this.request({
+            path: urlPath,
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        if (this.isJsonMime(response.headers.get('content-type'))) {
+            return new runtime.JSONApiResponse<boolean>(response);
+        } else {
+            return new runtime.TextApiResponse(response) as any;
+        }
+    }
+
+    /**
+     * Reject a pending enrollment, deleting it (köşk owner only)
+     */
+    async rejectEnrollment(requestParameters: RejectEnrollmentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<boolean> {
+        const response = await this.rejectEnrollmentRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

@@ -119,6 +119,12 @@ export interface CreateCourseDto {
      * @memberof CreateCourseDto
      */
     resources?: Array<CreateResourceDto>;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CreateCourseDto
+     */
+    requiresApproval?: boolean;
 }
 
 
@@ -173,6 +179,7 @@ export function CreateCourseDtoFromJSONTyped(json: any, ignoreDiscriminator: boo
         'weeks': json['weeks'] == null ? undefined : ((json['weeks'] as Array<any>).map(CreateWeekDtoFromJSON)),
         'muderris': json['muderris'] == null ? undefined : ((json['muderris'] as Array<any>).map(CreateMuderrisDtoFromJSON)),
         'resources': json['resources'] == null ? undefined : ((json['resources'] as Array<any>).map(CreateResourceDtoFromJSON)),
+        'requiresApproval': json['requiresApproval'] == null ? undefined : json['requiresApproval'],
     };
 }
 
@@ -200,6 +207,7 @@ export function CreateCourseDtoToJSONTyped(value?: CreateCourseDto | null, ignor
         'weeks': value['weeks'] == null ? undefined : ((value['weeks'] as Array<any>).map(CreateWeekDtoToJSON)),
         'muderris': value['muderris'] == null ? undefined : ((value['muderris'] as Array<any>).map(CreateMuderrisDtoToJSON)),
         'resources': value['resources'] == null ? undefined : ((value['resources'] as Array<any>).map(CreateResourceDtoToJSON)),
+        'requiresApproval': value['requiresApproval'],
     };
 }
 

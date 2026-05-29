@@ -20,6 +20,12 @@ import { mapValues } from '../runtime';
  */
 export interface CreateResourceDto {
     /**
+     * Existing resource row id (preserved on replace)
+     * @type {string}
+     * @memberof CreateResourceDto
+     */
+    id?: string;
+    /**
      * 
      * @type {string}
      * @memberof CreateResourceDto
@@ -63,6 +69,7 @@ export function CreateResourceDtoFromJSONTyped(json: any, ignoreDiscriminator: b
     }
     return {
         
+        'id': json['id'] == null ? undefined : json['id'],
         'name': json['name'],
         'meta': json['meta'] == null ? undefined : json['meta'],
         'type': json['type'] == null ? undefined : json['type'],
@@ -81,6 +88,7 @@ export function CreateResourceDtoToJSONTyped(value?: CreateResourceDto | null, i
 
     return {
         
+        'id': value['id'],
         'name': value['name'],
         'meta': value['meta'],
         'type': value['type'],

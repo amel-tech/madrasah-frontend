@@ -67,30 +67,6 @@ export interface CreateKoskDto {
      * @memberof CreateKoskDto
      */
     tags?: Array<string>;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof CreateKoskDto
-     */
-    verified?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof CreateKoskDto
-     */
-    featured?: boolean;
-    /**
-     * 
-     * @type {number}
-     * @memberof CreateKoskDto
-     */
-    rating?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof CreateKoskDto
-     */
-    ratingCount?: number;
 }
 
 /**
@@ -119,10 +95,6 @@ export function CreateKoskDtoFromJSONTyped(json: any, ignoreDiscriminator: boole
         'field': json['field'] == null ? undefined : json['field'],
         'level': json['level'] == null ? undefined : json['level'],
         'tags': json['tags'] == null ? undefined : json['tags'],
-        'verified': json['verified'] == null ? undefined : json['verified'],
-        'featured': json['featured'] == null ? undefined : json['featured'],
-        'rating': json['rating'] == null ? undefined : json['rating'],
-        'ratingCount': json['ratingCount'] == null ? undefined : json['ratingCount'],
     };
 }
 
@@ -145,10 +117,6 @@ export function CreateKoskDtoToJSONTyped(value?: CreateKoskDto | null, ignoreDis
         'field': value['field'],
         'level': value['level'],
         'tags': value['tags'],
-        'verified': value['verified'],
-        'featured': value['featured'],
-        'rating': value['rating'],
-        'ratingCount': value['ratingCount'],
     };
 }
 

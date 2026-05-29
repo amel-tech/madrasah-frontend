@@ -4,9 +4,12 @@ import { revalidatePath } from 'next/cache'
 import {
   createServerTedrisatAPIs,
   type KoskResponse,
+  type PaginatedKoskResponse,
   type CourseSummaryResponse,
   type CourseDetailResponse,
+  type PendingEnrollmentResponse,
   type CreateKoskDto,
+  type UpdateKoskDto,
 } from '@madrasah/services/tedrisat'
 import {
   authenticatedAction,
@@ -15,18 +18,21 @@ import {
 import { auth } from '~/lib/auth_options'
 import { env } from '~/env'
 
-export const getKosks = async (): Promise<KoskResponse[]> => {
+export const getKosks = async (
+  page = 1,
+  limit = 12,
+): Promise<PaginatedKoskResponse> => {
   try {
     const session = await auth()
     const { kosks } = await createServerTedrisatAPIs(
       session?.accessToken,
       env.TEDRISAT_API_BASE_URL,
     )
-    return await kosks.getAllKosks()
+    return await kosks.getAllKosks({ page, limit })
   }
   catch (error) {
     console.error('Error fetching köşks:', error)
-    return []
+    return { items: [], total: 0, page, limit }
   }
 }
 
@@ -74,6 +80,20 @@ export const createKosk = async (
   return result
 }
 
+export const updateKosk = async (
+  koskId: string,
+  kosk: UpdateKoskDto,
+): Promise<AuthenticatedActionResult<KoskResponse>> => {
+  const result = await authenticatedAction(api =>
+    api.kosks.updateKosk({ id: koskId, updateKoskDto: kosk }),
+  )
+  if (result.success) {
+    revalidatePath('/kosks')
+    revalidatePath(`/kosks/${koskId}`)
+  }
+  return result
+}
+
 export const getKoskCourses = async (
   koskId: string,
 ): Promise<CourseSummaryResponse[]> => {
@@ -87,6 +107,23 @@ export const getKoskCourses = async (
   }
   catch (error) {
     console.error('Error fetching köşk courses:', error)
+    return []
+  }
+}
+
+export const getPendingEnrollments = async (
+  koskId: string,
+): Promise<PendingEnrollmentResponse[]> => {
+  try {
+    const session = await auth()
+    const { courses } = await createServerTedrisatAPIs(
+      session?.accessToken,
+      env.TEDRISAT_API_BASE_URL,
+    )
+    return await courses.getPendingEnrollments({ koskId })
+  }
+  catch (error) {
+    console.error('Error fetching pending enrollments:', error)
     return []
   }
 }

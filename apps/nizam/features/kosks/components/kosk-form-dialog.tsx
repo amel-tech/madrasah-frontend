@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useTransition } from 'react'
+import { useState, useTransition, type ReactElement } from 'react'
 import { useRouter } from 'next/navigation'
 import { PlusIcon } from '@madrasah/icons'
 import { Button } from '@madrasah/ui/components/button'
@@ -17,23 +17,31 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@madrasah/ui/components/dialog'
-import { createKosk } from '~/features/kosks/actions'
+import type { KoskResponse } from '@madrasah/services/tedrisat'
+import { createKosk, updateKosk } from '~/features/kosks/actions'
 
-export function CreateKoskDialog() {
+export function KoskFormDialog({
+  kosk,
+  trigger,
+}: {
+  kosk?: KoskResponse
+  trigger?: ReactElement
+}) {
   const router = useRouter()
+  const isEdit = Boolean(kosk)
   const [open, setOpen] = useState(false)
   const [pending, startTransition] = useTransition()
 
-  const [name, setName] = useState('')
-  const [handle, setHandle] = useState('')
-  const [description, setDescription] = useState('')
-  const [isPrivate, setIsPrivate] = useState(true)
+  const [name, setName] = useState(kosk?.name ?? '')
+  const [handle, setHandle] = useState(kosk?.handle ?? '')
+  const [description, setDescription] = useState(kosk?.description ?? '')
+  const [isPrivate, setIsPrivate] = useState(kosk?.isPrivate ?? true)
 
   const reset = () => {
-    setName('')
-    setHandle('')
-    setDescription('')
-    setIsPrivate(true)
+    setName(kosk?.name ?? '')
+    setHandle(kosk?.handle ?? '')
+    setDescription(kosk?.description ?? '')
+    setIsPrivate(kosk?.isPrivate ?? true)
   }
 
   const submit = () => {
@@ -41,19 +49,21 @@ export function CreateKoskDialog() {
       toast.error('Köşk adı en az 2 karakter olmalıdır.')
       return
     }
+    const dto = {
+      name: name.trim(),
+      handle: handle.trim() || undefined,
+      description: description.trim() || undefined,
+      isPrivate,
+    }
     startTransition(async () => {
-      const res = await createKosk({
-        name: name.trim(),
-        handle: handle.trim() || undefined,
-        description: description.trim() || undefined,
-        isPrivate,
-      })
+      const res = kosk
+        ? await updateKosk(kosk.id, dto)
+        : await createKosk(dto)
       if (res.success === false) {
         toast.error(res.error)
         return
       }
-      toast.success('Köşk oluşturuldu.')
-      reset()
+      toast.success(isEdit ? 'Köşk güncellendi.' : 'Köşk oluşturuldu.')
       setOpen(false)
       router.refresh()
     })
@@ -68,14 +78,16 @@ export function CreateKoskDialog() {
       }}
     >
       <DialogTrigger asChild>
-        <Button size="lg" className="gap-2">
-          <PlusIcon className="w-5 h-5" />
-          Yeni Köşk
-        </Button>
+        {trigger ?? (
+          <Button size="lg" className="gap-2">
+            <PlusIcon className="w-5 h-5" />
+            Yeni Köşk
+          </Button>
+        )}
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Yeni Köşk Oluştur</DialogTitle>
+          <DialogTitle>{isEdit ? 'Köşkü Düzenle' : 'Yeni Köşk Oluştur'}</DialogTitle>
         </DialogHeader>
 
         <div className="flex flex-col gap-4 py-2">
@@ -129,7 +141,9 @@ export function CreateKoskDialog() {
             İptal
           </Button>
           <Button onClick={submit} disabled={pending}>
-            {pending ? 'Oluşturuluyor...' : 'Oluştur'}
+            {pending
+              ? (isEdit ? 'Kaydediliyor...' : 'Oluşturuluyor...')
+              : (isEdit ? 'Kaydet' : 'Oluştur')}
           </Button>
         </DialogFooter>
       </DialogContent>

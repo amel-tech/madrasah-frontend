@@ -79,6 +79,12 @@ export interface UpdateCourseDto {
      * @memberof UpdateCourseDto
      */
     grantsCertificate?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof UpdateCourseDto
+     */
+    requiresApproval?: boolean;
 }
 
 
@@ -129,6 +135,7 @@ export function UpdateCourseDtoFromJSONTyped(json: any, ignoreDiscriminator: boo
         'durationWeeks': json['durationWeeks'] == null ? undefined : json['durationWeeks'],
         'status': json['status'] == null ? undefined : json['status'],
         'grantsCertificate': json['grantsCertificate'] == null ? undefined : json['grantsCertificate'],
+        'requiresApproval': json['requiresApproval'] == null ? undefined : json['requiresApproval'],
     };
 }
 
@@ -153,6 +160,7 @@ export function UpdateCourseDtoToJSONTyped(value?: UpdateCourseDto | null, ignor
         'durationWeeks': value['durationWeeks'],
         'status': value['status'],
         'grantsCertificate': value['grantsCertificate'],
+        'requiresApproval': value['requiresApproval'],
     };
 }
 

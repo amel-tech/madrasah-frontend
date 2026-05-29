@@ -10,27 +10,27 @@ import {
   StarIcon as Star,
   SealCheckIcon as SealCheck,
   CaretDownIcon as CaretDown,
+  ArrowRightIcon as ArrowRight,
   MadrasahLogoIcon,
 } from '@madrasah/icons'
 import { cn } from '@madrasah/ui/lib/utils'
-import type { KoskResponse } from '@madrasah/services/tedrisat'
-import { CoverPlaceholder, HueAvatar } from './cover'
+import { Breadcrumbs } from '@madrasah/ui/components/breadcrumb'
+import type {
+  EnrolledCourseResponse,
+  KoskResponse,
+} from '@madrasah/services/tedrisat'
+import { CoverPlaceholder } from './cover'
+import { ContinueCard } from './continue-card'
 import { followKosk, unfollowKosk } from '../actions'
 
-type Muderris = { name: string, avatarHue: number }
-type Filter = 'all' | 'following' | 'recommended' | 'new'
-
-const initials = (name: string) =>
-  name.split(' ').filter(Boolean).slice(-2).map(w => w[0]).join('').toUpperCase()
+type Filter = 'all' | 'following'
 
 export const KoskListPage = ({
   kosks,
-  featured,
-  featuredMuderris,
+  continuing = [],
 }: {
   kosks: KoskResponse[]
-  featured: KoskResponse | null
-  featuredMuderris: Muderris[]
+  continuing?: EnrolledCourseResponse[]
 }) => {
   const t = useTranslations('tedris')
   const router = useRouter()
@@ -70,97 +70,69 @@ export const KoskListPage = ({
     return Array.from(map)
   }, [kosks, t])
 
-  const featuredVisible
-    = filter === 'all' && !field && !search.trim() && Boolean(featured)
-
   const visible = useMemo(() => {
     const q = search.trim().toLocaleLowerCase('tr')
-    let list = kosks.filter((k) => {
+    const list = kosks.filter((k) => {
       if (filter === 'following' && !k.isFollowing) return false
-      if (filter === 'recommended' && !(k.featured || k.verified)) return false
       if (field && (k.field ?? t('KoskListPage.uncategorized')) !== field) return false
       if (q && !`${k.name} ${k.handle ?? ''} ${k.description ?? ''}`.toLocaleLowerCase('tr').includes(q))
         return false
       return true
     })
-    list = [...list].sort((a, b) =>
-      filter === 'new'
-        ? new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-        : b.studentCount - a.studentCount,
-    )
-    if (featuredVisible && featured) list = list.filter(k => k.id !== featured.id)
-    return list
-  }, [kosks, filter, field, search, featured, featuredVisible, t])
+    return [...list].sort((a, b) => b.studentCount - a.studentCount)
+  }, [kosks, filter, field, search, t])
 
   const filters: { id: Filter, label: string }[] = [
     { id: 'all', label: t('KoskListPage.filterAll') },
     { id: 'following', label: t('KoskListPage.filterFollowing') },
-    { id: 'recommended', label: t('KoskListPage.filterRecommended') },
-    { id: 'new', label: t('KoskListPage.filterNew') },
   ]
 
   return (
     <div className="pb-16">
       {/* Breadcrumb */}
-      <nav className="mb-4 flex items-center gap-2 text-sm text-muted-foreground">
-        <span>{t('TabView.learning')}</span>
-        <span>›</span>
-        <span className="font-medium text-foreground">{t('KoskListPage.breadcrumbKosks')}</span>
-      </nav>
+      <Breadcrumbs
+        className="mb-4"
+        items={[
+          { label: t('TabView.learning') },
+          { label: t('KoskListPage.breadcrumbKosks') },
+        ]}
+      />
 
-      {/* Title + search */}
-      <div className="mb-6 flex items-end justify-between gap-4">
-        <div>
-          <h1 className="text-[26px] font-bold tracking-tight">{t('KoskListPage.title')}</h1>
-          <p className="mt-1.5 max-w-xl text-sm text-muted-foreground">{t('KoskListPage.subtitle')}</p>
-        </div>
-        <div className="flex w-60 items-center gap-2 rounded-lg border bg-white px-3.5 py-2 text-muted-foreground">
-          <Search size={16} />
-          <input
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            placeholder={t('KoskListPage.searchPlaceholder')}
-            className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
-          />
-        </div>
-      </div>
-
-      {/* Featured banner */}
-      {featuredVisible && featured && (
-        <FeaturedBanner
-          kosk={featured}
-          muderris={featuredMuderris}
-          t={t}
-          pending={pending}
-          onToggleFollow={onToggleFollow}
-        />
+      {/* Continue where you left off */}
+      {continuing.length > 0 && (
+        <section className="mb-8">
+          <div className="mb-3.5 flex items-center justify-between">
+            <div className="flex items-center gap-2.5">
+              <h2 className="text-lg font-bold tracking-tight">
+                {t('KoskListPage.continueTitle')}
+              </h2>
+              <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-semibold">
+                {t('KoskListPage.continueCount', { count: continuing.length })}
+              </span>
+            </div>
+            <Link
+              href="/learning/my-courses"
+              className="inline-flex items-center gap-1 text-[13px] font-medium text-muted-foreground"
+            >
+              {t('KoskListPage.allMyCourses')}
+              {' '}
+              <ArrowRight size={13} />
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {continuing.slice(0, 3).map(c => (
+              <ContinueCard
+                key={c.id}
+                course={c}
+                labels={{
+                  continue: t('KoskListPage.continue'),
+                  completed: t('KoskListPage.completed'),
+                }}
+              />
+            ))}
+          </div>
+        </section>
       )}
-
-      {/* Filter pills */}
-      <div className="mb-5 flex items-center gap-2">
-        {filters.map(f => (
-          <button
-            key={f.id}
-            type="button"
-            onClick={() => setFilter(f.id)}
-            className={cn(
-              'rounded-full px-3.5 py-1.5 text-[13px] font-medium',
-              filter === f.id ? 'bg-slate-900 text-white' : 'bg-slate-100 text-foreground',
-            )}
-          >
-            {f.label}
-          </button>
-        ))}
-        <span className="flex-1" />
-        <button
-          type="button"
-          className="inline-flex items-center gap-1.5 rounded-lg border bg-white px-3.5 py-2 text-[13px] font-medium"
-        >
-          {t('KoskListPage.sortPopular')}
-          {' '}
-          <CaretDown size={13} />
-        </button>
-      </div>
 
       {/* Sidebar + grid */}
       <div className="grid grid-cols-[200px_1fr] gap-7">
@@ -191,22 +163,59 @@ export const KoskListPage = ({
           </div>
         </aside>
 
-        <main className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-          {visible.map(k => (
-            <KoskCard
-              key={k.id}
-              kosk={k}
-              t={t}
-              levelLabel={levelLabel}
-              pending={pending}
-              onToggleFollow={onToggleFollow}
-            />
-          ))}
-          {visible.length === 0 && (
-            <p className="col-span-full py-12 text-center text-sm text-muted-foreground">
-              {t('KoskListPage.empty')}
-            </p>
-          )}
+        <main>
+          <div className="mb-5 flex items-center gap-2">
+            {filters.map(f => (
+              <button
+                key={f.id}
+                type="button"
+                onClick={() => setFilter(f.id)}
+                className={cn(
+                  'rounded-full px-3.5 py-1.5 text-[13px] font-medium',
+                  filter === f.id ? 'bg-slate-900 text-white' : 'bg-slate-100 text-foreground',
+                )}
+              >
+                {f.label}
+              </button>
+            ))}
+            <span className="flex-1" />
+
+            <div className="flex w-60 items-center gap-2 rounded-lg border bg-white px-3.5 py-2 text-muted-foreground">
+              <Search size={16} />
+              <input
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+                placeholder={t('KoskListPage.searchPlaceholder')}
+                className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+              />
+            </div>
+            <button
+              type="button"
+              className="inline-flex items-center gap-1.5 rounded-lg border bg-white px-3.5 py-2 text-[13px] font-medium"
+            >
+              {t('KoskListPage.sortPopular')}
+              {' '}
+              <CaretDown size={13} />
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {visible.map(k => (
+              <KoskCard
+                key={k.id}
+                kosk={k}
+                t={t}
+                levelLabel={levelLabel}
+                pending={pending}
+                onToggleFollow={onToggleFollow}
+              />
+            ))}
+            {visible.length === 0 && (
+              <p className="col-span-full py-12 text-center text-sm text-muted-foreground">
+                {t('KoskListPage.empty')}
+              </p>
+            )}
+          </div>
         </main>
       </div>
     </div>
@@ -341,82 +350,4 @@ const KoskCard = ({
       </div>
     </div>
   </Link>
-)
-
-const FeaturedBanner = ({
-  kosk,
-  muderris,
-  t,
-  pending,
-  onToggleFollow,
-}: {
-  kosk: KoskResponse
-  muderris: Muderris[]
-  t: ReturnType<typeof useTranslations>
-  pending: boolean
-  onToggleFollow: (k: KoskResponse) => void
-}) => (
-  <div className="mb-6 grid grid-cols-[300px_1fr] overflow-hidden rounded-2xl border bg-white">
-    <div className="relative">
-      <CoverPlaceholder hue={kosk.coverHue} className="h-full rounded-none" />
-      <span className="absolute left-4 top-4 rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-semibold">
-        {t('KoskListPage.featured')}
-      </span>
-      <div className="absolute bottom-4 left-4 grid size-16 place-items-center rounded-xl border bg-white">
-        <MadrasahLogoIcon size={40} />
-      </div>
-    </div>
-    <div className="flex flex-col justify-center gap-3 p-6">
-      <div className="flex items-center gap-2.5">
-        <h2 className="text-[22px] font-bold tracking-tight">{kosk.name}</h2>
-        <span className="text-sm text-muted-foreground">{kosk.handle}</span>
-        {kosk.verified && (
-          <span className="inline-flex items-center gap-1 rounded-full bg-blue-50 px-2 py-0.5 text-[11px] font-semibold text-blue-700">
-            <SealCheck size={12} weight="fill" />
-            {' '}
-            {t('KoskListPage.verified')}
-          </span>
-        )}
-      </div>
-      {kosk.description && (
-        <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">{kosk.description}</p>
-      )}
-      <div className="flex items-center gap-7">
-        <Stat value={kosk.courseCount} label={t('KoskListPage.statCourses')} />
-        <Stat value={kosk.studentCount} label={t('KoskListPage.statStudents')} />
-        <Stat value={kosk.muderrisCount} label={t('KoskListPage.statMuderris')} />
-        <span className="inline-flex items-center gap-1 text-sm font-semibold">
-          <Star size={14} weight="fill" className="text-amber-500" />
-          {' '}
-          {kosk.rating.toFixed(1)}
-        </span>
-      </div>
-      <div className="flex items-center gap-4">
-        {muderris.length > 0 && (
-          <div className="flex">
-            {muderris.slice(0, 4).map((m, i) => (
-              <div key={m.name} style={{ marginLeft: i ? -8 : 0 }}>
-                <HueAvatar name={initials(m.name)} hue={m.avatarHue} size={30} />
-              </div>
-            ))}
-          </div>
-        )}
-        <span className="flex-1" />
-        <FollowButton kosk={kosk} t={t} pending={pending} onToggleFollow={onToggleFollow} className="px-4 py-2 text-[13px]" />
-        <Link
-          href={`/kosks/${kosk.id}`}
-          className="rounded-lg bg-slate-900 px-4 py-2 text-[13px] font-medium text-white"
-        >
-          {t('KoskListPage.enterKosk')}
-        </Link>
-      </div>
-    </div>
-  </div>
-)
-
-const Stat = ({ value, label }: { value: number, label: string }) => (
-  <div className="flex items-baseline gap-1">
-    <span className="text-lg font-bold tracking-tight">{value}</span>
-    <span className="text-xs text-muted-foreground">{label}</span>
-  </div>
 )

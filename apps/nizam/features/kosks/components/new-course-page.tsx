@@ -9,6 +9,7 @@ import {
   TrashIcon as Trash,
   XIcon as X,
   CertificateIcon as Certificate,
+  ShieldCheckIcon as ShieldCheck,
 } from '@madrasah/icons'
 import { Input } from '@madrasah/ui/components/input'
 import { Textarea } from '@madrasah/ui/components/textarea'
@@ -34,10 +35,10 @@ import {
   updateKoskCourse,
 } from '~/features/kosks/actions/courses'
 
-type LessonDraft = { title: string, type: CreateLessonDtoTypeEnum, duration: string, kaynak: string }
-type WeekDraft = { title: string, summary: string, lessons: LessonDraft[] }
-type MuderrisDraft = { name: string, title: string }
-type ResourceDraft = { name: string, meta: string }
+type LessonDraft = { id?: string, title: string, type: CreateLessonDtoTypeEnum, duration: string, kaynak: string }
+type WeekDraft = { id?: string, title: string, summary: string, lessons: LessonDraft[] }
+type MuderrisDraft = { id?: string, name: string, title: string }
+type ResourceDraft = { id?: string, name: string, meta: string }
 
 const newLesson = (): LessonDraft => ({ title: '', type: CreateLessonDtoTypeEnum.Video, duration: '', kaynak: '' })
 const newWeek = (): WeekDraft => ({ title: '', summary: '', lessons: [newLesson()] })
@@ -64,20 +65,23 @@ export const NewCoursePage = ({
     course?.durationWeeks ? String(course.durationWeeks) : '',
   )
   const [grantsCertificate, setGrantsCertificate] = useState(course?.grantsCertificate ?? false)
+  const [requiresApproval, setRequiresApproval] = useState(course?.requiresApproval ?? false)
   const [muderris, setMuderris] = useState<MuderrisDraft[]>(
     course?.muderris.length
-      ? course.muderris.map(m => ({ name: m.name, title: m.title ?? '' }))
+      ? course.muderris.map(m => ({ id: m.id, name: m.name, title: m.title ?? '' }))
       : [{ name: '', title: '' }],
   )
   const [resources, setResources] = useState<ResourceDraft[]>(
-    course?.resources.map(r => ({ name: r.name, meta: r.meta ?? '' })) ?? [],
+    course?.resources.map(r => ({ id: r.id, name: r.name, meta: r.meta ?? '' })) ?? [],
   )
   const [weeks, setWeeks] = useState<WeekDraft[]>(
     course?.weeks.length
       ? course.weeks.map(w => ({
+          id: w.id,
           title: w.title,
           summary: w.summary ?? '',
           lessons: w.lessons.map(l => ({
+            id: l.id,
             title: l.title,
             type: l.type as CreateLessonDtoTypeEnum,
             duration: l.duration ?? '',
@@ -100,21 +104,24 @@ export const NewCoursePage = ({
     durationWeeks: durationWeeks ? Number(durationWeeks) : undefined,
     status,
     grantsCertificate,
+    requiresApproval,
     muderris: muderris
       .filter(m => m.name.trim())
-      .map(m => ({ name: m.name.trim(), title: m.title.trim() || undefined })),
+      .map(m => ({ id: m.id, name: m.name.trim(), title: m.title.trim() || undefined })),
     resources: resources
       .filter(r => r.name.trim())
-      .map(r => ({ name: r.name.trim(), meta: r.meta.trim() || undefined })),
+      .map(r => ({ id: r.id, name: r.name.trim(), meta: r.meta.trim() || undefined })),
     weeks: weeks
       .filter(w => w.title.trim())
       .map((w, i) => ({
+        id: w.id,
         weekNumber: i + 1,
         title: w.title.trim(),
         summary: w.summary.trim() || undefined,
         lessons: w.lessons
           .filter(l => l.title.trim())
           .map(l => ({
+            id: l.id,
             title: l.title.trim(),
             type: l.type,
             duration: l.duration.trim() || undefined,
@@ -144,17 +151,6 @@ export const NewCoursePage = ({
 
   return (
     <div className="mx-auto max-w-6xl pb-16">
-      {/* Breadcrumb */}
-      <nav className="mb-4 flex items-center gap-2 text-sm text-muted-foreground">
-        <span>{t('NewCoursePage.breadcrumbLearning')}</span>
-        <span>/</span>
-        <Link href={`/kosks/${kosk.id}`} className="hover:text-foreground">{kosk.name}</Link>
-        <span>/</span>
-        <span className="font-medium text-foreground">
-          {isEdit ? t('NewCoursePage.breadcrumbEdit') : t('NewCoursePage.breadcrumbNew')}
-        </span>
-      </nav>
-
       {/* Heading */}
       <div className="mb-6 flex items-end justify-between border-b pb-5">
         <div>
@@ -411,6 +407,27 @@ export const NewCoursePage = ({
                 </span>
                 <span className="mt-0.5 block text-xs leading-relaxed text-muted-foreground">
                   {t('NewCoursePage.grantsCertificateHint')}
+                </span>
+              </span>
+            </label>
+          </div>
+
+          <div className="rounded-2xl border bg-slate-50 p-3.5">
+            <label className="flex cursor-pointer items-start gap-2.5">
+              <input
+                type="checkbox"
+                checked={requiresApproval}
+                onChange={e => setRequiresApproval(e.target.checked)}
+                className="mt-0.5"
+              />
+              <span>
+                <span className="flex items-center gap-1.5 text-sm font-semibold">
+                  <ShieldCheck size={16} />
+                  {' '}
+                  {t('NewCoursePage.requiresApproval')}
+                </span>
+                <span className="mt-0.5 block text-xs leading-relaxed text-muted-foreground">
+                  {t('NewCoursePage.requiresApprovalHint')}
                 </span>
               </span>
             </label>

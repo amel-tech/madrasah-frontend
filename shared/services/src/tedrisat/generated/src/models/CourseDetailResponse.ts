@@ -162,6 +162,12 @@ export interface CourseDetailResponse {
      * @memberof CourseDetailResponse
      */
     enrollment?: EnrollmentResponse;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CourseDetailResponse
+     */
+    requiresApproval: boolean;
 }
 
 
@@ -203,6 +209,7 @@ export function instanceOfCourseDetailResponse(value: object): value is CourseDe
     if (!('weeks' in value) || value['weeks'] === undefined) return false;
     if (!('muderris' in value) || value['muderris'] === undefined) return false;
     if (!('resources' in value) || value['resources'] === undefined) return false;
+    if (!('requiresApproval' in value) || value['requiresApproval'] === undefined) return false;
     return true;
 }
 
@@ -235,6 +242,7 @@ export function CourseDetailResponseFromJSONTyped(json: any, ignoreDiscriminator
         'muderris': ((json['muderris'] as Array<any>).map(MuderrisResponseFromJSON)),
         'resources': ((json['resources'] as Array<any>).map(ResourceResponseFromJSON)),
         'enrollment': json['enrollment'] == null ? undefined : EnrollmentResponseFromJSON(json['enrollment']),
+        'requiresApproval': json['requiresApproval'],
     };
 }
 
@@ -268,6 +276,7 @@ export function CourseDetailResponseToJSONTyped(value?: CourseDetailResponse | n
         'muderris': ((value['muderris'] as Array<any>).map(MuderrisResponseToJSON)),
         'resources': ((value['resources'] as Array<any>).map(ResourceResponseToJSON)),
         'enrollment': EnrollmentResponseToJSON(value['enrollment']),
+        'requiresApproval': value['requiresApproval'],
     };
 }
 

@@ -20,6 +20,12 @@ import { mapValues } from '../runtime';
  */
 export interface CreateMuderrisDto {
     /**
+     * Existing müderris row id (preserved on replace)
+     * @type {string}
+     * @memberof CreateMuderrisDto
+     */
+    id?: string;
+    /**
      * Linked platform user id, if any
      * @type {string}
      * @memberof CreateMuderrisDto
@@ -69,6 +75,7 @@ export function CreateMuderrisDtoFromJSONTyped(json: any, ignoreDiscriminator: b
     }
     return {
         
+        'id': json['id'] == null ? undefined : json['id'],
         'userId': json['userId'] == null ? undefined : json['userId'],
         'name': json['name'],
         'title': json['title'] == null ? undefined : json['title'],
@@ -88,6 +95,7 @@ export function CreateMuderrisDtoToJSONTyped(value?: CreateMuderrisDto | null, i
 
     return {
         
+        'id': value['id'],
         'userId': value['userId'],
         'name': value['name'],
         'title': value['title'],

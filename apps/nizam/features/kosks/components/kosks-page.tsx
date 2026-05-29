@@ -7,9 +7,17 @@ import {
 } from '@madrasah/ui/components/card'
 import { HouseIcon, ArrowRightIcon } from '@madrasah/icons/ssr'
 import type { KoskResponse } from '@madrasah/services/tedrisat'
-import { CreateKoskDialog } from '~/features/kosks/components/create-kosk-dialog'
+import { KoskFormDialog } from '~/features/kosks/components/kosk-form-dialog'
 
-export function KosksPage({ kosks }: { kosks: KoskResponse[] }) {
+export function KosksPage({
+  kosks,
+  page,
+  totalPages,
+}: {
+  kosks: KoskResponse[]
+  page: number
+  totalPages: number
+}) {
   return (
     <div className="py-8">
       <div className="flex items-center justify-between mb-8">
@@ -19,7 +27,7 @@ export function KosksPage({ kosks }: { kosks: KoskResponse[] }) {
             Yönetiminizdeki köşkleri ve dersleri buradan görüntüleyebilirsiniz.
           </p>
         </div>
-        <CreateKoskDialog />
+        <KoskFormDialog />
       </div>
 
       {kosks.length === 0
@@ -54,6 +62,35 @@ export function KosksPage({ kosks }: { kosks: KoskResponse[] }) {
               ))}
             </div>
           )}
+
+      {totalPages > 1 && (
+        <div className="mt-8 flex items-center justify-center gap-3 text-sm">
+          {page > 1
+            ? (
+                <Link href={`/kosks?page=${page - 1}`} className="rounded-lg border bg-white px-3.5 py-2 font-medium">
+                  Önceki
+                </Link>
+              )
+            : (
+                <span className="rounded-lg border px-3.5 py-2 font-medium text-muted-foreground opacity-50">Önceki</span>
+              )}
+          <span className="text-muted-foreground">
+            {page}
+            {' '}
+            /
+            {totalPages}
+          </span>
+          {page < totalPages
+            ? (
+                <Link href={`/kosks?page=${page + 1}`} className="rounded-lg border bg-white px-3.5 py-2 font-medium">
+                  Sonraki
+                </Link>
+              )
+            : (
+                <span className="rounded-lg border px-3.5 py-2 font-medium text-muted-foreground opacity-50">Sonraki</span>
+              )}
+        </div>
+      )}
     </div>
   )
 }

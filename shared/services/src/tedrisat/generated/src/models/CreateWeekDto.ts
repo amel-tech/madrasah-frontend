@@ -28,6 +28,12 @@ import {
  */
 export interface CreateWeekDto {
     /**
+     * Existing week id (preserved on replace)
+     * @type {string}
+     * @memberof CreateWeekDto
+     */
+    id?: string;
+    /**
      * 
      * @type {number}
      * @memberof CreateWeekDto
@@ -73,6 +79,7 @@ export function CreateWeekDtoFromJSONTyped(json: any, ignoreDiscriminator: boole
     }
     return {
         
+        'id': json['id'] == null ? undefined : json['id'],
         'weekNumber': json['weekNumber'],
         'title': json['title'],
         'summary': json['summary'] == null ? undefined : json['summary'],
@@ -91,6 +98,7 @@ export function CreateWeekDtoToJSONTyped(value?: CreateWeekDto | null, ignoreDis
 
     return {
         
+        'id': value['id'],
         'weekNumber': value['weekNumber'],
         'title': value['title'],
         'summary': value['summary'],

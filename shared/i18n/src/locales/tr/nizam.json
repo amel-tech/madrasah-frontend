@@ -155,7 +155,9 @@
     "validationTitle": "Kurs adı zorunludur.",
     "editTitle": "Kursu Düzenle",
     "breadcrumbEdit": "Düzenle",
-    "updated": "Kurs güncellendi."
+    "updated": "Kurs güncellendi.",
+    "requiresApproval": "Kayıt onayı gereksin",
+    "requiresApprovalHint": "Açık olduğunda talebelerin kaydı, siz onaylayana kadar beklemede kalır."
   },
   "SampleFile": {
     "backWord": "Örnek Çeviri {index}",

@@ -24,6 +24,35 @@
         ]
       }
     },
+    "/courses/enrolled": {
+      "get": {
+        "operationId": "getEnrolledCourses",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EnrolledCourseResponse"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "List the courses the current talebe is enrolled in",
+        "tags": [
+          "courses"
+        ]
+      }
+    },
     "/courses/{id}": {
       "get": {
         "operationId": "getCourseById",
@@ -57,7 +86,7 @@
             "bearer": []
           }
         ],
-        "summary": "Get a course with its full syllabus, m\u00fcderris and resources",
+        "summary": "Get a course with its full syllabus, müderris and resources",
         "tags": [
           "courses"
         ]
@@ -151,7 +180,7 @@
             "bearer": []
           }
         ],
-        "summary": "Replace a course, including its full syllabus, m\u00fcderris and resources",
+        "summary": "Replace a course, including its full syllabus, müderris and resources",
         "tags": [
           "courses"
         ]
@@ -178,6 +207,9 @@
                 }
               }
             }
+          },
+          "404": {
+            "description": ""
           }
         },
         "security": [
@@ -1322,17 +1354,31 @@
     "/kosks": {
       "get": {
         "operationId": "getAllKosks",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/KoskResponse"
-                  }
+                  "$ref": "#/components/schemas/PaginatedKoskResponse"
                 }
               }
             }
@@ -1343,7 +1389,7 @@
             "bearer": []
           }
         ],
-        "summary": "Get all k\u00f6\u015fks",
+        "summary": "Get a paginated list of köşks",
         "tags": [
           "kosks"
         ]
@@ -1378,7 +1424,7 @@
             "bearer": []
           }
         ],
-        "summary": "Create a new k\u00f6\u015fk",
+        "summary": "Create a new köşk",
         "tags": [
           "kosks"
         ]
@@ -1417,7 +1463,7 @@
             "bearer": []
           }
         ],
-        "summary": "Get a k\u00f6\u015fk by ID",
+        "summary": "Get a köşk by ID",
         "tags": [
           "kosks"
         ]
@@ -1464,7 +1510,7 @@
             "bearer": []
           }
         ],
-        "summary": "Update a k\u00f6\u015fk",
+        "summary": "Update a köşk",
         "tags": [
           "kosks"
         ]
@@ -1491,6 +1537,9 @@
                 }
               }
             }
+          },
+          "404": {
+            "description": ""
           }
         },
         "security": [
@@ -1498,7 +1547,7 @@
             "bearer": []
           }
         ],
-        "summary": "Delete a k\u00f6\u015fk",
+        "summary": "Delete a köşk",
         "tags": [
           "kosks"
         ]
@@ -1537,7 +1586,7 @@
             "bearer": []
           }
         ],
-        "summary": "Follow a k\u00f6\u015fk as the current talebe",
+        "summary": "Follow a köşk as the current talebe",
         "tags": [
           "kosks"
         ]
@@ -1571,7 +1620,7 @@
             "bearer": []
           }
         ],
-        "summary": "Unfollow a k\u00f6\u015fk",
+        "summary": "Unfollow a köşk",
         "tags": [
           "kosks"
         ]
@@ -1613,7 +1662,7 @@
             "bearer": []
           }
         ],
-        "summary": "List the courses that belong to a k\u00f6\u015fk",
+        "summary": "List the courses that belong to a köşk",
         "tags": [
           "courses"
         ]
@@ -1660,7 +1709,7 @@
             "bearer": []
           }
         ],
-        "summary": "Create a new course under a k\u00f6\u015fk",
+        "summary": "Create a new course under a köşk",
         "tags": [
           "courses"
         ]
@@ -1702,6 +1751,142 @@
         "summary": "Throw a dummy error",
         "tags": [
           "Tedrisat Service"
+        ]
+      }
+    },
+    "/kosks/{koskId}/enrollments/pending": {
+      "get": {
+        "operationId": "getPendingEnrollments",
+        "parameters": [
+          {
+            "name": "koskId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PendingEnrollmentResponse"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "List pending enrollment requests for a köşk (owner only)",
+        "tags": [
+          "courses"
+        ]
+      }
+    },
+    "/courses/{id}/enrollments/{userId}/approve": {
+      "post": {
+        "operationId": "approveEnrollment",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnrollmentResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Approve a pending enrollment (köşk owner only)",
+        "tags": [
+          "courses"
+        ]
+      }
+    },
+    "/courses/{id}/enrollments/{userId}": {
+      "delete": {
+        "operationId": "rejectEnrollment",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Reject a pending enrollment, deleting it (köşk owner only)",
+        "tags": [
+          "courses"
         ]
       }
     }
@@ -2260,6 +2445,9 @@
           },
           "enrollment": {
             "$ref": "#/components/schemas/EnrollmentResponse"
+          },
+          "requiresApproval": {
+            "type": "boolean"
           }
         },
         "required": [
@@ -2276,7 +2464,8 @@
           "updatedAt",
           "weeks",
           "muderris",
-          "resources"
+          "resources",
+          "requiresApproval"
         ]
       },
       "CourseSummaryResponse": {
@@ -2355,6 +2544,9 @@
           },
           "enrollment": {
             "$ref": "#/components/schemas/EnrollmentResponse"
+          },
+          "requiresApproval": {
+            "type": "boolean"
           }
         },
         "required": [
@@ -2372,7 +2564,109 @@
           "weekCount",
           "lessonCount",
           "resourceCount",
-          "muderris"
+          "muderris",
+          "requiresApproval"
+        ]
+      },
+      "EnrolledCourseResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "koskId": {
+            "type": "string"
+          },
+          "authorId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "subtitle": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "level": {
+            "type": "string",
+            "enum": [
+              "BEGINNER",
+              "INTERMEDIATE",
+              "ADVANCED"
+            ]
+          },
+          "language": {
+            "type": "string"
+          },
+          "coverHue": {
+            "type": "number"
+          },
+          "durationWeeks": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "PUBLISHED"
+            ]
+          },
+          "grantsCertificate": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "koskName": {
+            "type": "string"
+          },
+          "weekCount": {
+            "type": "number"
+          },
+          "lessonCount": {
+            "type": "number"
+          },
+          "muderris": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MuderrisResponse"
+            }
+          },
+          "enrollment": {
+            "$ref": "#/components/schemas/EnrollmentResponse"
+          },
+          "requiresApproval": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "koskId",
+          "authorId",
+          "title",
+          "level",
+          "coverHue",
+          "durationWeeks",
+          "status",
+          "grantsCertificate",
+          "createdAt",
+          "updatedAt",
+          "weekCount",
+          "lessonCount",
+          "muderris",
+          "koskName",
+          "enrollment",
+          "requiresApproval"
         ]
       },
       "CreateCourseDto": {
@@ -2380,11 +2674,11 @@
         "properties": {
           "title": {
             "type": "string",
-            "example": "Bina ve \u0130zhar \u015eerhi"
+            "example": "Bina ve İzhar Şerhi"
           },
           "subtitle": {
             "type": "string",
-            "example": "Klasik sarf metni \u2014 \u015ferh, illet ve tatbiki \u00f6rneklerle."
+            "example": "Klasik sarf metni — şerh, illet ve tatbiki örneklerle."
           },
           "description": {
             "type": "string"
@@ -2404,7 +2698,7 @@
           },
           "language": {
             "type": "string",
-            "example": "T\u00fcrk\u00e7e / Arap\u00e7a"
+            "example": "Türkçe / Arapça"
           },
           "coverHue": {
             "type": "number",
@@ -2445,6 +2739,9 @@
             "items": {
               "$ref": "#/components/schemas/CreateResourceDto"
             }
+          },
+          "requiresApproval": {
+            "type": "boolean"
           }
         },
         "required": [
@@ -2456,7 +2753,7 @@
         "properties": {
           "name": {
             "type": "string",
-            "example": "S\u00fcleymaniye K\u00f6\u015fk\u00fc"
+            "example": "Süleymaniye Köşkü"
           },
           "handle": {
             "type": "string",
@@ -2464,7 +2761,7 @@
           },
           "description": {
             "type": "string",
-            "example": "Klasik medrese m\u00fcfredat\u0131na dayal\u0131; sarf, nahiv ve us\u00fbl-i f\u0131k\u0131h dersleri sunan k\u00f6\u015fk."
+            "example": "Klasik medrese müfredatına dayalı; sarf, nahiv ve usûl-i fıkıh dersleri sunan köşk."
           },
           "coverHue": {
             "type": "number",
@@ -2479,7 +2776,7 @@
           "field": {
             "type": "string",
             "example": "Tefsir & Hadis",
-            "description": "\u0130lim alan\u0131"
+            "description": "İlim alanı"
           },
           "level": {
             "type": "string",
@@ -2495,25 +2792,6 @@
             "items": {
               "type": "string"
             }
-          },
-          "verified": {
-            "type": "boolean",
-            "example": false
-          },
-          "featured": {
-            "type": "boolean",
-            "example": false
-          },
-          "rating": {
-            "type": "number",
-            "example": 4.8,
-            "minimum": 0,
-            "maximum": 5
-          },
-          "ratingCount": {
-            "type": "number",
-            "example": 132,
-            "minimum": 0
           }
         },
         "required": [
@@ -2523,9 +2801,13 @@
       "CreateLessonDto": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "string",
+            "description": "Existing lesson id (preserved on replace)"
+          },
           "title": {
             "type": "string",
-            "example": "Birinci bab\u0131n \u00ees\u00e2g\u00fbc\u00eesi"
+            "example": "Birinci babın îsâgûcîsi"
           },
           "type": {
             "type": "string",
@@ -2543,7 +2825,7 @@
           },
           "kaynak": {
             "type": "string",
-            "example": "Bina \u00b7 s. 4-9"
+            "example": "Bina · s. 4-9"
           },
           "isPreview": {
             "type": "boolean",
@@ -2558,17 +2840,21 @@
       "CreateMuderrisDto": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "string",
+            "description": "Existing müderris row id (preserved on replace)"
+          },
           "userId": {
             "type": "string",
             "description": "Linked platform user id, if any"
           },
           "name": {
             "type": "string",
-            "example": "M\u00fcderris Ahmed Hilmi"
+            "example": "Müderris Ahmed Hilmi"
           },
           "title": {
             "type": "string",
-            "example": "Sarf ve Nahiv M\u00fcderrisi"
+            "example": "Sarf ve Nahiv Müderrisi"
           },
           "bio": {
             "type": "string"
@@ -2587,13 +2873,17 @@
       "CreateResourceDto": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "string",
+            "description": "Existing resource row id (preserved on replace)"
+          },
           "name": {
             "type": "string",
-            "example": "Bina ve \u0130zhar \u2014 Klasik metin"
+            "example": "Bina ve İzhar — Klasik metin"
           },
           "meta": {
             "type": "string",
-            "example": "PDF \u00b7 124 sayfa"
+            "example": "PDF · 124 sayfa"
           },
           "type": {
             "type": "string",
@@ -2610,17 +2900,21 @@
       "CreateWeekDto": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "string",
+            "description": "Existing week id (preserved on replace)"
+          },
           "weekNumber": {
             "type": "number",
             "example": 1
           },
           "title": {
             "type": "string",
-            "example": "S\u00fcl\u00e2s\u00ee M\u00fccerred \u2014 Birinci Bab"
+            "example": "Sülâsî Mücerred — Birinci Bab"
           },
           "summary": {
             "type": "string",
-            "example": "M\u00fcfredat tan\u0131t\u0131m\u0131 ve birinci bab\u0131n \u00ees\u00e2g\u00fbc\u00eesi."
+            "example": "Müfredat tanıtımı ve birinci babın îsâgûcîsi."
           },
           "lessons": {
             "type": "array",
@@ -2651,6 +2945,7 @@
           "status": {
             "type": "string",
             "enum": [
+              "PENDING",
               "ENROLLED",
               "COMPLETED"
             ]
@@ -2662,6 +2957,14 @@
           "updatedAt": {
             "format": "date-time",
             "type": "string"
+          },
+          "studentName": {
+            "type": "string",
+            "nullable": true
+          },
+          "studentEmail": {
+            "type": "string",
+            "nullable": true
           }
         },
         "required": [
@@ -2671,6 +2974,57 @@
           "status",
           "createdAt",
           "updatedAt"
+        ]
+      },
+      "PendingEnrollmentResponse": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string"
+          },
+          "courseId": {
+            "type": "string"
+          },
+          "progress": {
+            "type": "number",
+            "description": "Percent complete, 0-100"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "ENROLLED",
+              "COMPLETED"
+            ]
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "studentName": {
+            "type": "string",
+            "nullable": true
+          },
+          "studentEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "courseTitle": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "userId",
+          "courseId",
+          "progress",
+          "status",
+          "createdAt",
+          "updatedAt",
+          "courseTitle"
         ]
       },
       "KoskResponse": {
@@ -2684,7 +3038,7 @@
           },
           "name": {
             "type": "string",
-            "example": "S\u00fcleymaniye K\u00f6\u015fk\u00fc"
+            "example": "Süleymaniye Köşkü"
           },
           "handle": {
             "type": "string",
@@ -2737,7 +3091,7 @@
           },
           "courseCount": {
             "type": "number",
-            "description": "Courses published under this k\u00f6\u015fk",
+            "description": "Courses published under this köşk",
             "example": 14
           },
           "studentCount": {
@@ -2747,7 +3101,7 @@
           },
           "muderrisCount": {
             "type": "number",
-            "description": "Distinct m\u00fcderris",
+            "description": "Distinct müderris",
             "example": 6
           },
           "followerCount": {
@@ -2756,7 +3110,7 @@
           },
           "isFollowing": {
             "type": "boolean",
-            "description": "Whether the current talebe follows this k\u00f6\u015fk"
+            "description": "Whether the current talebe follows this köşk"
           },
           "createdAt": {
             "format": "date-time",
@@ -2903,11 +3257,11 @@
         "properties": {
           "title": {
             "type": "string",
-            "example": "Bina ve \u0130zhar \u015eerhi"
+            "example": "Bina ve İzhar Şerhi"
           },
           "subtitle": {
             "type": "string",
-            "example": "Klasik sarf metni \u2014 \u015ferh, illet ve tatbiki \u00f6rneklerle."
+            "example": "Klasik sarf metni — şerh, illet ve tatbiki örneklerle."
           },
           "description": {
             "type": "string"
@@ -2927,7 +3281,7 @@
           },
           "language": {
             "type": "string",
-            "example": "T\u00fcrk\u00e7e / Arap\u00e7a"
+            "example": "Türkçe / Arapça"
           },
           "coverHue": {
             "type": "number",
@@ -2950,15 +3304,19 @@
           "grantsCertificate": {
             "type": "boolean",
             "example": true
+          },
+          "requiresApproval": {
+            "type": "boolean"
           }
-        }
+        },
+        "required": []
       },
       "UpdateKoskDto": {
         "type": "object",
         "properties": {
           "name": {
             "type": "string",
-            "example": "S\u00fcleymaniye K\u00f6\u015fk\u00fc"
+            "example": "Süleymaniye Köşkü"
           },
           "handle": {
             "type": "string",
@@ -2966,7 +3324,7 @@
           },
           "description": {
             "type": "string",
-            "example": "Klasik medrese m\u00fcfredat\u0131na dayal\u0131; sarf, nahiv ve us\u00fbl-i f\u0131k\u0131h dersleri sunan k\u00f6\u015fk."
+            "example": "Klasik medrese müfredatına dayalı; sarf, nahiv ve usûl-i fıkıh dersleri sunan köşk."
           },
           "coverHue": {
             "type": "number",
@@ -2981,7 +3339,7 @@
           "field": {
             "type": "string",
             "example": "Tefsir & Hadis",
-            "description": "\u0130lim alan\u0131"
+            "description": "İlim alanı"
           },
           "level": {
             "type": "string",
@@ -2997,25 +3355,6 @@
             "items": {
               "type": "string"
             }
-          },
-          "verified": {
-            "type": "boolean",
-            "example": false
-          },
-          "featured": {
-            "type": "boolean",
-            "example": false
-          },
-          "rating": {
-            "type": "number",
-            "example": 4.8,
-            "minimum": 0,
-            "maximum": 5
-          },
-          "ratingCount": {
-            "type": "number",
-            "example": 132,
-            "minimum": 0
           }
         }
       },
@@ -3075,6 +3414,38 @@
           "title",
           "orderIndex",
           "lessons"
+        ]
+      },
+      "PaginatedKoskResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KoskResponse"
+            }
+          },
+          "total": {
+            "type": "number",
+            "description": "Total number of köşks",
+            "example": 38
+          },
+          "page": {
+            "type": "number",
+            "description": "Current page (1-based)",
+            "example": 1
+          },
+          "limit": {
+            "type": "number",
+            "description": "Items per page",
+            "example": 12
+          }
+        },
+        "required": [
+          "items",
+          "total",
+          "page",
+          "limit"
         ]
       }
     }

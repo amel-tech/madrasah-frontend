@@ -155,7 +155,9 @@
     "validationTitle": "Kurs adı zorunludur.",
     "editTitle": "Kursu Düzenle",
     "breadcrumbEdit": "Düzenle",
-    "updated": "Kurs güncellendi."
+    "updated": "Kurs güncellendi.",
+    "requiresApproval": "Require enrollment approval",
+    "requiresApprovalHint": "When on, student enrollments stay pending until you approve them."
   },
   "SampleFile": {
     "backWord": "Sample Translation {index}",

@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { getCourse } from '~/features/courses/actions'
+import { getCourse, getKosk } from '~/features/courses/actions'
 import { CoursePage } from '~/features/courses/components/course-page'
 
 export default async function Page({
@@ -11,5 +11,8 @@ export default async function Page({
   const course = await getCourse(courseId)
   if (!course) notFound()
 
-  return <CoursePage course={course} />
+  // Köşk name for the breadcrumb (CourseDetailResponse only carries koskId).
+  const kosk = await getKosk(course.koskId)
+
+  return <CoursePage course={course} koskName={kosk?.name ?? null} />
 }

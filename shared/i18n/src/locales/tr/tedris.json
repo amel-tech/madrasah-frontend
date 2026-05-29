@@ -41,7 +41,10 @@
     "noResources": "Kaynak bulunmuyor.",
     "courseResources": "Bu kursun kaynakları",
     "icazetTitle": "İcâzet belgesi",
-    "icazetDescription": "Müfredatı tamamlayan talebelere müderris onaylı icâzet verilir."
+    "icazetDescription": "Müfredatı tamamlayan talebelere müderris onaylı icâzet verilir.",
+    "requestEnroll": "Kayıt iste",
+    "requestSent": "Kayıt talebiniz gönderildi, onay bekleniyor.",
+    "pendingApproval": "Onay bekleniyor"
   },
   "CreateDeckButtonDialog": {
     "cancel": "İptal etmek",
@@ -187,7 +190,15 @@
     "openKoskTitle": "Köşk aç",
     "openKoskHint": "Müderris misiniz? Kendi köşkünüzü açıp ders halkalarınızı başlatın.",
     "apply": "Başvuru yap",
-    "empty": "Henüz köşk bulunmuyor."
+    "empty": "Henüz köşk bulunmuyor.",
+    "prev": "Önceki",
+    "next": "Sonraki",
+    "pageOf": "{page} / {total}",
+    "continueTitle": "Kaldığın yerden devam et",
+    "continueCount": "{count} ders",
+    "allMyCourses": "Tüm derslerim",
+    "continue": "Devam et",
+    "completed": "tamamlandı"
   },
   "KoskPage": {
     "kosks": "Köşkler",
@@ -254,5 +265,12 @@
   },
   "Version": {
     "appVersion": "Uygulama sürümü"
+  },
+  "MyCoursesPage": {
+    "breadcrumb": "Derslerim",
+    "title": "Derslerim",
+    "subtitle": "Devam eden ders halkalarını tek yerden takip et.",
+    "empty": "Devam eden dersin bulunmuyor.",
+    "count": "{count} ders"
   }
 }

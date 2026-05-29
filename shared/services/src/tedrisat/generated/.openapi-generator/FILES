@@ -25,6 +25,7 @@ src/models/CreateLessonDto.ts
 src/models/CreateMuderrisDto.ts
 src/models/CreateResourceDto.ts
 src/models/CreateWeekDto.ts
+src/models/EnrolledCourseResponse.ts
 src/models/EnrollmentResponse.ts
 src/models/FieldError.ts
 src/models/FlashcardDeckResponse.ts
@@ -38,6 +39,8 @@ src/models/MedarisMetaPaginationResponse.ts
 src/models/MedarisMetaResponse.ts
 src/models/MedarisResponse.ts
 src/models/MuderrisResponse.ts
+src/models/PaginatedKoskResponse.ts
+src/models/PendingEnrollmentResponse.ts
 src/models/ResourceResponse.ts
 src/models/RowError.ts
 src/models/UpdateCourseDto.ts

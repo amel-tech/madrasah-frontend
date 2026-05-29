@@ -16,89 +16,96 @@ import { mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface EnrollmentResponse
+ * @interface PendingEnrollmentResponse
  */
-export interface EnrollmentResponse {
+export interface PendingEnrollmentResponse {
     /**
      * 
      * @type {string}
-     * @memberof EnrollmentResponse
+     * @memberof PendingEnrollmentResponse
      */
     userId: string;
     /**
      * 
      * @type {string}
-     * @memberof EnrollmentResponse
+     * @memberof PendingEnrollmentResponse
      */
     courseId: string;
     /**
      * Percent complete, 0-100
      * @type {number}
-     * @memberof EnrollmentResponse
+     * @memberof PendingEnrollmentResponse
      */
     progress: number;
     /**
      * 
      * @type {string}
-     * @memberof EnrollmentResponse
+     * @memberof PendingEnrollmentResponse
      */
-    status: EnrollmentResponseStatusEnum;
+    status: PendingEnrollmentResponseStatusEnum;
     /**
      * 
      * @type {Date}
-     * @memberof EnrollmentResponse
+     * @memberof PendingEnrollmentResponse
      */
     createdAt: Date;
     /**
      * 
      * @type {Date}
-     * @memberof EnrollmentResponse
+     * @memberof PendingEnrollmentResponse
      */
     updatedAt: Date;
     /**
      * 
      * @type {string}
-     * @memberof EnrollmentResponse
+     * @memberof PendingEnrollmentResponse
      */
     studentName?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof EnrollmentResponse
+     * @memberof PendingEnrollmentResponse
      */
     studentEmail?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PendingEnrollmentResponse
+     */
+    courseTitle: string;
 }
 
 
 /**
  * @export
  */
-export const EnrollmentResponseStatusEnum = {
+export const PendingEnrollmentResponseStatusEnum = {
     Pending: 'PENDING',
     Enrolled: 'ENROLLED',
     Completed: 'COMPLETED'
 } as const;
-export type EnrollmentResponseStatusEnum = typeof EnrollmentResponseStatusEnum[keyof typeof EnrollmentResponseStatusEnum];
+export type PendingEnrollmentResponseStatusEnum = typeof PendingEnrollmentResponseStatusEnum[keyof typeof PendingEnrollmentResponseStatusEnum];
 
 
 /**
- * Check if a given object implements the EnrollmentResponse interface.
+ * Check if a given object implements the PendingEnrollmentResponse interface.
  */
-export function instanceOfEnrollmentResponse(value: object): value is EnrollmentResponse {
+export function instanceOfPendingEnrollmentResponse(value: object): value is PendingEnrollmentResponse {
     if (!('userId' in value) || value['userId'] === undefined) return false;
     if (!('courseId' in value) || value['courseId'] === undefined) return false;
     if (!('progress' in value) || value['progress'] === undefined) return false;
     if (!('status' in value) || value['status'] === undefined) return false;
     if (!('createdAt' in value) || value['createdAt'] === undefined) return false;
     if (!('updatedAt' in value) || value['updatedAt'] === undefined) return false;
+    if (!('courseTitle' in value) || value['courseTitle'] === undefined) return false;
     return true;
 }
 
-export function EnrollmentResponseFromJSON(json: any): EnrollmentResponse {
-    return EnrollmentResponseFromJSONTyped(json, false);
+export function PendingEnrollmentResponseFromJSON(json: any): PendingEnrollmentResponse {
+    return PendingEnrollmentResponseFromJSONTyped(json, false);
 }
 
-export function EnrollmentResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): EnrollmentResponse {
+export function PendingEnrollmentResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): PendingEnrollmentResponse {
     if (json == null) {
         return json;
     }
@@ -112,14 +119,15 @@ export function EnrollmentResponseFromJSONTyped(json: any, ignoreDiscriminator: 
         'updatedAt': (new Date(json['updatedAt'])),
         'studentName': json['studentName'] == null ? undefined : json['studentName'],
         'studentEmail': json['studentEmail'] == null ? undefined : json['studentEmail'],
+        'courseTitle': json['courseTitle'],
     };
 }
 
-export function EnrollmentResponseToJSON(json: any): EnrollmentResponse {
-    return EnrollmentResponseToJSONTyped(json, false);
+export function PendingEnrollmentResponseToJSON(json: any): PendingEnrollmentResponse {
+    return PendingEnrollmentResponseToJSONTyped(json, false);
 }
 
-export function EnrollmentResponseToJSONTyped(value?: EnrollmentResponse | null, ignoreDiscriminator: boolean = false): any {
+export function PendingEnrollmentResponseToJSONTyped(value?: PendingEnrollmentResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
@@ -134,6 +142,7 @@ export function EnrollmentResponseToJSONTyped(value?: EnrollmentResponse | null,
         'updatedAt': ((value['updatedAt']).toISOString()),
         'studentName': value['studentName'],
         'studentEmail': value['studentEmail'],
+        'courseTitle': value['courseTitle'],
     };
 }
 

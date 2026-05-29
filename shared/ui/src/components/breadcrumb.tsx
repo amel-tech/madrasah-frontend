@@ -1,6 +1,6 @@
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
-import { CaretRightIcon, DotsThreeIcon } from "@madrasah/icons"
+import { CaretRightIcon, DotsThreeIcon } from "@madrasah/icons/ssr"
 
 import { cn } from "@madrasah/ui/lib/utils"
 
@@ -99,8 +99,65 @@ function BreadcrumbEllipsis({
   )
 }
 
+export type BreadcrumbEntry = {
+  label: React.ReactNode
+  /** When set (and not the last item) the crumb is a link. */
+  href?: string
+}
+
+/**
+ * Data-driven breadcrumb trail. Pass an ordered `items` array; the last item
+ * renders as the current page, earlier items with an `href` render as links.
+ *
+ * Pass `linkComponent` (e.g. next/link's `Link`) to get client-side navigation;
+ * it defaults to a plain `<a>`.
+ */
+function Breadcrumbs({
+  items,
+  linkComponent,
+  className,
+}: {
+  items: BreadcrumbEntry[]
+  linkComponent?: React.ElementType
+  className?: string
+}) {
+  const LinkComponent = linkComponent ?? "a"
+
+  return (
+    <Breadcrumb className={className}>
+      <BreadcrumbList>
+        {items.map((item, index) => {
+          const isLast = index === items.length - 1
+          const key = `${index}-${typeof item.label === "string" ? item.label : ""}`
+          return (
+            <React.Fragment key={key}>
+              <BreadcrumbItem>
+                {isLast
+                  ? (
+                      <BreadcrumbPage>{item.label}</BreadcrumbPage>
+                    )
+                  : item.href
+                    ? (
+                        <BreadcrumbLink asChild>
+                          <LinkComponent href={item.href}>{item.label}</LinkComponent>
+                        </BreadcrumbLink>
+                      )
+                    : (
+                        <span>{item.label}</span>
+                      )}
+              </BreadcrumbItem>
+              {!isLast && <BreadcrumbSeparator />}
+            </React.Fragment>
+          )
+        })}
+      </BreadcrumbList>
+    </Breadcrumb>
+  )
+}
+
 export {
   Breadcrumb,
+  Breadcrumbs,
   BreadcrumbList,
   BreadcrumbItem,
   BreadcrumbLink,

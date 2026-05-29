@@ -155,7 +155,9 @@
     "validationTitle": "Kurs adı zorunludur.",
     "editTitle": "Kursu Düzenle",
     "breadcrumbEdit": "Düzenle",
-    "updated": "Kurs güncellendi."
+    "updated": "Kurs güncellendi.",
+    "requiresApproval": "اشتراط الموافقة على التسجيل",
+    "requiresApprovalHint": "عند التفعيل، يبقى تسجيل الطلاب معلقًا حتى توافق عليه."
   },
   "SampleFile": {
     "backWord": "ترجمة نموذجية {index}",

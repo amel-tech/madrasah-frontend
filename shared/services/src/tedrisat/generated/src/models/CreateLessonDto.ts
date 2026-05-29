@@ -20,6 +20,12 @@ import { mapValues } from '../runtime';
  */
 export interface CreateLessonDto {
     /**
+     * Existing lesson id (preserved on replace)
+     * @type {string}
+     * @memberof CreateLessonDto
+     */
+    id?: string;
+    /**
      * 
      * @type {string}
      * @memberof CreateLessonDto
@@ -83,6 +89,7 @@ export function CreateLessonDtoFromJSONTyped(json: any, ignoreDiscriminator: boo
     }
     return {
         
+        'id': json['id'] == null ? undefined : json['id'],
         'title': json['title'],
         'type': json['type'],
         'duration': json['duration'] == null ? undefined : json['duration'],
@@ -102,6 +109,7 @@ export function CreateLessonDtoToJSONTyped(value?: CreateLessonDto | null, ignor
 
     return {
         
+        'id': value['id'],
         'title': value['title'],
         'type': value['type'],
         'duration': value['duration'],

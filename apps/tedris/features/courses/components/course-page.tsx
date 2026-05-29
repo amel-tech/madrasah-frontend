@@ -6,7 +6,6 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { toast } from '@madrasah/ui/components/sonner'
 import {
-  ArrowLeftIcon as ArrowLeft,
   ArrowRightIcon as ArrowRight,
   PlayIcon as Play,
   ClockIcon as Clock,
@@ -18,6 +17,7 @@ import {
   BookOpenIcon as BookOpen,
 } from '@madrasah/icons'
 import { cn } from '@madrasah/ui/lib/utils'
+import { Breadcrumbs } from '@madrasah/ui/components/breadcrumb'
 import type {
   CourseDetailResponse,
   ResourceResponse,
@@ -36,7 +36,13 @@ const ResourceIcon = ({ type }: { type: string | null }) => {
   return <FileText size={16} />
 }
 
-export const CoursePage = ({ course }: { course: CourseDetailResponse }) => {
+export const CoursePage = ({
+  course,
+  koskName,
+}: {
+  course: CourseDetailResponse
+  koskName?: string | null
+}) => {
   const t = useTranslations('tedris')
   const router = useRouter()
   const [tab, setTab] = useState('mufredat')
@@ -44,7 +50,8 @@ export const CoursePage = ({ course }: { course: CourseDetailResponse }) => {
   const [showSyllabus, setShowSyllabus] = useState(false)
   const [pending, startTransition] = useTransition()
 
-  const enrolled = Boolean(course.enrollment)
+  const isPending = course.enrollment?.status === 'PENDING'
+  const enrolled = Boolean(course.enrollment) && !isPending
   const progress = course.enrollment?.progress ?? 0
   const lessonCount = course.weeks.reduce((s, w) => s + w.lessons.length, 0)
   const previewWeeks = course.weeks.slice(0, 5)
@@ -57,7 +64,11 @@ export const CoursePage = ({ course }: { course: CourseDetailResponse }) => {
         toast.error(res.error)
         return
       }
-      toast.success(t('CoursePage.enrolled'))
+      toast.success(
+        course.requiresApproval
+          ? t('CoursePage.requestSent')
+          : t('CoursePage.enrolled'),
+      )
       router.refresh()
     })
 
@@ -70,18 +81,23 @@ export const CoursePage = ({ course }: { course: CourseDetailResponse }) => {
 
   return (
     <div className="pb-16">
+      {/* Breadcrumb */}
+      <Breadcrumbs
+        className="mb-4"
+        linkComponent={Link}
+        items={[
+          { label: t('TabView.learning'), href: '/learning' },
+          { label: t('KoskPage.kosks'), href: '/learning' },
+          ...(koskName
+            ? [{ label: koskName, href: `/kosks/${course.koskId}` }]
+            : []),
+          { label: course.title },
+        ]}
+      />
+
       {/* Hero */}
       <div className="grid grid-cols-1 gap-9 lg:grid-cols-[1fr_360px]">
         <div>
-          <Link
-            href={`/kosks/${course.koskId}`}
-            className="mb-4 inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
-          >
-            <ArrowLeft size={14} />
-            {' '}
-            {t('CoursePage.backToKosk')}
-          </Link>
-
           <div className="mb-2.5 flex items-center gap-2 text-[11px] uppercase tracking-wide text-muted-foreground">
             {course.category && <span className="font-semibold">{course.category}</span>}
             {course.category && <span className="size-[3px] rounded-full bg-slate-300" />}
@@ -147,27 +163,43 @@ export const CoursePage = ({ course }: { course: CourseDetailResponse }) => {
                 </>
               )}
 
-              {enrolled
+              {isPending
                 ? (
                     <button
                       type="button"
-                      className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-medium text-white"
+                      disabled
+                      className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-amber-50 px-4 py-2.5 text-sm font-medium text-amber-700"
                     >
-                      <Play size={14} weight="fill" />
+                      <Clock size={14} />
                       {' '}
-                      {t('CoursePage.continue')}
+                      {t('CoursePage.pendingApproval')}
                     </button>
                   )
-                : (
-                    <button
-                      type="button"
-                      onClick={handleEnroll}
-                      disabled={pending}
-                      className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-medium text-white disabled:opacity-60"
-                    >
-                      {pending ? t('CoursePage.enrolling') : t('CoursePage.enroll')}
-                    </button>
-                  )}
+                : enrolled
+                  ? (
+                      <button
+                        type="button"
+                        className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-medium text-white"
+                      >
+                        <Play size={14} weight="fill" />
+                        {' '}
+                        {t('CoursePage.continue')}
+                      </button>
+                    )
+                  : (
+                      <button
+                        type="button"
+                        onClick={handleEnroll}
+                        disabled={pending}
+                        className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-medium text-white disabled:opacity-60"
+                      >
+                        {pending
+                          ? t('CoursePage.enrolling')
+                          : course.requiresApproval
+                            ? t('CoursePage.requestEnroll')
+                            : t('CoursePage.enroll')}
+                      </button>
+                    )}
 
               <div className="mt-2.5 flex gap-2">
                 <button type="button" className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg border bg-white px-3.5 py-2 text-[13px] font-medium">

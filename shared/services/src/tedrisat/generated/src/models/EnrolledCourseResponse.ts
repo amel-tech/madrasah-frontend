@@ -31,133 +31,133 @@ import {
 /**
  * 
  * @export
- * @interface CourseSummaryResponse
+ * @interface EnrolledCourseResponse
  */
-export interface CourseSummaryResponse {
+export interface EnrolledCourseResponse {
     /**
      * 
      * @type {string}
-     * @memberof CourseSummaryResponse
+     * @memberof EnrolledCourseResponse
      */
     id: string;
     /**
      * 
      * @type {string}
-     * @memberof CourseSummaryResponse
+     * @memberof EnrolledCourseResponse
      */
     koskId: string;
     /**
      * 
      * @type {string}
-     * @memberof CourseSummaryResponse
+     * @memberof EnrolledCourseResponse
      */
     authorId: string;
     /**
      * 
      * @type {string}
-     * @memberof CourseSummaryResponse
+     * @memberof EnrolledCourseResponse
      */
     title: string;
     /**
      * 
      * @type {string}
-     * @memberof CourseSummaryResponse
+     * @memberof EnrolledCourseResponse
      */
     subtitle?: string;
     /**
      * 
      * @type {string}
-     * @memberof CourseSummaryResponse
+     * @memberof EnrolledCourseResponse
      */
     description?: string;
     /**
      * 
      * @type {string}
-     * @memberof CourseSummaryResponse
+     * @memberof EnrolledCourseResponse
      */
     category?: string;
     /**
      * 
      * @type {string}
-     * @memberof CourseSummaryResponse
+     * @memberof EnrolledCourseResponse
      */
-    level: CourseSummaryResponseLevelEnum;
+    level: EnrolledCourseResponseLevelEnum;
     /**
      * 
      * @type {string}
-     * @memberof CourseSummaryResponse
+     * @memberof EnrolledCourseResponse
      */
     language?: string;
     /**
      * 
      * @type {number}
-     * @memberof CourseSummaryResponse
+     * @memberof EnrolledCourseResponse
      */
     coverHue: number;
     /**
      * 
      * @type {number}
-     * @memberof CourseSummaryResponse
+     * @memberof EnrolledCourseResponse
      */
     durationWeeks: number;
     /**
      * 
      * @type {string}
-     * @memberof CourseSummaryResponse
+     * @memberof EnrolledCourseResponse
      */
-    status: CourseSummaryResponseStatusEnum;
+    status: EnrolledCourseResponseStatusEnum;
     /**
      * 
      * @type {boolean}
-     * @memberof CourseSummaryResponse
+     * @memberof EnrolledCourseResponse
      */
     grantsCertificate: boolean;
     /**
      * 
      * @type {Date}
-     * @memberof CourseSummaryResponse
+     * @memberof EnrolledCourseResponse
      */
     createdAt: Date;
     /**
      * 
      * @type {Date}
-     * @memberof CourseSummaryResponse
+     * @memberof EnrolledCourseResponse
      */
     updatedAt: Date;
     /**
      * 
+     * @type {string}
+     * @memberof EnrolledCourseResponse
+     */
+    koskName: string;
+    /**
+     * 
      * @type {number}
-     * @memberof CourseSummaryResponse
+     * @memberof EnrolledCourseResponse
      */
     weekCount: number;
     /**
      * 
      * @type {number}
-     * @memberof CourseSummaryResponse
+     * @memberof EnrolledCourseResponse
      */
     lessonCount: number;
     /**
      * 
-     * @type {number}
-     * @memberof CourseSummaryResponse
-     */
-    resourceCount: number;
-    /**
-     * 
      * @type {Array<MuderrisResponse>}
-     * @memberof CourseSummaryResponse
+     * @memberof EnrolledCourseResponse
      */
     muderris: Array<MuderrisResponse>;
     /**
      * 
      * @type {EnrollmentResponse}
-     * @memberof CourseSummaryResponse
+     * @memberof EnrolledCourseResponse
      */
-    enrollment?: EnrollmentResponse;
+    enrollment: EnrollmentResponse;
     /**
      * 
      * @type {boolean}
-     * @memberof CourseSummaryResponse
+     * @memberof EnrolledCourseResponse
      */
     requiresApproval: boolean;
 }
@@ -166,27 +166,27 @@ export interface CourseSummaryResponse {
 /**
  * @export
  */
-export const CourseSummaryResponseLevelEnum = {
+export const EnrolledCourseResponseLevelEnum = {
     Beginner: 'BEGINNER',
     Intermediate: 'INTERMEDIATE',
     Advanced: 'ADVANCED'
 } as const;
-export type CourseSummaryResponseLevelEnum = typeof CourseSummaryResponseLevelEnum[keyof typeof CourseSummaryResponseLevelEnum];
+export type EnrolledCourseResponseLevelEnum = typeof EnrolledCourseResponseLevelEnum[keyof typeof EnrolledCourseResponseLevelEnum];
 
 /**
  * @export
  */
-export const CourseSummaryResponseStatusEnum = {
+export const EnrolledCourseResponseStatusEnum = {
     Draft: 'DRAFT',
     Published: 'PUBLISHED'
 } as const;
-export type CourseSummaryResponseStatusEnum = typeof CourseSummaryResponseStatusEnum[keyof typeof CourseSummaryResponseStatusEnum];
+export type EnrolledCourseResponseStatusEnum = typeof EnrolledCourseResponseStatusEnum[keyof typeof EnrolledCourseResponseStatusEnum];
 
 
 /**
- * Check if a given object implements the CourseSummaryResponse interface.
+ * Check if a given object implements the EnrolledCourseResponse interface.
  */
-export function instanceOfCourseSummaryResponse(value: object): value is CourseSummaryResponse {
+export function instanceOfEnrolledCourseResponse(value: object): value is EnrolledCourseResponse {
     if (!('id' in value) || value['id'] === undefined) return false;
     if (!('koskId' in value) || value['koskId'] === undefined) return false;
     if (!('authorId' in value) || value['authorId'] === undefined) return false;
@@ -198,19 +198,20 @@ export function instanceOfCourseSummaryResponse(value: object): value is CourseS
     if (!('grantsCertificate' in value) || value['grantsCertificate'] === undefined) return false;
     if (!('createdAt' in value) || value['createdAt'] === undefined) return false;
     if (!('updatedAt' in value) || value['updatedAt'] === undefined) return false;
+    if (!('koskName' in value) || value['koskName'] === undefined) return false;
     if (!('weekCount' in value) || value['weekCount'] === undefined) return false;
     if (!('lessonCount' in value) || value['lessonCount'] === undefined) return false;
-    if (!('resourceCount' in value) || value['resourceCount'] === undefined) return false;
     if (!('muderris' in value) || value['muderris'] === undefined) return false;
+    if (!('enrollment' in value) || value['enrollment'] === undefined) return false;
     if (!('requiresApproval' in value) || value['requiresApproval'] === undefined) return false;
     return true;
 }
 
-export function CourseSummaryResponseFromJSON(json: any): CourseSummaryResponse {
-    return CourseSummaryResponseFromJSONTyped(json, false);
+export function EnrolledCourseResponseFromJSON(json: any): EnrolledCourseResponse {
+    return EnrolledCourseResponseFromJSONTyped(json, false);
 }
 
-export function CourseSummaryResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): CourseSummaryResponse {
+export function EnrolledCourseResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): EnrolledCourseResponse {
     if (json == null) {
         return json;
     }
@@ -231,20 +232,20 @@ export function CourseSummaryResponseFromJSONTyped(json: any, ignoreDiscriminato
         'grantsCertificate': json['grantsCertificate'],
         'createdAt': (new Date(json['createdAt'])),
         'updatedAt': (new Date(json['updatedAt'])),
+        'koskName': json['koskName'],
         'weekCount': json['weekCount'],
         'lessonCount': json['lessonCount'],
-        'resourceCount': json['resourceCount'],
         'muderris': ((json['muderris'] as Array<any>).map(MuderrisResponseFromJSON)),
-        'enrollment': json['enrollment'] == null ? undefined : EnrollmentResponseFromJSON(json['enrollment']),
+        'enrollment': EnrollmentResponseFromJSON(json['enrollment']),
         'requiresApproval': json['requiresApproval'],
     };
 }
 
-export function CourseSummaryResponseToJSON(json: any): CourseSummaryResponse {
-    return CourseSummaryResponseToJSONTyped(json, false);
+export function EnrolledCourseResponseToJSON(json: any): EnrolledCourseResponse {
+    return EnrolledCourseResponseToJSONTyped(json, false);
 }
 
-export function CourseSummaryResponseToJSONTyped(value?: CourseSummaryResponse | null, ignoreDiscriminator: boolean = false): any {
+export function EnrolledCourseResponseToJSONTyped(value?: EnrolledCourseResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
@@ -266,9 +267,9 @@ export function CourseSummaryResponseToJSONTyped(value?: CourseSummaryResponse |
         'grantsCertificate': value['grantsCertificate'],
         'createdAt': ((value['createdAt']).toISOString()),
         'updatedAt': ((value['updatedAt']).toISOString()),
+        'koskName': value['koskName'],
         'weekCount': value['weekCount'],
         'lessonCount': value['lessonCount'],
-        'resourceCount': value['resourceCount'],
         'muderris': ((value['muderris'] as Array<any>).map(MuderrisResponseToJSON)),
         'enrollment': EnrollmentResponseToJSON(value['enrollment']),
         'requiresApproval': value['requiresApproval'],

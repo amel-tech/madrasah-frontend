@@ -3,10 +3,12 @@ import { Button } from '@madrasah/ui/components/button'
 import { Badge } from '@madrasah/ui/components/badge'
 import {
   PlusIcon,
+  PencilSimpleIcon,
   CalendarBlankIcon,
   PlayCircleIcon,
   BookOpenIcon,
 } from '@madrasah/icons/ssr'
+import { KoskFormDialog } from '~/features/kosks/components/kosk-form-dialog'
 import {
   Card,
   CardContent,
@@ -17,7 +19,9 @@ import {
 import type {
   KoskResponse,
   CourseSummaryResponse,
+  PendingEnrollmentResponse,
 } from '@madrasah/services/tedrisat'
+import { PendingRequests } from '~/features/kosks/components/pending-requests'
 
 const LEVEL_LABELS: Record<string, string> = {
   BEGINNER: 'Başlangıç',
@@ -28,9 +32,11 @@ const LEVEL_LABELS: Record<string, string> = {
 export function KoskDetailPage({
   kosk,
   courses,
+  pendingEnrollments = [],
 }: {
   kosk: KoskResponse
   courses: CourseSummaryResponse[]
+  pendingEnrollments?: PendingEnrollmentResponse[]
 }) {
   return (
     <div className="py-8">
@@ -41,16 +47,28 @@ export function KoskDetailPage({
             Bu köşkte yer alan dersler ve müfredat yönetimi.
           </p>
         </div>
-        <Button
-          asChild
-          size="lg"
-          className="bg-emerald-600 hover:bg-emerald-700 text-white gap-2"
-        >
-          <Link href={`/kosks/${kosk.id}/courses/new`}>
-            <PlusIcon className="w-5 h-5" />
-            Yeni Ders Aç
-          </Link>
-        </Button>
+        <div className="flex items-center gap-2">
+          <PendingRequests koskId={kosk.id} requests={pendingEnrollments} />
+          <KoskFormDialog
+            kosk={kosk}
+            trigger={(
+              <Button variant="outline" size="lg" className="gap-2">
+                <PencilSimpleIcon className="w-5 h-5" />
+                Köşkü Düzenle
+              </Button>
+            )}
+          />
+          <Button
+            asChild
+            size="lg"
+            className="bg-emerald-600 hover:bg-emerald-700 text-white gap-2"
+          >
+            <Link href={`/kosks/${kosk.id}/courses/new`}>
+              <PlusIcon className="w-5 h-5" />
+              Yeni Ders Aç
+            </Link>
+          </Button>
+        </div>
       </div>
 
       {courses.length > 0

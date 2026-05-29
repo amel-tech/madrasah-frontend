@@ -2,19 +2,18 @@ import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
 import {
   CalendarBlankIcon as CalendarBlank,
-  CaretRightIcon as CaretRight,
   LockIcon as Lock,
   PlayCircleIcon as PlayCircle,
   BookOpenIcon as BookOpen,
   PlusIcon as Plus,
   MadrasahLogoIcon,
 } from '@madrasah/icons/ssr'
-import { Badge } from '@madrasah/ui/components/badge'
 import type {
   CourseSummaryResponse,
   KoskResponse,
 } from '@madrasah/services/tedrisat'
 import { cn } from '@madrasah/ui/lib/utils'
+import { Breadcrumbs } from '@madrasah/ui/components/breadcrumb'
 import { CoverPlaceholder, HueAvatar } from './cover'
 import { levelLabel } from './labels'
 
@@ -38,13 +37,15 @@ export const KoskPage = async ({
   return (
     <div className="pb-16">
       {/* Breadcrumb */}
-      <nav className="mb-5 flex items-center gap-2 text-sm text-muted-foreground">
-        <span>{t('TabView.learning')}</span>
-        <CaretRight size={14} />
-        <span>{t('KoskPage.kosks')}</span>
-        <CaretRight size={14} />
-        <span className="font-medium text-foreground">{kosk.name}</span>
-      </nav>
+      <Breadcrumbs
+        className="mb-5"
+        linkComponent={Link}
+        items={[
+          { label: t('TabView.learning'), href: '/learning' },
+          { label: t('KoskPage.kosks'), href: '/learning' },
+          { label: kosk.name },
+        ]}
+      />
 
       {/* Köşk header card */}
       <div className="mb-7 grid grid-cols-[auto_1fr_auto] items-center gap-6 rounded-2xl border bg-gradient-to-b from-slate-50 to-white p-6">
@@ -89,22 +90,6 @@ export const KoskPage = async ({
             </div>
           ))}
         </div>
-      </div>
-
-      {/* Toolbar */}
-      <div className="mb-5 flex items-center gap-2">
-        <Badge className="rounded-full bg-slate-900 px-3.5 py-1.5 text-white hover:bg-slate-900">
-          {t('KoskPage.filterAll')}
-        </Badge>
-        <span className="flex-1" />
-        <Link
-          href={`/kosks/${kosk.id}/courses/new`}
-          className="inline-flex items-center gap-1.5 rounded-lg bg-slate-900 px-3.5 py-2 text-sm font-medium text-white"
-        >
-          <Plus size={14} />
-          {' '}
-          {t('KoskPage.newCourse')}
-        </Link>
       </div>
 
       {/* Sidebar + grid */}
