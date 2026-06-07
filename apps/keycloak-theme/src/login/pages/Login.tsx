@@ -36,7 +36,7 @@ export default function Login(
     messagesPerField,
   } = kcContext
 
-  const { msg, msgStr } = i18n
+  const { msg, msgStr, advancedMsg } = i18n
 
   const [isLoginButtonDisabled, setIsLoginButtonDisabled] = useState(false)
 
@@ -50,8 +50,8 @@ export default function Login(
       doUseDefaultCss={false}
       classes={classes}
       displayMessage={!messagesPerField.existsError('username', 'password')}
-      headerNode={msg('loginAccountTitle')}
-      headerSubNode={msg('loginAccountSubtitle')}
+      headerNode={advancedMsg('loginAccountTitle')}
+      headerSubNode={advancedMsg('loginAccountSubtitle')}
       displayInfo={displayRegisterationNodes}
       infoNode={(
         <div id="kc-registration-container" className="text-center">
@@ -134,12 +134,14 @@ export default function Login(
         <div className="mx-auto flex flex-row gap-1 w-fit bg-gray-100 border border-gray-200 rounded-lg overflow-hidden font-medium text-sm mb-8 p-1">
           {' '}
           <a href={url.registrationUrl}>
-            <div className="py-2 px-4 rounded-md text-gray-600 hover:text-gray-800 hover:bg-gray-50 transition-all duration-200">Register</div>
+            <div className="py-2 px-4 rounded-md text-gray-600 hover:text-gray-800 hover:bg-gray-50 transition-all duration-200">
+              {msg('doRegister')}
+            </div>
             {' '}
           </a>
           <div className="py-2 px-4 rounded-md bg-brand-primary text-white shadow-sm">
             {' '}
-            Login
+            {msg('doLogIn')}
           </div>
         </div>
       )}
@@ -229,7 +231,7 @@ export default function Login(
                       'username',
                       'password',
                     )}
-                    placeholder="Password"
+                    placeholder={msgStr('password')}
                     className={cn(
                       'w-full pr-10',
                       messagesPerField.existsError('username', 'password')

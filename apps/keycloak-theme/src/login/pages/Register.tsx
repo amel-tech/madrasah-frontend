@@ -67,7 +67,9 @@ export default function Register(props: RegisterProps) {
           : msg('registerTitle')
       }
       headerSubNode={
-        messageHeader !== undefined ? undefined : msg('registerSubtitle')
+        messageHeader !== undefined
+          ? undefined
+          : advancedMsg('registerSubtitle')
       }
       displayMessage={messagesPerField.exists('global')}
       displayRequiredFields={false}
@@ -77,7 +79,9 @@ export default function Register(props: RegisterProps) {
           Register
         </div>
         <a href={url.loginUrl}>
-          <div className="py-2 px-4 rounded-md text-gray-600 hover:text-gray-800 hover:bg-gray-50 transition-all duration-200">Login</div>
+          <div className="py-2 px-4 rounded-md text-gray-600 hover:text-gray-800 hover:bg-gray-50 transition-all duration-200">
+            Login
+          </div>
         </a>
       </div>
 

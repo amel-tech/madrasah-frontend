@@ -42,7 +42,10 @@ export async function CurriculumSection() {
               <div className="absolute bottom-0 left-0 p-8 text-white">
                 <h4 className="font-display text-2xl font-bold mb-2">{t(`courses.${course.key}.title`)}</h4>
                 <p className="text-white/60 text-[10px] font-bold uppercase tracking-[0.2em]">
-                  {t(`courses.${course.key}.level`)} &bull; {t(`courses.${course.key}.lessons`)}
+                  {t(`courses.${course.key}.level`)}
+                  {' '}
+                  &bull;
+                  {t(`courses.${course.key}.lessons`)}
                 </p>
               </div>
             </div>

@@ -8,13 +8,6 @@ import type { KcContext } from './KcContext'
 import type { ExtendedTemplateProps } from './types/TemplateProps'
 
 import { Button } from '@madrasah/ui/components/button'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@madrasah/ui/components/select'
 import { Alert, AlertDescription } from '@madrasah/ui/components/alert'
 import { cn } from '@madrasah/ui/lib/utils'
 import { Badge } from '@madrasah/ui/components/badge'
@@ -44,7 +37,7 @@ export default function Template(
 
   const { kcClsx } = getKcClsx({ doUseDefaultCss, classes })
 
-  const { msg, msgStr, enabledLanguages } = i18n
+  const { msg, msgStr } = i18n
 
   const { realm, auth, url, message, isAppInitiatedAction } = kcContext
 
@@ -88,39 +81,6 @@ export default function Template(
               </div>
             </div>
             <header className={cn(kcClsx('kcFormHeaderClass'), 'mb-6 md:mb-8')}>
-              {enabledLanguages.length > 1 && (
-                <div className={kcClsx('kcLocaleMainClass')} id="kc-locale">
-                  <div
-                    id="kc-locale-wrapper"
-                    className={cn(kcClsx('kcLocaleWrapperClass'), 'hidden')}
-                  >
-                    <Select>
-                      <SelectTrigger>
-                        <SelectValue placeholder={msgStr('languages')} />
-                      </SelectTrigger>
-                      <SelectContent
-                        role="menu"
-                        id="language-switch1"
-                        aria-labelledby="kc-current-locale-link"
-                        aria-activedescendant=""
-                      >
-                        {enabledLanguages.map(
-                          ({ languageTag, label, href }, i) => (
-                            <SelectItem
-                              key={languageTag}
-                              value={href}
-                              role="menuitem"
-                              id={`language-${i + 1}`}
-                            >
-                              {label}
-                            </SelectItem>
-                          ),
-                        )}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-              )}
               {(() => {
                 const node = !(
                   auth !== undefined
@@ -321,11 +281,11 @@ export default function Template(
         </div>
       </div>
       {/* Right side - Image/Branding */}
-      <div id="kc-header" className={cn('hidden md:flex flex-1 items-center relative')}>
-        <img
-          src={BackgroundImage}
-          alt="Madrasah Background"
-        />
+      <div
+        id="kc-header"
+        className={cn('hidden md:flex flex-1 items-center relative')}
+      >
+        <img src={BackgroundImage} alt="Madrasah Background" />
       </div>
     </div>
   )

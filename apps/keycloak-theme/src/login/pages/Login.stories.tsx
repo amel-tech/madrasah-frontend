@@ -16,6 +16,42 @@ export const Default: Story = {
   render: () => <KcPageStory />,
 }
 
+export const DefaultTurkish: Story = {
+  render: () => (
+    <KcPageStory
+      kcContext={{
+        locale: {
+          currentLanguageTag: 'tr',
+        },
+      }}
+    />
+  ),
+}
+
+export const DefaultArabic: Story = {
+  render: () => (
+    <KcPageStory
+      kcContext={{
+        locale: {
+          currentLanguageTag: 'ar',
+        },
+      }}
+    />
+  ),
+}
+
+export const DefaultEnglish: Story = {
+  render: () => (
+    <KcPageStory
+      kcContext={{
+        locale: {
+          currentLanguageTag: 'en',
+        },
+      }}
+    />
+  ),
+}
+
 export const WithInvalidCredential: Story = {
   render: () => (
     <KcPageStory
