@@ -1,14 +1,17 @@
 'use client'
 
 import { useMemo, useState, useTransition } from 'react'
-import { useTranslations } from 'next-intl'
+import { useFormatter, useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import {
   PlusIcon as Plus,
   TrashIcon as Trash,
   XIcon as X,
+  CalendarBlankIcon as CalendarBlank,
   CertificateIcon as Certificate,
+  HeadsetIcon as Headset,
+  PencilSimpleIcon as PencilSimple,
   ShieldCheckIcon as ShieldCheck,
 } from '@madrasah/icons'
 import { Input } from '@madrasah/ui/components/input'
@@ -34,14 +37,58 @@ import {
   createKoskCourse,
   updateKoskCourse,
 } from '~/features/kosks/actions/courses'
+import {
+  LiveLessonEditor,
+  emptyLiveLesson,
+  type AgendaStepDraft,
+  type LiveLessonDraft,
+} from './live-lesson-editor'
 
-type LessonDraft = { id?: string, title: string, type: CreateLessonDtoTypeEnum, duration: string, kaynak: string }
+type LessonDraft = {
+  id?: string
+  title: string
+  type: CreateLessonDtoTypeEnum
+  duration: string
+  kaynak: string
+  /** datetime-local value; '' = unset */
+  scheduledAt: string
+  meetingUrl: string
+  agenda: AgendaStepDraft[]
+}
 type WeekDraft = { id?: string, title: string, summary: string, lessons: LessonDraft[] }
 type MuderrisDraft = { id?: string, name: string, title: string }
 type ResourceDraft = { id?: string, name: string, meta: string }
 
-const newLesson = (): LessonDraft => ({ title: '', type: CreateLessonDtoTypeEnum.Video, duration: '', kaynak: '' })
-const newWeek = (): WeekDraft => ({ title: '', summary: '', lessons: [newLesson()] })
+const newWeek = (): WeekDraft => ({ title: '', summary: '', lessons: [] })
+
+/** Convert an API Date to the value of an <input type="datetime-local">
+ *  in the editor's local zone. */
+const toDatetimeLocal = (date: Date): string => {
+  const pad = (n: number) => String(n).padStart(2, '0')
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`
+}
+
+const parseMinutes = (duration: string): string => /(\d+)/.exec(duration)?.[1] ?? ''
+
+const toLiveDraft = (l: LessonDraft): LiveLessonDraft => ({
+  id: l.id,
+  title: l.title,
+  scheduledAt: l.scheduledAt,
+  durationMinutes: parseMinutes(l.duration) || '60',
+  meetingUrl: l.meetingUrl,
+  agenda: l.agenda,
+})
+
+const fromLiveDraft = (d: LiveLessonDraft, prev?: LessonDraft): LessonDraft => ({
+  id: d.id,
+  title: d.title,
+  type: CreateLessonDtoTypeEnum.Live,
+  duration: d.durationMinutes ? `${d.durationMinutes} dk` : '',
+  kaynak: prev?.kaynak ?? '',
+  scheduledAt: d.scheduledAt,
+  meetingUrl: d.meetingUrl,
+  agenda: d.agenda,
+})
 
 export const NewCoursePage = ({
   kosk,
@@ -51,6 +98,7 @@ export const NewCoursePage = ({
   course?: CourseDetailResponse
 }) => {
   const t = useTranslations('nizam')
+  const format = useFormatter()
   const router = useRouter()
   const [pending, startTransition] = useTransition()
   const isEdit = Boolean(course)
@@ -74,6 +122,8 @@ export const NewCoursePage = ({
   const [resources, setResources] = useState<ResourceDraft[]>(
     course?.resources.map(r => ({ id: r.id, name: r.name, meta: r.meta ?? '' })) ?? [],
   )
+  // Hydrating every lesson field matters: PUT /courses/:id is a full
+  // replace, so anything missing here gets nulled on the next save.
   const [weeks, setWeeks] = useState<WeekDraft[]>(
     course?.weeks.length
       ? course.weeks.map(w => ({
@@ -86,10 +136,30 @@ export const NewCoursePage = ({
             type: l.type as CreateLessonDtoTypeEnum,
             duration: l.duration ?? '',
             kaynak: l.kaynak ?? '',
+            scheduledAt: l.scheduledAt ? toDatetimeLocal(new Date(l.scheduledAt)) : '',
+            meetingUrl: l.meetingUrl ?? '',
+            agenda: l.agenda?.map(s => ({ time: s.time, title: s.title })) ?? [],
           })),
         }))
       : [newWeek()],
   )
+
+  // One inline live-lesson editor at a time: `li === null` means a new
+  // lesson is being added to week `wi`; a number means lesson `li` of
+  // week `wi` is being edited.
+  const [editor, setEditor] = useState<{ wi: number, li: number | null, draft: LiveLessonDraft } | null>(null)
+
+  const saveEditor = () => {
+    if (!editor) return
+    setWeeks(weeks.map((w, idx) => {
+      if (idx !== editor.wi) return w
+      const lessons = editor.li === null
+        ? [...w.lessons, fromLiveDraft(editor.draft)]
+        : w.lessons.map((l, j) => (j === editor.li ? fromLiveDraft(editor.draft, l) : l))
+      return { ...w, lessons }
+    }))
+    setEditor(null)
+  }
 
   const lessonCount = useMemo(
     () => weeks.reduce((s, w) => s + w.lessons.filter(l => l.title.trim()).length, 0),
@@ -120,13 +190,21 @@ export const NewCoursePage = ({
         summary: w.summary.trim() || undefined,
         lessons: w.lessons
           .filter(l => l.title.trim())
-          .map(l => ({
-            id: l.id,
-            title: l.title.trim(),
-            type: l.type,
-            duration: l.duration.trim() || undefined,
-            kaynak: l.kaynak.trim() || undefined,
-          })),
+          .map((l) => {
+            const agenda = l.agenda
+              .filter(s => s.title.trim())
+              .map(s => ({ time: s.time.trim(), title: s.title.trim() }))
+            return {
+              id: l.id,
+              title: l.title.trim(),
+              type: l.type,
+              duration: l.duration.trim() || undefined,
+              kaynak: l.kaynak.trim() || undefined,
+              scheduledAt: l.scheduledAt ? new Date(l.scheduledAt) : undefined,
+              meetingUrl: l.meetingUrl.trim() || undefined,
+              agenda: agenda.length ? agenda : undefined,
+            }
+          }),
       })),
   })
 
@@ -307,51 +385,79 @@ export const NewCoursePage = ({
                       <Trash size={15} />
                     </button>
                   </div>
-                  <div className="flex flex-col gap-2 p-2.5">
-                    {w.lessons.map((l, li) => (
-                      <div key={li} className="flex items-center gap-2">
-                        <Input
-                          className="flex-1"
-                          placeholder={t('NewCoursePage.lessonTitlePlaceholder')}
-                          value={l.title}
-                          onChange={e => setWeeks(updLesson(weeks, wi, li, { title: e.target.value }))}
-                        />
-                        <Select
-                          value={l.type}
-                          onValueChange={v => setWeeks(updLesson(weeks, wi, li, { type: v as CreateLessonDtoTypeEnum }))}
-                        >
-                          <SelectTrigger className="w-32"><SelectValue /></SelectTrigger>
-                          <SelectContent>
-                            {Object.values(CreateLessonDtoTypeEnum).map(v => (
-                              <SelectItem key={v} value={v}>{t(`LessonTypes.${v}`)}</SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                        <Input
-                          className="w-24"
-                          placeholder={t('NewCoursePage.lessonDurationPlaceholder')}
-                          value={l.duration}
-                          onChange={e => setWeeks(updLesson(weeks, wi, li, { duration: e.target.value }))}
-                        />
-                        <button
-                          type="button"
-                          onClick={() => setWeeks(updWeek(weeks, wi, { lessons: w.lessons.filter((_, idx) => idx !== li) }))}
-                          className="grid size-8 shrink-0 place-items-center rounded-md text-muted-foreground"
-                          aria-label={t('NewCoursePage.remove')}
-                        >
-                          <X size={15} />
-                        </button>
-                      </div>
-                    ))}
-                    <button
-                      type="button"
-                      onClick={() => setWeeks(updWeek(weeks, wi, { lessons: [...w.lessons, newLesson()] }))}
-                      className="inline-flex items-center gap-1.5 self-start px-2 py-1.5 text-xs font-medium text-blue-700"
-                    >
-                      <Plus size={12} />
-                      {' '}
-                      {t('NewCoursePage.addLesson')}
-                    </button>
+                  <div className="flex flex-col gap-1.5 p-2.5">
+                    {w.lessons.map((l, li) => {
+                      const isLive = l.type === CreateLessonDtoTypeEnum.Live
+                      if (editor && editor.wi === wi && editor.li === li) {
+                        return (
+                          <LiveLessonEditor
+                            key={li}
+                            draft={editor.draft}
+                            onChange={draft => setEditor({ ...editor, draft })}
+                            onSave={saveEditor}
+                            onCancel={() => setEditor(null)}
+                          />
+                        )
+                      }
+                      return (
+                        <div key={li} className="flex items-center gap-2.5 rounded-lg px-2 py-1.5">
+                          <span className={`grid size-7 shrink-0 place-items-center rounded-lg ${isLive ? 'bg-red-50 text-red-600' : 'bg-slate-100 text-slate-500'}`}>
+                            <Headset size={14} />
+                          </span>
+                          <span className="min-w-0 flex-1 truncate text-sm">{l.title}</span>
+                          <span className={`shrink-0 rounded-full px-2 py-0.5 text-[11px] font-semibold ${isLive ? 'bg-red-50 text-red-600' : 'bg-slate-100 text-slate-500'}`}>
+                            {t(`LessonTypes.${l.type}`)}
+                          </span>
+                          {l.scheduledAt && (
+                            <span className="inline-flex shrink-0 items-center gap-1 text-xs text-muted-foreground">
+                              <CalendarBlank size={13} />
+                              {format.dateTime(new Date(l.scheduledAt), { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}
+                            </span>
+                          )}
+                          {l.duration && (
+                            <span className="w-12 shrink-0 text-right text-xs text-muted-foreground">{l.duration}</span>
+                          )}
+                          {isLive && (
+                            <button
+                              type="button"
+                              onClick={() => setEditor({ wi, li, draft: toLiveDraft(l) })}
+                              className="grid size-7 shrink-0 place-items-center rounded-md text-muted-foreground"
+                              aria-label={t('NewCoursePage.editLiveLesson')}
+                            >
+                              <PencilSimple size={14} />
+                            </button>
+                          )}
+                          <button
+                            type="button"
+                            onClick={() => setWeeks(updWeek(weeks, wi, { lessons: w.lessons.filter((_, idx) => idx !== li) }))}
+                            className="grid size-7 shrink-0 place-items-center rounded-md text-muted-foreground"
+                            aria-label={t('NewCoursePage.remove')}
+                          >
+                            <X size={15} />
+                          </button>
+                        </div>
+                      )
+                    })}
+                    {editor && editor.wi === wi && editor.li === null
+                      ? (
+                          <LiveLessonEditor
+                            draft={editor.draft}
+                            onChange={draft => setEditor({ ...editor, draft })}
+                            onSave={saveEditor}
+                            onCancel={() => setEditor(null)}
+                          />
+                        )
+                      : (
+                          <button
+                            type="button"
+                            onClick={() => setEditor({ wi, li: null, draft: emptyLiveLesson() })}
+                            className="inline-flex items-center gap-1.5 self-start px-2 py-1.5 text-xs font-medium text-red-600"
+                          >
+                            <Plus size={12} />
+                            {' '}
+                            {t('NewCoursePage.addLiveLesson')}
+                          </button>
+                        )}
                   </div>
                 </div>
               ))}
@@ -444,18 +550,6 @@ const upd = <T,>(arr: T[], i: number, patch: Partial<T>): T[] =>
 
 const updWeek = (weeks: WeekDraft[], wi: number, patch: Partial<WeekDraft>): WeekDraft[] =>
   weeks.map((w, idx) => (idx === wi ? { ...w, ...patch } : w))
-
-const updLesson = (
-  weeks: WeekDraft[],
-  wi: number,
-  li: number,
-  patch: Partial<LessonDraft>,
-): WeekDraft[] =>
-  weeks.map((w, idx) =>
-    idx === wi
-      ? { ...w, lessons: w.lessons.map((l, j) => (j === li ? { ...l, ...patch } : l)) }
-      : w,
-  )
 
 const Section = ({
   title,

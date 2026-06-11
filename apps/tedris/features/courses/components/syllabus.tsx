@@ -1,6 +1,7 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
+import { useFormatter, useTranslations } from 'next-intl'
+import Link from 'next/link'
 import {
   CaretDownIcon as CaretDown,
   PlayIcon as Play,
@@ -38,10 +39,17 @@ export const LessonTypeIcon = ({ type, size = 14 }: { type: string, size?: numbe
   }
 }
 
-export const LessonRow = ({ lesson }: { lesson: LessonResponse }) => {
+export const LessonRow = ({
+  lesson,
+  courseId,
+}: {
+  lesson: LessonResponse
+  courseId?: string
+}) => {
   const t = useTranslations('tedris')
-  return (
-    <div className="flex items-center gap-3.5 py-2 pl-6 pr-4">
+  const format = useFormatter()
+  const inner = (
+    <>
       <div className="grid size-6 place-items-center rounded-full bg-slate-100 text-muted-foreground">
         <LessonTypeIcon type={lesson.type} size={13} />
       </div>
@@ -49,6 +57,14 @@ export const LessonRow = ({ lesson }: { lesson: LessonResponse }) => {
         <div className="text-[13px] font-medium">{lesson.title}</div>
         <div className="mt-0.5 flex items-center gap-2 text-[11px] text-muted-foreground">
           <span>{lessonTypeLabel(lesson.type, t)}</span>
+          {lesson.scheduledAt && (
+            <>
+              <span className="size-[2px] rounded-full bg-slate-300" />
+              <span className="tabular-nums">
+                {format.dateTime(new Date(lesson.scheduledAt), { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}
+              </span>
+            </>
+          )}
           {lesson.kaynak && (
             <>
               <span className="size-[2px] rounded-full bg-slate-300" />
@@ -68,8 +84,20 @@ export const LessonRow = ({ lesson }: { lesson: LessonResponse }) => {
           {lesson.duration}
         </span>
       )}
-    </div>
+    </>
   )
+
+  if (courseId) {
+    return (
+      <Link
+        href={`/courses/${courseId}/lessons/${lesson.id}`}
+        className="flex items-center gap-3.5 py-2 pl-6 pr-4 text-inherit no-underline hover:bg-slate-50"
+      >
+        {inner}
+      </Link>
+    )
+  }
+  return <div className="flex items-center gap-3.5 py-2 pl-6 pr-4">{inner}</div>
 }
 
 export const WeekModule = ({
@@ -77,11 +105,13 @@ export const WeekModule = ({
   open,
   onToggle,
   collapsible = true,
+  courseId,
 }: {
   week: WeekResponse
   open?: boolean
   onToggle?: () => void
   collapsible?: boolean
+  courseId?: string
 }) => {
   const t = useTranslations('tedris')
   const expanded = collapsible ? Boolean(open) : true
@@ -134,7 +164,7 @@ export const WeekModule = ({
             </div>
           )}
           {week.lessons.map(lesson => (
-            <LessonRow key={lesson.id} lesson={lesson} />
+            <LessonRow key={lesson.id} lesson={lesson} courseId={courseId} />
           ))}
         </div>
       )}
@@ -218,7 +248,13 @@ export const SyllabusModal = ({
 
         <div className="flex flex-col gap-2 overflow-y-auto p-6">
           {course.weeks.map(week => (
-            <WeekModule key={week.id} week={week} collapsible={false} />
+            <WeekModule
+              key={week.id}
+              week={week}
+              collapsible={false}
+              // Lesson deep-links only for enrolled students (PENDING not enough).
+              courseId={course.enrollment && course.enrollment.status !== 'PENDING' ? course.id : undefined}
+            />
           ))}
         </div>
 

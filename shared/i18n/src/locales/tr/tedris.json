@@ -224,6 +224,25 @@
     "subtitle": "Köşkler ve kurslar",
     "empty": "Henüz köşk bulunmuyor."
   },
+  "LessonPage": {
+    "backToCourse": "Kursa dön",
+    "platformNotice": "Bu halka şu platform üzerinden yapılacaktır",
+    "platformUnknown": "Harici platform",
+    "meetingLink": "Toplantı bağlantısı",
+    "copyLink": "Kopyala",
+    "copied": "Bağlantı kopyalandı.",
+    "joinOn": "{platform}'te katıl",
+    "opensNewTab": "Bağlantı yeni sekmede açılır. Toplantıya köşk hesabınızla katılabilirsiniz.",
+    "noMeetingLink": "Toplantı bağlantısı henüz eklenmedi. Müderris bağlantıyı paylaştığında burada görünecek.",
+    "agendaTitle": "Müzakere akışı",
+    "statusUnscheduled": "Tarih belirlenmedi",
+    "statusSoon": "{minutes} dk sonra",
+    "statusLive": "Şu an canlı",
+    "statusEnded": "Sona erdi",
+    "managesCircle": "Halkayı yönetiyor",
+    "upcomingLessons": "Yaklaşan canlı dersler",
+    "noUpcomingLessons": "Yaklaşan canlı ders bulunmuyor."
+  },
   "LessonTypes": {
     "VIDEO": "Video",
     "DOCUMENT": "Doküman",

@@ -24,6 +24,7 @@ import type {
 } from '@madrasah/services/tedrisat'
 import { CoverPlaceholder, HueAvatar } from './cover'
 import { WeekModule, SyllabusModal } from './syllabus'
+import { nextLiveLesson } from './lesson-page'
 import { levelLabel } from './labels'
 import { enrollInCourse } from '../actions'
 
@@ -56,6 +57,7 @@ export const CoursePage = ({
   const lessonCount = course.weeks.reduce((s, w) => s + w.lessons.length, 0)
   const previewWeeks = course.weeks.slice(0, 5)
   const remaining = course.weeks.length - previewWeeks.length
+  const continueLesson = nextLiveLesson(course)
 
   const handleEnroll = () =>
     startTransition(async () => {
@@ -177,14 +179,28 @@ export const CoursePage = ({
                   )
                 : enrolled
                   ? (
-                      <button
-                        type="button"
-                        className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-medium text-white"
-                      >
-                        <Play size={14} weight="fill" />
-                        {' '}
-                        {t('CoursePage.continue')}
-                      </button>
+                      continueLesson
+                        ? (
+                            <Link
+                              href={`/courses/${course.id}/lessons/${continueLesson.id}`}
+                              className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-medium text-white no-underline"
+                            >
+                              <Play size={14} weight="fill" />
+                              {' '}
+                              {t('CoursePage.continue')}
+                            </Link>
+                          )
+                        : (
+                            <button
+                              type="button"
+                              disabled
+                              className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-medium text-white opacity-60"
+                            >
+                              <Play size={14} weight="fill" />
+                              {' '}
+                              {t('CoursePage.continue')}
+                            </button>
+                          )
                     )
                   : (
                       <button
@@ -298,6 +314,7 @@ export const CoursePage = ({
                     week={week}
                     open={openWeek === week.id}
                     onToggle={() => setOpenWeek(openWeek === week.id ? null : week.id)}
+                    courseId={enrolled ? course.id : undefined}
                   />
                 ))}
               </div>

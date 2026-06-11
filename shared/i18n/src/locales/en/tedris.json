@@ -224,6 +224,25 @@
     "subtitle": "Köşkler ve kurslar",
     "empty": "Henüz köşk bulunmuyor."
   },
+  "LessonPage": {
+    "backToCourse": "Back to course",
+    "platformNotice": "This circle will be held on the following platform",
+    "platformUnknown": "External platform",
+    "meetingLink": "Meeting link",
+    "copyLink": "Copy",
+    "copied": "Link copied.",
+    "joinOn": "Join on {platform}",
+    "opensNewTab": "The link opens in a new tab. You can join the meeting with your köşk account.",
+    "noMeetingLink": "No meeting link yet. It will appear here once the müderris shares it.",
+    "agendaTitle": "Discussion flow",
+    "statusUnscheduled": "Not scheduled",
+    "statusSoon": "in {minutes} min",
+    "statusLive": "Live now",
+    "statusEnded": "Ended",
+    "managesCircle": "Leads the circle",
+    "upcomingLessons": "Upcoming live lessons",
+    "noUpcomingLessons": "No upcoming live lessons."
+  },
   "LessonTypes": {
     "VIDEO": "Video",
     "DOCUMENT": "Doküman",

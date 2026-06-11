@@ -13,6 +13,14 @@
  */
 
 import { mapValues } from '../runtime';
+import type { AgendaStepDto } from './AgendaStepDto';
+import {
+    AgendaStepDtoFromJSON,
+    AgendaStepDtoFromJSONTyped,
+    AgendaStepDtoToJSON,
+    AgendaStepDtoToJSONTyped,
+} from './AgendaStepDto';
+
 /**
  * 
  * @export
@@ -49,6 +57,24 @@ export interface CreateLessonDto {
      * @memberof CreateLessonDto
      */
     kaynak?: string;
+    /**
+     * When the live session starts (type = LIVE).
+     * @type {Date}
+     * @memberof CreateLessonDto
+     */
+    scheduledAt?: Date;
+    /**
+     * External meeting link (Meet/Zoom/Jitsi…). The platform is resolved from the URL on the client.
+     * @type {string}
+     * @memberof CreateLessonDto
+     */
+    meetingUrl?: string;
+    /**
+     * Müzakere akışı — agenda steps shown to students.
+     * @type {Array<AgendaStepDto>}
+     * @memberof CreateLessonDto
+     */
+    agenda?: Array<AgendaStepDto>;
     /**
      * 
      * @type {boolean}
@@ -94,6 +120,9 @@ export function CreateLessonDtoFromJSONTyped(json: any, ignoreDiscriminator: boo
         'type': json['type'],
         'duration': json['duration'] == null ? undefined : json['duration'],
         'kaynak': json['kaynak'] == null ? undefined : json['kaynak'],
+        'scheduledAt': json['scheduledAt'] == null ? undefined : (new Date(json['scheduledAt'])),
+        'meetingUrl': json['meetingUrl'] == null ? undefined : json['meetingUrl'],
+        'agenda': json['agenda'] == null ? undefined : ((json['agenda'] as Array<any>).map(AgendaStepDtoFromJSON)),
         'isPreview': json['isPreview'] == null ? undefined : json['isPreview'],
     };
 }
@@ -114,6 +143,9 @@ export function CreateLessonDtoToJSONTyped(value?: CreateLessonDto | null, ignor
         'type': value['type'],
         'duration': value['duration'],
         'kaynak': value['kaynak'],
+        'scheduledAt': value['scheduledAt'] == null ? undefined : ((value['scheduledAt']).toISOString()),
+        'meetingUrl': value['meetingUrl'],
+        'agenda': value['agenda'] == null ? undefined : ((value['agenda'] as Array<any>).map(AgendaStepDtoToJSON)),
         'isPreview': value['isPreview'],
     };
 }

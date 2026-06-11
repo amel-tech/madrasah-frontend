@@ -224,6 +224,25 @@
     "subtitle": "Köşkler ve kurslar",
     "empty": "Henüz köşk bulunmuyor."
   },
+  "LessonPage": {
+    "backToCourse": "العودة إلى الدورة",
+    "platformNotice": "ستُعقد هذه الحلقة عبر المنصة التالية",
+    "platformUnknown": "منصة خارجية",
+    "meetingLink": "رابط الاجتماع",
+    "copyLink": "نسخ",
+    "copied": "تم نسخ الرابط.",
+    "joinOn": "انضم عبر {platform}",
+    "opensNewTab": "يُفتح الرابط في تبويب جديد. يمكنك الانضمام إلى الاجتماع بحساب الكُشك الخاص بك.",
+    "noMeetingLink": "لا يوجد رابط اجتماع بعد. سيظهر هنا عندما يشاركه المدرّس.",
+    "agendaTitle": "سير المذاكرة",
+    "statusUnscheduled": "لم يُحدد الموعد",
+    "statusSoon": "بعد {minutes} دقيقة",
+    "statusLive": "مباشر الآن",
+    "statusEnded": "انتهى",
+    "managesCircle": "يدير الحلقة",
+    "upcomingLessons": "الدروس المباشرة القادمة",
+    "noUpcomingLessons": "لا توجد دروس مباشرة قادمة."
+  },
   "LessonTypes": {
     "VIDEO": "Video",
     "DOCUMENT": "Doküman",

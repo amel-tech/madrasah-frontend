@@ -2798,6 +2798,23 @@
           "name"
         ]
       },
+      "AgendaStepDto": {
+        "type": "object",
+        "properties": {
+          "time": {
+            "type": "string",
+            "example": "21:00"
+          },
+          "title": {
+            "type": "string",
+            "example": "Açılış ve geçen haftanın özeti"
+          }
+        },
+        "required": [
+          "time",
+          "title"
+        ]
+      },
       "CreateLessonDto": {
         "type": "object",
         "properties": {
@@ -2826,6 +2843,24 @@
           "kaynak": {
             "type": "string",
             "example": "Bina · s. 4-9"
+          },
+          "scheduledAt": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2026-06-18T19:00:00.000Z",
+            "description": "When the live session starts (type = LIVE)."
+          },
+          "meetingUrl": {
+            "type": "string",
+            "example": "https://meet.google.com/bqx-mfzn-rde",
+            "description": "External meeting link (Meet/Zoom/Jitsi…). The platform is resolved from the URL on the client."
+          },
+          "agenda": {
+            "description": "Müzakere akışı — agenda steps shown to students.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgendaStepDto"
+            }
           },
           "isPreview": {
             "type": "boolean",
@@ -3141,6 +3176,23 @@
           "updatedAt"
         ]
       },
+      "AgendaStepResponse": {
+        "type": "object",
+        "properties": {
+          "time": {
+            "type": "string",
+            "example": "21:00"
+          },
+          "title": {
+            "type": "string",
+            "example": "Açılış ve geçen haftanın özeti"
+          }
+        },
+        "required": [
+          "time",
+          "title"
+        ]
+      },
       "LessonResponse": {
         "type": "object",
         "properties": {
@@ -3167,6 +3219,19 @@
           },
           "kaynak": {
             "type": "string"
+          },
+          "scheduledAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "meetingUrl": {
+            "type": "string"
+          },
+          "agenda": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgendaStepResponse"
+            }
           },
           "isPreview": {
             "type": "boolean"

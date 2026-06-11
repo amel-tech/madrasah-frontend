@@ -10,6 +10,8 @@ src/apis/KosksApi.ts
 src/apis/TedrisatServiceApi.ts
 src/apis/index.ts
 src/index.ts
+src/models/AgendaStepDto.ts
+src/models/AgendaStepResponse.ts
 src/models/BulkFlashcardErrorContext.ts
 src/models/BulkFlashcardErrorResponse.ts
 src/models/BulkFlashcardResponse.ts

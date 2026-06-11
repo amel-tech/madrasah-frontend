@@ -13,6 +13,14 @@
  */
 
 import { mapValues } from '../runtime';
+import type { AgendaStepResponse } from './AgendaStepResponse';
+import {
+    AgendaStepResponseFromJSON,
+    AgendaStepResponseFromJSONTyped,
+    AgendaStepResponseToJSON,
+    AgendaStepResponseToJSONTyped,
+} from './AgendaStepResponse';
+
 /**
  * 
  * @export
@@ -55,6 +63,24 @@ export interface LessonResponse {
      * @memberof LessonResponse
      */
     kaynak?: string;
+    /**
+     * 
+     * @type {Date}
+     * @memberof LessonResponse
+     */
+    scheduledAt?: Date;
+    /**
+     * 
+     * @type {string}
+     * @memberof LessonResponse
+     */
+    meetingUrl?: string;
+    /**
+     * 
+     * @type {Array<AgendaStepResponse>}
+     * @memberof LessonResponse
+     */
+    agenda?: Array<AgendaStepResponse>;
     /**
      * 
      * @type {boolean}
@@ -111,6 +137,9 @@ export function LessonResponseFromJSONTyped(json: any, ignoreDiscriminator: bool
         'type': json['type'],
         'duration': json['duration'] == null ? undefined : json['duration'],
         'kaynak': json['kaynak'] == null ? undefined : json['kaynak'],
+        'scheduledAt': json['scheduledAt'] == null ? undefined : (new Date(json['scheduledAt'])),
+        'meetingUrl': json['meetingUrl'] == null ? undefined : json['meetingUrl'],
+        'agenda': json['agenda'] == null ? undefined : ((json['agenda'] as Array<any>).map(AgendaStepResponseFromJSON)),
         'isPreview': json['isPreview'],
         'orderIndex': json['orderIndex'],
     };
@@ -133,6 +162,9 @@ export function LessonResponseToJSONTyped(value?: LessonResponse | null, ignoreD
         'type': value['type'],
         'duration': value['duration'],
         'kaynak': value['kaynak'],
+        'scheduledAt': value['scheduledAt'] == null ? undefined : ((value['scheduledAt']).toISOString()),
+        'meetingUrl': value['meetingUrl'],
+        'agenda': value['agenda'] == null ? undefined : ((value['agenda'] as Array<any>).map(AgendaStepResponseToJSON)),
         'isPreview': value['isPreview'],
         'orderIndex': value['orderIndex'],
     };
