@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.8.0](https://github.com/amel-tech/madrasah-frontend/compare/tedris-web-v1.7.0...tedris-web-v1.8.0) (2026-06-17)
+
+
+### Features
+
+* **card-memorization:** add isPending state and corresponding ui state changes ([7e2a291](https://github.com/amel-tech/madrasah-frontend/commit/7e2a291fab0adf85a5bddd02b47d00b7b2d21484))
+* **card-memorization:** integrate flashcard progress to backend ([02e147c](https://github.com/amel-tech/madrasah-frontend/commit/02e147c5dbff7d621c466a47afc5e6f2ce95c9b2))
+* **card-memorization:** integrate flashcard progress to backend ([8f601c5](https://github.com/amel-tech/madrasah-frontend/commit/8f601c5f3bfed4ab6cca60dcccf5ff22be4d02d5))
+* **card-memorization:** make response return in standart data: [] structure ([7c57e28](https://github.com/amel-tech/madrasah-frontend/commit/7c57e281251c736dd1e28d6b5be4ce5dd6d94a05))
+* **card-memorization:** refresh derived memorized cards  on cards change ([a89e2d6](https://github.com/amel-tech/madrasah-frontend/commit/a89e2d668988397589d40ace717c1f82c82630be))
+* **learning:** köşk & course learning surfaces + course management ([71cb203](https://github.com/amel-tech/madrasah-frontend/commit/71cb20309617a5b5b4976647dc2a8a48ec49aeb8))
+* **learning:** köşk & course learning surfaces and course management ([6f8cdec](https://github.com/amel-tech/madrasah-frontend/commit/6f8cdec03412e7308ac096b598f317ca0fa1b118))
+* **tedris,nizam:** continue-learning, my-courses, and enrollment approval UI ([3acab42](https://github.com/amel-tech/madrasah-frontend/commit/3acab42abfeff1d3f9ee250007dd9599f2320a57))
+* **tedris,nizam:** live-session lesson pages and editor ([c2a4104](https://github.com/amel-tech/madrasah-frontend/commit/c2a4104d9363accf5bd6b0a3d41271efe1c136a7))
+
 ## [1.7.0](https://github.com/amel-tech/madrasah-frontend/compare/tedris-web-v1.6.0...tedris-web-v1.7.0) (2026-05-13)
 
 
