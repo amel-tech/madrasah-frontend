@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.1.11](https://github.com/amel-tech/madrasah-frontend/compare/nizam-web-v0.1.10...nizam-web-v0.1.11) (2026-06-17)
+
+
+### Features
+
+* **card-memorization:** integrate flashcard progress to backend ([02e147c](https://github.com/amel-tech/madrasah-frontend/commit/02e147c5dbff7d621c466a47afc5e6f2ce95c9b2))
+* **card-memorization:** integrate flashcard progress to backend ([8f601c5](https://github.com/amel-tech/madrasah-frontend/commit/8f601c5f3bfed4ab6cca60dcccf5ff22be4d02d5))
+* **card-memorization:** make response return in standart data: [] structure ([7c57e28](https://github.com/amel-tech/madrasah-frontend/commit/7c57e281251c736dd1e28d6b5be4ce5dd6d94a05))
+* **card-memorization:** remove a forgotten console.log ([45ff28f](https://github.com/amel-tech/madrasah-frontend/commit/45ff28f97af14557e2816d48be5b4de34e5f2c5b))
+* **learning:** köşk & course learning surfaces + course management ([71cb203](https://github.com/amel-tech/madrasah-frontend/commit/71cb20309617a5b5b4976647dc2a8a48ec49aeb8))
+* **learning:** köşk & course learning surfaces and course management ([6f8cdec](https://github.com/amel-tech/madrasah-frontend/commit/6f8cdec03412e7308ac096b598f317ca0fa1b118))
+* **tedris,nizam:** continue-learning, my-courses, and enrollment approval UI ([3acab42](https://github.com/amel-tech/madrasah-frontend/commit/3acab42abfeff1d3f9ee250007dd9599f2320a57))
+* **tedris,nizam:** live-session lesson pages and editor ([c2a4104](https://github.com/amel-tech/madrasah-frontend/commit/c2a4104d9363accf5bd6b0a3d41271efe1c136a7))
+
 ## [0.1.10](https://github.com/amel-tech/madrasah-frontend/compare/nizam-web-v0.1.9...nizam-web-v0.1.10) (2026-05-13)
 
 
