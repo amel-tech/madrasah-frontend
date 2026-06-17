@@ -41,7 +41,7 @@ export async function PartnershipSection() {
                 {t('description')}
               </p>
               <div className="space-y-8 mb-12">
-                {partnershipFeatures.map(feature => {
+                {partnershipFeatures.map((feature) => {
                   const Icon = iconMap[feature.icon]
                   return (
                     <div key={feature.key} className="flex items-start">

@@ -10,6 +10,12 @@ export default defineConfig({
     react(),
     keycloakify({
       accountThemeImplementation: 'none',
+      kcContextExclusionsFtl: `
+                <@addToXKeycloakifyMessagesIfMessageKey str="loginAccountSubtitle" />
+                <@addToXKeycloakifyMessagesIfMessageKey str="loginAccountTitle" />
+                <@addToXKeycloakifyMessagesIfMessageKey str="registerSubtitle" />
+                <@addToXKeycloakifyMessagesIfMessageKey str="registerTitle" />
+            `,
     }),
   ],
 })

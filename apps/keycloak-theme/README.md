@@ -129,6 +129,27 @@ This theme leverages the monorepo's shared packages:
 - **[`@madrasah/typescript-config`](../../shared/typescript-config)**: TypeScript configuration
 - **[`@madrasah/eslint-config`](../../shared/eslint-config)**: ESLint rules
 
+## Translations
+
+Translations are now made from admin panel, but overridden keys should be added to viteconfig.
+
+```js
+  kcContextExclusionsFtl: `
+            <@addToXKeycloakifyMessagesIfMessageKey str="loginAccountSubtitle" />
+            ... add here
+        `,
+```
+
+and when being called from the code you should use advancedMsg function.
+
+```ts
+  const { msg, msgStr, advancedMsg } = i18n;
+
+  ...
+
+  headerNode={advancedMsg("loginAccountTitle")}
+```
+
 ## Troubleshooting
 
 ### Build Issues
