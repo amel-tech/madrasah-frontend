@@ -76,11 +76,11 @@ export default function Register(props: RegisterProps) {
     >
       <div className="mx-auto flex flex-row gap-1 w-fit bg-[#f5f5f5] border border-gray-200 rounded-lg overflow-hidden font-medium text-sm mb-8 p-1">
         <div className="py-2 px-4 rounded-md bg-brand-primary text-white shadow-sm">
-          Register
+          {msg('doRegister')}
         </div>
         <a href={url.loginUrl}>
           <div className="py-2 px-4 rounded-md text-gray-600 hover:text-gray-800 hover:bg-gray-50 transition-all duration-200">
-            Login
+            {msg('doLogIn')}
           </div>
         </a>
       </div>
