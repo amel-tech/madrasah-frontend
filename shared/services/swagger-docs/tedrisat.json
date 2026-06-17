@@ -24,65 +24,287 @@
         ]
       }
     },
-    "/health": {
+    "/courses/enrolled": {
       "get": {
-        "description": "Returns the health status of the Tedrisat service",
-        "operationId": "getHealth",
-        "parameters": [],
+        "operationId": "getEnrolledCourses",
         "responses": {
           "200": {
-            "description": "Service health information",
+            "description": "",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HealthCheckDto"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EnrolledCourseResponse"
+                  }
                 }
               }
             }
           }
         },
-        "summary": "Health check",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "List the courses the current talebe is enrolled in",
         "tags": [
-          "Tedrisat Service"
+          "courses"
         ]
       }
     },
-    "/throw-error": {
+    "/courses/{id}": {
       "get": {
-        "description": "Test endpoint that throws a validation error for demonstration purposes",
-        "operationId": "throwTestError",
-        "parameters": [],
+        "operationId": "getCourseById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseDetailResponse"
+                }
+              }
+            }
+          },
+          "404": {
             "description": ""
           }
         },
-        "summary": "Throw a dummy error",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get a course with its full syllabus, müderris and resources",
         "tags": [
-          "Tedrisat Service"
+          "courses"
         ]
-      }
-    },
-    "/secure": {
-      "get": {
-        "description": "Returns a secure hello message from the Tedrisat service",
-        "operationId": "getSecureHello",
-        "parameters": [],
+      },
+      "patch": {
+        "operationId": "updateCourse",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCourseDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
-            "description": "Secure hello message",
+            "description": "",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/CourseDetailResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update a course",
+        "tags": [
+          "courses"
+        ]
+      },
+      "put": {
+        "operationId": "replaceCourse",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCourseDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseDetailResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Replace a course, including its full syllabus, müderris and resources",
+        "tags": [
+          "courses"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteCourse",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Delete a course",
+        "tags": [
+          "courses"
+        ]
+      }
+    },
+    "/courses/{id}/enroll": {
+      "post": {
+        "operationId": "enrollInCourse",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnrollmentResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Enroll the current talebe in a course",
+        "tags": [
+          "courses"
+        ]
+      }
+    },
+    "/courses/{id}/progress": {
+      "put": {
+        "operationId": "updateCourseProgress",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProgressDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnrollmentResponse"
                 }
               }
             }
           }
         },
-        "summary": "Get secure hello message",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update the current talebe's progress in a course",
         "tags": [
-          "Tedrisat Service"
+          "courses"
         ]
       }
     },
@@ -197,6 +419,145 @@
         "summary": "Delete example by ID",
         "tags": [
           "Examples"
+        ]
+      }
+    },
+    "/flashcard/cards": {
+      "get": {
+        "description": "Retrieves all flashcards by matching a deck identifier",
+        "operationId": "getFlashcardByDeckId",
+        "parameters": [
+          {
+            "name": "deckId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "include",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "progress"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FlashcardResponse"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get all flashcards from a deck",
+        "tags": [
+          "flashcard-cards"
+        ]
+      }
+    },
+    "/flashcard/cards/bulk/sample": {
+      "get": {
+        "description": "Downloads a sample file to use as a template for bulk import. Not deck-specific.",
+        "operationId": "getSampleFile",
+        "parameters": [
+          {
+            "name": "format",
+            "required": true,
+            "in": "query",
+            "description": "The format of the file to download",
+            "schema": {
+              "enum": [
+                "xlsx",
+                "csv"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StreamableFile"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Download flashcard import template",
+        "tags": [
+          "flashcard-cards"
+        ]
+      }
+    },
+    "/flashcard/cards/progress": {
+      "put": {
+        "operationId": "replaceManyFlashcardProgress",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CreateFlashcardProgressDto"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FlashcardProgressResponse"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Create or update flashcard progress",
+        "tags": [
+          "flashcard-cards"
         ]
       }
     },
@@ -378,17 +739,18 @@
         ]
       }
     },
-    "/flashcard/cards": {
+    "/flashcard/decks": {
       "get": {
-        "description": "Retrieves all flashcards by matching a deck identifier",
-        "operationId": "getFlashcardByDeckId",
+        "description": "Retrieves all flashcard decks that are either public or owned by the user, with optional includes for related data such as tags.",
+        "operationId": "getAllFlashcardDecks",
         "parameters": [
           {
-            "name": "deckId",
-            "required": true,
+            "name": "isPublic",
+            "required": false,
             "in": "query",
+            "description": "When omitted returns public decks and user-owned private decks. When true returns only public decks. When false returns only user-owned private decks.",
             "schema": {
-              "type": "string"
+              "type": "boolean"
             }
           },
           {
@@ -398,10 +760,8 @@
             "schema": {
               "type": "array",
               "items": {
-                "type": "string",
-                "enum": [
-                  "progress"
-                ]
+                "type": "number",
+                "enum": []
               }
             }
           }
@@ -414,7 +774,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/FlashcardResponse"
+                    "$ref": "#/components/schemas/FlashcardDeckResponse"
                   }
                 }
               }
@@ -426,9 +786,75 @@
             "bearer": []
           }
         ],
-        "summary": "Get all flashcards from a deck",
+        "summary": "Get all flashcard decks visible to the user",
         "tags": [
-          "flashcard-cards"
+          "flashcard-decks"
+        ]
+      },
+      "post": {
+        "description": "Creates a new flashcard deck with the provided details. Tags can be optionally associated with the deck.",
+        "operationId": "createFlashcardDeck",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateFlashcardDeckDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlashcardDeckResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Create a new flashcard deck",
+        "tags": [
+          "flashcard-decks"
+        ]
+      }
+    },
+    "/flashcard/decks/collections": {
+      "get": {
+        "operationId": "getAllFlashcardDecksByUser",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FlashcardDeckResponse"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get all flashcard decks in the user's collection",
+        "tags": [
+          "flashcard-decks"
         ]
       }
     },
@@ -485,49 +911,6 @@
         ]
       }
     },
-    "/flashcard/cards/progress": {
-      "put": {
-        "operationId": "replaceManyFlashcardProgress",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/CreateFlashcardProgressDto"
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/FlashcardProgressResponse"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
-        "summary": "Create or update flashcard progress",
-        "tags": [
-          "flashcard-cards"
-        ]
-      }
-    },
     "/flashcard/decks/{deckId}/cards/bulk": {
       "post": {
         "description": "Bulk Body Json",
@@ -573,48 +956,6 @@
           }
         ],
         "summary": "Bulk",
-        "tags": [
-          "flashcard-cards"
-        ]
-      }
-    },
-    "/flashcard/cards/bulk/sample": {
-      "get": {
-        "description": "Downloads a sample file to use as a template for bulk import. Not deck-specific.",
-        "operationId": "getSampleFile",
-        "parameters": [
-          {
-            "name": "format",
-            "required": true,
-            "in": "query",
-            "description": "The format of the file to download",
-            "schema": {
-              "enum": [
-                "xlsx",
-                "csv"
-              ],
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/StreamableFile"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
-        "summary": "Download flashcard import template",
         "tags": [
           "flashcard-cards"
         ]
@@ -737,36 +1078,6 @@
         "summary": "Import flashcards from Excel/CSV",
         "tags": [
           "flashcard-cards"
-        ]
-      }
-    },
-    "/flashcard/decks/collections": {
-      "get": {
-        "operationId": "getAllFlashcardDecksByUser",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/FlashcardDeckResponse"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
-        "summary": "Get all flashcard decks in the user's collection",
-        "tags": [
-          "flashcard-decks"
         ]
       }
     },
@@ -946,95 +1257,6 @@
         ]
       }
     },
-    "/flashcard/decks": {
-      "get": {
-        "description": "Retrieves all flashcard decks that are either public or owned by the user, with optional includes for related data such as tags.",
-        "operationId": "getAllFlashcardDecks",
-        "parameters": [
-          {
-            "name": "isPublic",
-            "required": false,
-            "in": "query",
-            "description": "When omitted returns public decks and user-owned private decks. When true returns only public decks. When false returns only user-owned private decks.",
-            "schema": {
-              "type": "boolean"
-            }
-          },
-          {
-            "name": "include",
-            "required": false,
-            "in": "query",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "number",
-                "enum": []
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/FlashcardDeckResponse"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
-        "summary": "Get all flashcard decks visible to the user",
-        "tags": [
-          "flashcard-decks"
-        ]
-      },
-      "post": {
-        "description": "Creates a new flashcard deck with the provided details. Tags can be optionally associated with the deck.",
-        "operationId": "createFlashcardDeck",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateFlashcardDeckDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FlashcardDeckResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
-        "summary": "Create a new flashcard deck",
-        "tags": [
-          "flashcard-decks"
-        ]
-      }
-    },
     "/flashcard/decks/{id}/collections": {
       "post": {
         "description": "Creates a new association between a flashcard deck and the authenticated user.",
@@ -1105,15 +1327,575 @@
           "flashcard-decks"
         ]
       }
+    },
+    "/health": {
+      "get": {
+        "description": "Returns the health status of the Tedrisat service",
+        "operationId": "getHealth",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Service health information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthCheckDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Health check",
+        "tags": [
+          "Tedrisat Service"
+        ]
+      }
+    },
+    "/kosks": {
+      "get": {
+        "operationId": "getAllKosks",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedKoskResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get a paginated list of köşks",
+        "tags": [
+          "kosks"
+        ]
+      },
+      "post": {
+        "operationId": "createKosk",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateKoskDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KoskResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Create a new köşk",
+        "tags": [
+          "kosks"
+        ]
+      }
+    },
+    "/kosks/{id}": {
+      "get": {
+        "operationId": "getKoskById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KoskResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get a köşk by ID",
+        "tags": [
+          "kosks"
+        ]
+      },
+      "patch": {
+        "operationId": "updateKosk",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateKoskDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KoskResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update a köşk",
+        "tags": [
+          "kosks"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteKosk",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Delete a köşk",
+        "tags": [
+          "kosks"
+        ]
+      }
+    },
+    "/kosks/{id}/follow": {
+      "post": {
+        "operationId": "followKosk",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Follow a köşk as the current talebe",
+        "tags": [
+          "kosks"
+        ]
+      },
+      "delete": {
+        "operationId": "unfollowKosk",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Unfollow a köşk",
+        "tags": [
+          "kosks"
+        ]
+      }
+    },
+    "/kosks/{koskId}/courses": {
+      "get": {
+        "operationId": "getCoursesByKosk",
+        "parameters": [
+          {
+            "name": "koskId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CourseSummaryResponse"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "List the courses that belong to a köşk",
+        "tags": [
+          "courses"
+        ]
+      },
+      "post": {
+        "operationId": "createCourse",
+        "parameters": [
+          {
+            "name": "koskId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCourseDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseDetailResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Create a new course under a köşk",
+        "tags": [
+          "courses"
+        ]
+      }
+    },
+    "/secure": {
+      "get": {
+        "description": "Returns a secure hello message from the Tedrisat service",
+        "operationId": "getSecureHello",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Secure hello message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get secure hello message",
+        "tags": [
+          "Tedrisat Service"
+        ]
+      }
+    },
+    "/throw-error": {
+      "get": {
+        "description": "Test endpoint that throws a validation error for demonstration purposes",
+        "operationId": "throwTestError",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Throw a dummy error",
+        "tags": [
+          "Tedrisat Service"
+        ]
+      }
+    },
+    "/kosks/{koskId}/enrollments/pending": {
+      "get": {
+        "operationId": "getPendingEnrollments",
+        "parameters": [
+          {
+            "name": "koskId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PendingEnrollmentResponse"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "List pending enrollment requests for a köşk (owner only)",
+        "tags": [
+          "courses"
+        ]
+      }
+    },
+    "/courses/{id}/enrollments/{userId}/approve": {
+      "post": {
+        "operationId": "approveEnrollment",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnrollmentResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Approve a pending enrollment (köşk owner only)",
+        "tags": [
+          "courses"
+        ]
+      }
+    },
+    "/courses/{id}/enrollments/{userId}": {
+      "delete": {
+        "operationId": "rejectEnrollment",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Reject a pending enrollment, deleting it (köşk owner only)",
+        "tags": [
+          "courses"
+        ]
+      }
     }
   },
   "info": {
     "title": "Tedrisat Service API",
     "description": "Education management service for Madrasah platform",
     "version": "0.1.4",
-    "contact": {
-
-    }
+    "contact": {}
   },
   "tags": [
     {
@@ -1130,9 +1912,7 @@
           "implicit": {
             "authorizationUrl": "https://auth.medaris.app/realms/amel-tech-dev/protocol/openid-connect/auth",
             "tokenUrl": "https://auth.medaris.app/realms/amel-tech-dev/protocol/openid-connect/token",
-            "scopes": {
-
-            }
+            "scopes": {}
           }
         }
       }
@@ -1422,9 +2202,7 @@
       },
       "StreamableFile": {
         "type": "object",
-        "properties": {
-
-        }
+        "properties": {}
       },
       "FieldError": {
         "type": "object",
@@ -1587,6 +2365,1153 @@
             "type": "string"
           }
         }
+      },
+      "CourseDetailResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "koskId": {
+            "type": "string"
+          },
+          "authorId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "subtitle": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "level": {
+            "type": "string",
+            "enum": [
+              "BEGINNER",
+              "INTERMEDIATE",
+              "ADVANCED"
+            ]
+          },
+          "language": {
+            "type": "string"
+          },
+          "coverHue": {
+            "type": "number"
+          },
+          "durationWeeks": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "PUBLISHED"
+            ]
+          },
+          "grantsCertificate": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "weeks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WeekResponse"
+            }
+          },
+          "muderris": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MuderrisResponse"
+            }
+          },
+          "resources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceResponse"
+            }
+          },
+          "enrollment": {
+            "$ref": "#/components/schemas/EnrollmentResponse"
+          },
+          "requiresApproval": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "koskId",
+          "authorId",
+          "title",
+          "level",
+          "coverHue",
+          "durationWeeks",
+          "status",
+          "grantsCertificate",
+          "createdAt",
+          "updatedAt",
+          "weeks",
+          "muderris",
+          "resources",
+          "requiresApproval"
+        ]
+      },
+      "CourseSummaryResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "koskId": {
+            "type": "string"
+          },
+          "authorId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "subtitle": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "level": {
+            "type": "string",
+            "enum": [
+              "BEGINNER",
+              "INTERMEDIATE",
+              "ADVANCED"
+            ]
+          },
+          "language": {
+            "type": "string"
+          },
+          "coverHue": {
+            "type": "number"
+          },
+          "durationWeeks": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "PUBLISHED"
+            ]
+          },
+          "grantsCertificate": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "weekCount": {
+            "type": "number"
+          },
+          "lessonCount": {
+            "type": "number"
+          },
+          "resourceCount": {
+            "type": "number"
+          },
+          "muderris": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MuderrisResponse"
+            }
+          },
+          "enrollment": {
+            "$ref": "#/components/schemas/EnrollmentResponse"
+          },
+          "requiresApproval": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "koskId",
+          "authorId",
+          "title",
+          "level",
+          "coverHue",
+          "durationWeeks",
+          "status",
+          "grantsCertificate",
+          "createdAt",
+          "updatedAt",
+          "weekCount",
+          "lessonCount",
+          "resourceCount",
+          "muderris",
+          "requiresApproval"
+        ]
+      },
+      "EnrolledCourseResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "koskId": {
+            "type": "string"
+          },
+          "authorId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "subtitle": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "level": {
+            "type": "string",
+            "enum": [
+              "BEGINNER",
+              "INTERMEDIATE",
+              "ADVANCED"
+            ]
+          },
+          "language": {
+            "type": "string"
+          },
+          "coverHue": {
+            "type": "number"
+          },
+          "durationWeeks": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "PUBLISHED"
+            ]
+          },
+          "grantsCertificate": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "koskName": {
+            "type": "string"
+          },
+          "weekCount": {
+            "type": "number"
+          },
+          "lessonCount": {
+            "type": "number"
+          },
+          "muderris": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MuderrisResponse"
+            }
+          },
+          "enrollment": {
+            "$ref": "#/components/schemas/EnrollmentResponse"
+          },
+          "requiresApproval": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "koskId",
+          "authorId",
+          "title",
+          "level",
+          "coverHue",
+          "durationWeeks",
+          "status",
+          "grantsCertificate",
+          "createdAt",
+          "updatedAt",
+          "weekCount",
+          "lessonCount",
+          "muderris",
+          "koskName",
+          "enrollment",
+          "requiresApproval"
+        ]
+      },
+      "CreateCourseDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Bina ve İzhar Şerhi"
+          },
+          "subtitle": {
+            "type": "string",
+            "example": "Klasik sarf metni — şerh, illet ve tatbiki örneklerle."
+          },
+          "description": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string",
+            "example": "Sarf"
+          },
+          "level": {
+            "type": "string",
+            "enum": [
+              "BEGINNER",
+              "INTERMEDIATE",
+              "ADVANCED"
+            ],
+            "example": "INTERMEDIATE"
+          },
+          "language": {
+            "type": "string",
+            "example": "Türkçe / Arapça"
+          },
+          "coverHue": {
+            "type": "number",
+            "example": 145,
+            "minimum": 0,
+            "maximum": 360
+          },
+          "durationWeeks": {
+            "type": "number",
+            "example": 10
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "PUBLISHED"
+            ],
+            "example": "DRAFT"
+          },
+          "grantsCertificate": {
+            "type": "boolean",
+            "example": true
+          },
+          "weeks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateWeekDto"
+            }
+          },
+          "muderris": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateMuderrisDto"
+            }
+          },
+          "resources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateResourceDto"
+            }
+          },
+          "requiresApproval": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "title"
+        ]
+      },
+      "CreateKoskDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Süleymaniye Köşkü"
+          },
+          "handle": {
+            "type": "string",
+            "example": "@suleymaniye"
+          },
+          "description": {
+            "type": "string",
+            "example": "Klasik medrese müfredatına dayalı; sarf, nahiv ve usûl-i fıkıh dersleri sunan köşk."
+          },
+          "coverHue": {
+            "type": "number",
+            "example": 215,
+            "minimum": 0,
+            "maximum": 360
+          },
+          "isPrivate": {
+            "type": "boolean",
+            "example": true
+          },
+          "field": {
+            "type": "string",
+            "example": "Tefsir & Hadis",
+            "description": "İlim alanı"
+          },
+          "level": {
+            "type": "string",
+            "example": "ALL",
+            "description": "'ALL' | 'BEGINNER' | 'INTERMEDIATE' | 'ADVANCED'"
+          },
+          "tags": {
+            "example": [
+              "Tefsir",
+              "Hadis"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "AgendaStepDto": {
+        "type": "object",
+        "properties": {
+          "time": {
+            "type": "string",
+            "example": "21:00"
+          },
+          "title": {
+            "type": "string",
+            "example": "Açılış ve geçen haftanın özeti"
+          }
+        },
+        "required": [
+          "time",
+          "title"
+        ]
+      },
+      "CreateLessonDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Existing lesson id (preserved on replace)"
+          },
+          "title": {
+            "type": "string",
+            "example": "Birinci babın îsâgûcîsi"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "VIDEO",
+              "DOCUMENT",
+              "LIVE",
+              "QUIZ"
+            ],
+            "example": "VIDEO"
+          },
+          "duration": {
+            "type": "string",
+            "example": "28 dk"
+          },
+          "kaynak": {
+            "type": "string",
+            "example": "Bina · s. 4-9"
+          },
+          "scheduledAt": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2026-06-18T19:00:00.000Z",
+            "description": "When the live session starts (type = LIVE)."
+          },
+          "meetingUrl": {
+            "type": "string",
+            "example": "https://meet.google.com/bqx-mfzn-rde",
+            "description": "External meeting link (Meet/Zoom/Jitsi…). The platform is resolved from the URL on the client."
+          },
+          "agenda": {
+            "description": "Müzakere akışı — agenda steps shown to students.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgendaStepDto"
+            }
+          },
+          "isPreview": {
+            "type": "boolean",
+            "example": false
+          }
+        },
+        "required": [
+          "title",
+          "type"
+        ]
+      },
+      "CreateMuderrisDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Existing müderris row id (preserved on replace)"
+          },
+          "userId": {
+            "type": "string",
+            "description": "Linked platform user id, if any"
+          },
+          "name": {
+            "type": "string",
+            "example": "Müderris Ahmed Hilmi"
+          },
+          "title": {
+            "type": "string",
+            "example": "Sarf ve Nahiv Müderrisi"
+          },
+          "bio": {
+            "type": "string"
+          },
+          "avatarHue": {
+            "type": "number",
+            "example": 145,
+            "minimum": 0,
+            "maximum": 360
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "CreateResourceDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Existing resource row id (preserved on replace)"
+          },
+          "name": {
+            "type": "string",
+            "example": "Bina ve İzhar — Klasik metin"
+          },
+          "meta": {
+            "type": "string",
+            "example": "PDF · 124 sayfa"
+          },
+          "type": {
+            "type": "string",
+            "example": "pdf"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "CreateWeekDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Existing week id (preserved on replace)"
+          },
+          "weekNumber": {
+            "type": "number",
+            "example": 1
+          },
+          "title": {
+            "type": "string",
+            "example": "Sülâsî Mücerred — Birinci Bab"
+          },
+          "summary": {
+            "type": "string",
+            "example": "Müfredat tanıtımı ve birinci babın îsâgûcîsi."
+          },
+          "lessons": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateLessonDto"
+            }
+          }
+        },
+        "required": [
+          "weekNumber",
+          "title",
+          "lessons"
+        ]
+      },
+      "EnrollmentResponse": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string"
+          },
+          "courseId": {
+            "type": "string"
+          },
+          "progress": {
+            "type": "number",
+            "description": "Percent complete, 0-100"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "ENROLLED",
+              "COMPLETED"
+            ]
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "studentName": {
+            "type": "string",
+            "nullable": true
+          },
+          "studentEmail": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "userId",
+          "courseId",
+          "progress",
+          "status",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "PendingEnrollmentResponse": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string"
+          },
+          "courseId": {
+            "type": "string"
+          },
+          "progress": {
+            "type": "number",
+            "description": "Percent complete, 0-100"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "ENROLLED",
+              "COMPLETED"
+            ]
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "studentName": {
+            "type": "string",
+            "nullable": true
+          },
+          "studentEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "courseTitle": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "userId",
+          "courseId",
+          "progress",
+          "status",
+          "createdAt",
+          "updatedAt",
+          "courseTitle"
+        ]
+      },
+      "KoskResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "ownerId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "example": "Süleymaniye Köşkü"
+          },
+          "handle": {
+            "type": "string",
+            "example": "@suleymaniye"
+          },
+          "description": {
+            "type": "string"
+          },
+          "coverHue": {
+            "type": "number",
+            "example": 215
+          },
+          "isPrivate": {
+            "type": "boolean",
+            "example": true
+          },
+          "field": {
+            "type": "string",
+            "example": "Tefsir & Hadis"
+          },
+          "level": {
+            "type": "string",
+            "example": "ALL"
+          },
+          "tags": {
+            "example": [
+              "Tefsir",
+              "Hadis"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "verified": {
+            "type": "boolean",
+            "example": false
+          },
+          "featured": {
+            "type": "boolean",
+            "example": false
+          },
+          "rating": {
+            "type": "number",
+            "example": 4.8
+          },
+          "ratingCount": {
+            "type": "number",
+            "example": 132
+          },
+          "courseCount": {
+            "type": "number",
+            "description": "Courses published under this köşk",
+            "example": 14
+          },
+          "studentCount": {
+            "type": "number",
+            "description": "Distinct enrolled talebe",
+            "example": 482
+          },
+          "muderrisCount": {
+            "type": "number",
+            "description": "Distinct müderris",
+            "example": 6
+          },
+          "followerCount": {
+            "type": "number",
+            "example": 240
+          },
+          "isFollowing": {
+            "type": "boolean",
+            "description": "Whether the current talebe follows this köşk"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "ownerId",
+          "name",
+          "coverHue",
+          "isPrivate",
+          "tags",
+          "verified",
+          "featured",
+          "rating",
+          "ratingCount",
+          "courseCount",
+          "studentCount",
+          "muderrisCount",
+          "followerCount",
+          "isFollowing",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "AgendaStepResponse": {
+        "type": "object",
+        "properties": {
+          "time": {
+            "type": "string",
+            "example": "21:00"
+          },
+          "title": {
+            "type": "string",
+            "example": "Açılış ve geçen haftanın özeti"
+          }
+        },
+        "required": [
+          "time",
+          "title"
+        ]
+      },
+      "LessonResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "weekId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "VIDEO",
+              "DOCUMENT",
+              "LIVE",
+              "QUIZ"
+            ]
+          },
+          "duration": {
+            "type": "string"
+          },
+          "kaynak": {
+            "type": "string"
+          },
+          "scheduledAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "meetingUrl": {
+            "type": "string"
+          },
+          "agenda": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgendaStepResponse"
+            }
+          },
+          "isPreview": {
+            "type": "boolean"
+          },
+          "orderIndex": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "weekId",
+          "title",
+          "type",
+          "isPreview",
+          "orderIndex"
+        ]
+      },
+      "MuderrisResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "courseId": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "bio": {
+            "type": "string"
+          },
+          "avatarHue": {
+            "type": "number"
+          },
+          "orderIndex": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "courseId",
+          "name",
+          "avatarHue",
+          "orderIndex"
+        ]
+      },
+      "ResourceResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "courseId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "meta": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "orderIndex": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "courseId",
+          "name",
+          "orderIndex"
+        ]
+      },
+      "UpdateCourseDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Bina ve İzhar Şerhi"
+          },
+          "subtitle": {
+            "type": "string",
+            "example": "Klasik sarf metni — şerh, illet ve tatbiki örneklerle."
+          },
+          "description": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string",
+            "example": "Sarf"
+          },
+          "level": {
+            "type": "string",
+            "enum": [
+              "BEGINNER",
+              "INTERMEDIATE",
+              "ADVANCED"
+            ],
+            "example": "INTERMEDIATE"
+          },
+          "language": {
+            "type": "string",
+            "example": "Türkçe / Arapça"
+          },
+          "coverHue": {
+            "type": "number",
+            "example": 145,
+            "minimum": 0,
+            "maximum": 360
+          },
+          "durationWeeks": {
+            "type": "number",
+            "example": 10
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "PUBLISHED"
+            ],
+            "example": "DRAFT"
+          },
+          "grantsCertificate": {
+            "type": "boolean",
+            "example": true
+          },
+          "requiresApproval": {
+            "type": "boolean"
+          }
+        },
+        "required": []
+      },
+      "UpdateKoskDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Süleymaniye Köşkü"
+          },
+          "handle": {
+            "type": "string",
+            "example": "@suleymaniye"
+          },
+          "description": {
+            "type": "string",
+            "example": "Klasik medrese müfredatına dayalı; sarf, nahiv ve usûl-i fıkıh dersleri sunan köşk."
+          },
+          "coverHue": {
+            "type": "number",
+            "example": 215,
+            "minimum": 0,
+            "maximum": 360
+          },
+          "isPrivate": {
+            "type": "boolean",
+            "example": true
+          },
+          "field": {
+            "type": "string",
+            "example": "Tefsir & Hadis",
+            "description": "İlim alanı"
+          },
+          "level": {
+            "type": "string",
+            "example": "ALL",
+            "description": "'ALL' | 'BEGINNER' | 'INTERMEDIATE' | 'ADVANCED'"
+          },
+          "tags": {
+            "example": [
+              "Tefsir",
+              "Hadis"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "UpdateProgressDto": {
+        "type": "object",
+        "properties": {
+          "progress": {
+            "type": "number",
+            "example": 35,
+            "minimum": 0,
+            "maximum": 100
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ENROLLED",
+              "COMPLETED"
+            ]
+          }
+        },
+        "required": [
+          "progress"
+        ]
+      },
+      "WeekResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "courseId": {
+            "type": "string"
+          },
+          "weekNumber": {
+            "type": "number"
+          },
+          "title": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "orderIndex": {
+            "type": "number"
+          },
+          "lessons": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LessonResponse"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "courseId",
+          "weekNumber",
+          "title",
+          "orderIndex",
+          "lessons"
+        ]
+      },
+      "PaginatedKoskResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KoskResponse"
+            }
+          },
+          "total": {
+            "type": "number",
+            "description": "Total number of köşks",
+            "example": 38
+          },
+          "page": {
+            "type": "number",
+            "description": "Current page (1-based)",
+            "example": 1
+          },
+          "limit": {
+            "type": "number",
+            "description": "Items per page",
+            "example": 12
+          }
+        },
+        "required": [
+          "items",
+          "total",
+          "page",
+          "limit"
+        ]
       }
     }
   }
