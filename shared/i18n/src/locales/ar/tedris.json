@@ -239,9 +239,7 @@
     "statusSoon": "بعد {minutes} دقيقة",
     "statusLive": "مباشر الآن",
     "statusEnded": "انتهى",
-    "managesCircle": "يدير الحلقة",
-    "upcomingLessons": "الدروس المباشرة القادمة",
-    "noUpcomingLessons": "لا توجد دروس مباشرة قادمة."
+    "managesCircle": "يدير الحلقة"
   },
   "LessonTypes": {
     "VIDEO": "Video",
