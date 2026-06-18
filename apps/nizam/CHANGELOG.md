@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.1.12](https://github.com/amel-tech/madrasah-frontend/compare/nizam-web-v0.1.11...nizam-web-v0.1.12) (2026-06-18)
+
+
+### Features
+
+* **keycloak:** enable i18n on keycloak theme & small adjustments ([99a2fda](https://github.com/amel-tech/madrasah-frontend/commit/99a2fda911ad5e1863845a2a9d3bfb475c82b7c7))
+* **nizam:** kurs formu doğrulamaları, türetilen süre ve haftayı kopyalama ([e210ae6](https://github.com/amel-tech/madrasah-frontend/commit/e210ae664abf62787dffcebddb24724cfd56ed4a))
+
+
+### Bug Fixes
+
+* **nizam:** yapısal değişikliklerde açık ders düzenleyiciyi sıfırla ([35aabab](https://github.com/amel-tech/madrasah-frontend/commit/35aababe4cea9a4ecc3cc0a49babe622ad04bb67))
+
 ## [0.1.11](https://github.com/amel-tech/madrasah-frontend/compare/nizam-web-v0.1.10...nizam-web-v0.1.11) (2026-06-17)
 
 
