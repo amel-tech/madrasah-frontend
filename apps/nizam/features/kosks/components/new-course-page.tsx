@@ -181,6 +181,9 @@ export const NewCoursePage = ({
       })),
     }
     setWeeks([...weeks.slice(0, wi + 1), clone, ...weeks.slice(wi + 1)])
+    // Inserting shifts the indices of later weeks, which would leave an open
+    // editor pointing at the wrong week/lesson — cancel it.
+    setEditor(null)
   }
 
   const lessonCount = useMemo(
@@ -429,7 +432,10 @@ export const NewCoursePage = ({
                       </button>
                       <button
                         type="button"
-                        onClick={() => setWeeks(weeks.filter((_, idx) => idx !== wi))}
+                        onClick={() => {
+                          setWeeks(weeks.filter((_, idx) => idx !== wi))
+                          setEditor(null)
+                        }}
                         className="grid size-8 place-items-center rounded-md text-muted-foreground"
                         aria-label={t('NewCoursePage.remove')}
                       >
@@ -480,7 +486,10 @@ export const NewCoursePage = ({
                             )}
                             <button
                               type="button"
-                              onClick={() => setWeeks(updWeek(weeks, wi, { lessons: w.lessons.filter((_, idx) => idx !== li) }))}
+                              onClick={() => {
+                                setWeeks(updWeek(weeks, wi, { lessons: w.lessons.filter((_, idx) => idx !== li) }))
+                                setEditor(null)
+                              }}
                               className="grid size-7 shrink-0 place-items-center rounded-md text-muted-foreground"
                               aria-label={t('NewCoursePage.remove')}
                             >
