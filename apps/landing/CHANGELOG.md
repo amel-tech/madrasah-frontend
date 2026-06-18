@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.2.0](https://github.com/amel-tech/madrasah-frontend/compare/landing-web-v1.1.0...landing-web-v1.2.0) (2026-06-18)
+
+
+### Features
+
+* **card-memorization:** integrate flashcard progress to backend ([02e147c](https://github.com/amel-tech/madrasah-frontend/commit/02e147c5dbff7d621c466a47afc5e6f2ce95c9b2))
+* **card-memorization:** integrate flashcard progress to backend ([8f601c5](https://github.com/amel-tech/madrasah-frontend/commit/8f601c5f3bfed4ab6cca60dcccf5ff22be4d02d5))
+* **card-memorization:** make response return in standart data: [] structure ([7c57e28](https://github.com/amel-tech/madrasah-frontend/commit/7c57e281251c736dd1e28d6b5be4ce5dd6d94a05))
+* **keycloak:** enable i18n on keycloak theme & small adjustments ([99a2fda](https://github.com/amel-tech/madrasah-frontend/commit/99a2fda911ad5e1863845a2a9d3bfb475c82b7c7))
+* **keycloak:** enable i18n on keycloak theme & small adjustments ([a9ffb51](https://github.com/amel-tech/madrasah-frontend/commit/a9ffb51e95bd6058b1cdadbb26b32b3bf800438d))
+
 ## [1.1.0](https://github.com/amel-tech/madrasah-frontend/compare/landing-web-v1.0.0...landing-web-v1.1.0) (2026-05-13)
 
 
