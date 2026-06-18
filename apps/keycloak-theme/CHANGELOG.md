@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.4.0](https://github.com/amel-tech/madrasah-frontend/compare/keycloak-theme-v1.3.1...keycloak-theme-v1.4.0) (2026-06-18)
+
+
+### Features
+
+* **keycloack-theme:** add login/register translations on register page ([7d429e6](https://github.com/amel-tech/madrasah-frontend/commit/7d429e6172366add79db53b358c7e2b9106f0ee7))
+* **keycloak:** enable i18n on keycloak theme & small adjustments ([99a2fda](https://github.com/amel-tech/madrasah-frontend/commit/99a2fda911ad5e1863845a2a9d3bfb475c82b7c7))
+* **keycloak:** enable i18n on keycloak theme & small adjustments ([a9ffb51](https://github.com/amel-tech/madrasah-frontend/commit/a9ffb51e95bd6058b1cdadbb26b32b3bf800438d))
+
 ## [1.3.1](https://github.com/amel-tech/madrasah-frontend/compare/keycloak-theme-v1.3.0...keycloak-theme-v1.3.1) (2025-10-10)
 
 
