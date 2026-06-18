@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.9.0](https://github.com/amel-tech/madrasah-frontend/compare/tedris-web-v1.8.0...tedris-web-v1.9.0) (2026-06-18)
+
+
+### Features
+
+* **keycloak:** enable i18n on keycloak theme & small adjustments ([99a2fda](https://github.com/amel-tech/madrasah-frontend/commit/99a2fda911ad5e1863845a2a9d3bfb475c82b7c7))
+* **tedris:** ders sayfasından "Yaklaşan canlı dersler" bölümünü kaldır ([97497d2](https://github.com/amel-tech/madrasah-frontend/commit/97497d27ab764cf2074293209868aed53cbb51cb))
+
 ## [1.8.0](https://github.com/amel-tech/madrasah-frontend/compare/tedris-web-v1.7.0...tedris-web-v1.8.0) (2026-06-17)
 
 
