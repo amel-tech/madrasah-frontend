@@ -239,9 +239,7 @@
     "statusSoon": "in {minutes} min",
     "statusLive": "Live now",
     "statusEnded": "Ended",
-    "managesCircle": "Leads the circle",
-    "upcomingLessons": "Upcoming live lessons",
-    "noUpcomingLessons": "No upcoming live lessons."
+    "managesCircle": "Leads the circle"
   },
   "LessonTypes": {
     "VIDEO": "Video",

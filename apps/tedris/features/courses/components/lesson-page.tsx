@@ -8,7 +8,6 @@ import {
   ArrowLeftIcon as ArrowLeft,
   ArrowRightIcon as ArrowRight,
   ArrowSquareOutIcon as ArrowSquareOut,
-  CalendarBlankIcon as CalendarBlank,
   CaretRightIcon as CaretRight,
   CopyIcon as Copy,
   HeadsetIcon as Headset,
@@ -48,20 +47,6 @@ export const LessonPage = ({
   const { lesson, week } = flat[index]
   const prev = index > 0 ? flat[index - 1] : null
   const next = index < flat.length - 1 ? flat[index + 1] : null
-
-  // Next live sessions across all weeks (excluding this one), soonest first.
-  const upcoming = useMemo(() => {
-    const now = Date.now()
-    return flat
-      .filter(f =>
-        f.lesson.id !== lesson.id
-        && f.lesson.type === 'LIVE'
-        && f.lesson.scheduledAt
-        && new Date(f.lesson.scheduledAt).getTime() > now)
-      .sort((a, b) =>
-        new Date(a.lesson.scheduledAt!).getTime() - new Date(b.lesson.scheduledAt!).getTime())
-      .slice(0, 4)
-  }, [flat, lesson.id])
 
   const platform = resolveMeetingPlatform(lesson.meetingUrl)
   const platformName = platform.id === 'unknown' ? t('LessonPage.platformUnknown') : platform.label
@@ -292,39 +277,6 @@ export const LessonPage = ({
               </div>
             </div>
           )}
-
-          <div className="rounded-2xl border p-4">
-            <div className="mb-3 text-sm font-semibold">{t('LessonPage.upcomingLessons')}</div>
-            {upcoming.length === 0
-              ? (
-                  <p className="text-xs text-muted-foreground">{t('LessonPage.noUpcomingLessons')}</p>
-                )
-              : (
-                  <div className="flex flex-col gap-1.5">
-                    {upcoming.map(({ lesson: l, week: w }) => (
-                      <Link
-                        key={l.id}
-                        href={lessonHref(l)}
-                        className="flex items-center gap-2.5 rounded-lg px-1.5 py-1.5 text-inherit no-underline"
-                      >
-                        <span className="grid size-7 shrink-0 place-items-center rounded-lg bg-red-50 text-red-600">
-                          <Headset size={13} />
-                        </span>
-                        <span className="min-w-0 flex-1">
-                          <span className="block truncate text-[13px] font-medium">{l.title}</span>
-                          <span className="block text-[11px] text-muted-foreground">
-                            {t('CoursePage.week', { number: w.weekNumber })}
-                          </span>
-                        </span>
-                        <span className="inline-flex shrink-0 items-center gap-1 text-[11px] tabular-nums text-muted-foreground">
-                          <CalendarBlank size={12} />
-                          {format.dateTime(new Date(l.scheduledAt!), { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}
-                        </span>
-                      </Link>
-                    ))}
-                  </div>
-                )}
-          </div>
         </aside>
       </div>
     </div>

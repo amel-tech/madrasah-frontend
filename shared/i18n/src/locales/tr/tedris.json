@@ -239,9 +239,7 @@
     "statusSoon": "{minutes} dk sonra",
     "statusLive": "Şu an canlı",
     "statusEnded": "Sona erdi",
-    "managesCircle": "Halkayı yönetiyor",
-    "upcomingLessons": "Yaklaşan canlı dersler",
-    "noUpcomingLessons": "Yaklaşan canlı ders bulunmuyor."
+    "managesCircle": "Halkayı yönetiyor"
   },
   "LessonTypes": {
     "VIDEO": "Video",
