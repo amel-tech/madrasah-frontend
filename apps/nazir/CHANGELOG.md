@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.6](https://github.com/amel-tech/madrasah-frontend/compare/nazir-web-v0.1.5...nazir-web-v0.1.6) (2026-06-18)
+
+
+### Features
+
+* **card-memorization:** integrate flashcard progress to backend ([8f601c5](https://github.com/amel-tech/madrasah-frontend/commit/8f601c5f3bfed4ab6cca60dcccf5ff22be4d02d5))
+* **card-memorization:** make response return in standart data: [] structure ([7c57e28](https://github.com/amel-tech/madrasah-frontend/commit/7c57e281251c736dd1e28d6b5be4ce5dd6d94a05))
+
 ## [0.1.5](https://github.com/amel-tech/madrasah-frontend/compare/nazir-web-v0.1.4...nazir-web-v0.1.5) (2026-02-05)
 
 
